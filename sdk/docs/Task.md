@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **terminal_state** | **bool** | True if no onward transitions are possible | 
 **as_at_last_transition** | **datetime** | Last Transition timestamp | [optional] 
 **fields** | [**List[TaskInstanceField]**](TaskInstanceField.md) | Fields and their latest values - should correspond with the Task Definition field schema | [optional] 
+**stacking_key** | **str** | The key used to determine which stack to add the Task to | [optional] 
+**stack** | [**Stack**](Stack.md) |  | [optional] 
 
 ## Example
 

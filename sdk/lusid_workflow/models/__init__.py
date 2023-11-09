@@ -53,6 +53,7 @@ from lusid_workflow.models.run_worker_request import RunWorkerRequest
 from lusid_workflow.models.run_worker_response import RunWorkerResponse
 from lusid_workflow.models.sleep import Sleep
 from lusid_workflow.models.sleep_response import SleepResponse
+from lusid_workflow.models.stack import Stack
 from lusid_workflow.models.task import Task
 from lusid_workflow.models.task_definition import TaskDefinition
 from lusid_workflow.models.task_definition_version import TaskDefinitionVersion

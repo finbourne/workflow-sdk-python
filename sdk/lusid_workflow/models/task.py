@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist, constr
 from lusid_workflow.models.resource_id import ResourceId
+from lusid_workflow.models.stack import Stack
 from lusid_workflow.models.task_definition_version import TaskDefinitionVersion
 from lusid_workflow.models.task_instance_field import TaskInstanceField
 from lusid_workflow.models.task_summary import TaskSummary
@@ -43,7 +44,9 @@ class Task(BaseModel):
     terminal_state: StrictBool = Field(..., alias="terminalState", description="True if no onward transitions are possible")
     as_at_last_transition: Optional[datetime] = Field(None, alias="asAtLastTransition", description="Last Transition timestamp")
     fields: Optional[conlist(TaskInstanceField)] = Field(None, description="Fields and their latest values - should correspond with the Task Definition field schema")
-    __properties = ["id", "taskDefinitionId", "taskDefinitionVersion", "taskDefinitionDisplayName", "state", "ultimateParentTask", "parentTask", "childTasks", "correlationIds", "version", "terminalState", "asAtLastTransition", "fields"]
+    stacking_key: Optional[StrictStr] = Field(None, alias="stackingKey", description="The key used to determine which stack to add the Task to")
+    stack: Optional[Stack] = None
+    __properties = ["id", "taskDefinitionId", "taskDefinitionVersion", "taskDefinitionDisplayName", "state", "ultimateParentTask", "parentTask", "childTasks", "correlationIds", "version", "terminalState", "asAtLastTransition", "fields", "stackingKey", "stack"]
 
     class Config:
         """Pydantic configuration"""
@@ -98,6 +101,9 @@ class Task(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['fields'] = _items
+        # override the default output from pydantic by calling `to_dict()` of stack
+        if self.stack:
+            _dict['stack'] = self.stack.to_dict()
         # set to None if child_tasks (nullable) is None
         # and __fields_set__ contains the field
         if self.child_tasks is None and "child_tasks" in self.__fields_set__:
@@ -117,6 +123,11 @@ class Task(BaseModel):
         # and __fields_set__ contains the field
         if self.fields is None and "fields" in self.__fields_set__:
             _dict['fields'] = None
+
+        # set to None if stacking_key (nullable) is None
+        # and __fields_set__ contains the field
+        if self.stacking_key is None and "stacking_key" in self.__fields_set__:
+            _dict['stackingKey'] = None
 
         return _dict
 
@@ -142,6 +153,8 @@ class Task(BaseModel):
             "version": VersionInfo.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "terminal_state": obj.get("terminalState"),
             "as_at_last_transition": obj.get("asAtLastTransition"),
-            "fields": [TaskInstanceField.from_dict(_item) for _item in obj.get("fields")] if obj.get("fields") is not None else None
+            "fields": [TaskInstanceField.from_dict(_item) for _item in obj.get("fields")] if obj.get("fields") is not None else None,
+            "stacking_key": obj.get("stackingKey"),
+            "stack": Stack.from_dict(obj.get("stack")) if obj.get("stack") is not None else None
         })
         return _obj
