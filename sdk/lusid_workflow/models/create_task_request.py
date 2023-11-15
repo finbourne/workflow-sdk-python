@@ -30,7 +30,8 @@ class CreateTaskRequest(BaseModel):
     task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
     correlation_ids: Optional[conlist(StrictStr)] = Field(None, alias="correlationIds", description="A set of guid identifiers that allow correlation across the application tier")
     fields: Optional[conlist(TaskInstanceField)] = Field(None, description="Fields and their initial values - should correspond with the Task Definition field schema")
-    __properties = ["taskDefinitionId", "correlationIds", "fields"]
+    stacking_key: Optional[StrictStr] = Field(None, alias="stackingKey", description="The key for the Stack that this Task should be added to")
+    __properties = ["taskDefinitionId", "correlationIds", "fields", "stackingKey"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +77,11 @@ class CreateTaskRequest(BaseModel):
         if self.fields is None and "fields" in self.__fields_set__:
             _dict['fields'] = None
 
+        # set to None if stacking_key (nullable) is None
+        # and __fields_set__ contains the field
+        if self.stacking_key is None and "stacking_key" in self.__fields_set__:
+            _dict['stackingKey'] = None
+
         return _dict
 
     @classmethod
@@ -90,6 +96,7 @@ class CreateTaskRequest(BaseModel):
         _obj = CreateTaskRequest.parse_obj({
             "task_definition_id": ResourceId.from_dict(obj.get("taskDefinitionId")) if obj.get("taskDefinitionId") is not None else None,
             "correlation_ids": obj.get("correlationIds"),
-            "fields": [TaskInstanceField.from_dict(_item) for _item in obj.get("fields")] if obj.get("fields") is not None else None
+            "fields": [TaskInstanceField.from_dict(_item) for _item in obj.get("fields")] if obj.get("fields") is not None else None,
+            "stacking_key": obj.get("stackingKey")
         })
         return _obj

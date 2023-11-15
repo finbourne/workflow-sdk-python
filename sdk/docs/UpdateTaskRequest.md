@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **correlation_ids** | **List[str]** | A set of guid identifiers that allow correlation across the application tier | [optional] 
 **fields** | [**List[TaskInstanceField]**](TaskInstanceField.md) | Defines the fields associated with the update | [optional] 
+**stacking_key** | **str** | The key for the Stack that this Task should be added to | [optional] 
 
 ## Example
 
