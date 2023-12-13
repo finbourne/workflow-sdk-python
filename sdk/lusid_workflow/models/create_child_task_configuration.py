@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, constr, validator
+from pydantic import BaseModel, Field, StrictStr, constr, validator
 from lusid_workflow.models.field_mapping import FieldMapping
 from lusid_workflow.models.resource_id import ResourceId
 
@@ -31,7 +31,8 @@ class CreateChildTaskConfiguration(BaseModel):
     task_definition_as_at: Optional[datetime] = Field(None, alias="taskDefinitionAsAt", description="TaskDefinition AsAt timestamp")
     initial_trigger: Optional[constr(strict=True, max_length=1024)] = Field(None, alias="initialTrigger", description="The Initial Trigger for automatic start")
     child_task_fields: Optional[Dict[str, FieldMapping]] = Field(None, alias="childTaskFields", description="Field Mappings")
-    __properties = ["taskDefinitionId", "taskDefinitionAsAt", "initialTrigger", "childTaskFields"]
+    map_stacking_key_from: Optional[StrictStr] = Field(None, alias="mapStackingKeyFrom", description="If present, the value of this field on the parent task will be the Stacking Key on any created child tasks")
+    __properties = ["taskDefinitionId", "taskDefinitionAsAt", "initialTrigger", "childTaskFields", "mapStackingKeyFrom"]
 
     @validator('initial_trigger')
     def initial_trigger_validate_regular_expression(cls, value):
@@ -92,6 +93,11 @@ class CreateChildTaskConfiguration(BaseModel):
         if self.child_task_fields is None and "child_task_fields" in self.__fields_set__:
             _dict['childTaskFields'] = None
 
+        # set to None if map_stacking_key_from (nullable) is None
+        # and __fields_set__ contains the field
+        if self.map_stacking_key_from is None and "map_stacking_key_from" in self.__fields_set__:
+            _dict['mapStackingKeyFrom'] = None
+
         return _dict
 
     @classmethod
@@ -112,6 +118,7 @@ class CreateChildTaskConfiguration(BaseModel):
                 for _k, _v in obj.get("childTaskFields").items()
             )
             if obj.get("childTaskFields") is not None
-            else None
+            else None,
+            "map_stacking_key_from": obj.get("mapStackingKeyFrom")
         })
         return _obj
