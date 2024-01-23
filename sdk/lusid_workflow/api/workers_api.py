@@ -27,10 +27,12 @@ from pydantic import Field, StrictInt, constr, validator
 from typing import Optional
 
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
+from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from lusid_workflow.models.get_worker_result_response import GetWorkerResultResponse
 from lusid_workflow.models.paged_resource_list_of_worker import PagedResourceListOfWorker
 from lusid_workflow.models.run_worker_request import RunWorkerRequest
 from lusid_workflow.models.run_worker_response import RunWorkerResponse
+from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
 from lusid_workflow.models.worker import Worker
 
 from lusid_workflow.api_client import ApiClient
@@ -196,6 +198,166 @@ class WorkersApi:
 
         return self.api_client.call_api(
             '/api/workers', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def delete_worker(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the worker to be deleted")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the worker to be deleted")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_worker(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the worker to be deleted")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the worker to be deleted")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_worker(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the worker to be deleted")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the worker to be deleted")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] DeleteWorker: Delete a Worker  # noqa: E501
+
+        If the Worker does not exist a failure will be returned  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_worker(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: Scope of the worker to be deleted (required)
+        :type scope: str
+        :param code: Code of the worker to be deleted (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_worker_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_worker_with_http_info(scope, code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_worker_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the worker to be deleted")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the worker to be deleted")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] DeleteWorker: Delete a Worker  # noqa: E501
+
+        If the Worker does not exist a failure will be returned  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_worker_with_http_info(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: Scope of the worker to be deleted (required)
+        :type scope: str
+        :param code: Code of the worker to be deleted (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_worker" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+            '404': "str",
+        }
+
+        return self.api_client.call_api(
+            '/api/workers/{scope}/{code}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -866,6 +1028,181 @@ class WorkersApi:
 
         return self.api_client.call_api(
             '/api/workers/{scope}/{code}/$run', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @overload
+    async def update_worker(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the worker to be updated")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(..., description="State of the updated worker")], **kwargs) -> Worker:  # noqa: E501
+        ...
+
+    @overload
+    def update_worker(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the worker to be updated")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(..., description="State of the updated worker")], async_req: Optional[bool]=True, **kwargs) -> Worker:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def update_worker(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the worker to be updated")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(..., description="State of the updated worker")], async_req: Optional[bool]=None, **kwargs) -> Union[Worker, Awaitable[Worker]]:  # noqa: E501
+        """[EXPERIMENTAL] UpdateWorker: Update a Worker  # noqa: E501
+
+        If the Worker does not exist a failure will be returned  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_worker(scope, code, update_worker_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: Scope of the worker to be updated (required)
+        :type scope: str
+        :param code: Code of the worker to be updated (required)
+        :type code: str
+        :param update_worker_request: State of the updated worker (required)
+        :type update_worker_request: UpdateWorkerRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: timeout setting for this request.
+               If one number provided, it will be total request
+               timeout. It can also be a pair (tuple) of
+               (connection, read) timeouts.
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: Worker
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the update_worker_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.update_worker_with_http_info(scope, code, update_worker_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def update_worker_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the worker to be updated")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(..., description="State of the updated worker")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpdateWorker: Update a Worker  # noqa: E501
+
+        If the Worker does not exist a failure will be returned  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_worker_with_http_info(scope, code, update_worker_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: Scope of the worker to be updated (required)
+        :type scope: str
+        :param code: Code of the worker to be updated (required)
+        :type code: str
+        :param update_worker_request: State of the updated worker (required)
+        :type update_worker_request: UpdateWorkerRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(Worker, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'update_worker_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_worker" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_worker_request'] is not None:
+            _body_params = _params['update_worker_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "Worker",
+            '400': "LusidValidationProblemDetails",
+            '404': "str",
+        }
+
+        return self.api_client.call_api(
+            '/api/workers/{scope}/{code}', 'PUT',
             _path_params,
             _query_params,
             _header_params,

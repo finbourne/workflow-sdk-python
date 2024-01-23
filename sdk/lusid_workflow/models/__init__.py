@@ -68,6 +68,7 @@ from lusid_workflow.models.trigger_parent_task_action_response import TriggerPar
 from lusid_workflow.models.trigger_schema import TriggerSchema
 from lusid_workflow.models.update_task_definition_request import UpdateTaskDefinitionRequest
 from lusid_workflow.models.update_task_request import UpdateTaskRequest
+from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
 from lusid_workflow.models.version_info import VersionInfo
 from lusid_workflow.models.worker import Worker
 from lusid_workflow.models.worker_configuration import WorkerConfiguration
