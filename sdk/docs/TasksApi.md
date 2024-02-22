@@ -22,19 +22,19 @@ Method | HTTP request | Description
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.create_task_request import CreateTaskRequest
 from lusid_workflow.models.task import Task
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TasksApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
@@ -121,18 +121,18 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TasksApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
@@ -218,18 +218,18 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.task import Task
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TasksApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
@@ -317,18 +317,18 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.paged_resource_list_of_task import PagedResourceListOfTask
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TasksApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
@@ -420,19 +420,19 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.task import Task
 from lusid_workflow.models.update_task_request import UpdateTaskRequest
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    TasksApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client

@@ -26,19 +26,19 @@ If the Worker already exists a failure will be returned
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
 from lusid_workflow.models.worker import Worker
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    WorkersApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
@@ -125,18 +125,18 @@ If the Worker does not exist a failure will be returned
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    WorkersApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
@@ -226,18 +226,18 @@ Will return a NotFound failure if the Worker does not exist
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.worker import Worker
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    WorkersApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
@@ -326,18 +326,18 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.get_worker_result_response import GetWorkerResultResponse
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    WorkersApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
@@ -422,18 +422,18 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.paged_resource_list_of_worker import PagedResourceListOfWorker
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    WorkersApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
@@ -522,19 +522,19 @@ Name | Type | Description  | Notes
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.run_worker_request import RunWorkerRequest
 from lusid_workflow.models.run_worker_response import RunWorkerResponse
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    WorkersApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
@@ -627,19 +627,19 @@ If the Worker does not exist a failure will be returned
 ```python
 from __future__ import print_function
 import time
-import os
 import lusid_workflow
 from lusid_workflow.rest import ApiException
 from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
 from lusid_workflow.models.worker import Worker
 from pprint import pprint
 
+import os
 from lusid_workflow import (
-	  ApiClientFactory,
-	  ApplicationMetadataApi,
-	  EnvironmentVariablesConfigurationLoader,
-	  SecretsFileConfigurationLoader,
-	  ArgsConfigurationLoader
+    ApiClientFactory,
+    WorkersApi,
+    EnvironmentVariablesConfigurationLoader,
+    SecretsFileConfigurationLoader,
+    ArgsConfigurationLoader
 )
 
 # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
