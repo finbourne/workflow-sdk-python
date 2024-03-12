@@ -27,8 +27,9 @@ class ActionDefinitionResponse(BaseModel):
     Defines the Actions for a Task in a read-only form  # noqa: E501
     """
     name: Optional[StrictStr] = Field(None, description="The Name of this Action")
+    run_as_user_id: Optional[StrictStr] = Field(None, alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".")
     action_details: Optional[ActionDetailsResponse] = Field(None, alias="actionDetails")
-    __properties = ["name", "actionDetails"]
+    __properties = ["name", "runAsUserId", "actionDetails"]
 
     class Config:
         """Pydantic configuration"""
@@ -62,6 +63,11 @@ class ActionDefinitionResponse(BaseModel):
         if self.name is None and "name" in self.__fields_set__:
             _dict['name'] = None
 
+        # set to None if run_as_user_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.run_as_user_id is None and "run_as_user_id" in self.__fields_set__:
+            _dict['runAsUserId'] = None
+
         return _dict
 
     @classmethod
@@ -75,6 +81,7 @@ class ActionDefinitionResponse(BaseModel):
 
         _obj = ActionDefinitionResponse.parse_obj({
             "name": obj.get("name"),
+            "run_as_user_id": obj.get("runAsUserId"),
             "action_details": ActionDetailsResponse.from_dict(obj.get("actionDetails")) if obj.get("actionDetails") is not None else None
         })
         return _obj

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field, constr, validator
 from lusid_workflow.models.action_details import ActionDetails
 
@@ -27,12 +27,23 @@ class ActionDefinition(BaseModel):
     Defines the Actions for a Task  # noqa: E501
     """
     name: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="The Name of this Action")
+    run_as_user_id: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".")
     action_details: ActionDetails = Field(..., alias="actionDetails")
-    __properties = ["name", "actionDetails"]
+    __properties = ["name", "runAsUserId", "actionDetails"]
 
     @validator('name')
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
+        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
+            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
+        return value
+
+    @validator('run_as_user_id')
+    def run_as_user_id_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
         if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
             raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
         return value
@@ -64,6 +75,11 @@ class ActionDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of action_details
         if self.action_details:
             _dict['actionDetails'] = self.action_details.to_dict()
+        # set to None if run_as_user_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.run_as_user_id is None and "run_as_user_id" in self.__fields_set__:
+            _dict['runAsUserId'] = None
+
         return _dict
 
     @classmethod
@@ -77,6 +93,7 @@ class ActionDefinition(BaseModel):
 
         _obj = ActionDefinition.parse_obj({
             "name": obj.get("name"),
+            "run_as_user_id": obj.get("runAsUserId"),
             "action_details": ActionDetails.from_dict(obj.get("actionDetails")) if obj.get("actionDetails") is not None else None
         })
         return _obj
