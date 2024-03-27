@@ -20,13 +20,15 @@ import json
 
 from typing import Any, Dict, Optional
 from pydantic import BaseModel, Field, StrictStr, validator
+from lusid_workflow.models.resource_id import ResourceId
 
-class FailResponse(BaseModel):
+class SchedulerJobResponse(BaseModel):
     """
-    Readonly configuration for a Worker that always Fails  # noqa: E501
+    Readonly configuration for a Worker that calls a Scheduler job  # noqa: E501
     """
     type: Optional[StrictStr] = Field(None, description="The type of worker")
-    __properties = ["type"]
+    job_id: Optional[ResourceId] = Field(None, alias="jobId")
+    __properties = ["type", "jobId"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -34,8 +36,8 @@ class FailResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Fail', 'HealthCheck', 'LuminesceView', 'SchedulerJob', 'Sleep'):
-            raise ValueError("must be one of enum values ('Fail', 'HealthCheck', 'LuminesceView', 'SchedulerJob', 'Sleep')")
+        if value not in ('SchedulerJob'):
+            raise ValueError("must be one of enum values ('SchedulerJob')")
         return value
 
     class Config:
@@ -52,8 +54,8 @@ class FailResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> FailResponse:
-        """Create an instance of FailResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> SchedulerJobResponse:
+        """Create an instance of SchedulerJobResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -62,6 +64,9 @@ class FailResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of job_id
+        if self.job_id:
+            _dict['jobId'] = self.job_id.to_dict()
         # set to None if type (nullable) is None
         # and __fields_set__ contains the field
         if self.type is None and "type" in self.__fields_set__:
@@ -70,15 +75,16 @@ class FailResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> FailResponse:
-        """Create an instance of FailResponse from a dict"""
+    def from_dict(cls, obj: dict) -> SchedulerJobResponse:
+        """Create an instance of SchedulerJobResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return FailResponse.parse_obj(obj)
+            return SchedulerJobResponse.parse_obj(obj)
 
-        _obj = FailResponse.parse_obj({
-            "type": obj.get("type")
+        _obj = SchedulerJobResponse.parse_obj({
+            "type": obj.get("type"),
+            "job_id": ResourceId.from_dict(obj.get("jobId")) if obj.get("jobId") is not None else None
         })
         return _obj

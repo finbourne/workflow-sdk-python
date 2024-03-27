@@ -23,11 +23,12 @@ from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
 from lusid_workflow.models.fail import Fail
 from lusid_workflow.models.health_check import HealthCheck
 from lusid_workflow.models.luminesce_view import LuminesceView
+from lusid_workflow.models.scheduler_job import SchedulerJob
 from lusid_workflow.models.sleep import Sleep
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-WORKERCONFIGURATION_ONE_OF_SCHEMAS = ["Fail", "HealthCheck", "LuminesceView", "Sleep"]
+WORKERCONFIGURATION_ONE_OF_SCHEMAS = ["Fail", "HealthCheck", "LuminesceView", "SchedulerJob", "Sleep"]
 
 class WorkerConfiguration(BaseModel):
     """
@@ -39,10 +40,12 @@ class WorkerConfiguration(BaseModel):
     oneof_schema_2_validator: Optional[HealthCheck] = None
     # data type: LuminesceView
     oneof_schema_3_validator: Optional[LuminesceView] = None
+    # data type: SchedulerJob
+    oneof_schema_4_validator: Optional[SchedulerJob] = None
     # data type: Sleep
-    oneof_schema_4_validator: Optional[Sleep] = None
+    oneof_schema_5_validator: Optional[Sleep] = None
     if TYPE_CHECKING:
-        actual_instance: Union[Fail, HealthCheck, LuminesceView, Sleep]
+        actual_instance: Union[Fail, HealthCheck, LuminesceView, SchedulerJob, Sleep]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(WORKERCONFIGURATION_ONE_OF_SCHEMAS, const=True)
@@ -80,6 +83,11 @@ class WorkerConfiguration(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `LuminesceView`")
         else:
             match += 1
+        # validate data type: SchedulerJob
+        if not isinstance(v, SchedulerJob):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `SchedulerJob`")
+        else:
+            match += 1
         # validate data type: Sleep
         if not isinstance(v, Sleep):
             error_messages.append(f"Error! Input type `{type(v)}` is not `Sleep`")
@@ -87,10 +95,10 @@ class WorkerConfiguration(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in WorkerConfiguration with oneOf schemas: Fail, HealthCheck, LuminesceView, Sleep. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in WorkerConfiguration with oneOf schemas: Fail, HealthCheck, LuminesceView, SchedulerJob, Sleep. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in WorkerConfiguration with oneOf schemas: Fail, HealthCheck, LuminesceView, Sleep. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in WorkerConfiguration with oneOf schemas: Fail, HealthCheck, LuminesceView, SchedulerJob, Sleep. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -123,6 +131,12 @@ class WorkerConfiguration(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into SchedulerJob
+        try:
+            instance.actual_instance = SchedulerJob.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
         # deserialize data into Sleep
         try:
             instance.actual_instance = Sleep.from_json(json_str)
@@ -132,10 +146,10 @@ class WorkerConfiguration(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into WorkerConfiguration with oneOf schemas: Fail, HealthCheck, LuminesceView, Sleep. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into WorkerConfiguration with oneOf schemas: Fail, HealthCheck, LuminesceView, SchedulerJob, Sleep. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into WorkerConfiguration with oneOf schemas: Fail, HealthCheck, LuminesceView, Sleep. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into WorkerConfiguration with oneOf schemas: Fail, HealthCheck, LuminesceView, SchedulerJob, Sleep. Details: " + ", ".join(error_messages))
         else:
             return instance
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **type** | **str** | The type of worker | 
 **url** | **str** | The URL to check, eg: https://www.google.com/ | 
 **name** | **str** | Name of the view in Luminesce | 
+**job_id** | [**ResourceId**](ResourceId.md) |  | 
 
 ## Example
 

@@ -23,11 +23,12 @@ from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
 from lusid_workflow.models.fail_response import FailResponse
 from lusid_workflow.models.health_check_response import HealthCheckResponse
 from lusid_workflow.models.luminesce_view_response import LuminesceViewResponse
+from lusid_workflow.models.scheduler_job_response import SchedulerJobResponse
 from lusid_workflow.models.sleep_response import SleepResponse
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-WORKERCONFIGURATIONRESPONSE_ONE_OF_SCHEMAS = ["FailResponse", "HealthCheckResponse", "LuminesceViewResponse", "SleepResponse"]
+WORKERCONFIGURATIONRESPONSE_ONE_OF_SCHEMAS = ["FailResponse", "HealthCheckResponse", "LuminesceViewResponse", "SchedulerJobResponse", "SleepResponse"]
 
 class WorkerConfigurationResponse(BaseModel):
     """
@@ -39,10 +40,12 @@ class WorkerConfigurationResponse(BaseModel):
     oneof_schema_2_validator: Optional[HealthCheckResponse] = None
     # data type: LuminesceViewResponse
     oneof_schema_3_validator: Optional[LuminesceViewResponse] = None
+    # data type: SchedulerJobResponse
+    oneof_schema_4_validator: Optional[SchedulerJobResponse] = None
     # data type: SleepResponse
-    oneof_schema_4_validator: Optional[SleepResponse] = None
+    oneof_schema_5_validator: Optional[SleepResponse] = None
     if TYPE_CHECKING:
-        actual_instance: Union[FailResponse, HealthCheckResponse, LuminesceViewResponse, SleepResponse]
+        actual_instance: Union[FailResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(WORKERCONFIGURATIONRESPONSE_ONE_OF_SCHEMAS, const=True)
@@ -80,6 +83,11 @@ class WorkerConfigurationResponse(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `LuminesceViewResponse`")
         else:
             match += 1
+        # validate data type: SchedulerJobResponse
+        if not isinstance(v, SchedulerJobResponse):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `SchedulerJobResponse`")
+        else:
+            match += 1
         # validate data type: SleepResponse
         if not isinstance(v, SleepResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `SleepResponse`")
@@ -87,10 +95,10 @@ class WorkerConfigurationResponse(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, HealthCheckResponse, LuminesceViewResponse, SleepResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, HealthCheckResponse, LuminesceViewResponse, SleepResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -123,6 +131,12 @@ class WorkerConfigurationResponse(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into SchedulerJobResponse
+        try:
+            instance.actual_instance = SchedulerJobResponse.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
         # deserialize data into SleepResponse
         try:
             instance.actual_instance = SleepResponse.from_json(json_str)
@@ -132,10 +146,10 @@ class WorkerConfigurationResponse(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, HealthCheckResponse, LuminesceViewResponse, SleepResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, HealthCheckResponse, LuminesceViewResponse, SleepResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
         else:
             return instance
 

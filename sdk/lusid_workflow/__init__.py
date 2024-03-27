@@ -67,6 +67,8 @@ from lusid_workflow.models.run_worker_action import RunWorkerAction
 from lusid_workflow.models.run_worker_action_response import RunWorkerActionResponse
 from lusid_workflow.models.run_worker_request import RunWorkerRequest
 from lusid_workflow.models.run_worker_response import RunWorkerResponse
+from lusid_workflow.models.scheduler_job import SchedulerJob
+from lusid_workflow.models.scheduler_job_response import SchedulerJobResponse
 from lusid_workflow.models.sleep import Sleep
 from lusid_workflow.models.sleep_response import SleepResponse
 from lusid_workflow.models.stack import Stack
@@ -144,6 +146,8 @@ __all__ = [
     "RunWorkerActionResponse",
     "RunWorkerRequest",
     "RunWorkerResponse",
+    "SchedulerJob",
+    "SchedulerJobResponse",
     "Sleep",
     "SleepResponse",
     "Stack",

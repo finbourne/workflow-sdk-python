@@ -20,19 +20,21 @@ import json
 
 from typing import Any, Dict
 from pydantic import BaseModel, Field, constr, validator
+from lusid_workflow.models.resource_id import ResourceId
 
-class Fail(BaseModel):
+class SchedulerJob(BaseModel):
     """
-    Configuration for a Worker that always Fails  # noqa: E501
+    Configuration for a Worker that calls a Scheduler Job  # noqa: E501
     """
     type: constr(strict=True, min_length=1) = Field(..., description="The type of worker")
-    __properties = ["type"]
+    job_id: ResourceId = Field(..., alias="jobId")
+    __properties = ["type", "jobId"]
 
     @validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('Fail', 'HealthCheck', 'LuminesceView', 'SchedulerJob', 'Sleep'):
-            raise ValueError("must be one of enum values ('Fail', 'HealthCheck', 'LuminesceView', 'SchedulerJob', 'Sleep')")
+        if value not in ('SchedulerJob'):
+            raise ValueError("must be one of enum values ('SchedulerJob')")
         return value
 
     class Config:
@@ -49,8 +51,8 @@ class Fail(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Fail:
-        """Create an instance of Fail from a JSON string"""
+    def from_json(cls, json_str: str) -> SchedulerJob:
+        """Create an instance of SchedulerJob from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -59,18 +61,22 @@ class Fail(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of job_id
+        if self.job_id:
+            _dict['jobId'] = self.job_id.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Fail:
-        """Create an instance of Fail from a dict"""
+    def from_dict(cls, obj: dict) -> SchedulerJob:
+        """Create an instance of SchedulerJob from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return Fail.parse_obj(obj)
+            return SchedulerJob.parse_obj(obj)
 
-        _obj = Fail.parse_obj({
-            "type": obj.get("type")
+        _obj = SchedulerJob.parse_obj({
+            "type": obj.get("type"),
+            "job_id": ResourceId.from_dict(obj.get("jobId")) if obj.get("jobId") is not None else None
         })
         return _obj
