@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict
-from pydantic import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.task_definition_version import TaskDefinitionVersion
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 
 class CreateChildTasksAction(BaseModel):

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 from lusid_workflow.models.action_definition_response import ActionDefinitionResponse
 from lusid_workflow.models.initial_state import InitialState
 from lusid_workflow.models.resource_id import ResourceId

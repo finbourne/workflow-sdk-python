@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic.v1 import BaseModel, Field, StrictStr
 from lusid_workflow.models.action_details_response import ActionDetailsResponse
 
 class ActionDefinitionResponse(BaseModel):

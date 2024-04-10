@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.stack import Stack
 from lusid_workflow.models.task_definition_version import TaskDefinitionVersion
