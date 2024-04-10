@@ -17,7 +17,6 @@
 from __future__ import absolute_import
 
 # import apis into sdk package
-from lusid_workflow.api.event_handlers_api import EventHandlersApi
 from lusid_workflow.api.task_definitions_api import TaskDefinitionsApi
 from lusid_workflow.api.tasks_api import TasksApi
 from lusid_workflow.api.workers_api import WorkersApi
@@ -38,14 +37,10 @@ from lusid_workflow.models.action_details_response import ActionDetailsResponse
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 from lusid_workflow.models.create_child_tasks_action import CreateChildTasksAction
 from lusid_workflow.models.create_child_tasks_action_response import CreateChildTasksActionResponse
-from lusid_workflow.models.create_event_handler_request import CreateEventHandlerRequest
 from lusid_workflow.models.create_task_definition_request import CreateTaskDefinitionRequest
 from lusid_workflow.models.create_task_request import CreateTaskRequest
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
-from lusid_workflow.models.event_handler import EventHandler
-from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
-from lusid_workflow.models.event_matching_pattern import EventMatchingPattern
 from lusid_workflow.models.fail import Fail
 from lusid_workflow.models.fail_response import FailResponse
 from lusid_workflow.models.field_mapping import FieldMapping
@@ -111,7 +106,6 @@ from lusid_workflow.extensions import (
 
 
 __all__ = [
-    "EventHandlersApi",
     "TaskDefinitionsApi",
     "TasksApi",
     "WorkersApi",
@@ -122,14 +116,10 @@ __all__ = [
     "CreateChildTaskConfiguration",
     "CreateChildTasksAction",
     "CreateChildTasksActionResponse",
-    "CreateEventHandlerRequest",
     "CreateTaskDefinitionRequest",
     "CreateTaskRequest",
     "CreateWorkerRequest",
     "DeletedEntityResponse",
-    "EventHandler",
-    "EventHandlerMapping",
-    "EventMatchingPattern",
     "Fail",
     "FailResponse",
     "FieldMapping",
