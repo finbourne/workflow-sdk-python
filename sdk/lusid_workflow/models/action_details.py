@@ -19,12 +19,12 @@ import pprint
 import re  # noqa: F401
 
 from typing import Any, List, Optional
-from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
 from lusid_workflow.models.create_child_tasks_action import CreateChildTasksAction
 from lusid_workflow.models.run_worker_action import RunWorkerAction
 from lusid_workflow.models.trigger_parent_task_action import TriggerParentTaskAction
 from typing import Union, Any, List, TYPE_CHECKING
-from pydantic import StrictStr, Field
+from pydantic.v1 import StrictStr, Field
 
 ACTIONDETAILS_ONE_OF_SCHEMAS = ["CreateChildTasksAction", "RunWorkerAction", "TriggerParentTaskAction"]
 

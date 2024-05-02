@@ -19,14 +19,14 @@ import pprint
 import re  # noqa: F401
 
 from typing import Any, List, Optional
-from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
 from lusid_workflow.models.fail_response import FailResponse
 from lusid_workflow.models.health_check_response import HealthCheckResponse
 from lusid_workflow.models.luminesce_view_response import LuminesceViewResponse
 from lusid_workflow.models.scheduler_job_response import SchedulerJobResponse
 from lusid_workflow.models.sleep_response import SleepResponse
 from typing import Union, Any, List, TYPE_CHECKING
-from pydantic import StrictStr, Field
+from pydantic.v1 import StrictStr, Field
 
 WORKERCONFIGURATIONRESPONSE_ONE_OF_SCHEMAS = ["FailResponse", "HealthCheckResponse", "LuminesceViewResponse", "SchedulerJobResponse", "SleepResponse"]
 
