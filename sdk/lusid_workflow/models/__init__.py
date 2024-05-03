@@ -24,10 +24,14 @@ from lusid_workflow.models.action_id import ActionId
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 from lusid_workflow.models.create_child_tasks_action import CreateChildTasksAction
 from lusid_workflow.models.create_child_tasks_action_response import CreateChildTasksActionResponse
+from lusid_workflow.models.create_event_handler_request import CreateEventHandlerRequest
 from lusid_workflow.models.create_task_definition_request import CreateTaskDefinitionRequest
 from lusid_workflow.models.create_task_request import CreateTaskRequest
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
+from lusid_workflow.models.event_handler import EventHandler
+from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
+from lusid_workflow.models.event_matching_pattern import EventMatchingPattern
 from lusid_workflow.models.fail import Fail
 from lusid_workflow.models.fail_response import FailResponse
 from lusid_workflow.models.field_mapping import FieldMapping
@@ -42,6 +46,7 @@ from lusid_workflow.models.luminesce_view import LuminesceView
 from lusid_workflow.models.luminesce_view_response import LuminesceViewResponse
 from lusid_workflow.models.lusid_problem_details import LusidProblemDetails
 from lusid_workflow.models.lusid_validation_problem_details import LusidValidationProblemDetails
+from lusid_workflow.models.paged_resource_list_of_event_handler import PagedResourceListOfEventHandler
 from lusid_workflow.models.paged_resource_list_of_task import PagedResourceListOfTask
 from lusid_workflow.models.paged_resource_list_of_task_definition import PagedResourceListOfTaskDefinition
 from lusid_workflow.models.paged_resource_list_of_worker import PagedResourceListOfWorker
@@ -74,6 +79,7 @@ from lusid_workflow.models.transition_trigger_definition import TransitionTrigge
 from lusid_workflow.models.trigger_parent_task_action import TriggerParentTaskAction
 from lusid_workflow.models.trigger_parent_task_action_response import TriggerParentTaskActionResponse
 from lusid_workflow.models.trigger_schema import TriggerSchema
+from lusid_workflow.models.update_event_handler_request import UpdateEventHandlerRequest
 from lusid_workflow.models.update_task_definition_request import UpdateTaskDefinitionRequest
 from lusid_workflow.models.update_task_request import UpdateTaskRequest
 from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
@@ -95,10 +101,14 @@ __all__ = [
     "CreateChildTaskConfiguration",
     "CreateChildTasksAction",
     "CreateChildTasksActionResponse",
+    "CreateEventHandlerRequest",
     "CreateTaskDefinitionRequest",
     "CreateTaskRequest",
     "CreateWorkerRequest",
     "DeletedEntityResponse",
+    "EventHandler",
+    "EventHandlerMapping",
+    "EventMatchingPattern",
     "Fail",
     "FailResponse",
     "FieldMapping",
@@ -113,6 +123,7 @@ __all__ = [
     "LuminesceViewResponse",
     "LusidProblemDetails",
     "LusidValidationProblemDetails",
+    "PagedResourceListOfEventHandler",
     "PagedResourceListOfTask",
     "PagedResourceListOfTaskDefinition",
     "PagedResourceListOfWorker",
@@ -145,6 +156,7 @@ __all__ = [
     "TriggerParentTaskAction",
     "TriggerParentTaskActionResponse",
     "TriggerSchema",
+    "UpdateEventHandlerRequest",
     "UpdateTaskDefinitionRequest",
     "UpdateTaskRequest",
     "UpdateWorkerRequest",
