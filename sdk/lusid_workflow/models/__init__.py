@@ -25,6 +25,8 @@ from lusid_workflow.models.create_child_task_configuration import CreateChildTas
 from lusid_workflow.models.create_child_tasks_action import CreateChildTasksAction
 from lusid_workflow.models.create_child_tasks_action_response import CreateChildTasksActionResponse
 from lusid_workflow.models.create_event_handler_request import CreateEventHandlerRequest
+from lusid_workflow.models.create_new_task_activity import CreateNewTaskActivity
+from lusid_workflow.models.create_new_task_activity_response import CreateNewTaskActivityResponse
 from lusid_workflow.models.create_task_definition_request import CreateTaskDefinitionRequest
 from lusid_workflow.models.create_task_request import CreateTaskRequest
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
@@ -68,6 +70,8 @@ from lusid_workflow.models.sleep import Sleep
 from lusid_workflow.models.sleep_response import SleepResponse
 from lusid_workflow.models.stack import Stack
 from lusid_workflow.models.task import Task
+from lusid_workflow.models.task_activity import TaskActivity
+from lusid_workflow.models.task_activity_response import TaskActivityResponse
 from lusid_workflow.models.task_definition import TaskDefinition
 from lusid_workflow.models.task_definition_version import TaskDefinitionVersion
 from lusid_workflow.models.task_field_definition import TaskFieldDefinition
@@ -80,6 +84,8 @@ from lusid_workflow.models.trigger_parent_task_action import TriggerParentTaskAc
 from lusid_workflow.models.trigger_parent_task_action_response import TriggerParentTaskActionResponse
 from lusid_workflow.models.trigger_schema import TriggerSchema
 from lusid_workflow.models.update_event_handler_request import UpdateEventHandlerRequest
+from lusid_workflow.models.update_matching_tasks_activity import UpdateMatchingTasksActivity
+from lusid_workflow.models.update_matching_tasks_activity_response import UpdateMatchingTasksActivityResponse
 from lusid_workflow.models.update_task_definition_request import UpdateTaskDefinitionRequest
 from lusid_workflow.models.update_task_request import UpdateTaskRequest
 from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
@@ -102,6 +108,8 @@ __all__ = [
     "CreateChildTasksAction",
     "CreateChildTasksActionResponse",
     "CreateEventHandlerRequest",
+    "CreateNewTaskActivity",
+    "CreateNewTaskActivityResponse",
     "CreateTaskDefinitionRequest",
     "CreateTaskRequest",
     "CreateWorkerRequest",
@@ -145,6 +153,8 @@ __all__ = [
     "SleepResponse",
     "Stack",
     "Task",
+    "TaskActivity",
+    "TaskActivityResponse",
     "TaskDefinition",
     "TaskDefinitionVersion",
     "TaskFieldDefinition",
@@ -157,6 +167,8 @@ __all__ = [
     "TriggerParentTaskActionResponse",
     "TriggerSchema",
     "UpdateEventHandlerRequest",
+    "UpdateMatchingTasksActivity",
+    "UpdateMatchingTasksActivityResponse",
     "UpdateTaskDefinitionRequest",
     "UpdateTaskRequest",
     "UpdateWorkerRequest",

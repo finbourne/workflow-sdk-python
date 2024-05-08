@@ -23,6 +23,7 @@ from pydantic.v1 import BaseModel, Field, StrictStr, constr
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
 from lusid_workflow.models.event_matching_pattern import EventMatchingPattern
 from lusid_workflow.models.resource_id import ResourceId
+from lusid_workflow.models.task_activity import TaskActivity
 
 class UpdateEventHandlerRequest(BaseModel):
     """
@@ -35,7 +36,7 @@ class UpdateEventHandlerRequest(BaseModel):
     run_as_user_id: EventHandlerMapping = Field(..., alias="runAsUserId")
     task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
     task_definition_as_at: Optional[datetime] = Field(None, alias="taskDefinitionAsAt", description="AsAt of the required task definition")
-    task_activity: Optional[Any] = Field(..., alias="taskActivity", description="Defines what the event handler should do after being triggered")
+    task_activity: TaskActivity = Field(..., alias="taskActivity")
     __properties = ["displayName", "description", "status", "eventMatchingPattern", "runAsUserId", "taskDefinitionId", "taskDefinitionAsAt", "taskActivity"]
 
     class Config:
@@ -71,6 +72,9 @@ class UpdateEventHandlerRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of task_definition_id
         if self.task_definition_id:
             _dict['taskDefinitionId'] = self.task_definition_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of task_activity
+        if self.task_activity:
+            _dict['taskActivity'] = self.task_activity.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -80,11 +84,6 @@ class UpdateEventHandlerRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.task_definition_as_at is None and "task_definition_as_at" in self.__fields_set__:
             _dict['taskDefinitionAsAt'] = None
-
-        # set to None if task_activity (nullable) is None
-        # and __fields_set__ contains the field
-        if self.task_activity is None and "task_activity" in self.__fields_set__:
-            _dict['taskActivity'] = None
 
         return _dict
 
@@ -105,6 +104,6 @@ class UpdateEventHandlerRequest(BaseModel):
             "run_as_user_id": EventHandlerMapping.from_dict(obj.get("runAsUserId")) if obj.get("runAsUserId") is not None else None,
             "task_definition_id": ResourceId.from_dict(obj.get("taskDefinitionId")) if obj.get("taskDefinitionId") is not None else None,
             "task_definition_as_at": obj.get("taskDefinitionAsAt"),
-            "task_activity": obj.get("taskActivity")
+            "task_activity": TaskActivity.from_dict(obj.get("taskActivity")) if obj.get("taskActivity") is not None else None
         })
         return _obj
