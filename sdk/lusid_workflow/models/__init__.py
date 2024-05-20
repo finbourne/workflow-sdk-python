@@ -54,6 +54,7 @@ from lusid_workflow.models.paged_resource_list_of_task_definition import PagedRe
 from lusid_workflow.models.paged_resource_list_of_worker import PagedResourceListOfWorker
 from lusid_workflow.models.parameter import Parameter
 from lusid_workflow.models.parameter_value import ParameterValue
+from lusid_workflow.models.read_only_states import ReadOnlyStates
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.resource_list_of_access_controlled_resource import ResourceListOfAccessControlledResource
 from lusid_workflow.models.resource_list_of_task import ResourceListOfTask
@@ -137,6 +138,7 @@ __all__ = [
     "PagedResourceListOfWorker",
     "Parameter",
     "ParameterValue",
+    "ReadOnlyStates",
     "ResourceId",
     "ResourceListOfAccessControlledResource",
     "ResourceListOfTask",
