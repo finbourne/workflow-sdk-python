@@ -715,16 +715,16 @@ class EventHandlersApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def update_event_handler(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies a Task Definition")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update a Task Definition")], **kwargs) -> EventHandler:  # noqa: E501
+    async def update_event_handler(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies an Event Handler")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update an Event Handler")], **kwargs) -> EventHandler:  # noqa: E501
         ...
 
     @overload
-    def update_event_handler(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies a Task Definition")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update a Task Definition")], async_req: Optional[bool]=True, **kwargs) -> EventHandler:  # noqa: E501
+    def update_event_handler(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies an Event Handler")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update an Event Handler")], async_req: Optional[bool]=True, **kwargs) -> EventHandler:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_event_handler(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies a Task Definition")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update a Task Definition")], async_req: Optional[bool]=None, **kwargs) -> Union[EventHandler, Awaitable[EventHandler]]:  # noqa: E501
-        """[EXPERIMENTAL] UpdateEventHandler: Update an existing Task Definition  # noqa: E501
+    def update_event_handler(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies an Event Handler")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update an Event Handler")], async_req: Optional[bool]=None, **kwargs) -> Union[EventHandler, Awaitable[EventHandler]]:  # noqa: E501
+        """[EXPERIMENTAL] UpdateEventHandler: Update an existing Event handler  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -732,11 +732,11 @@ class EventHandlersApi:
         >>> thread = api.update_event_handler(scope, code, update_event_handler_request, async_req=True)
         >>> result = thread.get()
 
-        :param scope: The scope that identifies a Task Definition (required)
+        :param scope: The scope that identifies an Event Handler (required)
         :type scope: str
-        :param code: The code that identifies a Task Definition (required)
+        :param code: The code that identifies an Event Handler (required)
         :type code: str
-        :param update_event_handler_request: The data to update a Task Definition (required)
+        :param update_event_handler_request: The data to update an Event Handler (required)
         :type update_event_handler_request: UpdateEventHandlerRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -758,8 +758,8 @@ class EventHandlersApi:
         return self.update_event_handler_with_http_info(scope, code, update_event_handler_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_event_handler_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies a Task Definition")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update a Task Definition")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpdateEventHandler: Update an existing Task Definition  # noqa: E501
+    def update_event_handler_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies an Event Handler")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update an Event Handler")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpdateEventHandler: Update an existing Event handler  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -767,11 +767,11 @@ class EventHandlersApi:
         >>> thread = api.update_event_handler_with_http_info(scope, code, update_event_handler_request, async_req=True)
         >>> result = thread.get()
 
-        :param scope: The scope that identifies a Task Definition (required)
+        :param scope: The scope that identifies an Event Handler (required)
         :type scope: str
-        :param code: The code that identifies a Task Definition (required)
+        :param code: The code that identifies an Event Handler (required)
         :type code: str
-        :param update_event_handler_request: The data to update a Task Definition (required)
+        :param update_event_handler_request: The data to update an Event Handler (required)
         :type update_event_handler_request: UpdateEventHandlerRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
