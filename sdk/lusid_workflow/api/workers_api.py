@@ -693,25 +693,27 @@ class WorkersApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfWorker:  # noqa: E501
+    async def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfWorker:  # noqa: E501
         ...
 
     @overload
-    def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfWorker:  # noqa: E501
+    def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfWorker:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorker, Awaitable[PagedResourceListOfWorker]]:  # noqa: E501
+    def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorker, Awaitable[PagedResourceListOfWorker]]:  # noqa: E501
         """[EXPERIMENTAL] ListWorkers: List Workers  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_workers(as_at, limit, page, async_req=True)
+        >>> thread = api.list_workers(as_at, filter, limit, page, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.
         :type as_at: datetime
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
         :param page: The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.
@@ -733,20 +735,22 @@ class WorkersApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_workers_with_http_info(as_at, limit, page, **kwargs)  # noqa: E501
+        return self.list_workers_with_http_info(as_at, filter, limit, page, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_workers_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_workers_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[constr(strict=True, max_length=16384, min_length=0)], Field(description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[constr(strict=True, max_length=500, min_length=1)], Field(description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListWorkers: List Workers  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_workers_with_http_info(as_at, limit, page, async_req=True)
+        >>> thread = api.list_workers_with_http_info(as_at, filter, limit, page, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.
         :type as_at: datetime
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
         :param limit: When paginating, limit the number of returned results to this many.
         :type limit: int
         :param page: The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.
@@ -780,6 +784,7 @@ class WorkersApi:
 
         _all_params = [
             'as_at',
+            'filter',
             'limit',
             'page'
         ]
@@ -817,6 +822,9 @@ class WorkersApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))
