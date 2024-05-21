@@ -18,15 +18,15 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
 class ReadOnlyStates(BaseModel):
     """
     Information about which states the field can be edited in  # noqa: E501
     """
-    state_type: constr(strict=True, min_length=1) = Field(..., alias="stateType", description="The State Type (e.g. InitialState, AllStates, SelectedStates)")
-    selected_states: conlist(StrictStr) = Field(..., alias="selectedStates", description="Named states for which the field will be readonly - This field can only be populated if StateType = SelectedStates")
+    state_type: constr(strict=True, min_length=1) = Field(..., alias="stateType", description="The State Type (e.g. InitialState, AllStates, TerminalState, SelectedStates)")
+    selected_states: Optional[conlist(StrictStr)] = Field(None, alias="selectedStates", description="Named states for which the field will be readonly - This field can only be populated if StateType = SelectedStates")
     __properties = ["stateType", "selectedStates"]
 
     class Config:
@@ -53,6 +53,11 @@ class ReadOnlyStates(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if selected_states (nullable) is None
+        # and __fields_set__ contains the field
+        if self.selected_states is None and "selected_states" in self.__fields_set__:
+            _dict['selectedStates'] = None
+
         return _dict
 
     @classmethod
