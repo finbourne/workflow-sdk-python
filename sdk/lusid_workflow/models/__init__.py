@@ -90,6 +90,7 @@ from lusid_workflow.models.update_matching_tasks_activity_response import Update
 from lusid_workflow.models.update_task_definition_request import UpdateTaskDefinitionRequest
 from lusid_workflow.models.update_task_request import UpdateTaskRequest
 from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
+from lusid_workflow.models.value_constraints import ValueConstraints
 from lusid_workflow.models.version_info import VersionInfo
 from lusid_workflow.models.worker import Worker
 from lusid_workflow.models.worker_configuration import WorkerConfiguration
@@ -174,6 +175,7 @@ __all__ = [
     "UpdateTaskDefinitionRequest",
     "UpdateTaskRequest",
     "UpdateWorkerRequest",
+    "ValueConstraints",
     "VersionInfo",
     "Worker",
     "WorkerConfiguration",
