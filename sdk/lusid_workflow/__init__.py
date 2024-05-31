@@ -122,6 +122,7 @@ from lusid_workflow.extensions import (
     ConfigurationLoader,
     SecretsFileConfigurationLoader,
     EnvironmentVariablesConfigurationLoader,
+    FileTokenConfigurationLoader,
     ArgsConfigurationLoader,
     SyncApiClient
 )
@@ -227,6 +228,8 @@ __all__ = [
     "ConfigurationLoader",
     "SecretsFileConfigurationLoader",
     "EnvironmentVariablesConfigurationLoader",
+    "FileTokenConfigurationLoader",
     "ArgsConfigurationLoader",
     "SyncApiClient"
+    
 ]

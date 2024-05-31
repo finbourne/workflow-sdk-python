@@ -5,8 +5,8 @@ Constraints that should be applied to a Tasks fields
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**constraint_type** | **str** | Whether the constraint is a suggestion or should be enforced via validation | 
-**value_source_type** | **str** | The source of the acceptable values | 
+**constraint_type** | **str** | Whether the constraint is a suggestion or should be enforced via validation (e.g. Suggested, Validated) | 
+**value_source_type** | **str** | The source of the acceptable values (e.g. AcceptableValues) | 
 **acceptable_values** | **List[object]** | The acceptable values for the field | 
 
 ## Example

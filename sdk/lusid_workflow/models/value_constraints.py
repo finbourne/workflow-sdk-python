@@ -25,8 +25,8 @@ class ValueConstraints(BaseModel):
     """
     Constraints that should be applied to a Tasks fields  # noqa: E501
     """
-    constraint_type: constr(strict=True, min_length=1) = Field(..., alias="constraintType", description="Whether the constraint is a suggestion or should be enforced via validation")
-    value_source_type: constr(strict=True, min_length=1) = Field(..., alias="valueSourceType", description="The source of the acceptable values")
+    constraint_type: constr(strict=True, min_length=1) = Field(..., alias="constraintType", description="Whether the constraint is a suggestion or should be enforced via validation (e.g. Suggested, Validated)")
+    value_source_type: constr(strict=True, min_length=1) = Field(..., alias="valueSourceType", description="The source of the acceptable values (e.g. AcceptableValues)")
     acceptable_values: conlist(Any) = Field(..., alias="acceptableValues", description="The acceptable values for the field")
     __properties = ["constraintType", "valueSourceType", "acceptableValues"]
 
