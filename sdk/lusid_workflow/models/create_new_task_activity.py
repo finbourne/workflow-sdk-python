@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
 from lusid_workflow.models.field_mapping import FieldMapping
 
@@ -27,7 +27,7 @@ class CreateNewTaskActivity(BaseModel):
     """
     Define a Task Activity that creates a new task  # noqa: E501
     """
-    initial_trigger: constr(strict=True, min_length=1) = Field(..., alias="initialTrigger", description="Trigger to supply to all tasks to be made")
+    initial_trigger: Optional[StrictStr] = Field(None, alias="initialTrigger", description="Trigger to supply to all tasks to be made")
     type: constr(strict=True, min_length=1) = Field(..., description="The type of task activity")
     correlation_ids: Optional[conlist(EventHandlerMapping)] = Field(None, alias="correlationIds", description="The event to correlation ID mappings")
     task_fields: Optional[Dict[str, FieldMapping]] = Field(None, alias="taskFields", description="The event to task field mappings")
@@ -78,6 +78,11 @@ class CreateNewTaskActivity(BaseModel):
                 if self.task_fields[_key]:
                     _field_dict[_key] = self.task_fields[_key].to_dict()
             _dict['taskFields'] = _field_dict
+        # set to None if initial_trigger (nullable) is None
+        # and __fields_set__ contains the field
+        if self.initial_trigger is None and "initial_trigger" in self.__fields_set__:
+            _dict['initialTrigger'] = None
+
         # set to None if correlation_ids (nullable) is None
         # and __fields_set__ contains the field
         if self.correlation_ids is None and "correlation_ids" in self.__fields_set__:
