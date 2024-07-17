@@ -371,7 +371,7 @@ api_client_factory = ApiClientFactory(config_loaders=config_loaders)
 async with api_client_factory:
     # Create an instance of the API class
     api_instance = api_client_factory.build(lusid_workflow.WorkersApi)
-    run_id = 56 # int | The ID returned when calling Run Worker
+    run_id = 'run_id_example' # str | The ID returned when calling Run Worker
 
     try:
         # [EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results
@@ -387,7 +387,7 @@ async with api_client_factory:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **run_id** | **int**| The ID returned when calling Run Worker | 
+ **run_id** | **str**| The ID returned when calling Run Worker | 
 
 ### Return type
 

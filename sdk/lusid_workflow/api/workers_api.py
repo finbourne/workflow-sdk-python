@@ -544,15 +544,15 @@ class WorkersApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def get_worker_result(self, run_id : Annotated[StrictInt, Field(..., description="The ID returned when calling Run Worker")], **kwargs) -> GetWorkerResultResponse:  # noqa: E501
+    async def get_worker_result(self, run_id : Annotated[StrictStr, Field(..., description="The ID returned when calling Run Worker")], **kwargs) -> GetWorkerResultResponse:  # noqa: E501
         ...
 
     @overload
-    def get_worker_result(self, run_id : Annotated[StrictInt, Field(..., description="The ID returned when calling Run Worker")], async_req: Optional[bool]=True, **kwargs) -> GetWorkerResultResponse:  # noqa: E501
+    def get_worker_result(self, run_id : Annotated[StrictStr, Field(..., description="The ID returned when calling Run Worker")], async_req: Optional[bool]=True, **kwargs) -> GetWorkerResultResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_worker_result(self, run_id : Annotated[StrictInt, Field(..., description="The ID returned when calling Run Worker")], async_req: Optional[bool]=None, **kwargs) -> Union[GetWorkerResultResponse, Awaitable[GetWorkerResultResponse]]:  # noqa: E501
+    def get_worker_result(self, run_id : Annotated[StrictStr, Field(..., description="The ID returned when calling Run Worker")], async_req: Optional[bool]=None, **kwargs) -> Union[GetWorkerResultResponse, Awaitable[GetWorkerResultResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -562,7 +562,7 @@ class WorkersApi:
         >>> result = thread.get()
 
         :param run_id: The ID returned when calling Run Worker (required)
-        :type run_id: int
+        :type run_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: timeout setting for this request.
@@ -583,7 +583,7 @@ class WorkersApi:
         return self.get_worker_result_with_http_info(run_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_worker_result_with_http_info(self, run_id : Annotated[StrictInt, Field(..., description="The ID returned when calling Run Worker")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_worker_result_with_http_info(self, run_id : Annotated[StrictStr, Field(..., description="The ID returned when calling Run Worker")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -593,7 +593,7 @@ class WorkersApi:
         >>> result = thread.get()
 
         :param run_id: The ID returned when calling Run Worker (required)
-        :type run_id: int
+        :type run_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
