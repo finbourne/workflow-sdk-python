@@ -36,8 +36,8 @@ class CreateChildTasksActionResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ('CreateChildTasks', 'RunWorker', 'TriggerParentTask'):
-            raise ValueError("must be one of enum values ('CreateChildTasks', 'RunWorker', 'TriggerParentTask')")
+        if not value == 'CreateChildTasks':
+            raise ValueError("must be one of enum values ('CreateChildTasks')")
         return value
 
     class Config:

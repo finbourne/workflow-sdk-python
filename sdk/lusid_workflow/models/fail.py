@@ -31,8 +31,8 @@ class Fail(BaseModel):
     @validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('Fail', 'HealthCheck', 'LuminesceView', 'SchedulerJob', 'Sleep'):
-            raise ValueError("must be one of enum values ('Fail', 'HealthCheck', 'LuminesceView', 'SchedulerJob', 'Sleep')")
+        if not value == 'Fail':
+            raise ValueError("must be one of enum values ('Fail')")
         return value
 
     class Config:

@@ -34,8 +34,8 @@ class FailResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ('Fail', 'HealthCheck', 'LuminesceView', 'SchedulerJob', 'Sleep'):
-            raise ValueError("must be one of enum values ('Fail', 'HealthCheck', 'LuminesceView', 'SchedulerJob', 'Sleep')")
+        if not value == 'Fail':
+            raise ValueError("must be one of enum values ('Fail')")
         return value
 
     class Config:

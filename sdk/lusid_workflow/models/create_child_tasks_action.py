@@ -33,8 +33,8 @@ class CreateChildTasksAction(BaseModel):
     @validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('CreateChildTasks', 'RunWorker', 'TriggerParentTask'):
-            raise ValueError("must be one of enum values ('CreateChildTasks', 'RunWorker', 'TriggerParentTask')")
+        if not value == 'CreateChildTasks':
+            raise ValueError("must be one of enum values ('CreateChildTasks')")
         return value
 
     class Config:
