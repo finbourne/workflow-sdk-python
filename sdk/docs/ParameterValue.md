@@ -25,6 +25,6 @@ parameter_value_dict = parameter_value_instance.to_dict()
 # create an instance of ParameterValue from a dict
 parameter_value_form_dict = parameter_value.from_dict(parameter_value_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

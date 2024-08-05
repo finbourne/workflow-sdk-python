@@ -26,6 +26,6 @@ value_constraints_dict = value_constraints_instance.to_dict()
 # create an instance of ValueConstraints from a dict
 value_constraints_form_dict = value_constraints.from_dict(value_constraints_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

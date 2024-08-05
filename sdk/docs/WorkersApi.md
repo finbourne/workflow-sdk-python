@@ -22,67 +22,57 @@ If the Worker already exists a failure will be returned
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.create_worker_request import CreateWorkerRequest
-from lusid_workflow.models.worker import Worker
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    WorkersApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    WorkersApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(WorkersApi)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # create_worker_request = CreateWorkerRequest()
+        # create_worker_request = CreateWorkerRequest.from_json("")
+        create_worker_request = CreateWorkerRequest.from_dict({"id":{"scope":"Health","code":"HealthCheckWorker"},"displayName":"ASP.Net Health Check worker","description":"Calls /health to check a service is running","workerConfiguration":{"type":"HealthCheck","url":"http://localhost.lusid.com:8282"}}) # CreateWorkerRequest | Worker to be created
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] CreateWorker: Create a new Worker
+            api_response = await api_instance.create_worker(create_worker_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling WorkersApi->create_worker: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.WorkersApi)
-    create_worker_request = {"id":{"scope":"Health","code":"HealthCheckWorker"},"displayName":"ASP.Net Health Check worker","description":"Calls /health to check a service is running","workerConfiguration":{"type":"HealthCheck","url":"http://localhost.lusid.com:8282"}} # CreateWorkerRequest | Worker to be created
-
-    try:
-        # [EXPERIMENTAL] CreateWorker: Create a new Worker
-        api_response = await api_instance.create_worker(create_worker_request)
-        print("The response of WorkersApi->create_worker:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling WorkersApi->create_worker: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -93,10 +83,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Worker**](Worker.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -110,7 +96,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_worker**
 > DeletedEntityResponse delete_worker(scope, code)
@@ -121,67 +107,53 @@ If the Worker does not exist a failure will be returned
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    WorkersApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    WorkersApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(WorkersApi)
+        scope = 'scope_example' # str | Scope of the worker to be deleted
+        code = 'code_example' # str | Code of the worker to be deleted
 
+        try:
+            # [EXPERIMENTAL] DeleteWorker: Delete a Worker
+            api_response = await api_instance.delete_worker(scope, code)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling WorkersApi->delete_worker: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.WorkersApi)
-    scope = 'scope_example' # str | Scope of the worker to be deleted
-    code = 'code_example' # str | Code of the worker to be deleted
-
-    try:
-        # [EXPERIMENTAL] DeleteWorker: Delete a Worker
-        api_response = await api_instance.delete_worker(scope, code)
-        print("The response of WorkersApi->delete_worker:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling WorkersApi->delete_worker: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -193,10 +165,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeletedEntityResponse**](DeletedEntityResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -211,7 +179,7 @@ Name | Type | Description  | Notes
 **404** | Worker not found. |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_worker**
 > Worker get_worker(scope, code, as_at=as_at)
@@ -222,68 +190,54 @@ Will return a NotFound failure if the Worker does not exist
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.worker import Worker
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    WorkersApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    WorkersApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(WorkersApi)
+        scope = 'scope_example' # str | Scope of the worker
+        code = 'code_example' # str | Code of the worker
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
 
+        try:
+            # [EXPERIMENTAL] GetWorker: Get a Worker
+            api_response = await api_instance.get_worker(scope, code, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling WorkersApi->get_worker: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.WorkersApi)
-    scope = 'scope_example' # str | Scope of the worker
-    code = 'code_example' # str | Code of the worker
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
-
-    try:
-        # [EXPERIMENTAL] GetWorker: Get a Worker
-        api_response = await api_instance.get_worker(scope, code, as_at=as_at)
-        print("The response of WorkersApi->get_worker:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling WorkersApi->get_worker: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -297,10 +251,6 @@ Name | Type | Description  | Notes
 
 [**Worker**](Worker.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -313,7 +263,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_worker_result**
 > GetWorkerResultResponse get_worker_result(run_id)
@@ -322,66 +272,52 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.get_worker_result_response import GetWorkerResultResponse
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    WorkersApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    WorkersApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(WorkersApi)
+        run_id = 'run_id_example' # str | The ID returned when calling Run Worker
 
+        try:
+            # [EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results
+            api_response = await api_instance.get_worker_result(run_id)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling WorkersApi->get_worker_result: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.WorkersApi)
-    run_id = 'run_id_example' # str | The ID returned when calling Run Worker
-
-    try:
-        # [EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results
-        api_response = await api_instance.get_worker_result(run_id)
-        print("The response of WorkersApi->get_worker_result:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling WorkersApi->get_worker_result: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -392,10 +328,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetWorkerResultResponse**](GetWorkerResultResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -409,7 +341,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_workers**
 > PagedResourceListOfWorker list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
@@ -418,70 +350,56 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.paged_resource_list_of_worker import PagedResourceListOfWorker
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    WorkersApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    WorkersApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(WorkersApi)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified. (optional)
+        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
+        sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\" (optional)
+        limit = 10 # int | When paginating, limit the number of returned results to this many. (optional) (default to 10)
+        page = 'page_example' # str | The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
 
+        try:
+            # [EXPERIMENTAL] ListWorkers: List Workers
+            api_response = await api_instance.list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling WorkersApi->list_workers: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.WorkersApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
-    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\" (optional)
-    limit = 10 # int | When paginating, limit the number of returned results to this many. (optional) (default to 10)
-    page = 'page_example' # str | The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
-
-    try:
-        # [EXPERIMENTAL] ListWorkers: List Workers
-        api_response = await api_instance.list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
-        print("The response of WorkersApi->list_workers:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling WorkersApi->list_workers: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -497,10 +415,6 @@ Name | Type | Description  | Notes
 
 [**PagedResourceListOfWorker**](PagedResourceListOfWorker.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -513,7 +427,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **run_worker**
 > RunWorkerResponse run_worker(scope, code, run_worker_request, as_at=as_at)
@@ -522,70 +436,60 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.run_worker_request import RunWorkerRequest
-from lusid_workflow.models.run_worker_response import RunWorkerResponse
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    WorkersApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    WorkersApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(WorkersApi)
+        scope = 'scope_example' # str | Scope of the worker
+        code = 'code_example' # str | Code of the worker
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # run_worker_request = RunWorkerRequest()
+        # run_worker_request = RunWorkerRequest.from_json("")
+        run_worker_request = RunWorkerRequest.from_dict({"parameters":[{"name":"test-parameter","value":true}]}) # RunWorkerRequest | 
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] RunWorker: Run a Worker
+            api_response = await api_instance.run_worker(scope, code, run_worker_request, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling WorkersApi->run_worker: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.WorkersApi)
-    scope = 'scope_example' # str | Scope of the worker
-    code = 'code_example' # str | Code of the worker
-    run_worker_request = {"parameters":[{"name":"test-parameter","value":true}]} # RunWorkerRequest | 
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
-
-    try:
-        # [EXPERIMENTAL] RunWorker: Run a Worker
-        api_response = await api_instance.run_worker(scope, code, run_worker_request, as_at=as_at)
-        print("The response of WorkersApi->run_worker:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling WorkersApi->run_worker: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -600,10 +504,6 @@ Name | Type | Description  | Notes
 
 [**RunWorkerResponse**](RunWorkerResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
@@ -616,7 +516,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **update_worker**
 > Worker update_worker(scope, code, update_worker_request)
@@ -627,69 +527,59 @@ If the Worker does not exist a failure will be returned
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
-from lusid_workflow.models.worker import Worker
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    WorkersApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    WorkersApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(WorkersApi)
+        scope = 'scope_example' # str | Scope of the worker to be updated
+        code = 'code_example' # str | Code of the worker to be updated
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # update_worker_request = UpdateWorkerRequest()
+        # update_worker_request = UpdateWorkerRequest.from_json("")
+        update_worker_request = UpdateWorkerRequest.from_dict({"displayName":"ASP.Net Health Check worker","description":"Calls /health to check a service is running","workerConfiguration":{"type":"HealthCheck","url":"http://localhost.lusid.com:8282"}}) # UpdateWorkerRequest | State of the updated worker
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] UpdateWorker: Update a Worker
+            api_response = await api_instance.update_worker(scope, code, update_worker_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling WorkersApi->update_worker: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.WorkersApi)
-    scope = 'scope_example' # str | Scope of the worker to be updated
-    code = 'code_example' # str | Code of the worker to be updated
-    update_worker_request = {"displayName":"ASP.Net Health Check worker","description":"Calls /health to check a service is running","workerConfiguration":{"type":"HealthCheck","url":"http://localhost.lusid.com:8282"}} # UpdateWorkerRequest | State of the updated worker
-
-    try:
-        # [EXPERIMENTAL] UpdateWorker: Update a Worker
-        api_response = await api_instance.update_worker(scope, code, update_worker_request)
-        print("The response of WorkersApi->update_worker:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling WorkersApi->update_worker: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -702,10 +592,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Worker**](Worker.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -720,5 +606,5 @@ Name | Type | Description  | Notes
 **404** | Worker not found. |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 

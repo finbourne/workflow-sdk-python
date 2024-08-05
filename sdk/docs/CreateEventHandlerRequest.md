@@ -32,6 +32,6 @@ create_event_handler_request_dict = create_event_handler_request_instance.to_dic
 # create an instance of CreateEventHandlerRequest from a dict
 create_event_handler_request_form_dict = create_event_handler_request.from_dict(create_event_handler_request_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

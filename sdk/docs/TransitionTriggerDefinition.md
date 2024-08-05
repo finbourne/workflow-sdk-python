@@ -25,6 +25,6 @@ transition_trigger_definition_dict = transition_trigger_definition_instance.to_d
 # create an instance of TransitionTriggerDefinition from a dict
 transition_trigger_definition_form_dict = transition_trigger_definition.from_dict(transition_trigger_definition_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

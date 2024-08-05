@@ -28,6 +28,6 @@ worker_status_triggers_dict = worker_status_triggers_instance.to_dict()
 # create an instance of WorkerStatusTriggers from a dict
 worker_status_triggers_form_dict = worker_status_triggers.from_dict(worker_status_triggers_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

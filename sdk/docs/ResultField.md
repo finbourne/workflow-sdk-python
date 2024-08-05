@@ -27,6 +27,6 @@ result_field_dict = result_field_instance.to_dict()
 # create an instance of ResultField from a dict
 result_field_form_dict = result_field.from_dict(result_field_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

@@ -33,6 +33,6 @@ event_handler_dict = event_handler_instance.to_dict()
 # create an instance of EventHandler from a dict
 event_handler_form_dict = event_handler.from_dict(event_handler_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

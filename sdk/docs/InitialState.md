@@ -25,6 +25,6 @@ initial_state_dict = initial_state_instance.to_dict()
 # create an instance of InitialState from a dict
 initial_state_form_dict = initial_state.from_dict(initial_state_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 

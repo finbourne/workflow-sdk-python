@@ -18,68 +18,58 @@ Method | HTTP request | Description
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.create_task_request import CreateTaskRequest
-from lusid_workflow.models.task import Task
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    TasksApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    TasksApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TasksApi)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # create_task_request = CreateTaskRequest()
+        # create_task_request = CreateTaskRequest.from_json("")
+        create_task_request = CreateTaskRequest.from_dict({"taskDefinitionId":{"scope":"A1","code":"ZZZ"},"correlationIds":["correlation-id"],"fields":[{"name":"clientId","value":"zzz123"},{"name":"assignee"},{"name":"resolutionDetail","value":""}]}) # CreateTaskRequest | Request to create Task
+        trigger = 'trigger_example' # str | The name of the Trigger to invoke (optional)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] CreateTask: Create a new Task
+            api_response = await api_instance.create_task(create_task_request, trigger=trigger)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TasksApi->create_task: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.TasksApi)
-    create_task_request = {"taskDefinitionId":{"scope":"A1","code":"ZZZ"},"correlationIds":["correlation-id"],"fields":[{"name":"clientId","value":"zzz123"},{"name":"assignee"},{"name":"resolutionDetail","value":""}]} # CreateTaskRequest | Request to create Task
-    trigger = 'trigger_example' # str | The name of the Trigger to invoke (optional)
-
-    try:
-        # [EXPERIMENTAL] CreateTask: Create a new Task
-        api_response = await api_instance.create_task(create_task_request, trigger=trigger)
-        print("The response of TasksApi->create_task:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TasksApi->create_task: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -91,10 +81,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Task**](Task.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -108,7 +94,7 @@ Name | Type | Description  | Notes
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_task**
 > DeletedEntityResponse delete_task(id)
@@ -117,66 +103,52 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    TasksApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    TasksApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TasksApi)
+        id = 'id_example' # str | The identifier for the Task to be deleted.
 
+        try:
+            # [EXPERIMENTAL] DeleteTask: Delete a Task
+            api_response = await api_instance.delete_task(id)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TasksApi->delete_task: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.TasksApi)
-    id = 'id_example' # str | The identifier for the Task to be deleted.
-
-    try:
-        # [EXPERIMENTAL] DeleteTask: Delete a Task
-        api_response = await api_instance.delete_task(id)
-        print("The response of TasksApi->delete_task:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TasksApi->delete_task: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -187,10 +159,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeletedEntityResponse**](DeletedEntityResponse.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -205,7 +173,7 @@ Name | Type | Description  | Notes
 **404** | Task not found. |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_task**
 > Task get_task(id, as_at=as_at)
@@ -214,67 +182,53 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.task import Task
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    TasksApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    TasksApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TasksApi)
+        id = 'id_example' # str | Id of the Task to retrieve
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
 
+        try:
+            # [EXPERIMENTAL] GetTask: Get a Task
+            api_response = await api_instance.get_task(id, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TasksApi->get_task: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.TasksApi)
-    id = 'id_example' # str | Id of the Task to retrieve
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
-
-    try:
-        # [EXPERIMENTAL] GetTask: Get a Task
-        api_response = await api_instance.get_task(id, as_at=as_at)
-        print("The response of TasksApi->get_task:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TasksApi->get_task: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -287,10 +241,6 @@ Name | Type | Description  | Notes
 
 [**Task**](Task.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -304,7 +254,7 @@ Name | Type | Description  | Notes
 **404** | Task not found. |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_tasks**
 > PagedResourceListOfTask list_tasks(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
@@ -313,70 +263,56 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.paged_resource_list_of_task import PagedResourceListOfTask
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    TasksApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    TasksApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TasksApi)
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
+        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
+        sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\" (optional)
+        limit = 10 # int | When paginating, limit the number of returned results to this many. (optional) (default to 10)
+        page = 'page_example' # str | The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
 
+        try:
+            # [EXPERIMENTAL] ListTasks: List Tasks
+            api_response = await api_instance.list_tasks(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TasksApi->list_tasks: %s\n" % e)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.TasksApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
-    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\" (optional)
-    limit = 10 # int | When paginating, limit the number of returned results to this many. (optional) (default to 10)
-    page = 'page_example' # str | The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
-
-    try:
-        # [EXPERIMENTAL] ListTasks: List Tasks
-        api_response = await api_instance.list_tasks(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
-        print("The response of TasksApi->list_tasks:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TasksApi->list_tasks: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -392,10 +328,6 @@ Name | Type | Description  | Notes
 
 [**PagedResourceListOfTask**](PagedResourceListOfTask.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
  - **Content-Type**: Not defined
@@ -409,7 +341,7 @@ Name | Type | Description  | Notes
 **404** | No Tasks found. |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **update_task**
 > Task update_task(id, trigger=trigger, update_task_request=update_task_request)
@@ -418,69 +350,59 @@ Name | Type | Description  | Notes
 
 ### Example
 
-* OAuth Authentication (oauth2):
 ```python
-from __future__ import print_function
-import time
-import lusid_workflow
-from lusid_workflow.rest import ApiException
-from lusid_workflow.models.task import Task
-from lusid_workflow.models.update_task_request import UpdateTaskRequest
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
 from pprint import pprint
-
-import os
 from lusid_workflow import (
     ApiClientFactory,
-    TasksApi,
-    EnvironmentVariablesConfigurationLoader,
-    SecretsFileConfigurationLoader,
-    ArgsConfigurationLoader
+    TasksApi
 )
 
-# Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
-# By default this will read config from environment variables
-# Then from a secrets.json file found in the current working directory
-api_client_factory = ApiClientFactory()
+async def main():
 
-# The ApiClientFactory can be passed an iterable of configuration loaders to read configuration from
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
 
-api_url = "https://fbn-prd.lusid.com/workflow"
-# Path to a secrets.json file containing authentication credentials
-# See https://support.lusid.com/knowledgebase/article/KA-01667/en-us
-# for a detailed guide to setting up the SDK make authenticated calls to LUSID APIs
-secrets_path = os.getenv("FBN_SECRETS_PATH")
-app_name="LusidJupyterNotebook"
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
 
-config_loaders = [
-	EnvironmentVariablesConfigurationLoader(),
-	SecretsFileConfigurationLoader(api_secrets_file=secrets_path),
-	ArgsConfigurationLoader(api_url=api_url, app_name=app_name)
-]
-api_client_factory = ApiClientFactory(config_loaders=config_loaders)
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TasksApi)
+        id = 'id_example' # str | Id of the Task to act upon
+        trigger = 'trigger_example' # str |  (optional)
 
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # update_task_request = UpdateTaskRequest()
+        # update_task_request = UpdateTaskRequest.from_json("")
+        update_task_request = UpdateTaskRequest.from_dict({"fields":[{"name":"clientId","value":"zzz123"},{"name":"assignee","value":"bob"},{"name":"resolutionDetail","value":""}]}) # UpdateTaskRequest | The details of the request (optional)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
+        try:
+            # [EXPERIMENTAL] UpdateTask: Update a Task
+            api_response = await api_instance.update_task(id, trigger=trigger, update_task_request=update_task_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TasksApi->update_task: %s\n" % e)
 
-
-
-# Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-async with api_client_factory:
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(lusid_workflow.TasksApi)
-    id = 'id_example' # str | Id of the Task to act upon
-    trigger = 'trigger_example' # str |  (optional)
-    update_task_request = {"fields":[{"name":"clientId","value":"zzz123"},{"name":"assignee","value":"bob"},{"name":"resolutionDetail","value":""}]} # UpdateTaskRequest | The details of the request (optional)
-
-    try:
-        # [EXPERIMENTAL] UpdateTask: Update a Task
-        api_response = await api_instance.update_task(id, trigger=trigger, update_task_request=update_task_request)
-        print("The response of TasksApi->update_task:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling TasksApi->update_task: %s\n" % e)
+asyncio.run(main())
 ```
-
 
 ### Parameters
 
@@ -493,10 +415,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Task**](Task.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -511,5 +429,5 @@ Name | Type | Description  | Notes
 **404** | Task not found. |  -  |
 **0** | Error response |  -  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 

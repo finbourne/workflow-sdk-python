@@ -25,6 +25,6 @@ health_check_dict = health_check_instance.to_dict()
 # create an instance of HealthCheck from a dict
 health_check_form_dict = health_check.from_dict(health_check_dict)
 ```
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
 
