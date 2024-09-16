@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**create_task**](TasksApi.md#create_task) | **POST** /api/tasks | [EXPERIMENTAL] CreateTask: Create a new Task
 [**delete_task**](TasksApi.md#delete_task) | **DELETE** /api/tasks/{id} | [EXPERIMENTAL] DeleteTask: Delete a Task
 [**get_task**](TasksApi.md#get_task) | **GET** /api/tasks/{id} | [EXPERIMENTAL] GetTask: Get a Task
+[**get_task_history**](TasksApi.md#get_task_history) | **GET** /api/tasks/{id}/history | [EXPERIMENTAL] GetTaskHistory: Get the history of a Task
 [**list_tasks**](TasksApi.md#list_tasks) | **GET** /api/tasks | ListTasks: List Tasks
 [**update_task**](TasksApi.md#update_task) | **POST** /api/tasks/{id} | [EXPERIMENTAL] UpdateTask: Update a Task
 
@@ -240,6 +241,87 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Task**](Task.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | Task not found. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_task_history**
+> ResourceListOfChangeItem get_task_history(id, as_at=as_at)
+
+[EXPERIMENTAL] GetTaskHistory: Get the history of a Task
+
+### Example
+
+```python
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.models import *
+from pprint import pprint
+from lusid_workflow import (
+    ApiClientFactory,
+    TasksApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TasksApi)
+        id = 'id_example' # str | The Task Id for which to get the history
+        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime of the oldest change to retrieve. Defaults to returning the latest version of the Task if not specified. (optional)
+
+        try:
+            # [EXPERIMENTAL] GetTaskHistory: Get the history of a Task
+            api_response = await api_instance.get_task_history(id, as_at=as_at)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TasksApi->get_task_history: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The Task Id for which to get the history | 
+ **as_at** | **datetime**| The asAt datetime of the oldest change to retrieve. Defaults to returning the latest version of the Task if not specified. | [optional] 
+
+### Return type
+
+[**ResourceListOfChangeItem**](ResourceListOfChangeItem.md)
 
 ### HTTP request headers
 

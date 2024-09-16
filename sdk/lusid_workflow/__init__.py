@@ -39,6 +39,7 @@ from lusid_workflow.models.action_definition_response import ActionDefinitionRes
 from lusid_workflow.models.action_details import ActionDetails
 from lusid_workflow.models.action_details_response import ActionDetailsResponse
 from lusid_workflow.models.action_id import ActionId
+from lusid_workflow.models.change_item import ChangeItem
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 from lusid_workflow.models.create_child_tasks_action import CreateChildTasksAction
 from lusid_workflow.models.create_child_tasks_action_response import CreateChildTasksActionResponse
@@ -75,6 +76,7 @@ from lusid_workflow.models.parameter_value import ParameterValue
 from lusid_workflow.models.read_only_states import ReadOnlyStates
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.resource_list_of_access_controlled_resource import ResourceListOfAccessControlledResource
+from lusid_workflow.models.resource_list_of_change_item import ResourceListOfChangeItem
 from lusid_workflow.models.resource_list_of_task import ResourceListOfTask
 from lusid_workflow.models.result_field import ResultField
 from lusid_workflow.models.result_matching_pattern import ResultMatchingPattern
@@ -141,6 +143,7 @@ __all__ = [
     "ActionDetails",
     "ActionDetailsResponse",
     "ActionId",
+    "ChangeItem",
     "CreateChildTaskConfiguration",
     "CreateChildTasksAction",
     "CreateChildTasksActionResponse",
@@ -177,6 +180,7 @@ __all__ = [
     "ReadOnlyStates",
     "ResourceId",
     "ResourceListOfAccessControlledResource",
+    "ResourceListOfChangeItem",
     "ResourceListOfTask",
     "ResultField",
     "ResultMatchingPattern",
