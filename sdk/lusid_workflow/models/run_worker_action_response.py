@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
+from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr, conlist, validator
 from lusid_workflow.models.field_mapping import FieldMapping
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.resultant_child_task_configuration import ResultantChildTaskConfiguration
@@ -35,7 +35,8 @@ class RunWorkerActionResponse(BaseModel):
     worker_parameters: Optional[Dict[str, FieldMapping]] = Field(None, alias="workerParameters", description="Parameters for this Worker")
     worker_status_triggers: Optional[WorkerStatusTriggers] = Field(None, alias="workerStatusTriggers")
     child_task_configurations: Optional[conlist(ResultantChildTaskConfiguration)] = Field(None, alias="childTaskConfigurations", description="Tasks can be generated from run worker results; this is the configuration")
-    __properties = ["type", "workerId", "workerAsAt", "workerParameters", "workerStatusTriggers", "childTaskConfigurations"]
+    worker_timeout: Optional[StrictInt] = Field(None, alias="workerTimeout", description="Worker timeout in seconds")
+    __properties = ["type", "workerId", "workerAsAt", "workerParameters", "workerStatusTriggers", "childTaskConfigurations", "workerTimeout"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -111,6 +112,11 @@ class RunWorkerActionResponse(BaseModel):
         if self.child_task_configurations is None and "child_task_configurations" in self.__fields_set__:
             _dict['childTaskConfigurations'] = None
 
+        # set to None if worker_timeout (nullable) is None
+        # and __fields_set__ contains the field
+        if self.worker_timeout is None and "worker_timeout" in self.__fields_set__:
+            _dict['workerTimeout'] = None
+
         return _dict
 
     @classmethod
@@ -133,6 +139,7 @@ class RunWorkerActionResponse(BaseModel):
             if obj.get("workerParameters") is not None
             else None,
             "worker_status_triggers": WorkerStatusTriggers.from_dict(obj.get("workerStatusTriggers")) if obj.get("workerStatusTriggers") is not None else None,
-            "child_task_configurations": [ResultantChildTaskConfiguration.from_dict(_item) for _item in obj.get("childTaskConfigurations")] if obj.get("childTaskConfigurations") is not None else None
+            "child_task_configurations": [ResultantChildTaskConfiguration.from_dict(_item) for _item in obj.get("childTaskConfigurations")] if obj.get("childTaskConfigurations") is not None else None,
+            "worker_timeout": obj.get("workerTimeout")
         })
         return _obj

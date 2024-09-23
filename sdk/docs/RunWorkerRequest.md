@@ -6,6 +6,7 @@ Request to Create a new worker
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **parameters** | [**List[ParameterValue]**](ParameterValue.md) | The Parameter and their values. | 
+**worker_timeout** | **int** | The timeout in seconds for the worker | [optional] 
 
 ## Example
 

@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictInt, conlist
 from lusid_workflow.models.parameter_value import ParameterValue
 
 class RunWorkerRequest(BaseModel):
@@ -27,7 +27,8 @@ class RunWorkerRequest(BaseModel):
     Request to Create a new worker  # noqa: E501
     """
     parameters: conlist(ParameterValue) = Field(..., description="The Parameter and their values.")
-    __properties = ["parameters"]
+    worker_timeout: Optional[StrictInt] = Field(None, alias="workerTimeout", description="The timeout in seconds for the worker")
+    __properties = ["parameters", "workerTimeout"]
 
     class Config:
         """Pydantic configuration"""
@@ -60,6 +61,11 @@ class RunWorkerRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['parameters'] = _items
+        # set to None if worker_timeout (nullable) is None
+        # and __fields_set__ contains the field
+        if self.worker_timeout is None and "worker_timeout" in self.__fields_set__:
+            _dict['workerTimeout'] = None
+
         return _dict
 
     @classmethod
@@ -72,6 +78,7 @@ class RunWorkerRequest(BaseModel):
             return RunWorkerRequest.parse_obj(obj)
 
         _obj = RunWorkerRequest.parse_obj({
-            "parameters": [ParameterValue.from_dict(_item) for _item in obj.get("parameters")] if obj.get("parameters") is not None else None
+            "parameters": [ParameterValue.from_dict(_item) for _item in obj.get("parameters")] if obj.get("parameters") is not None else None,
+            "worker_timeout": obj.get("workerTimeout")
         })
         return _obj

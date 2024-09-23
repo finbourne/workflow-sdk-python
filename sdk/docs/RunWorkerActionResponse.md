@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **worker_parameters** | [**Dict[str, FieldMapping]**](FieldMapping.md) | Parameters for this Worker | [optional] 
 **worker_status_triggers** | [**WorkerStatusTriggers**](WorkerStatusTriggers.md) |  | [optional] 
 **child_task_configurations** | [**List[ResultantChildTaskConfiguration]**](ResultantChildTaskConfiguration.md) | Tasks can be generated from run worker results; this is the configuration | [optional] 
+**worker_timeout** | **int** | Worker timeout in seconds | [optional] 
 
 ## Example
 

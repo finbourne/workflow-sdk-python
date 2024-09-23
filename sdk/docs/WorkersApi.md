@@ -478,7 +478,7 @@ async def main():
         # Change the lines below to switch approach
         # run_worker_request = RunWorkerRequest()
         # run_worker_request = RunWorkerRequest.from_json("")
-        run_worker_request = RunWorkerRequest.from_dict({"parameters":[{"name":"test-parameter","value":true}]}) # RunWorkerRequest | 
+        run_worker_request = RunWorkerRequest.from_dict({"parameters":[{"name":"test-parameter","value":true}],"workerTimeout":120}) # RunWorkerRequest | 
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
 
         try:
