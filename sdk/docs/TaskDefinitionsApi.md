@@ -22,6 +22,7 @@ Method | HTTP request | Description
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -48,6 +49,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -62,6 +71,9 @@ async def main():
         create_task_definition_request = CreateTaskDefinitionRequest.from_dict({"id":{"scope":"A1","code":"ZZZ"},"displayName":"An example TaskDefinition","description":"Test","states":[{"name":"Submitted"},{"name":"InProgress"},{"name":"SendingSurvey"},{"name":"Done"},{"name":"SurveyNotSent"},{"name":"NotDone"}],"fieldSchema":[{"name":"clientId","type":"String"},{"name":"assignee","type":"String","readOnlyStates":{"stateType":"SelectedStates","selectedStates":["Submitted","Done","SurveyNotSent","NotDone"]}},{"name":"resolutionDetail","type":"String","readOnlyStates":{"stateType":"TerminalState"}}],"initialState":{"name":"Submitted","requiredFields":["clientId"]},"triggers":[{"name":"start","trigger":{"type":"External"}},{"name":"cancel","trigger":{"type":"External"}},{"name":"resolve","trigger":{"type":"External"}},{"name":"timeout","trigger":{"type":"External"}},{"name":"success","trigger":{"type":"External"}},{"name":"failure","trigger":{"type":"External"}}],"transitions":[{"fromState":"Submitted","toState":"InProgress","trigger":"start","guard":"fields['assignee'] exists AND fields['assignee'] NOT eq ''"},{"fromState":"InProgress","toState":"SendingSurvey","trigger":"resolve","guard":"fields['resolutionDetail'] exists AND fields['resolutionDetail'] NOT eq ''","action":"health-check"},{"fromState":"SendingSurvey","toState":"Done","trigger":"success"},{"fromState":"SendingSurvey","toState":"SurveyNotSent","trigger":"failure"},{"fromState":"SendingSurvey","toState":"NotDone","trigger":"timeout"},{"fromState":"InProgress","toState":"NotDone","trigger":"cancel","guard":"fields['cancellationDetail'] exists AND fields['cancellationDetail'] NOT eq ''"}],"actions":[{"name":"health-check","runAsUserId":"user-id","actionDetails":{"type":"RunWorker","workerId":{"scope":"Health","code":"HealthCheckWorker"},"workerAsAt":"2022-01-01T01:02:03.0000000+00:00","workerParameters":{},"workerStatusTriggers":{"started":null,"completedWithResults":null,"completedNoResults":null,"failedToStart":null,"failedToComplete":null},"childTaskConfigurations":[{"taskDefinitionId":{"scope":"AAA","code":"BBB"},"mapStackingKeyFrom":null,"childTaskFields":{"assignee":{"mapFrom":"foo","setTo":"bar"}},"resultMatchingPattern":null,"taskDefinitionAsAt":null,"initialTrigger":"test-trigger"}],"workerTimeout":120}}]}) # CreateTaskDefinitionRequest | The data to create a Task Definition
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_task_definition(create_task_definition_request, opts=opts)
+
             # [EXPERIMENTAL] CreateTaskDefinition: Create a new Task Definition
             api_response = await api_instance.create_task_definition(create_task_definition_request)
             pprint(api_response)
@@ -105,6 +117,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -131,6 +144,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -141,6 +162,9 @@ async def main():
         code = 'code_example' # str | The code that identifies a Task Definition
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_task_definition(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteTaskDefinition: Delete a Task Definition
             api_response = await api_instance.delete_task_definition(scope, code)
             pprint(api_response)
@@ -186,6 +210,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -212,6 +237,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -223,6 +256,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_task_definition(scope, code, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetTaskDefinition: Get a Task Definition
             api_response = await api_instance.get_task_definition(scope, code, as_at=as_at)
             pprint(api_response)
@@ -269,6 +305,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -295,6 +332,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -308,6 +353,9 @@ async def main():
         page = 'page_example' # str | The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_task_definitions(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
+
             # [EXPERIMENTAL] ListTaskDefinitions: List Task Definitions
             api_response = await api_instance.list_task_definitions(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
             pprint(api_response)
@@ -356,6 +404,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -382,6 +431,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -393,6 +450,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_tasks_for_task_definition(scope, code, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] ListTasksForTaskDefinition: List Tasks for a Task Definition
             api_response = await api_instance.list_tasks_for_task_definition(scope, code, as_at=as_at)
             pprint(api_response)
@@ -439,6 +499,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -465,6 +526,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -481,6 +550,9 @@ async def main():
         update_task_definition_request = UpdateTaskDefinitionRequest.from_dict({"displayName":"An example TaskDefinition","description":"Test","states":[{"name":"Submitted"},{"name":"InProgress"},{"name":"SendingSurvey"},{"name":"Done"},{"name":"SurveyNotSent"},{"name":"NotDone"}],"fieldSchema":[{"name":"clientId","type":"String"},{"name":"assignee","type":"String","readOnlyStates":{"stateType":"SelectedStates","selectedStates":["Submitted","Done","SurveyNotSent","NotDone"]}},{"name":"resolutionDetail","type":"String","readOnlyStates":{"stateType":"TerminalState"}}],"initialState":{"name":"Submitted","requiredFields":["clientId"]},"triggers":[{"name":"start","trigger":{"type":"External"}},{"name":"cancel","trigger":{"type":"External"}},{"name":"resolve","trigger":{"type":"External"}},{"name":"timeout","trigger":{"type":"External"}},{"name":"success","trigger":{"type":"External"}},{"name":"failure","trigger":{"type":"External"}}],"transitions":[{"fromState":"Submitted","toState":"InProgress","trigger":"start","guard":"fields['assignee'] exists AND fields['assignee'] NOT eq ''"},{"fromState":"InProgress","toState":"SendingSurvey","trigger":"resolve","guard":"fields['resolutionDetail'] exists AND fields['resolutionDetail'] NOT eq ''","action":"health-check"},{"fromState":"SendingSurvey","toState":"Done","trigger":"success"},{"fromState":"SendingSurvey","toState":"SurveyNotSent","trigger":"failure"},{"fromState":"SendingSurvey","toState":"NotDone","trigger":"timeout"},{"fromState":"InProgress","toState":"NotDone","trigger":"cancel","guard":"fields['cancellationDetail'] exists AND fields['cancellationDetail'] NOT eq ''"}],"actions":[{"name":"health-check","runAsUserId":"user-id","actionDetails":{"type":"RunWorker","workerId":{"scope":"Health","code":"HealthCheckWorker"},"workerAsAt":"2022-01-01T01:02:03.0000000+00:00","workerParameters":{},"workerStatusTriggers":{"started":null,"completedWithResults":null,"completedNoResults":null,"failedToStart":null,"failedToComplete":null},"childTaskConfigurations":[{"taskDefinitionId":{"scope":"AAA","code":"BBB"},"mapStackingKeyFrom":null,"childTaskFields":{"assignee":{"mapFrom":"foo","setTo":"bar"}},"resultMatchingPattern":null,"taskDefinitionAsAt":null,"initialTrigger":"test-trigger"}],"workerTimeout":120}}]}) # UpdateTaskDefinitionRequest | The data to update a Task Definition
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_task_definition(scope, code, update_task_definition_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateTaskDefinition: Update an existing Task Definition
             api_response = await api_instance.update_task_definition(scope, code, update_task_definition_request)
             pprint(api_response)

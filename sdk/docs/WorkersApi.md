@@ -25,6 +25,7 @@ If the Worker already exists a failure will be returned
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -51,6 +52,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -65,6 +74,9 @@ async def main():
         create_worker_request = CreateWorkerRequest.from_dict({"id":{"scope":"Health","code":"HealthCheckWorker"},"displayName":"ASP.Net Health Check worker","description":"Calls /health to check a service is running","workerConfiguration":{"type":"HealthCheck","url":"http://localhost.lusid.com:8282"}}) # CreateWorkerRequest | Worker to be created
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_worker(create_worker_request, opts=opts)
+
             # [EXPERIMENTAL] CreateWorker: Create a new Worker
             api_response = await api_instance.create_worker(create_worker_request)
             pprint(api_response)
@@ -110,6 +122,7 @@ If the Worker does not exist a failure will be returned
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -136,6 +149,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -146,6 +167,9 @@ async def main():
         code = 'code_example' # str | Code of the worker to be deleted
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_worker(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteWorker: Delete a Worker
             api_response = await api_instance.delete_worker(scope, code)
             pprint(api_response)
@@ -193,6 +217,7 @@ Will return a NotFound failure if the Worker does not exist
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -219,6 +244,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -230,6 +263,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_worker(scope, code, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetWorker: Get a Worker
             api_response = await api_instance.get_worker(scope, code, as_at=as_at)
             pprint(api_response)
@@ -275,6 +311,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -301,6 +338,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -310,6 +355,9 @@ async def main():
         run_id = 'run_id_example' # str | The ID returned when calling Run Worker
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_worker_result(run_id, opts=opts)
+
             # [EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results
             api_response = await api_instance.get_worker_result(run_id)
             pprint(api_response)
@@ -353,6 +401,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -379,6 +428,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -392,6 +449,9 @@ async def main():
         page = 'page_example' # str | The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
+
             # [EXPERIMENTAL] ListWorkers: List Workers
             api_response = await api_instance.list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
             pprint(api_response)
@@ -439,6 +499,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -465,6 +526,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -482,6 +551,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.run_worker(scope, code, run_worker_request, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] RunWorker: Run a Worker
             api_response = await api_instance.run_worker(scope, code, run_worker_request, as_at=as_at)
             pprint(api_response)
@@ -530,6 +602,7 @@ If the Worker does not exist a failure will be returned
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -556,6 +629,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -572,6 +653,9 @@ async def main():
         update_worker_request = UpdateWorkerRequest.from_dict({"displayName":"ASP.Net Health Check worker","description":"Calls /health to check a service is running","workerConfiguration":{"type":"HealthCheck","url":"http://localhost.lusid.com:8282"}}) # UpdateWorkerRequest | State of the updated worker
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_worker(scope, code, update_worker_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateWorker: Update a Worker
             api_response = await api_instance.update_worker(scope, code, update_worker_request)
             pprint(api_response)

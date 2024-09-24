@@ -22,6 +22,7 @@ Method | HTTP request | Description
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -48,6 +49,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -63,6 +72,9 @@ async def main():
         trigger = 'trigger_example' # str | The name of the Trigger to invoke (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_task(create_task_request, trigger=trigger, opts=opts)
+
             # [EXPERIMENTAL] CreateTask: Create a new Task
             api_response = await api_instance.create_task(create_task_request, trigger=trigger)
             pprint(api_response)
@@ -107,6 +119,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -133,6 +146,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -142,6 +163,9 @@ async def main():
         id = 'id_example' # str | The identifier for the Task to be deleted.
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_task(id, opts=opts)
+
             # [EXPERIMENTAL] DeleteTask: Delete a Task
             api_response = await api_instance.delete_task(id)
             pprint(api_response)
@@ -186,6 +210,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -212,6 +237,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -222,6 +255,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_task(id, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetTask: Get a Task
             api_response = await api_instance.get_task(id, as_at=as_at)
             pprint(api_response)
@@ -267,6 +303,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -293,6 +330,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -303,6 +348,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime of the oldest change to retrieve. Defaults to returning the latest version of the Task if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_task_history(id, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetTaskHistory: Get the history of a Task
             api_response = await api_instance.get_task_history(id, as_at=as_at)
             pprint(api_response)
@@ -348,6 +396,7 @@ ListTasks: List Tasks
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -374,6 +423,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -387,6 +444,9 @@ async def main():
         page = 'page_example' # str | The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_tasks(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
+
             # ListTasks: List Tasks
             api_response = await api_instance.list_tasks(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
             pprint(api_response)
@@ -435,6 +495,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -461,6 +522,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -477,6 +546,9 @@ async def main():
         update_task_request = UpdateTaskRequest.from_dict({"fields":[{"name":"clientId","value":"zzz123"},{"name":"assignee","value":"bob"},{"name":"resolutionDetail","value":""}]}) # UpdateTaskRequest | The details of the request (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_task(id, trigger=trigger, update_task_request=update_task_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateTask: Update a Task
             api_response = await api_instance.update_task(id, trigger=trigger, update_task_request=update_task_request)
             pprint(api_response)

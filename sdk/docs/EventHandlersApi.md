@@ -21,6 +21,7 @@ Method | HTTP request | Description
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -47,6 +48,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -61,6 +70,9 @@ async def main():
         create_event_handler_request = CreateEventHandlerRequest.from_dict({"id":{"scope":"A1","code":"ZZZ"},"displayName":"An example Event Handler","description":"Test","status":"Active","eventMatchingPattern":{"eventType":"PortfolioCreated","filter":"body.portfolioScope eq 'TestScope'"},"runAsUserId":{"setTo":"ExampleUserId"},"taskDefinitionId":{"scope":"A1","code":"YYY"},"taskDefinitionAsAt":"9999-12-31T23:59:59.9999999+00:00","taskActivity":{"initialTrigger":"InitialTrigger","type":"CreateNewTask","correlationIds":[],"taskFields":{}}}) # CreateEventHandlerRequest | The data to create an Event Handler
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.create_event_handler(create_event_handler_request, opts=opts)
+
             # [EXPERIMENTAL] CreateEventHandler: Create a new Event Handler
             api_response = await api_instance.create_event_handler(create_event_handler_request)
             pprint(api_response)
@@ -106,6 +118,7 @@ If the Event Handler does not exist a failure will be returned
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -132,6 +145,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -142,6 +163,9 @@ async def main():
         code = 'code_example' # str | Code of the event handler to be deleted
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_event_handler(scope, code, opts=opts)
+
             # [EXPERIMENTAL] DeleteEventHandler: Delete an Event Handler
             api_response = await api_instance.delete_event_handler(scope, code)
             pprint(api_response)
@@ -189,6 +213,7 @@ Will return a NotFound failure if the event handler does not exist
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -215,6 +240,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -226,6 +259,9 @@ async def main():
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the event handler. Defaults to returning the latest version of the event handler if not specified. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.get_event_handler(scope, code, as_at=as_at, opts=opts)
+
             # [EXPERIMENTAL] GetEventHandler: Get an Event Handler
             api_response = await api_instance.get_event_handler(scope, code, as_at=as_at)
             pprint(api_response)
@@ -271,6 +307,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -297,6 +334,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -309,6 +354,9 @@ async def main():
         page = 'page_example' # str | The pagination token to use to continue listing event handlers from a previous call to list event handlers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.list_event_handlers(as_at=as_at, filter=filter, limit=limit, page=page, opts=opts)
+
             # [EXPERIMENTAL] ListEventHandlers: List Event Handlers
             api_response = await api_instance.list_event_handlers(as_at=as_at, filter=filter, limit=limit, page=page)
             pprint(api_response)
@@ -355,6 +403,7 @@ Name | Type | Description  | Notes
 ```python
 import asyncio
 from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
@@ -381,6 +430,14 @@ async def main():
     # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
     api_client_factory = ApiClientFactory()
 
     # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
@@ -397,6 +454,9 @@ async def main():
         update_event_handler_request = UpdateEventHandlerRequest.from_dict({"displayName":"An example Event Handler","description":"Test","status":"Active","eventMatchingPattern":{"eventType":"PortfolioCreated","filter":"body.portfolioScope eq 'TestScope'"},"runAsUserId":{"setTo":"ExampleUserId"},"taskDefinitionId":{"scope":"A1","code":"YYY"},"taskDefinitionAsAt":"9999-12-31T23:59:59.9999999+00:00","taskActivity":{"initialTrigger":"InitialTrigger","type":"CreateNewTask","correlationIds":[],"taskFields":{}}}) # UpdateEventHandlerRequest | The data to update an Event Handler
 
         try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.update_event_handler(scope, code, update_event_handler_request, opts=opts)
+
             # [EXPERIMENTAL] UpdateEventHandler: Update an existing Event handler
             api_response = await api_instance.update_event_handler(scope, code, update_event_handler_request)
             pprint(api_response)
