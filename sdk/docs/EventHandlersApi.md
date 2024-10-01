@@ -65,9 +65,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_event_handler_request = CreateEventHandlerRequest()
         # create_event_handler_request = CreateEventHandlerRequest.from_json("")
-        create_event_handler_request = CreateEventHandlerRequest.from_dict({"id":{"scope":"A1","code":"ZZZ"},"displayName":"An example Event Handler","description":"Test","status":"Active","eventMatchingPattern":{"eventType":"PortfolioCreated","filter":"body.portfolioScope eq 'TestScope'"},"runAsUserId":{"setTo":"ExampleUserId"},"taskDefinitionId":{"scope":"A1","code":"YYY"},"taskDefinitionAsAt":"9999-12-31T23:59:59.9999999+00:00","taskActivity":{"initialTrigger":"InitialTrigger","type":"CreateNewTask","correlationIds":[],"taskFields":{}}}) # CreateEventHandlerRequest | The data to create an Event Handler
+        # create_event_handler_request = CreateEventHandlerRequest.from_dict({})
+        create_event_handler_request = CreateEventHandlerRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -449,9 +449,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_event_handler_request = UpdateEventHandlerRequest()
         # update_event_handler_request = UpdateEventHandlerRequest.from_json("")
-        update_event_handler_request = UpdateEventHandlerRequest.from_dict({"displayName":"An example Event Handler","description":"Test","status":"Active","eventMatchingPattern":{"eventType":"PortfolioCreated","filter":"body.portfolioScope eq 'TestScope'"},"runAsUserId":{"setTo":"ExampleUserId"},"taskDefinitionId":{"scope":"A1","code":"YYY"},"taskDefinitionAsAt":"9999-12-31T23:59:59.9999999+00:00","taskActivity":{"initialTrigger":"InitialTrigger","type":"CreateNewTask","correlationIds":[],"taskFields":{}}}) # UpdateEventHandlerRequest | The data to update an Event Handler
+        # update_event_handler_request = UpdateEventHandlerRequest.from_dict({})
+        update_event_handler_request = UpdateEventHandlerRequest()
 
         try:
             # uncomment the below to set overrides at the request level

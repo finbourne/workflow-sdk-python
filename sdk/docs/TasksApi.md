@@ -66,9 +66,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_task_request = CreateTaskRequest()
         # create_task_request = CreateTaskRequest.from_json("")
-        create_task_request = CreateTaskRequest.from_dict({"taskDefinitionId":{"scope":"A1","code":"ZZZ"},"correlationIds":["correlation-id"],"fields":[{"name":"clientId","value":"zzz123"},{"name":"assignee"},{"name":"resolutionDetail","value":""}]}) # CreateTaskRequest | Request to create Task
+        # create_task_request = CreateTaskRequest.from_dict({})
+        create_task_request = CreateTaskRequest()
         trigger = 'trigger_example' # str | The name of the Trigger to invoke (optional)
 
         try:
@@ -541,9 +541,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_task_request = UpdateTaskRequest()
         # update_task_request = UpdateTaskRequest.from_json("")
-        update_task_request = UpdateTaskRequest.from_dict({"fields":[{"name":"clientId","value":"zzz123"},{"name":"assignee","value":"bob"},{"name":"resolutionDetail","value":""}]}) # UpdateTaskRequest | The details of the request (optional)
+        # update_task_request = UpdateTaskRequest.from_dict({})
+        update_task_request = UpdateTaskRequest()
 
         try:
             # uncomment the below to set overrides at the request level

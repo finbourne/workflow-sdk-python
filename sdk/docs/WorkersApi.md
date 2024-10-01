@@ -69,9 +69,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # create_worker_request = CreateWorkerRequest()
         # create_worker_request = CreateWorkerRequest.from_json("")
-        create_worker_request = CreateWorkerRequest.from_dict({"id":{"scope":"Health","code":"HealthCheckWorker"},"displayName":"ASP.Net Health Check worker","description":"Calls /health to check a service is running","workerConfiguration":{"type":"HealthCheck","url":"http://localhost.lusid.com:8282"}}) # CreateWorkerRequest | Worker to be created
+        # create_worker_request = CreateWorkerRequest.from_dict({})
+        create_worker_request = CreateWorkerRequest()
 
         try:
             # uncomment the below to set overrides at the request level
@@ -545,9 +545,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # run_worker_request = RunWorkerRequest()
         # run_worker_request = RunWorkerRequest.from_json("")
-        run_worker_request = RunWorkerRequest.from_dict({"parameters":[{"name":"test-parameter","value":true}],"workerTimeout":120}) # RunWorkerRequest | 
+        # run_worker_request = RunWorkerRequest.from_dict({})
+        run_worker_request = RunWorkerRequest()
         as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
 
         try:
@@ -648,9 +648,9 @@ async def main():
 
         # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
         # Change the lines below to switch approach
-        # update_worker_request = UpdateWorkerRequest()
         # update_worker_request = UpdateWorkerRequest.from_json("")
-        update_worker_request = UpdateWorkerRequest.from_dict({"displayName":"ASP.Net Health Check worker","description":"Calls /health to check a service is running","workerConfiguration":{"type":"HealthCheck","url":"http://localhost.lusid.com:8282"}}) # UpdateWorkerRequest | State of the updated worker
+        # update_worker_request = UpdateWorkerRequest.from_dict({})
+        update_worker_request = UpdateWorkerRequest()
 
         try:
             # uncomment the below to set overrides at the request level
