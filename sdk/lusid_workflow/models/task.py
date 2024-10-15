@@ -46,7 +46,10 @@ class Task(BaseModel):
     fields: Optional[conlist(TaskInstanceField)] = Field(None, description="Fields and their latest values - should correspond with the Task Definition field schema")
     stacking_key: Optional[StrictStr] = Field(None, alias="stackingKey", description="The key used to determine which stack to add the Task to")
     stack: Optional[Stack] = None
-    __properties = ["id", "taskDefinitionId", "taskDefinitionVersion", "taskDefinitionDisplayName", "state", "ultimateParentTask", "parentTask", "childTasks", "correlationIds", "version", "terminalState", "asAtLastTransition", "fields", "stackingKey", "stack"]
+    action_log_id_created: Optional[StrictStr] = Field(None, alias="actionLogIdCreated", description="The Id of the Action that created this Task")
+    action_log_id_modified: Optional[StrictStr] = Field(None, alias="actionLogIdModified", description="The Id of the Action that last modified this Task")
+    action_log_id_submitted: Optional[StrictStr] = Field(None, alias="actionLogIdSubmitted", description="The Id of the last Action submitted by this Task")
+    __properties = ["id", "taskDefinitionId", "taskDefinitionVersion", "taskDefinitionDisplayName", "state", "ultimateParentTask", "parentTask", "childTasks", "correlationIds", "version", "terminalState", "asAtLastTransition", "fields", "stackingKey", "stack", "actionLogIdCreated", "actionLogIdModified", "actionLogIdSubmitted"]
 
     class Config:
         """Pydantic configuration"""
@@ -129,6 +132,21 @@ class Task(BaseModel):
         if self.stacking_key is None and "stacking_key" in self.__fields_set__:
             _dict['stackingKey'] = None
 
+        # set to None if action_log_id_created (nullable) is None
+        # and __fields_set__ contains the field
+        if self.action_log_id_created is None and "action_log_id_created" in self.__fields_set__:
+            _dict['actionLogIdCreated'] = None
+
+        # set to None if action_log_id_modified (nullable) is None
+        # and __fields_set__ contains the field
+        if self.action_log_id_modified is None and "action_log_id_modified" in self.__fields_set__:
+            _dict['actionLogIdModified'] = None
+
+        # set to None if action_log_id_submitted (nullable) is None
+        # and __fields_set__ contains the field
+        if self.action_log_id_submitted is None and "action_log_id_submitted" in self.__fields_set__:
+            _dict['actionLogIdSubmitted'] = None
+
         return _dict
 
     @classmethod
@@ -155,6 +173,9 @@ class Task(BaseModel):
             "as_at_last_transition": obj.get("asAtLastTransition"),
             "fields": [TaskInstanceField.from_dict(_item) for _item in obj.get("fields")] if obj.get("fields") is not None else None,
             "stacking_key": obj.get("stackingKey"),
-            "stack": Stack.from_dict(obj.get("stack")) if obj.get("stack") is not None else None
+            "stack": Stack.from_dict(obj.get("stack")) if obj.get("stack") is not None else None,
+            "action_log_id_created": obj.get("actionLogIdCreated"),
+            "action_log_id_modified": obj.get("actionLogIdModified"),
+            "action_log_id_submitted": obj.get("actionLogIdSubmitted")
         })
         return _obj

@@ -27,7 +27,7 @@ class ActionDefinition(BaseModel):
     Defines the Actions for a Task  # noqa: E501
     """
     name: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="The Name of this Action")
-    run_as_user_id: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".")
+    run_as_user_id: Optional[constr(strict=True, max_length=1024)] = Field(None, alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".")
     action_details: ActionDetails = Field(..., alias="actionDetails")
     __properties = ["name", "runAsUserId", "actionDetails"]
 

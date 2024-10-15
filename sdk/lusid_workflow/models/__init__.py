@@ -21,6 +21,9 @@ from lusid_workflow.models.action_definition_response import ActionDefinitionRes
 from lusid_workflow.models.action_details import ActionDetails
 from lusid_workflow.models.action_details_response import ActionDetailsResponse
 from lusid_workflow.models.action_id import ActionId
+from lusid_workflow.models.action_log import ActionLog
+from lusid_workflow.models.action_log_item import ActionLogItem
+from lusid_workflow.models.action_log_origin import ActionLogOrigin
 from lusid_workflow.models.change_item import ChangeItem
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 from lusid_workflow.models.create_child_tasks_action import CreateChildTasksAction
@@ -108,6 +111,9 @@ __all__ = [
     "ActionDetails",
     "ActionDetailsResponse",
     "ActionId",
+    "ActionLog",
+    "ActionLogItem",
+    "ActionLogOrigin",
     "ChangeItem",
     "CreateChildTaskConfiguration",
     "CreateChildTasksAction",

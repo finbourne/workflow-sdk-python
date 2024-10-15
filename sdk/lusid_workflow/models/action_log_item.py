@@ -17,18 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
-
-class ActionId(BaseModel):
+class ActionLogItem(BaseModel):
     """
-    ActionId
+    A log item for a given Action Log  # noqa: E501
     """
-    scope: constr(strict=True, max_length=100, min_length=3) = Field(...)
-    activity: constr(strict=True, max_length=25, min_length=3) = Field(...)
-    entity: constr(strict=True, max_length=40, min_length=3) = Field(...)
-    __properties = ["scope", "activity", "entity"]
+    timestamp: datetime = Field(..., description="The timestamp of the log item")
+    log_type: constr(strict=True, min_length=1) = Field(..., alias="logType", description="The type of log item")
+    details: Optional[StrictStr] = Field(None, description="The details of the log item")
+    __properties = ["timestamp", "logType", "details"]
 
     class Config:
         """Pydantic configuration"""
@@ -44,8 +44,8 @@ class ActionId(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ActionId:
-        """Create an instance of ActionId from a JSON string"""
+    def from_json(cls, json_str: str) -> ActionLogItem:
+        """Create an instance of ActionLogItem from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -54,20 +54,25 @@ class ActionId(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if details (nullable) is None
+        # and __fields_set__ contains the field
+        if self.details is None and "details" in self.__fields_set__:
+            _dict['details'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ActionId:
-        """Create an instance of ActionId from a dict"""
+    def from_dict(cls, obj: dict) -> ActionLogItem:
+        """Create an instance of ActionLogItem from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ActionId.parse_obj(obj)
+            return ActionLogItem.parse_obj(obj)
 
-        _obj = ActionId.parse_obj({
-            "scope": obj.get("scope"),
-            "activity": obj.get("activity"),
-            "entity": obj.get("entity")
+        _obj = ActionLogItem.parse_obj({
+            "timestamp": obj.get("timestamp"),
+            "log_type": obj.get("logType"),
+            "details": obj.get("details")
         })
         return _obj
