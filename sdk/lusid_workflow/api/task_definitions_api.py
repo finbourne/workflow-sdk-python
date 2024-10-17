@@ -211,15 +211,15 @@ class TaskDefinitionsApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def delete_task_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies a Task Definition")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_task_definition(self, scope : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="The code that identifies a Task Definition")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_task_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies a Task Definition")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_task_definition(self, scope : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="The code that identifies a Task Definition")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_task_definition(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies a Task Definition")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_task_definition(self, scope : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="The code that identifies a Task Definition")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteTaskDefinition: Delete a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -251,7 +251,7 @@ class TaskDefinitionsApi:
         return self.delete_task_definition_with_http_info(scope, code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_task_definition_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="The code that identifies a Task Definition")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_task_definition_with_http_info(self, scope : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="The scope that identifies a Task Definition")], code : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="The code that identifies a Task Definition")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteTaskDefinition: Delete a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an

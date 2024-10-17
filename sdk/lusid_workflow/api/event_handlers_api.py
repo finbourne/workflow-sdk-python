@@ -210,15 +210,15 @@ class EventHandlersApi:
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def delete_event_handler(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the event handler to be deleted")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the event handler to be deleted")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_event_handler(self, scope : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="Scope of the event handler to be deleted")], code : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="Code of the event handler to be deleted")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_event_handler(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the event handler to be deleted")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the event handler to be deleted")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_event_handler(self, scope : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="Scope of the event handler to be deleted")], code : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="Code of the event handler to be deleted")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_event_handler(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the event handler to be deleted")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the event handler to be deleted")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_event_handler(self, scope : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="Scope of the event handler to be deleted")], code : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="Code of the event handler to be deleted")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteEventHandler: Delete an Event Handler  # noqa: E501
 
         If the Event Handler does not exist a failure will be returned  # noqa: E501
@@ -251,7 +251,7 @@ class EventHandlersApi:
         return self.delete_event_handler_with_http_info(scope, code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_event_handler_with_http_info(self, scope : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Scope of the event handler to be deleted")], code : Annotated[constr(strict=True, max_length=64, min_length=1), Field(..., description="Code of the event handler to be deleted")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_event_handler_with_http_info(self, scope : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="Scope of the event handler to be deleted")], code : Annotated[constr(strict=True, max_length=512, min_length=1), Field(..., description="Code of the event handler to be deleted")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteEventHandler: Delete an Event Handler  # noqa: E501
 
         If the Event Handler does not exist a failure will be returned  # noqa: E501
