@@ -34,6 +34,7 @@ from lusid_workflow.models.create_new_task_activity_response import CreateNewTas
 from lusid_workflow.models.create_task_definition_request import CreateTaskDefinitionRequest
 from lusid_workflow.models.create_task_request import CreateTaskRequest
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
+from lusid_workflow.models.delete_tasks_request import DeleteTasksRequest
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from lusid_workflow.models.event_handler import EventHandler
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
@@ -124,6 +125,7 @@ __all__ = [
     "CreateTaskDefinitionRequest",
     "CreateTaskRequest",
     "CreateWorkerRequest",
+    "DeleteTasksRequest",
     "DeletedEntityResponse",
     "EventHandler",
     "EventHandlerMapping",

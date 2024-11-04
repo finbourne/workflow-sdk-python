@@ -46,15 +46,15 @@ class ActionLogsApi:
         self.api_client = api_client
 
     @overload
-    async def get_action_logs(self, id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The Action Id")], **kwargs) -> ActionLog:  # noqa: E501
+    async def get_action_logs(self, id : Annotated[constr(strict=True, max_length=36, min_length=36), Field(..., description="The Action Id")], **kwargs) -> ActionLog:  # noqa: E501
         ...
 
     @overload
-    def get_action_logs(self, id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The Action Id")], async_req: Optional[bool]=True, **kwargs) -> ActionLog:  # noqa: E501
+    def get_action_logs(self, id : Annotated[constr(strict=True, max_length=36, min_length=36), Field(..., description="The Action Id")], async_req: Optional[bool]=True, **kwargs) -> ActionLog:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_action_logs(self, id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The Action Id")], async_req: Optional[bool]=None, **kwargs) -> Union[ActionLog, Awaitable[ActionLog]]:  # noqa: E501
+    def get_action_logs(self, id : Annotated[constr(strict=True, max_length=36, min_length=36), Field(..., description="The Action Id")], async_req: Optional[bool]=None, **kwargs) -> Union[ActionLog, Awaitable[ActionLog]]:  # noqa: E501
         """[EXPERIMENTAL] GetActionLogs: Get the Action Logs for an Action Id  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -84,7 +84,7 @@ class ActionLogsApi:
         return self.get_action_logs_with_http_info(id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_action_logs_with_http_info(self, id : Annotated[constr(strict=True, max_length=40, min_length=30), Field(..., description="The Action Id")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_action_logs_with_http_info(self, id : Annotated[constr(strict=True, max_length=36, min_length=36), Field(..., description="The Action Id")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetActionLogs: Get the Action Logs for an Action Id  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an

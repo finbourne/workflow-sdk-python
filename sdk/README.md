@@ -20,6 +20,7 @@ Class | Method | HTTP request | Description
 *TaskDefinitionsApi* | [**update_task_definition**](docs/TaskDefinitionsApi.md#update_task_definition) | **PUT** /api/taskdefinitions/{scope}/{code} | [EXPERIMENTAL] UpdateTaskDefinition: Update an existing Task Definition
 *TasksApi* | [**create_task**](docs/TasksApi.md#create_task) | **POST** /api/tasks | [EXPERIMENTAL] CreateTask: Create a new Task
 *TasksApi* | [**delete_task**](docs/TasksApi.md#delete_task) | **DELETE** /api/tasks/{id} | [EXPERIMENTAL] DeleteTask: Delete a Task
+*TasksApi* | [**delete_tasks**](docs/TasksApi.md#delete_tasks) | **POST** /api/tasks/$delete | [EXPERIMENTAL] DeleteTasks: Batch Delete Tasks
 *TasksApi* | [**get_task**](docs/TasksApi.md#get_task) | **GET** /api/tasks/{id} | [EXPERIMENTAL] GetTask: Get a Task
 *TasksApi* | [**get_task_history**](docs/TasksApi.md#get_task_history) | **GET** /api/tasks/{id}/history | [EXPERIMENTAL] GetTaskHistory: Get the history of a Task
 *TasksApi* | [**list_tasks**](docs/TasksApi.md#list_tasks) | **GET** /api/tasks | ListTasks: List Tasks
@@ -56,6 +57,7 @@ Class | Method | HTTP request | Description
  - [CreateTaskDefinitionRequest](docs/CreateTaskDefinitionRequest.md)
  - [CreateTaskRequest](docs/CreateTaskRequest.md)
  - [CreateWorkerRequest](docs/CreateWorkerRequest.md)
+ - [DeleteTasksRequest](docs/DeleteTasksRequest.md)
  - [DeletedEntityResponse](docs/DeletedEntityResponse.md)
  - [EventHandler](docs/EventHandler.md)
  - [EventHandlerMapping](docs/EventHandlerMapping.md)

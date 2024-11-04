@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_task**](TasksApi.md#create_task) | **POST** /api/tasks | [EXPERIMENTAL] CreateTask: Create a new Task
 [**delete_task**](TasksApi.md#delete_task) | **DELETE** /api/tasks/{id} | [EXPERIMENTAL] DeleteTask: Delete a Task
+[**delete_tasks**](TasksApi.md#delete_tasks) | **POST** /api/tasks/$delete | [EXPERIMENTAL] DeleteTasks: Batch Delete Tasks
 [**get_task**](TasksApi.md#get_task) | **GET** /api/tasks/{id} | [EXPERIMENTAL] GetTask: Get a Task
 [**get_task_history**](TasksApi.md#get_task_history) | **GET** /api/tasks/{id}/history | [EXPERIMENTAL] GetTaskHistory: Get the history of a Task
 [**list_tasks**](TasksApi.md#list_tasks) | **GET** /api/tasks | ListTasks: List Tasks
@@ -188,6 +189,102 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | Task not found. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **delete_tasks**
+> DeletedEntityResponse delete_tasks(delete_tasks_request=delete_tasks_request)
+
+[EXPERIMENTAL] DeleteTasks: Batch Delete Tasks
+
+### Example
+
+```python
+import asyncio
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
+from lusid_workflow.models import *
+from pprint import pprint
+from lusid_workflow import (
+    ApiClientFactory,
+    TasksApi
+)
+
+async def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+{
+    "api":
+    {
+        "tokenUrl":"<your-token-url>",
+        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+        "username":"<your-username>",
+        "password":"<your-password>",
+        "clientId":"<your-client-id>",
+        "clientSecret":"<your-client-secret>"
+    }
+}''')
+
+    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = ApiClientFactory(opts=opts)
+
+    api_client_factory = ApiClientFactory()
+
+    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
+    async with api_client_factory:
+        # Create an instance of the API class
+        api_instance = api_client_factory.build(TasksApi)
+
+        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+        # Change the lines below to switch approach
+        # delete_tasks_request = DeleteTasksRequest.from_json("")
+        # delete_tasks_request = DeleteTasksRequest.from_dict({})
+        delete_tasks_request = DeleteTasksRequest()
+
+        try:
+            # uncomment the below to set overrides at the request level
+            # api_response = await api_instance.delete_tasks(delete_tasks_request=delete_tasks_request, opts=opts)
+
+            # [EXPERIMENTAL] DeleteTasks: Batch Delete Tasks
+            api_response = await api_instance.delete_tasks(delete_tasks_request=delete_tasks_request)
+            pprint(api_response)
+        except ApiException as e:
+            print("Exception when calling TasksApi->delete_tasks: %s\n" % e)
+
+asyncio.run(main())
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **delete_tasks_request** | [**DeleteTasksRequest**](DeleteTasksRequest.md)| Request with the task instance ids to delete. | [optional] 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: application/json
 
 ### HTTP response details
