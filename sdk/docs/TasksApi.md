@@ -21,33 +21,32 @@ Method | HTTP request | Description
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     TasksApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -56,33 +55,34 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(TasksApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TasksApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # create_task_request = CreateTaskRequest.from_json("")
-        # create_task_request = CreateTaskRequest.from_dict({})
-        create_task_request = CreateTaskRequest()
-        trigger = 'trigger_example' # str | The name of the Trigger to invoke (optional)
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_task_request = CreateTaskRequest.from_json("")
+    # create_task_request = CreateTaskRequest.from_dict({})
+    create_task_request = CreateTaskRequest()
+    trigger = 'trigger_example' # str | The name of the Trigger to invoke (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_task(create_task_request, trigger=trigger, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_task(create_task_request, trigger=trigger, opts=opts)
 
-            # [EXPERIMENTAL] CreateTask: Create a new Task
-            api_response = await api_instance.create_task(create_task_request, trigger=trigger)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling TasksApi->create_task: %s\n" % e)
+        # [EXPERIMENTAL] CreateTask: Create a new Task
+        api_response = api_instance.create_task(create_task_request, trigger=trigger)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling TasksApi->create_task: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -118,33 +118,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     TasksApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -153,27 +152,28 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(TasksApi)
-        id = 'id_example' # str | The identifier for the Task to be deleted.
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TasksApi)
+    id = 'id_example' # str | The identifier for the Task to be deleted.
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_task(id, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_task(id, opts=opts)
 
-            # [EXPERIMENTAL] DeleteTask: Delete a Task
-            api_response = await api_instance.delete_task(id)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling TasksApi->delete_task: %s\n" % e)
+        # [EXPERIMENTAL] DeleteTask: Delete a Task
+        api_response = api_instance.delete_task(id)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling TasksApi->delete_task: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -209,33 +209,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     TasksApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -244,32 +243,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(TasksApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TasksApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # delete_tasks_request = DeleteTasksRequest.from_json("")
-        # delete_tasks_request = DeleteTasksRequest.from_dict({})
-        delete_tasks_request = DeleteTasksRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # delete_tasks_request = DeleteTasksRequest.from_json("")
+    # delete_tasks_request = DeleteTasksRequest.from_dict({})
+    delete_tasks_request = DeleteTasksRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_tasks(delete_tasks_request=delete_tasks_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_tasks(delete_tasks_request=delete_tasks_request, opts=opts)
 
-            # [EXPERIMENTAL] DeleteTasks: Batch Delete Tasks
-            api_response = await api_instance.delete_tasks(delete_tasks_request=delete_tasks_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling TasksApi->delete_tasks: %s\n" % e)
+        # [EXPERIMENTAL] DeleteTasks: Batch Delete Tasks
+        api_response = api_instance.delete_tasks(delete_tasks_request=delete_tasks_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling TasksApi->delete_tasks: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -305,33 +305,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     TasksApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -340,28 +339,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(TasksApi)
-        id = 'id_example' # str | Id of the Task to retrieve
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TasksApi)
+    id = 'id_example' # str | Id of the Task to retrieve
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_task(id, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_task(id, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetTask: Get a Task
-            api_response = await api_instance.get_task(id, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling TasksApi->get_task: %s\n" % e)
+        # [EXPERIMENTAL] GetTask: Get a Task
+        api_response = api_instance.get_task(id, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling TasksApi->get_task: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -398,33 +398,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     TasksApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -433,28 +432,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(TasksApi)
-        id = 'id_example' # str | The Task Id for which to get the history
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime of the oldest change to retrieve. Defaults to returning the latest version of the Task if not specified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TasksApi)
+    id = 'id_example' # str | The Task Id for which to get the history
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime of the oldest change to retrieve. Defaults to returning the latest version of the Task if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_task_history(id, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_task_history(id, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetTaskHistory: Get the history of a Task
-            api_response = await api_instance.get_task_history(id, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling TasksApi->get_task_history: %s\n" % e)
+        # [EXPERIMENTAL] GetTaskHistory: Get the history of a Task
+        api_response = api_instance.get_task_history(id, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling TasksApi->get_task_history: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -491,33 +491,32 @@ ListTasks: List Tasks
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     TasksApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -526,31 +525,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(TasksApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
-        sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\" (optional)
-        limit = 10 # int | When paginating, limit the number of returned results to this many. (optional) (default to 10)
-        page = 'page_example' # str | The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TasksApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\" (optional)
+    limit = 10 # int | When paginating, limit the number of returned results to this many. (optional) (default to 10)
+    page = 'page_example' # str | The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_tasks(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_tasks(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
 
-            # ListTasks: List Tasks
-            api_response = await api_instance.list_tasks(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling TasksApi->list_tasks: %s\n" % e)
+        # ListTasks: List Tasks
+        api_response = api_instance.list_tasks(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling TasksApi->list_tasks: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -590,33 +590,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     TasksApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -625,34 +624,35 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(TasksApi)
-        id = 'id_example' # str | Id of the Task to act upon
-        trigger = 'trigger_example' # str |  (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TasksApi)
+    id = 'id_example' # str | Id of the Task to act upon
+    trigger = 'trigger_example' # str |  (optional)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # update_task_request = UpdateTaskRequest.from_json("")
-        # update_task_request = UpdateTaskRequest.from_dict({})
-        update_task_request = UpdateTaskRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # update_task_request = UpdateTaskRequest.from_json("")
+    # update_task_request = UpdateTaskRequest.from_dict({})
+    update_task_request = UpdateTaskRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.update_task(id, trigger=trigger, update_task_request=update_task_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_task(id, trigger=trigger, update_task_request=update_task_request, opts=opts)
 
-            # [EXPERIMENTAL] UpdateTask: Update a Task
-            api_response = await api_instance.update_task(id, trigger=trigger, update_task_request=update_task_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling TasksApi->update_task: %s\n" % e)
+        # [EXPERIMENTAL] UpdateTask: Update a Task
+        api_response = api_instance.update_task(id, trigger=trigger, update_task_request=update_task_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling TasksApi->update_task: %s\n" % e)
+
+main()
 ```
 
 ### Parameters

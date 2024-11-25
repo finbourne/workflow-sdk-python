@@ -23,33 +23,32 @@ If the Worker already exists a failure will be returned
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkersApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -58,32 +57,33 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkersApi)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkersApi)
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # create_worker_request = CreateWorkerRequest.from_json("")
-        # create_worker_request = CreateWorkerRequest.from_dict({})
-        create_worker_request = CreateWorkerRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_worker_request = CreateWorkerRequest.from_json("")
+    # create_worker_request = CreateWorkerRequest.from_dict({})
+    create_worker_request = CreateWorkerRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.create_worker(create_worker_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_worker(create_worker_request, opts=opts)
 
-            # [EXPERIMENTAL] CreateWorker: Create a new Worker
-            api_response = await api_instance.create_worker(create_worker_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkersApi->create_worker: %s\n" % e)
+        # [EXPERIMENTAL] CreateWorker: Create a new Worker
+        api_response = api_instance.create_worker(create_worker_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkersApi->create_worker: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -120,33 +120,32 @@ If the Worker does not exist a failure will be returned
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkersApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -155,28 +154,29 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkersApi)
-        scope = 'scope_example' # str | Scope of the worker to be deleted
-        code = 'code_example' # str | Code of the worker to be deleted
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkersApi)
+    scope = 'scope_example' # str | Scope of the worker to be deleted
+    code = 'code_example' # str | Code of the worker to be deleted
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.delete_worker(scope, code, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_worker(scope, code, opts=opts)
 
-            # [EXPERIMENTAL] DeleteWorker: Delete a Worker
-            api_response = await api_instance.delete_worker(scope, code)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkersApi->delete_worker: %s\n" % e)
+        # [EXPERIMENTAL] DeleteWorker: Delete a Worker
+        api_response = api_instance.delete_worker(scope, code)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkersApi->delete_worker: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -215,33 +215,32 @@ Will return a NotFound failure if the Worker does not exist
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkersApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -250,29 +249,30 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkersApi)
-        scope = 'scope_example' # str | Scope of the worker
-        code = 'code_example' # str | Code of the worker
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkersApi)
+    scope = 'scope_example' # str | Scope of the worker
+    code = 'code_example' # str | Code of the worker
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_worker(scope, code, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_worker(scope, code, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] GetWorker: Get a Worker
-            api_response = await api_instance.get_worker(scope, code, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkersApi->get_worker: %s\n" % e)
+        # [EXPERIMENTAL] GetWorker: Get a Worker
+        api_response = api_instance.get_worker(scope, code, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkersApi->get_worker: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -309,33 +309,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkersApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -344,27 +343,28 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkersApi)
-        run_id = 'run_id_example' # str | The ID returned when calling Run Worker
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkersApi)
+    run_id = 'run_id_example' # str | The ID returned when calling Run Worker
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.get_worker_result(run_id, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_worker_result(run_id, opts=opts)
 
-            # [EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results
-            api_response = await api_instance.get_worker_result(run_id)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkersApi->get_worker_result: %s\n" % e)
+        # [EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results
+        api_response = api_instance.get_worker_result(run_id)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkersApi->get_worker_result: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -399,33 +399,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkersApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -434,31 +433,32 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkersApi)
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified. (optional)
-        filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
-        sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\" (optional)
-        limit = 10 # int | When paginating, limit the number of returned results to this many. (optional) (default to 10)
-        page = 'page_example' # str | The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkersApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\" (optional)
+    limit = 10 # int | When paginating, limit the number of returned results to this many. (optional) (default to 10)
+    page = 'page_example' # str | The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
 
-            # [EXPERIMENTAL] ListWorkers: List Workers
-            api_response = await api_instance.list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkersApi->list_workers: %s\n" % e)
+        # [EXPERIMENTAL] ListWorkers: List Workers
+        api_response = api_instance.list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkersApi->list_workers: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -497,33 +497,32 @@ Name | Type | Description  | Notes
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkersApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -532,35 +531,36 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkersApi)
-        scope = 'scope_example' # str | Scope of the worker
-        code = 'code_example' # str | Code of the worker
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkersApi)
+    scope = 'scope_example' # str | Scope of the worker
+    code = 'code_example' # str | Code of the worker
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # run_worker_request = RunWorkerRequest.from_json("")
-        # run_worker_request = RunWorkerRequest.from_dict({})
-        run_worker_request = RunWorkerRequest()
-        as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # run_worker_request = RunWorkerRequest.from_json("")
+    # run_worker_request = RunWorkerRequest.from_dict({})
+    run_worker_request = RunWorkerRequest()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified. (optional)
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.run_worker(scope, code, run_worker_request, as_at=as_at, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.run_worker(scope, code, run_worker_request, as_at=as_at, opts=opts)
 
-            # [EXPERIMENTAL] RunWorker: Run a Worker
-            api_response = await api_instance.run_worker(scope, code, run_worker_request, as_at=as_at)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkersApi->run_worker: %s\n" % e)
+        # [EXPERIMENTAL] RunWorker: Run a Worker
+        api_response = api_instance.run_worker(scope, code, run_worker_request, as_at=as_at)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkersApi->run_worker: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
@@ -600,33 +600,32 @@ If the Worker does not exist a failure will be returned
 ### Example
 
 ```python
-import asyncio
 from lusid_workflow.exceptions import ApiException
 from lusid_workflow.extensions.configuration_options import ConfigurationOptions
 from lusid_workflow.models import *
 from pprint import pprint
 from lusid_workflow import (
-    ApiClientFactory,
+    SyncApiClientFactory,
     WorkersApi
 )
 
-async def main():
+def main():
 
     with open("secrets.json", "w") as file:
         file.write('''
-{
-    "api":
     {
-        "tokenUrl":"<your-token-url>",
-        "workflowUrl":"https://<your-domain>.lusid.com/workflow",
-        "username":"<your-username>",
-        "password":"<your-password>",
-        "clientId":"<your-client-id>",
-        "clientSecret":"<your-client-secret>"
-    }
-}''')
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
 
-    # Use the lusid_workflow ApiClientFactory to build Api instances with a configured api client
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
     # By default this will read config from environment variables
     # Then from a secrets.json file found in the current working directory
 
@@ -635,34 +634,35 @@ async def main():
     # opts.total_timeout_ms = 30_000
 
     # uncomment the below to use an api client factory with overrides
-    # api_client_factory = ApiClientFactory(opts=opts)
+    # api_client_factory = SyncApiClientFactory(opts=opts)
 
-    api_client_factory = ApiClientFactory()
+    api_client_factory = SyncApiClientFactory()
 
-    # Enter a context with an instance of the ApiClientFactory to ensure the connection pool is closed after use
-    async with api_client_factory:
-        # Create an instance of the API class
-        api_instance = api_client_factory.build(WorkersApi)
-        scope = 'scope_example' # str | Scope of the worker to be updated
-        code = 'code_example' # str | Code of the worker to be updated
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkersApi)
+    scope = 'scope_example' # str | Scope of the worker to be updated
+    code = 'code_example' # str | Code of the worker to be updated
 
-        # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
-        # Change the lines below to switch approach
-        # update_worker_request = UpdateWorkerRequest.from_json("")
-        # update_worker_request = UpdateWorkerRequest.from_dict({})
-        update_worker_request = UpdateWorkerRequest()
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # update_worker_request = UpdateWorkerRequest.from_json("")
+    # update_worker_request = UpdateWorkerRequest.from_dict({})
+    update_worker_request = UpdateWorkerRequest()
 
-        try:
-            # uncomment the below to set overrides at the request level
-            # api_response = await api_instance.update_worker(scope, code, update_worker_request, opts=opts)
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_worker(scope, code, update_worker_request, opts=opts)
 
-            # [EXPERIMENTAL] UpdateWorker: Update a Worker
-            api_response = await api_instance.update_worker(scope, code, update_worker_request)
-            pprint(api_response)
-        except ApiException as e:
-            print("Exception when calling WorkersApi->update_worker: %s\n" % e)
+        # [EXPERIMENTAL] UpdateWorker: Update a Worker
+        api_response = api_instance.update_worker(scope, code, update_worker_request)
+        pprint(api_response)
 
-asyncio.run(main())
+    except ApiException as e:
+        print("Exception when calling WorkersApi->update_worker: %s\n" % e)
+
+main()
 ```
 
 ### Parameters
