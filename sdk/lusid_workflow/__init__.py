@@ -62,6 +62,8 @@ from lusid_workflow.models.fail import Fail
 from lusid_workflow.models.fail_response import FailResponse
 from lusid_workflow.models.field_mapping import FieldMapping
 from lusid_workflow.models.get_worker_result_response import GetWorkerResultResponse
+from lusid_workflow.models.group_reconciliation import GroupReconciliation
+from lusid_workflow.models.group_reconciliation_response import GroupReconciliationResponse
 from lusid_workflow.models.health_check import HealthCheck
 from lusid_workflow.models.health_check_response import HealthCheckResponse
 from lusid_workflow.models.id_selector_definition import IdSelectorDefinition
@@ -171,6 +173,8 @@ __all__ = [
     "FailResponse",
     "FieldMapping",
     "GetWorkerResultResponse",
+    "GroupReconciliation",
+    "GroupReconciliationResponse",
     "HealthCheck",
     "HealthCheckResponse",
     "IdSelectorDefinition",
