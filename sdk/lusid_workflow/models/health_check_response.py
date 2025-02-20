@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class HealthCheckResponse(BaseModel):
     """
     Readonly configuration for a Worker that performs a GET against a given Url.  # noqa: E501
     """
-    type: Optional[StrictStr] = Field(None, description="The type of worker")
-    url: Optional[StrictStr] = Field(None, description="The URL to check, eg: https://www.google.com/")
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of worker") 
+    url:  Optional[StrictStr] = Field(None,alias="url", description="The URL to check, eg: https://www.google.com/") 
     __properties = ["type", "url"]
 
     @validator('type')

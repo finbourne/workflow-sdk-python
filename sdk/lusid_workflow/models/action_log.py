@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid_workflow.models.action_log_item import ActionLogItem
 from lusid_workflow.models.action_log_origin import ActionLogOrigin
 
@@ -27,29 +27,12 @@ class ActionLog(BaseModel):
     """
     An Action Log contains the processing history of an Action  # noqa: E501
     """
-    id: constr(strict=True) = Field(..., description="Unique identifier of the Action")
+    id:  StrictStr = Field(...,alias="id", description="Unique identifier of the Action") 
     origin: ActionLogOrigin = Field(...)
-    action_type: constr(strict=True, min_length=1) = Field(..., alias="actionType", description="The type of the Action")
-    run_as_user_id: Optional[constr(strict=True, max_length=1024)] = Field(None, alias="runAsUserId", description="The ID of the user that the Action was performed by.  If not specified, the actions were performed by the \"current user\".")
+    action_type:  StrictStr = Field(...,alias="actionType", description="The type of the Action") 
+    run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that the Action was performed by.  If not specified, the actions were performed by the \"current user\".") 
     logged_items: conlist(ActionLogItem) = Field(..., alias="loggedItems", description="The logged items for this Action")
     __properties = ["id", "origin", "actionType", "runAsUserId", "loggedItems"]
-
-    @validator('id')
-    def id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-]+$/")
-        return value
-
-    @validator('run_as_user_id')
-    def run_as_user_id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

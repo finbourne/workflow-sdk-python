@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class LuminesceViewResponse(BaseModel):
     """
     Readonly configuration for a Worker that calls a Luminesce view  # noqa: E501
     """
-    type: Optional[StrictStr] = Field(None, description="The type of worker")
-    name: Optional[StrictStr] = Field(None, description="Name of the view in Luminesce")
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of worker") 
+    name:  Optional[StrictStr] = Field(None,alias="name", description="Name of the view in Luminesce") 
     __properties = ["type", "name"]
 
     @validator('type')

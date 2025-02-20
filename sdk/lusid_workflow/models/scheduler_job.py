@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid_workflow.models.resource_id import ResourceId
 
 class SchedulerJob(BaseModel):
     """
     Configuration for a Worker that calls a Scheduler Job  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of worker")
+    type:  StrictStr = Field(...,alias="type", description="The type of worker") 
     job_id: ResourceId = Field(..., alias="jobId")
     __properties = ["type", "jobId"]
 

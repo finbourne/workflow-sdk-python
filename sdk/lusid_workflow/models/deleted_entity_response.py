@@ -19,14 +19,14 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid_workflow.models.link import Link
 
 class DeletedEntityResponse(BaseModel):
     """
     DeletedEntityResponse
     """
-    href: Optional[StrictStr] = Field(None, description="The Uri related to this Entity")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The Uri related to this Entity") 
     effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The EffectiveFrom for this response")
     as_at: datetime = Field(..., alias="asAt", description="The AsAt for this response")
     links: Optional[conlist(Link)] = None

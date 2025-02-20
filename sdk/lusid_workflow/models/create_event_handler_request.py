@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
 from lusid_workflow.models.event_matching_pattern import EventMatchingPattern
 from lusid_workflow.models.resource_id import ResourceId
@@ -30,9 +30,9 @@ class CreateEventHandlerRequest(BaseModel):
     Contains information for creating an Event Handler  # noqa: E501
     """
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="Human readable name")
-    description: Optional[StrictStr] = Field(None, description="Human readable description")
-    status: constr(strict=True, min_length=1) = Field(..., description="The current status of the event handler")
+    display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
+    status:  StrictStr = Field(...,alias="status", description="The current status of the event handler") 
     event_matching_pattern: EventMatchingPattern = Field(..., alias="eventMatchingPattern")
     run_as_user_id: EventHandlerMapping = Field(..., alias="runAsUserId")
     task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")

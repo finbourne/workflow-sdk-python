@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class TriggerParentTaskAction(BaseModel):
     """
     Defines a Trigger Parent Task Action  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="Type name for this Action")
-    trigger: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="Trigger on parent task to be invoked")
+    type:  StrictStr = Field(...,alias="type", description="Type name for this Action") 
+    trigger:  StrictStr = Field(...,alias="trigger", description="Trigger on parent task to be invoked") 
     __properties = ["type", "trigger"]
 
     @validator('type')
@@ -34,13 +34,6 @@ class TriggerParentTaskAction(BaseModel):
         """Validates the enum"""
         if value not in ('TriggerParentTask'):
             raise ValueError("must be one of enum values ('TriggerParentTask')")
-        return value
-
-    @validator('trigger')
-    def trigger_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
         return value
 
     class Config:

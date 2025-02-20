@@ -19,22 +19,15 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 
 class InitialState(BaseModel):
     """
     Defines the Initial State of the Task  # noqa: E501
     """
-    name: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="The Initial State of the Task")
+    name:  StrictStr = Field(...,alias="name", description="The Initial State of the Task") 
     required_fields: Optional[conlist(StrictStr)] = Field(None, alias="requiredFields", description="Required input Fields for the Initial State")
     __properties = ["name", "requiredFields"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

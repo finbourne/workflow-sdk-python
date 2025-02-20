@@ -19,59 +19,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class TaskTransitionDefinition(BaseModel):
     """
     Defines a State change  # noqa: E501
     """
-    from_state: constr(strict=True, max_length=1024, min_length=1) = Field(..., alias="fromState", description="The State this Transition if coming From")
-    to_state: constr(strict=True, max_length=1024, min_length=1) = Field(..., alias="toState", description="The State this Transition is going To")
-    trigger: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="The Trigger for this Transition")
-    guard: Optional[constr(strict=True, max_length=1024, min_length=1)] = Field(None, description="The Guard for this Transition, if any")
-    action: Optional[constr(strict=True, max_length=1024, min_length=1)] = Field(None, description="The Action to invoke on successful Transition")
+    from_state:  StrictStr = Field(...,alias="fromState", description="The State this Transition if coming From") 
+    to_state:  StrictStr = Field(...,alias="toState", description="The State this Transition is going To") 
+    trigger:  StrictStr = Field(...,alias="trigger", description="The Trigger for this Transition") 
+    guard:  Optional[StrictStr] = Field(None,alias="guard", description="The Guard for this Transition, if any") 
+    action:  Optional[StrictStr] = Field(None,alias="action", description="The Action to invoke on successful Transition") 
     __properties = ["fromState", "toState", "trigger", "guard", "action"]
-
-    @validator('from_state')
-    def from_state_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('to_state')
-    def to_state_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('trigger')
-    def trigger_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('guard')
-    def guard_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('action')
-    def action_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

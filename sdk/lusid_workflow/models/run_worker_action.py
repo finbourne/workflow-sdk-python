@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist, constr, validator 
 from lusid_workflow.models.field_mapping import FieldMapping
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.resultant_child_task_configuration import ResultantChildTaskConfiguration
@@ -29,7 +29,7 @@ class RunWorkerAction(BaseModel):
     """
     Defines a Run Worker Action  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="Type name for this Action")
+    type:  StrictStr = Field(...,alias="type", description="Type name for this Action") 
     worker_id: ResourceId = Field(..., alias="workerId")
     worker_as_at: Optional[datetime] = Field(None, alias="workerAsAt", description="Worker AsAt")
     worker_parameters: Optional[Dict[str, FieldMapping]] = Field(None, alias="workerParameters", description="Parameters for this Worker")

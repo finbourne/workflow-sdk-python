@@ -19,22 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 
 class EventMatchingPattern(BaseModel):
     """
     The matching event pattern object  # noqa: E501
     """
-    event_type: constr(strict=True, max_length=512, min_length=0) = Field(..., alias="eventType", description="The type of event to subscribe to. The list of available event types can be discovered  by calling the ‘List available EventTypes’ API endpoint in the Notifications service")
-    filter: Optional[StrictStr] = Field(None, description="A filter on the event. See https://support.lusid.com/filtering-results-from-lusid for more information.  If not provided, all events will be matched.")
+    event_type:  StrictStr = Field(...,alias="eventType", description="The type of event to subscribe to. The list of available event types can be discovered  by calling the ‘List available EventTypes’ API endpoint in the Notifications service") 
+    filter:  Optional[StrictStr] = Field(None,alias="filter", description="A filter on the event. See https://support.lusid.com/filtering-results-from-lusid for more information.  If not provided, all events will be matched.") 
     __properties = ["eventType", "filter"]
-
-    @validator('event_type')
-    def event_type_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z]*$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

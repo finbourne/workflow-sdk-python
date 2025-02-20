@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 from lusid_workflow.models.action_details_response import ActionDetailsResponse
 
 class ActionDefinitionResponse(BaseModel):
     """
     Defines the Actions for a Task in a read-only form  # noqa: E501
     """
-    name: Optional[StrictStr] = Field(None, description="The Name of this Action")
-    run_as_user_id: Optional[StrictStr] = Field(None, alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".")
+    name:  Optional[StrictStr] = Field(None,alias="name", description="The Name of this Action") 
+    run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".") 
     action_details: Optional[ActionDetailsResponse] = Field(None, alias="actionDetails")
     __properties = ["name", "runAsUserId", "actionDetails"]
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
 from lusid_workflow.models.field_mapping import FieldMapping
 
@@ -27,8 +27,8 @@ class CreateNewTaskActivity(BaseModel):
     """
     Define a Task Activity that creates a new task  # noqa: E501
     """
-    initial_trigger: Optional[StrictStr] = Field(None, alias="initialTrigger", description="Trigger to supply to all tasks to be made")
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of task activity")
+    initial_trigger:  Optional[StrictStr] = Field(None,alias="initialTrigger", description="Trigger to supply to all tasks to be made") 
+    type:  StrictStr = Field(...,alias="type", description="The type of task activity") 
     correlation_ids: Optional[conlist(EventHandlerMapping)] = Field(None, alias="correlationIds", description="The event to correlation ID mappings")
     task_fields: Optional[Dict[str, FieldMapping]] = Field(None, alias="taskFields", description="The event to task field mappings")
     __properties = ["initialTrigger", "type", "correlationIds", "taskFields"]

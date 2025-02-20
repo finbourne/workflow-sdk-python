@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.task_instance_field import TaskInstanceField
 
@@ -30,7 +30,7 @@ class CreateTaskRequest(BaseModel):
     task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
     correlation_ids: Optional[conlist(StrictStr)] = Field(None, alias="correlationIds", description="A set of guid identifiers that allow correlation across the application tier")
     fields: Optional[conlist(TaskInstanceField)] = Field(None, description="Fields and their initial values - should correspond with the Task Definition field schema")
-    stacking_key: Optional[StrictStr] = Field(None, alias="stackingKey", description="The key for the Stack that this Task should be added to")
+    stacking_key:  Optional[StrictStr] = Field(None,alias="stackingKey", description="The key for the Stack that this Task should be added to") 
     __properties = ["taskDefinitionId", "correlationIds", "fields", "stackingKey"]
 
     class Config:

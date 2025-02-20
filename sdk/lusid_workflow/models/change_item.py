@@ -19,18 +19,18 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr 
 
 class ChangeItem(BaseModel):
     """
     Defines a change that occured to a Task  # noqa: E501
     """
     as_at_modified: datetime = Field(..., alias="asAtModified", description="The AsAt time of the change")
-    user_id_modified: constr(strict=True, min_length=1) = Field(..., alias="userIdModified", description="The User ID that performed the change")
-    request_id_modified: constr(strict=True, min_length=1) = Field(..., alias="requestIdModified", description="The Request ID of the request that caused the change")
+    user_id_modified:  StrictStr = Field(...,alias="userIdModified", description="The User ID that performed the change") 
+    request_id_modified:  StrictStr = Field(...,alias="requestIdModified", description="The Request ID of the request that caused the change") 
     as_at_version_number: StrictInt = Field(..., alias="asAtVersionNumber", description="The AsAt Version number")
-    action: constr(strict=True, min_length=1) = Field(..., description="The Action that resulted in the change")
-    attribute_name: constr(strict=True, min_length=1) = Field(..., alias="attributeName", description="The name of the attribute that has been change")
+    action:  StrictStr = Field(...,alias="action", description="The Action that resulted in the change") 
+    attribute_name:  StrictStr = Field(...,alias="attributeName", description="The name of the attribute that has been change") 
     previous_value: Optional[Any] = Field(None, alias="previousValue", description="The value of the attribute prior to the change")
     new_value: Optional[Any] = Field(..., alias="newValue", description="The value of the attribute following the change")
     __properties = ["asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber", "action", "attributeName", "previousValue", "newValue"]

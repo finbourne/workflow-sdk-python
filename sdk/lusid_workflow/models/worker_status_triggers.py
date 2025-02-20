@@ -19,17 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class WorkerStatusTriggers(BaseModel):
     """
     Defines triggers that will be invoked per Worker outcome  # noqa: E501
     """
-    started: Optional[StrictStr] = Field(None, description="Trigger to invoke when the Worker has Started")
-    completed_with_results: Optional[StrictStr] = Field(None, alias="completedWithResults", description="Trigger to invoke when the Worker has Completed (with results)")
-    completed_no_results: Optional[StrictStr] = Field(None, alias="completedNoResults", description="Trigger to invoke when the Worker has Completed (no results)")
-    failed_to_start: Optional[StrictStr] = Field(None, alias="failedToStart", description="Trigger to invoke when the Worker has Failed to Start")
-    failed_to_complete: Optional[StrictStr] = Field(None, alias="failedToComplete", description="Trigger to invoke when the Worker has Failed to Complete")
+    started:  Optional[StrictStr] = Field(None,alias="started", description="Trigger to invoke when the Worker has Started") 
+    completed_with_results:  Optional[StrictStr] = Field(None,alias="completedWithResults", description="Trigger to invoke when the Worker has Completed (with results)") 
+    completed_no_results:  Optional[StrictStr] = Field(None,alias="completedNoResults", description="Trigger to invoke when the Worker has Completed (no results)") 
+    failed_to_start:  Optional[StrictStr] = Field(None,alias="failedToStart", description="Trigger to invoke when the Worker has Failed to Start") 
+    failed_to_complete:  Optional[StrictStr] = Field(None,alias="failedToComplete", description="Trigger to invoke when the Worker has Failed to Complete") 
     __properties = ["started", "completedWithResults", "completedNoResults", "failedToStart", "failedToComplete"]
 
     class Config:

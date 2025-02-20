@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.worker_configuration import WorkerConfiguration
 
@@ -28,27 +28,10 @@ class CreateWorkerRequest(BaseModel):
     Request to Create a new worker  # noqa: E501
     """
     id: ResourceId = Field(...)
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="Human readable name")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="Human readable description")
+    display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
     worker_configuration: WorkerConfiguration = Field(..., alias="workerConfiguration")
     __properties = ["id", "displayName", "description", "workerConfiguration"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

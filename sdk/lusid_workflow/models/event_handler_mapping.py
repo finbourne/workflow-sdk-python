@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class EventHandlerMapping(BaseModel):
     """
     Defines a mapping for event handler properties  # noqa: E501
     """
-    map_from: Optional[StrictStr] = Field(None, alias="mapFrom", description="The field to map from")
-    set_to: Optional[StrictStr] = Field(None, alias="setTo", description="The (constant) value to set")
+    map_from:  Optional[StrictStr] = Field(None,alias="mapFrom", description="The field to map from") 
+    set_to:  Optional[StrictStr] = Field(None,alias="setTo", description="The (constant) value to set") 
     __properties = ["mapFrom", "setTo"]
 
     class Config:

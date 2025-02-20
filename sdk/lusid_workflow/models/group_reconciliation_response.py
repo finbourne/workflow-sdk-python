@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class GroupReconciliationResponse(BaseModel):
     """
     Readonly configuration for the Group Reconciliation Worker  # noqa: E501
     """
-    type: Optional[StrictStr] = Field(None, description="The type of worker")
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of worker") 
     __properties = ["type"]
 
     @validator('type')

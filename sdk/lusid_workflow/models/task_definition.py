@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid_workflow.models.action_definition_response import ActionDefinitionResponse
 from lusid_workflow.models.initial_state import InitialState
 from lusid_workflow.models.resource_id import ResourceId
@@ -35,8 +35,8 @@ class TaskDefinition(BaseModel):
     """
     id: ResourceId = Field(...)
     version: Optional[VersionInfo] = None
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="Human readable name")
-    description: Optional[StrictStr] = Field(None, description="Human readable description")
+    display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
     states: conlist(TaskStateDefinition, min_items=1) = Field(..., description="The states this Task Definition operates over")
     field_schema: Optional[conlist(TaskFieldDefinition)] = Field(None, alias="fieldSchema", description="The Fields that this Task Definition operates on")
     initial_state: InitialState = Field(..., alias="initialState")

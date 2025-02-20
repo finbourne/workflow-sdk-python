@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class Fail(BaseModel):
     """
     Configuration for a Worker that always Fails  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of worker")
+    type:  StrictStr = Field(...,alias="type", description="The type of worker") 
     __properties = ["type"]
 
     @validator('type')

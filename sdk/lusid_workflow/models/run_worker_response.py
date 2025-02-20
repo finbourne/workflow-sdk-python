@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
 
 class RunWorkerResponse(BaseModel):
     """
     The RunWorker response  # noqa: E501
     """
-    run_id: StrictStr = Field(..., alias="runId", description="Identifies a Worker run")
-    status_detail: Optional[StrictStr] = Field(None, alias="statusDetail", description="Detail on the final status")
+    run_id:  StrictStr = Field(...,alias="runId", description="Identifies a Worker run") 
+    status_detail:  Optional[StrictStr] = Field(None,alias="statusDetail", description="Detail on the final status") 
     __properties = ["runId", "statusDetail"]
 
     class Config:

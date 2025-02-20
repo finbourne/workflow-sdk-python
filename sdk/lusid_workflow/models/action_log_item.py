@@ -19,15 +19,15 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class ActionLogItem(BaseModel):
     """
     A log item for a given Action Log  # noqa: E501
     """
     timestamp: datetime = Field(..., description="The timestamp of the log item")
-    log_type: constr(strict=True, min_length=1) = Field(..., alias="logType", description="The type of log item")
-    details: Optional[StrictStr] = Field(None, description="The details of the log item")
+    log_type:  StrictStr = Field(...,alias="logType", description="The type of log item") 
+    details:  Optional[StrictStr] = Field(None,alias="details", description="The details of the log item") 
     __properties = ["timestamp", "logType", "details"]
 
     class Config:

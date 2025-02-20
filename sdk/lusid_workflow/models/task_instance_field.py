@@ -19,22 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class TaskInstanceField(BaseModel):
     """
     Defines a Field on a Task  # noqa: E501
     """
-    name: constr(strict=True) = Field(..., description="The name of this Field")
+    name:  StrictStr = Field(...,alias="name", description="The name of this Field") 
     value: Optional[Any] = Field(None, description="The value of this Field")
     __properties = ["name", "value"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

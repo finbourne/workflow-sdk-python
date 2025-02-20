@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 
 class CreateChildTasksAction(BaseModel):
     """
     Defines a Create Child Tasks Action  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="Type name for this Action")
+    type:  StrictStr = Field(...,alias="type", description="Type name for this Action") 
     child_task_configurations: conlist(CreateChildTaskConfiguration) = Field(..., alias="childTaskConfigurations", description="The Child Task Configurations")
     __properties = ["type", "childTaskConfigurations"]
 

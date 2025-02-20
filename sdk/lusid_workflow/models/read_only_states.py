@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 
 class ReadOnlyStates(BaseModel):
     """
     Information about which states the field can be edited in  # noqa: E501
     """
-    state_type: constr(strict=True, min_length=1) = Field(..., alias="stateType", description="The State Type (e.g. InitialState, AllStates, TerminalState, SelectedStates)")
+    state_type:  StrictStr = Field(...,alias="stateType", description="The State Type (e.g. InitialState, AllStates, TerminalState, SelectedStates)") 
     selected_states: Optional[conlist(StrictStr)] = Field(None, alias="selectedStates", description="Named states for which the field will be readonly - This field can only be populated if StateType = SelectedStates")
     __properties = ["stateType", "selectedStates"]
 

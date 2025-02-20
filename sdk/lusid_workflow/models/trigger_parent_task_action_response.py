@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
 class TriggerParentTaskActionResponse(BaseModel):
     """
     Defines a read-only Trigger Parent Task Action  # noqa: E501
     """
-    type: Optional[StrictStr] = Field(None, description="Type name for this Action")
-    trigger: Optional[StrictStr] = Field(None, description="Trigger on parent task to be invoked")
+    type:  Optional[StrictStr] = Field(None,alias="type", description="Type name for this Action") 
+    trigger:  Optional[StrictStr] = Field(None,alias="trigger", description="Trigger on parent task to be invoked") 
     __properties = ["type", "trigger"]
 
     @validator('type')

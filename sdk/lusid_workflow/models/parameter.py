@@ -19,18 +19,18 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr 
 
 class Parameter(BaseModel):
     """
     Defines a Worker Parameter  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of this Parameter")
-    name: constr(strict=True, min_length=1) = Field(..., description="Name")
-    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="DisplayName")
-    description: Optional[StrictStr] = Field(None, description="Description")
+    type:  StrictStr = Field(...,alias="type", description="The type of this Parameter") 
+    name:  StrictStr = Field(...,alias="name", description="Name") 
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="DisplayName") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Description") 
     required: StrictBool = Field(..., description="Required or not")
-    default_value: Optional[StrictStr] = Field(None, alias="defaultValue", description="DefaultValue")
+    default_value:  Optional[StrictStr] = Field(None,alias="defaultValue", description="DefaultValue") 
     __properties = ["type", "name", "displayName", "description", "required", "defaultValue"]
 
     class Config:

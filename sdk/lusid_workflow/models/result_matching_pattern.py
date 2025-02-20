@@ -19,21 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class ResultMatchingPattern(BaseModel):
     """
     Standard Finbourne filter to match against Run Worker results  # noqa: E501
     """
-    filter: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="Filter string")
+    filter:  StrictStr = Field(...,alias="filter", description="Filter string") 
     __properties = ["filter"]
-
-    @validator('filter')
-    def filter_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

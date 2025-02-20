@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr 
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.stack import Stack
 from lusid_workflow.models.task_definition_version import TaskDefinitionVersion
@@ -31,11 +31,11 @@ class Task(BaseModel):
     """
     Defines a Task created based on a Task Definition  # noqa: E501
     """
-    id: StrictStr = Field(..., description="The unique id for this Task")
+    id:  StrictStr = Field(...,alias="id", description="The unique id for this Task") 
     task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
     task_definition_version: TaskDefinitionVersion = Field(..., alias="taskDefinitionVersion")
-    task_definition_display_name: constr(strict=True, min_length=1) = Field(..., alias="taskDefinitionDisplayName", description="The display name of the Task Definition used by this Task")
-    state: constr(strict=True, min_length=1) = Field(..., description="Current State")
+    task_definition_display_name:  StrictStr = Field(...,alias="taskDefinitionDisplayName", description="The display name of the Task Definition used by this Task") 
+    state:  StrictStr = Field(...,alias="state", description="Current State") 
     ultimate_parent_task: TaskSummary = Field(..., alias="ultimateParentTask")
     parent_task: Optional[TaskSummary] = Field(None, alias="parentTask")
     child_tasks: Optional[conlist(TaskSummary)] = Field(None, alias="childTasks", description="This Task's child tasks")
@@ -44,11 +44,11 @@ class Task(BaseModel):
     terminal_state: StrictBool = Field(..., alias="terminalState", description="True if no onward transitions are possible")
     as_at_last_transition: Optional[datetime] = Field(None, alias="asAtLastTransition", description="Last Transition timestamp")
     fields: Optional[conlist(TaskInstanceField)] = Field(None, description="Fields and their latest values - should correspond with the Task Definition field schema")
-    stacking_key: Optional[StrictStr] = Field(None, alias="stackingKey", description="The key used to determine which stack to add the Task to")
+    stacking_key:  Optional[StrictStr] = Field(None,alias="stackingKey", description="The key used to determine which stack to add the Task to") 
     stack: Optional[Stack] = None
-    action_log_id_created: Optional[StrictStr] = Field(None, alias="actionLogIdCreated", description="The Id of the Action that created this Task")
-    action_log_id_modified: Optional[StrictStr] = Field(None, alias="actionLogIdModified", description="The Id of the Action that last modified this Task")
-    action_log_id_submitted: Optional[StrictStr] = Field(None, alias="actionLogIdSubmitted", description="The Id of the last Action submitted by this Task")
+    action_log_id_created:  Optional[StrictStr] = Field(None,alias="actionLogIdCreated", description="The Id of the Action that created this Task") 
+    action_log_id_modified:  Optional[StrictStr] = Field(None,alias="actionLogIdModified", description="The Id of the Action that last modified this Task") 
+    action_log_id_submitted:  Optional[StrictStr] = Field(None,alias="actionLogIdSubmitted", description="The Id of the last Action submitted by this Task") 
     __properties = ["id", "taskDefinitionId", "taskDefinitionVersion", "taskDefinitionDisplayName", "state", "ultimateParentTask", "parentTask", "childTasks", "correlationIds", "version", "terminalState", "asAtLastTransition", "fields", "stackingKey", "stack", "actionLogIdCreated", "actionLogIdModified", "actionLogIdSubmitted"]
 
     class Config:

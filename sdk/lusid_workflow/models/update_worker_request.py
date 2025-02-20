@@ -19,33 +19,16 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class UpdateWorkerRequest(BaseModel):
     """
     Request to Update a new worker  # noqa: E501
     """
-    display_name: constr(strict=True, max_length=512, min_length=1) = Field(..., alias="displayName", description="Human readable name")
-    description: Optional[constr(strict=True, max_length=1024, min_length=0)] = Field(None, description="Human readable description")
+    display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
     worker_configuration: Optional[Any] = Field(..., alias="workerConfiguration", description="Information about how the worker should be executed")
     __properties = ["displayName", "description", "workerConfiguration"]
-
-    @validator('display_name')
-    def display_name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
-
-    @validator('description')
-    def description_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

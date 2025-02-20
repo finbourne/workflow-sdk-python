@@ -19,18 +19,18 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr 
 
 class VersionInfo(BaseModel):
     """
     The version metadata.  # noqa: E501
     """
     as_at_created: Optional[datetime] = Field(None, alias="asAtCreated", description="The asAt datetime at which this entity was first created.")
-    user_id_created: Optional[StrictStr] = Field(None, alias="userIdCreated", description="The unique id of the user who created this entity.")
-    request_id_created: Optional[StrictStr] = Field(None, alias="requestIdCreated", description="The request id of the request that created this entity.")
+    user_id_created:  Optional[StrictStr] = Field(None,alias="userIdCreated", description="The unique id of the user who created this entity.") 
+    request_id_created:  Optional[StrictStr] = Field(None,alias="requestIdCreated", description="The request id of the request that created this entity.") 
     as_at_modified: Optional[datetime] = Field(None, alias="asAtModified", description="The asAt datetime at which this entity was last updated.")
-    user_id_modified: Optional[StrictStr] = Field(None, alias="userIdModified", description="The unique id of the user who last updated this entity.")
-    request_id_modified: Optional[StrictStr] = Field(None, alias="requestIdModified", description="The request id of the request that last updated this entity.")
+    user_id_modified:  Optional[StrictStr] = Field(None,alias="userIdModified", description="The unique id of the user who last updated this entity.") 
+    request_id_modified:  Optional[StrictStr] = Field(None,alias="requestIdModified", description="The request id of the request that last updated this entity.") 
     as_at_version_number: Optional[StrictInt] = Field(None, alias="asAtVersionNumber", description="The integer version number for this entity (the entity was created at version 1).")
     __properties = ["asAtCreated", "userIdCreated", "requestIdCreated", "asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber"]
 

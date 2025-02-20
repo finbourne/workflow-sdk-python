@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class LuminesceView(BaseModel):
     """
     Configuration for a Worker that calls a Luminesce view  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of worker")
-    name: constr(strict=True, max_length=512, min_length=1) = Field(..., description="Name of the view in Luminesce")
+    type:  StrictStr = Field(...,alias="type", description="The type of worker") 
+    name:  StrictStr = Field(...,alias="name", description="Name of the view in Luminesce") 
     __properties = ["type", "name"]
 
     @validator('type')
@@ -34,13 +34,6 @@ class LuminesceView(BaseModel):
         """Validates the enum"""
         if value not in ('LuminesceView'):
             raise ValueError("must be one of enum values ('LuminesceView')")
-        return value
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[\s\S]*$", value):
-            raise ValueError(r"must validate the regular expression /^[\s\S]*$/")
         return value
 
     class Config:

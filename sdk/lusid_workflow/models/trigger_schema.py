@@ -19,13 +19,13 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class TriggerSchema(BaseModel):
     """
     Triggers can operate in response to different stimuli  # noqa: E501
     """
-    type: constr(strict=True, min_length=1) = Field(..., description="The type of Trigger; available value(s): External")
+    type:  StrictStr = Field(...,alias="type", description="The type of Trigger; available value(s): External") 
     __properties = ["type"]
 
     class Config:

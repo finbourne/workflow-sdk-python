@@ -19,15 +19,15 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 
 class GetWorkerResultResponse(BaseModel):
     """
     The RunWorker response  # noqa: E501
     """
-    worker_status: constr(strict=True, min_length=1) = Field(..., alias="workerStatus", description="The final status of the Worker")
+    worker_status:  StrictStr = Field(...,alias="workerStatus", description="The final status of the Worker") 
     results: conlist(Dict[str, Any]) = Field(..., description="Results")
-    status_detail: Optional[StrictStr] = Field(None, alias="statusDetail", description="Detail on the final status")
+    status_detail:  Optional[StrictStr] = Field(None,alias="statusDetail", description="Detail on the final status") 
     __properties = ["workerStatus", "results", "statusDetail"]
 
     class Config:

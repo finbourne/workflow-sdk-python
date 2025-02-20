@@ -19,14 +19,14 @@ import json
 
 
 from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
 
 class ValueConstraints(BaseModel):
     """
     Constraints that should be applied to a Tasks fields  # noqa: E501
     """
-    constraint_type: constr(strict=True, min_length=1) = Field(..., alias="constraintType", description="Whether the constraint is a suggestion or should be enforced via validation (e.g. Suggested, Validated)")
-    value_source_type: constr(strict=True, min_length=1) = Field(..., alias="valueSourceType", description="The source of the acceptable values (e.g. AcceptableValues)")
+    constraint_type:  StrictStr = Field(...,alias="constraintType", description="Whether the constraint is a suggestion or should be enforced via validation (e.g. Suggested, Validated)") 
+    value_source_type:  StrictStr = Field(...,alias="valueSourceType", description="The source of the acceptable values (e.g. AcceptableValues)") 
     acceptable_values: conlist(Any) = Field(..., alias="acceptableValues", description="The acceptable values for the field")
     __properties = ["constraintType", "valueSourceType", "acceptableValues"]
 

@@ -19,34 +19,17 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid_workflow.models.action_details import ActionDetails
 
 class ActionDefinition(BaseModel):
     """
     Defines the Actions for a Task  # noqa: E501
     """
-    name: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="The Name of this Action")
-    run_as_user_id: Optional[constr(strict=True, max_length=1024)] = Field(None, alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".")
+    name:  StrictStr = Field(...,alias="name", description="The Name of this Action") 
+    run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".") 
     action_details: ActionDetails = Field(..., alias="actionDetails")
     __properties = ["name", "runAsUserId", "actionDetails"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
-
-    @validator('run_as_user_id')
-    def run_as_user_id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

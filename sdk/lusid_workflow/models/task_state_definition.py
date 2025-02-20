@@ -19,21 +19,14 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class TaskStateDefinition(BaseModel):
     """
     A Task Definition/Task has a given set of States  # noqa: E501
     """
-    name: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="The Name of this State")
+    name:  StrictStr = Field(...,alias="name", description="The Name of this State") 
     __properties = ["name"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

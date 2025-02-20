@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
 from lusid_workflow.models.action_definition import ActionDefinition
 from lusid_workflow.models.initial_state import InitialState
 from lusid_workflow.models.task_field_definition import TaskFieldDefinition
@@ -31,8 +31,8 @@ class UpdateTaskDefinitionRequest(BaseModel):
     """
     Contains required info to update a Task Definition  # noqa: E501
     """
-    display_name: constr(strict=True, min_length=1) = Field(..., alias="displayName", description="Human readable name")
-    description: Optional[StrictStr] = Field(None, description="Human readable description")
+    display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
     states: conlist(TaskStateDefinition, min_items=1) = Field(..., description="The states this Task Definition operates over")
     field_schema: Optional[conlist(TaskFieldDefinition)] = Field(None, alias="fieldSchema", description="Defines the fields associated with this Task")
     initial_state: InitialState = Field(..., alias="initialState")

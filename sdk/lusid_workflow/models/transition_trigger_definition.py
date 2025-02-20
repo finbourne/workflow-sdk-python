@@ -19,23 +19,16 @@ import json
 
 
 from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid_workflow.models.trigger_schema import TriggerSchema
 
 class TransitionTriggerDefinition(BaseModel):
     """
     State changes happen in response to Triggers  # noqa: E501
     """
-    name: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="The key/Name of this Trigger")
+    name:  StrictStr = Field(...,alias="name", description="The key/Name of this Trigger") 
     trigger: TriggerSchema = Field(...)
     __properties = ["name", "trigger"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

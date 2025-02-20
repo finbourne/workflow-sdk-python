@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid_workflow.models.field_mapping import FieldMapping
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.result_matching_pattern import ResultMatchingPattern
@@ -31,20 +31,10 @@ class ResultantChildTaskConfiguration(BaseModel):
     result_matching_pattern: Optional[ResultMatchingPattern] = Field(None, alias="resultMatchingPattern")
     task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
     task_definition_as_at: Optional[datetime] = Field(None, alias="taskDefinitionAsAt", description="TaskDefinition AsAt timestamp")
-    initial_trigger: Optional[constr(strict=True, max_length=1024)] = Field(None, alias="initialTrigger", description="The Initial Trigger for automatic start")
+    initial_trigger:  Optional[StrictStr] = Field(None,alias="initialTrigger", description="The Initial Trigger for automatic start") 
     child_task_fields: Dict[str, FieldMapping] = Field(..., alias="childTaskFields", description="Field Mappings")
-    map_stacking_key_from: Optional[StrictStr] = Field(None, alias="mapStackingKeyFrom", description="The field to be mapped as the ChildTasks Stacking Key")
+    map_stacking_key_from:  Optional[StrictStr] = Field(None,alias="mapStackingKeyFrom", description="The field to be mapped as the ChildTasks Stacking Key") 
     __properties = ["resultMatchingPattern", "taskDefinitionId", "taskDefinitionAsAt", "initialTrigger", "childTaskFields", "mapStackingKeyFrom"]
-
-    @validator('initial_trigger')
-    def initial_trigger_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

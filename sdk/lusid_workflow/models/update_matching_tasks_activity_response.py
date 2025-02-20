@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, validator 
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
 from lusid_workflow.models.field_mapping import FieldMapping
 
@@ -27,9 +27,9 @@ class UpdateMatchingTasksActivityResponse(BaseModel):
     """
     Readonly TaskActivity response  # noqa: E501
     """
-    type: Optional[StrictStr] = Field(None, description="The type of task activity")
-    filter: Optional[StrictStr] = Field(None, description="The filter that matches on existing tasks")
-    trigger: Optional[StrictStr] = Field(None, description="Trigger to supply to all tasks that have been matched")
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of task activity") 
+    filter:  Optional[StrictStr] = Field(None,alias="filter", description="The filter that matches on existing tasks") 
+    trigger:  Optional[StrictStr] = Field(None,alias="trigger", description="Trigger to supply to all tasks that have been matched") 
     correlation_ids: Optional[conlist(EventHandlerMapping)] = Field(None, alias="correlationIds", description="The event to correlation ID mappings")
     task_fields: Optional[Dict[str, FieldMapping]] = Field(None, alias="taskFields", description="The event to task field mappings")
     __properties = ["type", "filter", "trigger", "correlationIds", "taskFields"]

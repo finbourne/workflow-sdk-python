@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid_workflow.models.read_only_states import ReadOnlyStates
 from lusid_workflow.models.value_constraints import ValueConstraints
 
@@ -27,18 +27,11 @@ class TaskFieldDefinition(BaseModel):
     """
     Defines a Task Definition Field  # noqa: E501
     """
-    name: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="The name of this Field")
-    type: constr(strict=True, min_length=1) = Field(..., description="The value type for the field. Available values are: \"String\", \"Decimal\", \"DateTime\", \"Boolean\")")
+    name:  StrictStr = Field(...,alias="name", description="The name of this Field") 
+    type:  StrictStr = Field(...,alias="type", description="The value type for the field. Available values are: \"String\", \"Decimal\", \"DateTime\", \"Boolean\")") 
     read_only_states: Optional[ReadOnlyStates] = Field(None, alias="readOnlyStates")
     value_constraints: Optional[ValueConstraints] = Field(None, alias="valueConstraints")
     __properties = ["name", "type", "readOnlyStates", "valueConstraints"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

@@ -19,25 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class FieldMapping(BaseModel):
     """
     Defines a single Field map  # noqa: E501
     """
-    map_from: Optional[constr(strict=True, max_length=1024, min_length=1)] = Field(None, alias="mapFrom", description="The field to map from")
+    map_from:  Optional[StrictStr] = Field(None,alias="mapFrom", description="The field to map from") 
     set_to: Optional[Any] = Field(None, alias="setTo", description="The (constant) value to set")
     __properties = ["mapFrom", "setTo"]
-
-    @validator('map_from')
-    def map_from_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""

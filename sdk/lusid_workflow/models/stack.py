@@ -19,7 +19,7 @@ import json
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, StrictStr
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr 
 
 class Stack(BaseModel):
     """
@@ -28,10 +28,10 @@ class Stack(BaseModel):
     member_added_as_at: Optional[datetime] = Field(None, alias="memberAddedAsAt", description="When the Task was added to the Stack")
     stack_opened_as_at: Optional[datetime] = Field(None, alias="stackOpenedAsAt", description="When the Stack was opened")
     stack_closed_as_at: Optional[datetime] = Field(None, alias="stackClosedAsAt", description="When the Stack was closed")
-    stack_membership_type: Optional[StrictStr] = Field(None, alias="stackMembershipType", description="Whether the task is the Lead task of the Stack or a Member within the Stack")
-    stack_status: Optional[StrictStr] = Field(None, alias="stackStatus", description="Status of the Stack (Open/Closed)")
-    lead_task_id: Optional[StrictStr] = Field(None, alias="leadTaskId", description="ID of the Lead Task")
-    lead_task_state: Optional[StrictStr] = Field(None, alias="leadTaskState", description="State of the Lead Task")
+    stack_membership_type:  Optional[StrictStr] = Field(None,alias="stackMembershipType", description="Whether the task is the Lead task of the Stack or a Member within the Stack") 
+    stack_status:  Optional[StrictStr] = Field(None,alias="stackStatus", description="Status of the Stack (Open/Closed)") 
+    lead_task_id:  Optional[StrictStr] = Field(None,alias="leadTaskId", description="ID of the Lead Task") 
+    lead_task_state:  Optional[StrictStr] = Field(None,alias="leadTaskState", description="State of the Lead Task") 
     tasks_in_stack: Optional[StrictInt] = Field(None, alias="tasksInStack", description="Number of Tasks in the Stack")
     __properties = ["memberAddedAsAt", "stackOpenedAsAt", "stackClosedAsAt", "stackMembershipType", "stackStatus", "leadTaskId", "leadTaskState", "tasksInStack"]
 

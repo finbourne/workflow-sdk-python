@@ -19,22 +19,15 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 
 class ParameterValue(BaseModel):
     """
     Defines a Parameter Value  # noqa: E501
     """
-    name: constr(strict=True, max_length=1024, min_length=1) = Field(..., description="Name")
+    name:  StrictStr = Field(...,alias="name", description="Name") 
     value: Optional[Any] = Field(None, description="Value which can be a String, Boolean, Decimal or DateTime (ISO 8601)")
     __properties = ["name", "value"]
-
-    @validator('name')
-    def name_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9\-_]+$", value):
-            raise ValueError(r"must validate the regular expression /^[a-zA-Z0-9\-_]+$/")
-        return value
 
     class Config:
         """Pydantic configuration"""
