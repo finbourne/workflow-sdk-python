@@ -37,7 +37,7 @@ class TaskDefinition(BaseModel):
     version: Optional[VersionInfo] = None
     display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
-    states: conlist(TaskStateDefinition, min_items=1) = Field(..., description="The states this Task Definition operates over")
+    states: conlist(TaskStateDefinition) = Field(..., description="The states this Task Definition operates over")
     field_schema: Optional[conlist(TaskFieldDefinition)] = Field(None, alias="fieldSchema", description="The Fields that this Task Definition operates on")
     initial_state: InitialState = Field(..., alias="initialState")
     triggers: Optional[conlist(TransitionTriggerDefinition)] = Field(None, description="The Triggers for State transition")
