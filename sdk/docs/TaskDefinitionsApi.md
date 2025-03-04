@@ -4,18 +4,18 @@ All URIs are relative to *https://fbn-prd.lusid.com/workflow*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_task_definition**](TaskDefinitionsApi.md#create_task_definition) | **POST** /api/taskdefinitions | [EXPERIMENTAL] CreateTaskDefinition: Create a new Task Definition
-[**delete_task_definition**](TaskDefinitionsApi.md#delete_task_definition) | **DELETE** /api/taskdefinitions/{scope}/{code} | [EXPERIMENTAL] DeleteTaskDefinition: Delete a Task Definition
-[**get_task_definition**](TaskDefinitionsApi.md#get_task_definition) | **GET** /api/taskdefinitions/{scope}/{code} | [EXPERIMENTAL] GetTaskDefinition: Get a Task Definition
-[**list_task_definitions**](TaskDefinitionsApi.md#list_task_definitions) | **GET** /api/taskdefinitions | [EXPERIMENTAL] ListTaskDefinitions: List Task Definitions
-[**list_tasks_for_task_definition**](TaskDefinitionsApi.md#list_tasks_for_task_definition) | **GET** /api/taskdefinitions/{scope}/{code}/tasks | [EXPERIMENTAL] ListTasksForTaskDefinition: List Tasks for a Task Definition
-[**update_task_definition**](TaskDefinitionsApi.md#update_task_definition) | **PUT** /api/taskdefinitions/{scope}/{code} | [EXPERIMENTAL] UpdateTaskDefinition: Update an existing Task Definition
+[**create_task_definition**](TaskDefinitionsApi.md#create_task_definition) | **POST** /api/taskdefinitions | CreateTaskDefinition: Create a new Task Definition
+[**delete_task_definition**](TaskDefinitionsApi.md#delete_task_definition) | **DELETE** /api/taskdefinitions/{scope}/{code} | DeleteTaskDefinition: Delete a Task Definition
+[**get_task_definition**](TaskDefinitionsApi.md#get_task_definition) | **GET** /api/taskdefinitions/{scope}/{code} | GetTaskDefinition: Get a Task Definition
+[**list_task_definitions**](TaskDefinitionsApi.md#list_task_definitions) | **GET** /api/taskdefinitions | ListTaskDefinitions: List Task Definitions
+[**list_tasks_for_task_definition**](TaskDefinitionsApi.md#list_tasks_for_task_definition) | **GET** /api/taskdefinitions/{scope}/{code}/tasks | ListTasksForTaskDefinition: List Tasks for a Task Definition
+[**update_task_definition**](TaskDefinitionsApi.md#update_task_definition) | **PUT** /api/taskdefinitions/{scope}/{code} | UpdateTaskDefinition: Update an existing Task Definition
 
 
 # **create_task_definition**
 > TaskDefinition create_task_definition(create_task_definition_request)
 
-[EXPERIMENTAL] CreateTaskDefinition: Create a new Task Definition
+CreateTaskDefinition: Create a new Task Definition
 
 ### Example
 
@@ -73,7 +73,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_task_definition(create_task_definition_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateTaskDefinition: Create a new Task Definition
+        # CreateTaskDefinition: Create a new Task Definition
         api_response = api_instance.create_task_definition(create_task_definition_request)
         pprint(api_response)
 
@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 # **delete_task_definition**
 > DeletedEntityResponse delete_task_definition(scope, code)
 
-[EXPERIMENTAL] DeleteTaskDefinition: Delete a Task Definition
+DeleteTaskDefinition: Delete a Task Definition
 
 ### Example
 
@@ -164,7 +164,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_task_definition(scope, code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteTaskDefinition: Delete a Task Definition
+        # DeleteTaskDefinition: Delete a Task Definition
         api_response = api_instance.delete_task_definition(scope, code)
         pprint(api_response)
 
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 # **get_task_definition**
 > TaskDefinition get_task_definition(scope, code, as_at=as_at)
 
-[EXPERIMENTAL] GetTaskDefinition: Get a Task Definition
+GetTaskDefinition: Get a Task Definition
 
 ### Example
 
@@ -258,7 +258,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_task_definition(scope, code, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetTaskDefinition: Get a Task Definition
+        # GetTaskDefinition: Get a Task Definition
         api_response = api_instance.get_task_definition(scope, code, as_at=as_at)
         pprint(api_response)
 
@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 # **list_task_definitions**
 > PagedResourceListOfTaskDefinition list_task_definitions(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
 
-[EXPERIMENTAL] ListTaskDefinitions: List Task Definitions
+ListTaskDefinitions: List Task Definitions
 
 ### Example
 
@@ -355,7 +355,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_task_definitions(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
 
-        # [EXPERIMENTAL] ListTaskDefinitions: List Task Definitions
+        # ListTaskDefinitions: List Task Definitions
         api_response = api_instance.list_task_definitions(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
         pprint(api_response)
 
@@ -397,7 +397,7 @@ Name | Type | Description  | Notes
 # **list_tasks_for_task_definition**
 > ResourceListOfTask list_tasks_for_task_definition(scope, code, as_at=as_at)
 
-[EXPERIMENTAL] ListTasksForTaskDefinition: List Tasks for a Task Definition
+ListTasksForTaskDefinition: List Tasks for a Task Definition
 
 ### Example
 
@@ -452,7 +452,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_tasks_for_task_definition(scope, code, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] ListTasksForTaskDefinition: List Tasks for a Task Definition
+        # ListTasksForTaskDefinition: List Tasks for a Task Definition
         api_response = api_instance.list_tasks_for_task_definition(scope, code, as_at=as_at)
         pprint(api_response)
 
@@ -492,7 +492,7 @@ Name | Type | Description  | Notes
 # **update_task_definition**
 > TaskDefinition update_task_definition(scope, code, update_task_definition_request)
 
-[EXPERIMENTAL] UpdateTaskDefinition: Update an existing Task Definition
+UpdateTaskDefinition: Update an existing Task Definition
 
 ### Example
 
@@ -552,7 +552,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_task_definition(scope, code, update_task_definition_request, opts=opts)
 
-        # [EXPERIMENTAL] UpdateTaskDefinition: Update an existing Task Definition
+        # UpdateTaskDefinition: Update an existing Task Definition
         api_response = api_instance.update_task_definition(scope, code, update_task_definition_request)
         pprint(api_response)
 

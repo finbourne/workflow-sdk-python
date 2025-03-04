@@ -71,7 +71,7 @@ class WorkersApi:
 
     @validate_arguments
     def create_worker(self, create_worker_request : Annotated[CreateWorkerRequest, Field(..., description="Worker to be created")], async_req: Optional[bool]=None, **kwargs) -> Union[Worker, Awaitable[Worker]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateWorker: Create a new Worker  # noqa: E501
+        """CreateWorker: Create a new Worker  # noqa: E501
 
         If the Worker already exists a failure will be returned  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -102,7 +102,7 @@ class WorkersApi:
 
     @validate_arguments
     def create_worker_with_http_info(self, create_worker_request : Annotated[CreateWorkerRequest, Field(..., description="Worker to be created")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateWorker: Create a new Worker  # noqa: E501
+        """CreateWorker: Create a new Worker  # noqa: E501
 
         If the Worker already exists a failure will be returned  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -230,7 +230,7 @@ class WorkersApi:
 
     @validate_arguments
     def delete_worker(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be deleted")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be deleted")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteWorker: Delete a Worker  # noqa: E501
+        """DeleteWorker: Delete a Worker  # noqa: E501
 
         If the Worker does not exist a failure will be returned  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -263,7 +263,7 @@ class WorkersApi:
 
     @validate_arguments
     def delete_worker_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be deleted")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be deleted")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteWorker: Delete a Worker  # noqa: E501
+        """DeleteWorker: Delete a Worker  # noqa: E501
 
         If the Worker does not exist a failure will be returned  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -391,7 +391,7 @@ class WorkersApi:
 
     @validate_arguments
     def get_worker(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker")], code : Annotated[StrictStr, Field(..., description="Code of the worker")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Worker, Awaitable[Worker]]:  # noqa: E501
-        """[EXPERIMENTAL] GetWorker: Get a Worker  # noqa: E501
+        """GetWorker: Get a Worker  # noqa: E501
 
         Will return a NotFound failure if the Worker does not exist  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -426,7 +426,7 @@ class WorkersApi:
 
     @validate_arguments
     def get_worker_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker")], code : Annotated[StrictStr, Field(..., description="Code of the worker")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetWorker: Get a Worker  # noqa: E501
+        """GetWorker: Get a Worker  # noqa: E501
 
         Will return a NotFound failure if the Worker does not exist  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -562,7 +562,7 @@ class WorkersApi:
 
     @validate_arguments
     def get_worker_result(self, run_id : Annotated[StrictStr, Field(..., description="The ID returned when calling Run Worker")], async_req: Optional[bool]=None, **kwargs) -> Union[GetWorkerResultResponse, Awaitable[GetWorkerResultResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results  # noqa: E501
+        """GetWorkerResult: Get the status of a specific run of a worker with any relevant results  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -592,7 +592,7 @@ class WorkersApi:
 
     @validate_arguments
     def get_worker_result_with_http_info(self, run_id : Annotated[StrictStr, Field(..., description="The ID returned when calling Run Worker")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results  # noqa: E501
+        """GetWorkerResult: Get the status of a specific run of a worker with any relevant results  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -712,7 +712,7 @@ class WorkersApi:
 
     @validate_arguments
     def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorker, Awaitable[PagedResourceListOfWorker]]:  # noqa: E501
-        """[EXPERIMENTAL] ListWorkers: List Workers  # noqa: E501
+        """ListWorkers: List Workers  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -750,7 +750,7 @@ class WorkersApi:
 
     @validate_arguments
     def list_workers_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListWorkers: List Workers  # noqa: E501
+        """ListWorkers: List Workers  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -898,7 +898,7 @@ class WorkersApi:
 
     @validate_arguments
     def run_worker(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker")], code : Annotated[StrictStr, Field(..., description="Code of the worker")], run_worker_request : RunWorkerRequest, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RunWorkerResponse, Awaitable[RunWorkerResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] RunWorker: Run a Worker  # noqa: E501
+        """RunWorker: Run a Worker  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -934,7 +934,7 @@ class WorkersApi:
 
     @validate_arguments
     def run_worker_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker")], code : Annotated[StrictStr, Field(..., description="Code of the worker")], run_worker_request : RunWorkerRequest, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Worker. Defaults to returning the latest version of the Worker if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] RunWorker: Run a Worker  # noqa: E501
+        """RunWorker: Run a Worker  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -1082,7 +1082,7 @@ class WorkersApi:
 
     @validate_arguments
     def update_worker(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be updated")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(..., description="State of the updated worker")], async_req: Optional[bool]=None, **kwargs) -> Union[Worker, Awaitable[Worker]]:  # noqa: E501
-        """[EXPERIMENTAL] UpdateWorker: Update a Worker  # noqa: E501
+        """UpdateWorker: Update a Worker  # noqa: E501
 
         If the Worker does not exist a failure will be returned  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1117,7 +1117,7 @@ class WorkersApi:
 
     @validate_arguments
     def update_worker_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be updated")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(..., description="State of the updated worker")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpdateWorker: Update a Worker  # noqa: E501
+        """UpdateWorker: Update a Worker  # noqa: E501
 
         If the Worker does not exist a failure will be returned  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

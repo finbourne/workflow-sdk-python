@@ -4,19 +4,19 @@ All URIs are relative to *https://fbn-prd.lusid.com/workflow*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_worker**](WorkersApi.md#create_worker) | **POST** /api/workers | [EXPERIMENTAL] CreateWorker: Create a new Worker
-[**delete_worker**](WorkersApi.md#delete_worker) | **DELETE** /api/workers/{scope}/{code} | [EXPERIMENTAL] DeleteWorker: Delete a Worker
-[**get_worker**](WorkersApi.md#get_worker) | **GET** /api/workers/{scope}/{code} | [EXPERIMENTAL] GetWorker: Get a Worker
-[**get_worker_result**](WorkersApi.md#get_worker_result) | **GET** /api/workers/{runId}/$result | [EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results
-[**list_workers**](WorkersApi.md#list_workers) | **GET** /api/workers | [EXPERIMENTAL] ListWorkers: List Workers
-[**run_worker**](WorkersApi.md#run_worker) | **POST** /api/workers/{scope}/{code}/$run | [EXPERIMENTAL] RunWorker: Run a Worker
-[**update_worker**](WorkersApi.md#update_worker) | **PUT** /api/workers/{scope}/{code} | [EXPERIMENTAL] UpdateWorker: Update a Worker
+[**create_worker**](WorkersApi.md#create_worker) | **POST** /api/workers | CreateWorker: Create a new Worker
+[**delete_worker**](WorkersApi.md#delete_worker) | **DELETE** /api/workers/{scope}/{code} | DeleteWorker: Delete a Worker
+[**get_worker**](WorkersApi.md#get_worker) | **GET** /api/workers/{scope}/{code} | GetWorker: Get a Worker
+[**get_worker_result**](WorkersApi.md#get_worker_result) | **GET** /api/workers/{runId}/$result | GetWorkerResult: Get the status of a specific run of a worker with any relevant results
+[**list_workers**](WorkersApi.md#list_workers) | **GET** /api/workers | ListWorkers: List Workers
+[**run_worker**](WorkersApi.md#run_worker) | **POST** /api/workers/{scope}/{code}/$run | RunWorker: Run a Worker
+[**update_worker**](WorkersApi.md#update_worker) | **PUT** /api/workers/{scope}/{code} | UpdateWorker: Update a Worker
 
 
 # **create_worker**
 > Worker create_worker(create_worker_request)
 
-[EXPERIMENTAL] CreateWorker: Create a new Worker
+CreateWorker: Create a new Worker
 
 If the Worker already exists a failure will be returned
 
@@ -76,7 +76,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_worker(create_worker_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateWorker: Create a new Worker
+        # CreateWorker: Create a new Worker
         api_response = api_instance.create_worker(create_worker_request)
         pprint(api_response)
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 # **delete_worker**
 > DeletedEntityResponse delete_worker(scope, code)
 
-[EXPERIMENTAL] DeleteWorker: Delete a Worker
+DeleteWorker: Delete a Worker
 
 If the Worker does not exist a failure will be returned
 
@@ -169,7 +169,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_worker(scope, code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteWorker: Delete a Worker
+        # DeleteWorker: Delete a Worker
         api_response = api_instance.delete_worker(scope, code)
         pprint(api_response)
 
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 # **get_worker**
 > Worker get_worker(scope, code, as_at=as_at)
 
-[EXPERIMENTAL] GetWorker: Get a Worker
+GetWorker: Get a Worker
 
 Will return a NotFound failure if the Worker does not exist
 
@@ -265,7 +265,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_worker(scope, code, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetWorker: Get a Worker
+        # GetWorker: Get a Worker
         api_response = api_instance.get_worker(scope, code, as_at=as_at)
         pprint(api_response)
 
@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 # **get_worker_result**
 > GetWorkerResultResponse get_worker_result(run_id)
 
-[EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results
+GetWorkerResult: Get the status of a specific run of a worker with any relevant results
 
 ### Example
 
@@ -357,7 +357,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_worker_result(run_id, opts=opts)
 
-        # [EXPERIMENTAL] GetWorkerResult: Get the status of a specific run of a worker with any relevant results
+        # GetWorkerResult: Get the status of a specific run of a worker with any relevant results
         api_response = api_instance.get_worker_result(run_id)
         pprint(api_response)
 
@@ -394,7 +394,7 @@ Name | Type | Description  | Notes
 # **list_workers**
 > PagedResourceListOfWorker list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
 
-[EXPERIMENTAL] ListWorkers: List Workers
+ListWorkers: List Workers
 
 ### Example
 
@@ -451,7 +451,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
 
-        # [EXPERIMENTAL] ListWorkers: List Workers
+        # ListWorkers: List Workers
         api_response = api_instance.list_workers(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
         pprint(api_response)
 
@@ -492,7 +492,7 @@ Name | Type | Description  | Notes
 # **run_worker**
 > RunWorkerResponse run_worker(scope, code, run_worker_request, as_at=as_at)
 
-[EXPERIMENTAL] RunWorker: Run a Worker
+RunWorker: Run a Worker
 
 ### Example
 
@@ -553,7 +553,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.run_worker(scope, code, run_worker_request, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] RunWorker: Run a Worker
+        # RunWorker: Run a Worker
         api_response = api_instance.run_worker(scope, code, run_worker_request, as_at=as_at)
         pprint(api_response)
 
@@ -593,7 +593,7 @@ Name | Type | Description  | Notes
 # **update_worker**
 > Worker update_worker(scope, code, update_worker_request)
 
-[EXPERIMENTAL] UpdateWorker: Update a Worker
+UpdateWorker: Update a Worker
 
 If the Worker does not exist a failure will be returned
 
@@ -655,7 +655,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_worker(scope, code, update_worker_request, opts=opts)
 
-        # [EXPERIMENTAL] UpdateWorker: Update a Worker
+        # UpdateWorker: Update a Worker
         api_response = api_instance.update_worker(scope, code, update_worker_request)
         pprint(api_response)
 

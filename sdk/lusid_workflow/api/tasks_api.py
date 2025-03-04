@@ -70,7 +70,7 @@ class TasksApi:
 
     @validate_arguments
     def create_task(self, create_task_request : Annotated[CreateTaskRequest, Field(..., description="Request to create Task")], trigger : Annotated[Optional[StrictStr], Field( description="The name of the Trigger to invoke")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Task, Awaitable[Task]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateTask: Create a new Task  # noqa: E501
+        """CreateTask: Create a new Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -102,7 +102,7 @@ class TasksApi:
 
     @validate_arguments
     def create_task_with_http_info(self, create_task_request : Annotated[CreateTaskRequest, Field(..., description="Request to create Task")], trigger : Annotated[Optional[StrictStr], Field( description="The name of the Trigger to invoke")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateTask: Create a new Task  # noqa: E501
+        """CreateTask: Create a new Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -235,7 +235,7 @@ class TasksApi:
 
     @validate_arguments
     def delete_task(self, id : Annotated[StrictStr, Field(..., description="The identifier for the Task to be deleted.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTask: Delete a Task  # noqa: E501
+        """DeleteTask: Delete a Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -265,7 +265,7 @@ class TasksApi:
 
     @validate_arguments
     def delete_task_with_http_info(self, id : Annotated[StrictStr, Field(..., description="The identifier for the Task to be deleted.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTask: Delete a Task  # noqa: E501
+        """DeleteTask: Delete a Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -386,7 +386,7 @@ class TasksApi:
 
     @validate_arguments
     def delete_tasks(self, delete_tasks_request : Annotated[Optional[DeleteTasksRequest], Field(description="Request with the task instance ids to delete.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTasks: Batch Delete Tasks  # noqa: E501
+        """DeleteTasks: Batch Delete Tasks  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -416,7 +416,7 @@ class TasksApi:
 
     @validate_arguments
     def delete_tasks_with_http_info(self, delete_tasks_request : Annotated[Optional[DeleteTasksRequest], Field(description="Request with the task instance ids to delete.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTasks: Batch Delete Tasks  # noqa: E501
+        """DeleteTasks: Batch Delete Tasks  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -544,7 +544,7 @@ class TasksApi:
 
     @validate_arguments
     def get_task(self, id : Annotated[StrictStr, Field(..., description="Id of the Task to retrieve")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Task, Awaitable[Task]]:  # noqa: E501
-        """[EXPERIMENTAL] GetTask: Get a Task  # noqa: E501
+        """GetTask: Get a Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -576,7 +576,7 @@ class TasksApi:
 
     @validate_arguments
     def get_task_with_http_info(self, id : Annotated[StrictStr, Field(..., description="Id of the Task to retrieve")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetTask: Get a Task  # noqa: E501
+        """GetTask: Get a Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -706,7 +706,7 @@ class TasksApi:
 
     @validate_arguments
     def get_task_history(self, id : Annotated[StrictStr, Field(..., description="The Task Id for which to get the history")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime of the oldest change to retrieve. Defaults to returning the latest version of the Task if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfChangeItem, Awaitable[ResourceListOfChangeItem]]:  # noqa: E501
-        """[EXPERIMENTAL] GetTaskHistory: Get the history of a Task  # noqa: E501
+        """GetTaskHistory: Get the history of a Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -738,7 +738,7 @@ class TasksApi:
 
     @validate_arguments
     def get_task_history_with_http_info(self, id : Annotated[StrictStr, Field(..., description="The Task Id for which to get the history")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime of the oldest change to retrieve. Defaults to returning the latest version of the Task if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetTaskHistory: Get the history of a Task  # noqa: E501
+        """GetTaskHistory: Get the history of a Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -1055,7 +1055,7 @@ class TasksApi:
 
     @validate_arguments
     def update_task(self, id : Annotated[StrictStr, Field(..., description="Id of the Task to act upon")], trigger : Annotated[Optional[StrictStr], Field( description="")] = None, update_task_request : Annotated[Optional[UpdateTaskRequest], Field(description="The details of the request")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Task, Awaitable[Task]]:  # noqa: E501
-        """[EXPERIMENTAL] UpdateTask: Update a Task  # noqa: E501
+        """UpdateTask: Update a Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -1089,7 +1089,7 @@ class TasksApi:
 
     @validate_arguments
     def update_task_with_http_info(self, id : Annotated[StrictStr, Field(..., description="Id of the Task to act upon")], trigger : Annotated[Optional[StrictStr], Field( description="")] = None, update_task_request : Annotated[Optional[UpdateTaskRequest], Field(description="The details of the request")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpdateTask: Update a Task  # noqa: E501
+        """UpdateTask: Update a Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True

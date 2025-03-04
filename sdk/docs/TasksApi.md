@@ -4,19 +4,19 @@ All URIs are relative to *https://fbn-prd.lusid.com/workflow*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_task**](TasksApi.md#create_task) | **POST** /api/tasks | [EXPERIMENTAL] CreateTask: Create a new Task
-[**delete_task**](TasksApi.md#delete_task) | **DELETE** /api/tasks/{id} | [EXPERIMENTAL] DeleteTask: Delete a Task
-[**delete_tasks**](TasksApi.md#delete_tasks) | **POST** /api/tasks/$delete | [EXPERIMENTAL] DeleteTasks: Batch Delete Tasks
-[**get_task**](TasksApi.md#get_task) | **GET** /api/tasks/{id} | [EXPERIMENTAL] GetTask: Get a Task
-[**get_task_history**](TasksApi.md#get_task_history) | **GET** /api/tasks/{id}/history | [EXPERIMENTAL] GetTaskHistory: Get the history of a Task
+[**create_task**](TasksApi.md#create_task) | **POST** /api/tasks | CreateTask: Create a new Task
+[**delete_task**](TasksApi.md#delete_task) | **DELETE** /api/tasks/{id} | DeleteTask: Delete a Task
+[**delete_tasks**](TasksApi.md#delete_tasks) | **POST** /api/tasks/$delete | DeleteTasks: Batch Delete Tasks
+[**get_task**](TasksApi.md#get_task) | **GET** /api/tasks/{id} | GetTask: Get a Task
+[**get_task_history**](TasksApi.md#get_task_history) | **GET** /api/tasks/{id}/history | GetTaskHistory: Get the history of a Task
 [**list_tasks**](TasksApi.md#list_tasks) | **GET** /api/tasks | ListTasks: List Tasks
-[**update_task**](TasksApi.md#update_task) | **POST** /api/tasks/{id} | [EXPERIMENTAL] UpdateTask: Update a Task
+[**update_task**](TasksApi.md#update_task) | **POST** /api/tasks/{id} | UpdateTask: Update a Task
 
 
 # **create_task**
 > Task create_task(create_task_request, trigger=trigger)
 
-[EXPERIMENTAL] CreateTask: Create a new Task
+CreateTask: Create a new Task
 
 ### Example
 
@@ -75,7 +75,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_task(create_task_request, trigger=trigger, opts=opts)
 
-        # [EXPERIMENTAL] CreateTask: Create a new Task
+        # CreateTask: Create a new Task
         api_response = api_instance.create_task(create_task_request, trigger=trigger)
         pprint(api_response)
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 # **delete_task**
 > DeletedEntityResponse delete_task(id)
 
-[EXPERIMENTAL] DeleteTask: Delete a Task
+DeleteTask: Delete a Task
 
 ### Example
 
@@ -166,7 +166,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_task(id, opts=opts)
 
-        # [EXPERIMENTAL] DeleteTask: Delete a Task
+        # DeleteTask: Delete a Task
         api_response = api_instance.delete_task(id)
         pprint(api_response)
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 # **delete_tasks**
 > DeletedEntityResponse delete_tasks(delete_tasks_request=delete_tasks_request)
 
-[EXPERIMENTAL] DeleteTasks: Batch Delete Tasks
+DeleteTasks: Batch Delete Tasks
 
 ### Example
 
@@ -262,7 +262,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_tasks(delete_tasks_request=delete_tasks_request, opts=opts)
 
-        # [EXPERIMENTAL] DeleteTasks: Batch Delete Tasks
+        # DeleteTasks: Batch Delete Tasks
         api_response = api_instance.delete_tasks(delete_tasks_request=delete_tasks_request)
         pprint(api_response)
 
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 # **get_task**
 > Task get_task(id, as_at=as_at)
 
-[EXPERIMENTAL] GetTask: Get a Task
+GetTask: Get a Task
 
 ### Example
 
@@ -354,7 +354,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_task(id, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetTask: Get a Task
+        # GetTask: Get a Task
         api_response = api_instance.get_task(id, as_at=as_at)
         pprint(api_response)
 
@@ -393,7 +393,7 @@ Name | Type | Description  | Notes
 # **get_task_history**
 > ResourceListOfChangeItem get_task_history(id, as_at=as_at)
 
-[EXPERIMENTAL] GetTaskHistory: Get the history of a Task
+GetTaskHistory: Get the history of a Task
 
 ### Example
 
@@ -447,7 +447,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_task_history(id, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetTaskHistory: Get the history of a Task
+        # GetTaskHistory: Get the history of a Task
         api_response = api_instance.get_task_history(id, as_at=as_at)
         pprint(api_response)
 
@@ -585,7 +585,7 @@ Name | Type | Description  | Notes
 # **update_task**
 > Task update_task(id, trigger=trigger, update_task_request=update_task_request)
 
-[EXPERIMENTAL] UpdateTask: Update a Task
+UpdateTask: Update a Task
 
 ### Example
 
@@ -645,7 +645,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_task(id, trigger=trigger, update_task_request=update_task_request, opts=opts)
 
-        # [EXPERIMENTAL] UpdateTask: Update a Task
+        # UpdateTask: Update a Task
         api_response = api_instance.update_task(id, trigger=trigger, update_task_request=update_task_request)
         pprint(api_response)
 

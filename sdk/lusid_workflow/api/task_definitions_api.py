@@ -69,7 +69,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def create_task_definition(self, create_task_definition_request : Annotated[CreateTaskDefinitionRequest, Field(..., description="The data to create a Task Definition")], async_req: Optional[bool]=None, **kwargs) -> Union[TaskDefinition, Awaitable[TaskDefinition]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateTaskDefinition: Create a new Task Definition  # noqa: E501
+        """CreateTaskDefinition: Create a new Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -99,7 +99,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def create_task_definition_with_http_info(self, create_task_definition_request : Annotated[CreateTaskDefinitionRequest, Field(..., description="The data to create a Task Definition")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateTaskDefinition: Create a new Task Definition  # noqa: E501
+        """CreateTaskDefinition: Create a new Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -226,7 +226,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def delete_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTaskDefinition: Delete a Task Definition  # noqa: E501
+        """DeleteTaskDefinition: Delete a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -258,7 +258,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def delete_task_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTaskDefinition: Delete a Task Definition  # noqa: E501
+        """DeleteTaskDefinition: Delete a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -385,7 +385,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def get_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaskDefinition, Awaitable[TaskDefinition]]:  # noqa: E501
-        """[EXPERIMENTAL] GetTaskDefinition: Get a Task Definition  # noqa: E501
+        """GetTaskDefinition: Get a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -419,7 +419,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def get_task_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetTaskDefinition: Get a Task Definition  # noqa: E501
+        """GetTaskDefinition: Get a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -555,7 +555,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def list_task_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTaskDefinition, Awaitable[PagedResourceListOfTaskDefinition]]:  # noqa: E501
-        """[EXPERIMENTAL] ListTaskDefinitions: List Task Definitions  # noqa: E501
+        """ListTaskDefinitions: List Task Definitions  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -593,7 +593,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def list_task_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListTaskDefinitions: List Task Definitions  # noqa: E501
+        """ListTaskDefinitions: List Task Definitions  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -742,7 +742,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def list_tasks_for_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTask, Awaitable[ResourceListOfTask]]:  # noqa: E501
-        """[EXPERIMENTAL] ListTasksForTaskDefinition: List Tasks for a Task Definition  # noqa: E501
+        """ListTasksForTaskDefinition: List Tasks for a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -776,7 +776,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def list_tasks_for_task_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListTasksForTaskDefinition: List Tasks for a Task Definition  # noqa: E501
+        """ListTasksForTaskDefinition: List Tasks for a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -912,7 +912,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def update_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], update_task_definition_request : Annotated[UpdateTaskDefinitionRequest, Field(..., description="The data to update a Task Definition")], async_req: Optional[bool]=None, **kwargs) -> Union[TaskDefinition, Awaitable[TaskDefinition]]:  # noqa: E501
-        """[EXPERIMENTAL] UpdateTaskDefinition: Update an existing Task Definition  # noqa: E501
+        """UpdateTaskDefinition: Update an existing Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -946,7 +946,7 @@ class TaskDefinitionsApi:
 
     @validate_arguments
     def update_task_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], update_task_definition_request : Annotated[UpdateTaskDefinitionRequest, Field(..., description="The data to update a Task Definition")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpdateTaskDefinition: Update an existing Task Definition  # noqa: E501
+        """UpdateTaskDefinition: Update an existing Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
