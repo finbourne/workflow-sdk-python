@@ -71,39 +71,46 @@ class WorkerConfiguration(BaseModel):
         instance = WorkerConfiguration.construct()
         error_messages = []
         match = 0
+        matchclass = ""
         # validate data type: Fail
         if not isinstance(v, Fail):
             error_messages.append(f"Error! Input type `{type(v)}` is not `Fail`")
         else:
             match += 1
+            matchclass = matchclass + " Fail"
         # validate data type: GroupReconciliation
         if not isinstance(v, GroupReconciliation):
             error_messages.append(f"Error! Input type `{type(v)}` is not `GroupReconciliation`")
         else:
             match += 1
+            matchclass = matchclass + " GroupReconciliation"
         # validate data type: HealthCheck
         if not isinstance(v, HealthCheck):
             error_messages.append(f"Error! Input type `{type(v)}` is not `HealthCheck`")
         else:
             match += 1
+            matchclass = matchclass + " HealthCheck"
         # validate data type: LuminesceView
         if not isinstance(v, LuminesceView):
             error_messages.append(f"Error! Input type `{type(v)}` is not `LuminesceView`")
         else:
             match += 1
+            matchclass = matchclass + " LuminesceView"
         # validate data type: SchedulerJob
         if not isinstance(v, SchedulerJob):
             error_messages.append(f"Error! Input type `{type(v)}` is not `SchedulerJob`")
         else:
             match += 1
+            matchclass = matchclass + " SchedulerJob"
         # validate data type: Sleep
         if not isinstance(v, Sleep):
             error_messages.append(f"Error! Input type `{type(v)}` is not `Sleep`")
         else:
             match += 1
+            matchclass = matchclass + " Sleep"
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in WorkerConfiguration with oneOf schemas: Fail, GroupReconciliation, HealthCheck, LuminesceView, SchedulerJob, Sleep. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in WorkerConfiguration with oneOf schemas: Fail, GroupReconciliation, HealthCheck, LuminesceView, SchedulerJob, Sleep. Details: Matched classes " + matchclass)
         elif match == 0:
             # no match
             raise ValueError("No match found when setting `actual_instance` in WorkerConfiguration with oneOf schemas: Fail, GroupReconciliation, HealthCheck, LuminesceView, SchedulerJob, Sleep. Details: " + ", ".join(error_messages))
@@ -120,47 +127,55 @@ class WorkerConfiguration(BaseModel):
         instance = WorkerConfiguration.construct()
         error_messages = []
         match = 0
+        matchclass = ""
+        
 
         # deserialize data into Fail
         try:
             instance.actual_instance = Fail.from_json(json_str)
             match += 1
+            matchclass =matchclass + " Fail"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into GroupReconciliation
         try:
             instance.actual_instance = GroupReconciliation.from_json(json_str)
             match += 1
+            matchclass =matchclass + " GroupReconciliation"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into HealthCheck
         try:
             instance.actual_instance = HealthCheck.from_json(json_str)
             match += 1
+            matchclass =matchclass + " HealthCheck"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into LuminesceView
         try:
             instance.actual_instance = LuminesceView.from_json(json_str)
             match += 1
+            matchclass =matchclass + " LuminesceView"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into SchedulerJob
         try:
             instance.actual_instance = SchedulerJob.from_json(json_str)
             match += 1
+            matchclass =matchclass + " SchedulerJob"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into Sleep
         try:
             instance.actual_instance = Sleep.from_json(json_str)
             match += 1
+            matchclass =matchclass + " Sleep"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into WorkerConfiguration with oneOf schemas: Fail, GroupReconciliation, HealthCheck, LuminesceView, SchedulerJob, Sleep. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into WorkerConfiguration with oneOf schemas: Fail, GroupReconciliation, HealthCheck, LuminesceView, SchedulerJob, Sleep. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
         elif match == 0:
             # no match
             raise ValueError("No match found when deserializing the JSON string into WorkerConfiguration with oneOf schemas: Fail, GroupReconciliation, HealthCheck, LuminesceView, SchedulerJob, Sleep. Details: " + ", ".join(error_messages))

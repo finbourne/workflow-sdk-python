@@ -62,24 +62,28 @@ class ActionDetails(BaseModel):
         instance = ActionDetails.construct()
         error_messages = []
         match = 0
+        matchclass = ""
         # validate data type: CreateChildTasksAction
         if not isinstance(v, CreateChildTasksAction):
             error_messages.append(f"Error! Input type `{type(v)}` is not `CreateChildTasksAction`")
         else:
             match += 1
+            matchclass = matchclass + " CreateChildTasksAction"
         # validate data type: RunWorkerAction
         if not isinstance(v, RunWorkerAction):
             error_messages.append(f"Error! Input type `{type(v)}` is not `RunWorkerAction`")
         else:
             match += 1
+            matchclass = matchclass + " RunWorkerAction"
         # validate data type: TriggerParentTaskAction
         if not isinstance(v, TriggerParentTaskAction):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TriggerParentTaskAction`")
         else:
             match += 1
+            matchclass = matchclass + " TriggerParentTaskAction"
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ActionDetails with oneOf schemas: CreateChildTasksAction, RunWorkerAction, TriggerParentTaskAction. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in ActionDetails with oneOf schemas: CreateChildTasksAction, RunWorkerAction, TriggerParentTaskAction. Details: Matched classes " + matchclass)
         elif match == 0:
             # no match
             raise ValueError("No match found when setting `actual_instance` in ActionDetails with oneOf schemas: CreateChildTasksAction, RunWorkerAction, TriggerParentTaskAction. Details: " + ", ".join(error_messages))
@@ -96,29 +100,34 @@ class ActionDetails(BaseModel):
         instance = ActionDetails.construct()
         error_messages = []
         match = 0
+        matchclass = ""
+        
 
         # deserialize data into CreateChildTasksAction
         try:
             instance.actual_instance = CreateChildTasksAction.from_json(json_str)
             match += 1
+            matchclass =matchclass + " CreateChildTasksAction"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into RunWorkerAction
         try:
             instance.actual_instance = RunWorkerAction.from_json(json_str)
             match += 1
+            matchclass =matchclass + " RunWorkerAction"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into TriggerParentTaskAction
         try:
             instance.actual_instance = TriggerParentTaskAction.from_json(json_str)
             match += 1
+            matchclass =matchclass + " TriggerParentTaskAction"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ActionDetails with oneOf schemas: CreateChildTasksAction, RunWorkerAction, TriggerParentTaskAction. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into ActionDetails with oneOf schemas: CreateChildTasksAction, RunWorkerAction, TriggerParentTaskAction. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
         elif match == 0:
             # no match
             raise ValueError("No match found when deserializing the JSON string into ActionDetails with oneOf schemas: CreateChildTasksAction, RunWorkerAction, TriggerParentTaskAction. Details: " + ", ".join(error_messages))

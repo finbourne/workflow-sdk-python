@@ -59,19 +59,22 @@ class TaskActivityResponse(BaseModel):
         instance = TaskActivityResponse.construct()
         error_messages = []
         match = 0
+        matchclass = ""
         # validate data type: CreateNewTaskActivityResponse
         if not isinstance(v, CreateNewTaskActivityResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `CreateNewTaskActivityResponse`")
         else:
             match += 1
+            matchclass = matchclass + " CreateNewTaskActivityResponse"
         # validate data type: UpdateMatchingTasksActivityResponse
         if not isinstance(v, UpdateMatchingTasksActivityResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `UpdateMatchingTasksActivityResponse`")
         else:
             match += 1
+            matchclass = matchclass + " UpdateMatchingTasksActivityResponse"
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TaskActivityResponse with oneOf schemas: CreateNewTaskActivityResponse, UpdateMatchingTasksActivityResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in TaskActivityResponse with oneOf schemas: CreateNewTaskActivityResponse, UpdateMatchingTasksActivityResponse. Details: Matched classes " + matchclass)
         elif match == 0:
             # no match
             raise ValueError("No match found when setting `actual_instance` in TaskActivityResponse with oneOf schemas: CreateNewTaskActivityResponse, UpdateMatchingTasksActivityResponse. Details: " + ", ".join(error_messages))
@@ -88,23 +91,27 @@ class TaskActivityResponse(BaseModel):
         instance = TaskActivityResponse.construct()
         error_messages = []
         match = 0
+        matchclass = ""
+        
 
         # deserialize data into CreateNewTaskActivityResponse
         try:
             instance.actual_instance = CreateNewTaskActivityResponse.from_json(json_str)
             match += 1
+            matchclass =matchclass + " CreateNewTaskActivityResponse"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into UpdateMatchingTasksActivityResponse
         try:
             instance.actual_instance = UpdateMatchingTasksActivityResponse.from_json(json_str)
             match += 1
+            matchclass =matchclass + " UpdateMatchingTasksActivityResponse"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TaskActivityResponse with oneOf schemas: CreateNewTaskActivityResponse, UpdateMatchingTasksActivityResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into TaskActivityResponse with oneOf schemas: CreateNewTaskActivityResponse, UpdateMatchingTasksActivityResponse. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
         elif match == 0:
             # no match
             raise ValueError("No match found when deserializing the JSON string into TaskActivityResponse with oneOf schemas: CreateNewTaskActivityResponse, UpdateMatchingTasksActivityResponse. Details: " + ", ".join(error_messages))

@@ -71,39 +71,46 @@ class WorkerConfigurationResponse(BaseModel):
         instance = WorkerConfigurationResponse.construct()
         error_messages = []
         match = 0
+        matchclass = ""
         # validate data type: FailResponse
         if not isinstance(v, FailResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `FailResponse`")
         else:
             match += 1
+            matchclass = matchclass + " FailResponse"
         # validate data type: GroupReconciliationResponse
         if not isinstance(v, GroupReconciliationResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `GroupReconciliationResponse`")
         else:
             match += 1
+            matchclass = matchclass + " GroupReconciliationResponse"
         # validate data type: HealthCheckResponse
         if not isinstance(v, HealthCheckResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `HealthCheckResponse`")
         else:
             match += 1
+            matchclass = matchclass + " HealthCheckResponse"
         # validate data type: LuminesceViewResponse
         if not isinstance(v, LuminesceViewResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `LuminesceViewResponse`")
         else:
             match += 1
+            matchclass = matchclass + " LuminesceViewResponse"
         # validate data type: SchedulerJobResponse
         if not isinstance(v, SchedulerJobResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `SchedulerJobResponse`")
         else:
             match += 1
+            matchclass = matchclass + " SchedulerJobResponse"
         # validate data type: SleepResponse
         if not isinstance(v, SleepResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `SleepResponse`")
         else:
             match += 1
+            matchclass = matchclass + " SleepResponse"
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse. Details: Matched classes " + matchclass)
         elif match == 0:
             # no match
             raise ValueError("No match found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
@@ -120,47 +127,55 @@ class WorkerConfigurationResponse(BaseModel):
         instance = WorkerConfigurationResponse.construct()
         error_messages = []
         match = 0
+        matchclass = ""
+        
 
         # deserialize data into FailResponse
         try:
             instance.actual_instance = FailResponse.from_json(json_str)
             match += 1
+            matchclass =matchclass + " FailResponse"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into GroupReconciliationResponse
         try:
             instance.actual_instance = GroupReconciliationResponse.from_json(json_str)
             match += 1
+            matchclass =matchclass + " GroupReconciliationResponse"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into HealthCheckResponse
         try:
             instance.actual_instance = HealthCheckResponse.from_json(json_str)
             match += 1
+            matchclass =matchclass + " HealthCheckResponse"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into LuminesceViewResponse
         try:
             instance.actual_instance = LuminesceViewResponse.from_json(json_str)
             match += 1
+            matchclass =matchclass + " LuminesceViewResponse"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into SchedulerJobResponse
         try:
             instance.actual_instance = SchedulerJobResponse.from_json(json_str)
             match += 1
+            matchclass =matchclass + " SchedulerJobResponse"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into SleepResponse
         try:
             instance.actual_instance = SleepResponse.from_json(json_str)
             match += 1
+            matchclass =matchclass + " SleepResponse"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
         elif match == 0:
             # no match
             raise ValueError("No match found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, LuminesceViewResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))

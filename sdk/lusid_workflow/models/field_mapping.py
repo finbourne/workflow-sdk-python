@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
 
 class FieldMapping(BaseModel):
     """
