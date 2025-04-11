@@ -24,6 +24,8 @@ from lusid_workflow.models.action_id import ActionId
 from lusid_workflow.models.action_log import ActionLog
 from lusid_workflow.models.action_log_item import ActionLogItem
 from lusid_workflow.models.action_log_origin import ActionLogOrigin
+from lusid_workflow.models.batch_update_tasks_request import BatchUpdateTasksRequest
+from lusid_workflow.models.batch_update_tasks_response import BatchUpdateTasksResponse
 from lusid_workflow.models.change_item import ChangeItem
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 from lusid_workflow.models.create_child_tasks_action import CreateChildTasksAction
@@ -36,6 +38,7 @@ from lusid_workflow.models.create_task_request import CreateTaskRequest
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
 from lusid_workflow.models.delete_tasks_request import DeleteTasksRequest
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
+from lusid_workflow.models.error_detail import ErrorDetail
 from lusid_workflow.models.event_handler import EventHandler
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
 from lusid_workflow.models.event_matching_pattern import EventMatchingPattern
@@ -97,6 +100,7 @@ from lusid_workflow.models.update_matching_tasks_activity import UpdateMatchingT
 from lusid_workflow.models.update_matching_tasks_activity_response import UpdateMatchingTasksActivityResponse
 from lusid_workflow.models.update_task_definition_request import UpdateTaskDefinitionRequest
 from lusid_workflow.models.update_task_request import UpdateTaskRequest
+from lusid_workflow.models.update_task_with_id_and_trigger_request import UpdateTaskWithIdAndTriggerRequest
 from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
 from lusid_workflow.models.value_constraints import ValueConstraints
 from lusid_workflow.models.version_info import VersionInfo
@@ -117,6 +121,8 @@ __all__ = [
     "ActionLog",
     "ActionLogItem",
     "ActionLogOrigin",
+    "BatchUpdateTasksRequest",
+    "BatchUpdateTasksResponse",
     "ChangeItem",
     "CreateChildTaskConfiguration",
     "CreateChildTasksAction",
@@ -129,6 +135,7 @@ __all__ = [
     "CreateWorkerRequest",
     "DeleteTasksRequest",
     "DeletedEntityResponse",
+    "ErrorDetail",
     "EventHandler",
     "EventHandlerMapping",
     "EventMatchingPattern",
@@ -190,6 +197,7 @@ __all__ = [
     "UpdateMatchingTasksActivityResponse",
     "UpdateTaskDefinitionRequest",
     "UpdateTaskRequest",
+    "UpdateTaskWithIdAndTriggerRequest",
     "UpdateWorkerRequest",
     "ValueConstraints",
     "VersionInfo",

@@ -18,6 +18,7 @@ Class | Method | HTTP request | Description
 *TaskDefinitionsApi* | [**list_task_definitions**](docs/TaskDefinitionsApi.md#list_task_definitions) | **GET** /api/taskdefinitions | ListTaskDefinitions: List Task Definitions
 *TaskDefinitionsApi* | [**list_tasks_for_task_definition**](docs/TaskDefinitionsApi.md#list_tasks_for_task_definition) | **GET** /api/taskdefinitions/{scope}/{code}/tasks | ListTasksForTaskDefinition: List Tasks for a Task Definition
 *TaskDefinitionsApi* | [**update_task_definition**](docs/TaskDefinitionsApi.md#update_task_definition) | **PUT** /api/taskdefinitions/{scope}/{code} | UpdateTaskDefinition: Update an existing Task Definition
+*TasksApi* | [**batch_update_tasks**](docs/TasksApi.md#batch_update_tasks) | **PATCH** /api/tasks/$update | [EXPERIMENTAL] BatchUpdateTasks: Batch update tasks
 *TasksApi* | [**create_task**](docs/TasksApi.md#create_task) | **POST** /api/tasks | CreateTask: Create a new Task
 *TasksApi* | [**delete_task**](docs/TasksApi.md#delete_task) | **DELETE** /api/tasks/{id} | DeleteTask: Delete a Task
 *TasksApi* | [**delete_tasks**](docs/TasksApi.md#delete_tasks) | **POST** /api/tasks/$delete | DeleteTasks: Batch Delete Tasks
@@ -47,6 +48,8 @@ Class | Method | HTTP request | Description
  - [ActionLog](docs/ActionLog.md)
  - [ActionLogItem](docs/ActionLogItem.md)
  - [ActionLogOrigin](docs/ActionLogOrigin.md)
+ - [BatchUpdateTasksRequest](docs/BatchUpdateTasksRequest.md)
+ - [BatchUpdateTasksResponse](docs/BatchUpdateTasksResponse.md)
  - [ChangeItem](docs/ChangeItem.md)
  - [CreateChildTaskConfiguration](docs/CreateChildTaskConfiguration.md)
  - [CreateChildTasksAction](docs/CreateChildTasksAction.md)
@@ -59,6 +62,7 @@ Class | Method | HTTP request | Description
  - [CreateWorkerRequest](docs/CreateWorkerRequest.md)
  - [DeleteTasksRequest](docs/DeleteTasksRequest.md)
  - [DeletedEntityResponse](docs/DeletedEntityResponse.md)
+ - [ErrorDetail](docs/ErrorDetail.md)
  - [EventHandler](docs/EventHandler.md)
  - [EventHandlerMapping](docs/EventHandlerMapping.md)
  - [EventMatchingPattern](docs/EventMatchingPattern.md)
@@ -120,6 +124,7 @@ Class | Method | HTTP request | Description
  - [UpdateMatchingTasksActivityResponse](docs/UpdateMatchingTasksActivityResponse.md)
  - [UpdateTaskDefinitionRequest](docs/UpdateTaskDefinitionRequest.md)
  - [UpdateTaskRequest](docs/UpdateTaskRequest.md)
+ - [UpdateTaskWithIdAndTriggerRequest](docs/UpdateTaskWithIdAndTriggerRequest.md)
  - [UpdateWorkerRequest](docs/UpdateWorkerRequest.md)
  - [ValueConstraints](docs/ValueConstraints.md)
  - [VersionInfo](docs/VersionInfo.md)
