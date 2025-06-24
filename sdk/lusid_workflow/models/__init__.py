@@ -26,6 +26,7 @@ from lusid_workflow.models.action_log_item import ActionLogItem
 from lusid_workflow.models.action_log_origin import ActionLogOrigin
 from lusid_workflow.models.batch_update_tasks_request import BatchUpdateTasksRequest
 from lusid_workflow.models.batch_update_tasks_response import BatchUpdateTasksResponse
+from lusid_workflow.models.calendar_reference import CalendarReference
 from lusid_workflow.models.change_item import ChangeItem
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 from lusid_workflow.models.create_child_tasks_action import CreateChildTasksAction
@@ -36,6 +37,10 @@ from lusid_workflow.models.create_new_task_activity_response import CreateNewTas
 from lusid_workflow.models.create_task_definition_request import CreateTaskDefinitionRequest
 from lusid_workflow.models.create_task_request import CreateTaskRequest
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
+from lusid_workflow.models.cut_label_reference import CutLabelReference
+from lusid_workflow.models.date_regularity import DateRegularity
+from lusid_workflow.models.day_of_year import DayOfYear
+from lusid_workflow.models.day_regularity import DayRegularity
 from lusid_workflow.models.delete_tasks_request import DeleteTasksRequest
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from lusid_workflow.models.error_detail import ErrorDetail
@@ -65,6 +70,8 @@ from lusid_workflow.models.paged_resource_list_of_worker import PagedResourceLis
 from lusid_workflow.models.parameter import Parameter
 from lusid_workflow.models.parameter_value import ParameterValue
 from lusid_workflow.models.read_only_states import ReadOnlyStates
+from lusid_workflow.models.recurrence_pattern import RecurrencePattern
+from lusid_workflow.models.relative_month_regularity import RelativeMonthRegularity
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.resource_list_of_access_controlled_resource import ResourceListOfAccessControlledResource
 from lusid_workflow.models.resource_list_of_change_item import ResourceListOfChangeItem
@@ -76,10 +83,14 @@ from lusid_workflow.models.run_worker_action import RunWorkerAction
 from lusid_workflow.models.run_worker_action_response import RunWorkerActionResponse
 from lusid_workflow.models.run_worker_request import RunWorkerRequest
 from lusid_workflow.models.run_worker_response import RunWorkerResponse
+from lusid_workflow.models.schedule_matching_pattern import ScheduleMatchingPattern
+from lusid_workflow.models.schedule_matching_pattern_context import ScheduleMatchingPatternContext
 from lusid_workflow.models.scheduler_job import SchedulerJob
 from lusid_workflow.models.scheduler_job_response import SchedulerJobResponse
 from lusid_workflow.models.sleep import Sleep
 from lusid_workflow.models.sleep_response import SleepResponse
+from lusid_workflow.models.specific_month_regularity import SpecificMonthRegularity
+from lusid_workflow.models.specified_time import SpecifiedTime
 from lusid_workflow.models.stack import Stack
 from lusid_workflow.models.task import Task
 from lusid_workflow.models.task_activity import TaskActivity
@@ -91,6 +102,8 @@ from lusid_workflow.models.task_instance_field import TaskInstanceField
 from lusid_workflow.models.task_state_definition import TaskStateDefinition
 from lusid_workflow.models.task_summary import TaskSummary
 from lusid_workflow.models.task_transition_definition import TaskTransitionDefinition
+from lusid_workflow.models.time_constraints import TimeConstraints
+from lusid_workflow.models.time_of_day import TimeOfDay
 from lusid_workflow.models.transition_trigger_definition import TransitionTriggerDefinition
 from lusid_workflow.models.trigger_parent_task_action import TriggerParentTaskAction
 from lusid_workflow.models.trigger_parent_task_action_response import TriggerParentTaskActionResponse
@@ -104,10 +117,12 @@ from lusid_workflow.models.update_task_with_id_and_trigger_request import Update
 from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
 from lusid_workflow.models.value_constraints import ValueConstraints
 from lusid_workflow.models.version_info import VersionInfo
+from lusid_workflow.models.week_regularity import WeekRegularity
 from lusid_workflow.models.worker import Worker
 from lusid_workflow.models.worker_configuration import WorkerConfiguration
 from lusid_workflow.models.worker_configuration_response import WorkerConfigurationResponse
 from lusid_workflow.models.worker_status_triggers import WorkerStatusTriggers
+from lusid_workflow.models.year_regularity import YearRegularity
 
 
 __all__ = [
@@ -123,6 +138,7 @@ __all__ = [
     "ActionLogOrigin",
     "BatchUpdateTasksRequest",
     "BatchUpdateTasksResponse",
+    "CalendarReference",
     "ChangeItem",
     "CreateChildTaskConfiguration",
     "CreateChildTasksAction",
@@ -133,6 +149,10 @@ __all__ = [
     "CreateTaskDefinitionRequest",
     "CreateTaskRequest",
     "CreateWorkerRequest",
+    "CutLabelReference",
+    "DateRegularity",
+    "DayOfYear",
+    "DayRegularity",
     "DeleteTasksRequest",
     "DeletedEntityResponse",
     "ErrorDetail",
@@ -162,6 +182,8 @@ __all__ = [
     "Parameter",
     "ParameterValue",
     "ReadOnlyStates",
+    "RecurrencePattern",
+    "RelativeMonthRegularity",
     "ResourceId",
     "ResourceListOfAccessControlledResource",
     "ResourceListOfChangeItem",
@@ -173,10 +195,14 @@ __all__ = [
     "RunWorkerActionResponse",
     "RunWorkerRequest",
     "RunWorkerResponse",
+    "ScheduleMatchingPattern",
+    "ScheduleMatchingPatternContext",
     "SchedulerJob",
     "SchedulerJobResponse",
     "Sleep",
     "SleepResponse",
+    "SpecificMonthRegularity",
+    "SpecifiedTime",
     "Stack",
     "Task",
     "TaskActivity",
@@ -188,6 +214,8 @@ __all__ = [
     "TaskStateDefinition",
     "TaskSummary",
     "TaskTransitionDefinition",
+    "TimeConstraints",
+    "TimeOfDay",
     "TransitionTriggerDefinition",
     "TriggerParentTaskAction",
     "TriggerParentTaskActionResponse",
@@ -201,8 +229,10 @@ __all__ = [
     "UpdateWorkerRequest",
     "ValueConstraints",
     "VersionInfo",
+    "WeekRegularity",
     "Worker",
     "WorkerConfiguration",
     "WorkerConfigurationResponse",
-    "WorkerStatusTriggers"
+    "WorkerStatusTriggers",
+    "YearRegularity"
 ]

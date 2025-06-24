@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **display_name** | **str** | Human readable name | 
 **description** | **str** | Human readable description | [optional] 
 **status** | **str** | The current status of the event handler | 
-**event_matching_pattern** | [**EventMatchingPattern**](EventMatchingPattern.md) |  | 
+**event_matching_pattern** | [**EventMatchingPattern**](EventMatchingPattern.md) |  | [optional] 
+**schedule_matching_pattern** | [**ScheduleMatchingPattern**](ScheduleMatchingPattern.md) |  | [optional] 
 **run_as_user_id** | [**EventHandlerMapping**](EventHandlerMapping.md) |  | 
 **task_definition_id** | [**ResourceId**](ResourceId.md) |  | 
 **task_definition_as_at** | **datetime** | AsAt of the required task definition | [optional] 

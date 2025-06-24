@@ -23,6 +23,7 @@ from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
 from lusid_workflow.models.event_matching_pattern import EventMatchingPattern
 from lusid_workflow.models.resource_id import ResourceId
+from lusid_workflow.models.schedule_matching_pattern import ScheduleMatchingPattern
 from lusid_workflow.models.task_activity_response import TaskActivityResponse
 from lusid_workflow.models.version_info import VersionInfo
 
@@ -35,12 +36,13 @@ class EventHandler(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
     status:  StrictStr = Field(...,alias="status", description="The current status of the event handler") 
-    event_matching_pattern: EventMatchingPattern = Field(..., alias="eventMatchingPattern")
+    event_matching_pattern: Optional[EventMatchingPattern] = Field(None, alias="eventMatchingPattern")
+    schedule_matching_pattern: Optional[ScheduleMatchingPattern] = Field(None, alias="scheduleMatchingPattern")
     run_as_user_id: EventHandlerMapping = Field(..., alias="runAsUserId")
     task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
     task_definition_as_at: Optional[datetime] = Field(None, alias="taskDefinitionAsAt", description="AsAt of the required task definition")
     task_activity: TaskActivityResponse = Field(..., alias="taskActivity")
-    __properties = ["id", "version", "displayName", "description", "status", "eventMatchingPattern", "runAsUserId", "taskDefinitionId", "taskDefinitionAsAt", "taskActivity"]
+    __properties = ["id", "version", "displayName", "description", "status", "eventMatchingPattern", "scheduleMatchingPattern", "runAsUserId", "taskDefinitionId", "taskDefinitionAsAt", "taskActivity"]
 
     class Config:
         """Pydantic configuration"""
@@ -83,6 +85,9 @@ class EventHandler(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of event_matching_pattern
         if self.event_matching_pattern:
             _dict['eventMatchingPattern'] = self.event_matching_pattern.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of schedule_matching_pattern
+        if self.schedule_matching_pattern:
+            _dict['scheduleMatchingPattern'] = self.schedule_matching_pattern.to_dict()
         # override the default output from pydantic by calling `to_dict()` of run_as_user_id
         if self.run_as_user_id:
             _dict['runAsUserId'] = self.run_as_user_id.to_dict()
@@ -120,6 +125,7 @@ class EventHandler(BaseModel):
             "description": obj.get("description"),
             "status": obj.get("status"),
             "event_matching_pattern": EventMatchingPattern.from_dict(obj.get("eventMatchingPattern")) if obj.get("eventMatchingPattern") is not None else None,
+            "schedule_matching_pattern": ScheduleMatchingPattern.from_dict(obj.get("scheduleMatchingPattern")) if obj.get("scheduleMatchingPattern") is not None else None,
             "run_as_user_id": EventHandlerMapping.from_dict(obj.get("runAsUserId")) if obj.get("runAsUserId") is not None else None,
             "task_definition_id": ResourceId.from_dict(obj.get("taskDefinitionId")) if obj.get("taskDefinitionId") is not None else None,
             "task_definition_as_at": obj.get("taskDefinitionAsAt"),
