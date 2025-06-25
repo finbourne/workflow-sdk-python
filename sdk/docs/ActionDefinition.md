@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **name** | **str** | The Name of this Action | 
 **run_as_user_id** | **str** | The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \&quot;current user\&quot;. | [optional] 
 **action_details** | [**ActionDetails**](ActionDetails.md) |  | 
+**display_name** | **str** | The display name of this Action | [optional] 
+**description** | **str** | The description of this Action | [optional] 
 
 ## Example
 

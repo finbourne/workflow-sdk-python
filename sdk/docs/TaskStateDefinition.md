@@ -6,6 +6,9 @@ A Task Definition/Task has a given set of States
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | The Name of this State | 
+**display_name** | **str** | The display name of this State | [optional] 
+**description** | **str** | The description of this State | [optional] 
+**category** | **str** | The category of this State | [optional] 
 
 ## Example
 

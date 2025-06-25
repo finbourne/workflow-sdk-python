@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid_workflow.models.action_details_response import ActionDetailsResponse
 
 class ActionDefinitionResponse(BaseModel):
@@ -29,7 +29,10 @@ class ActionDefinitionResponse(BaseModel):
     name:  Optional[StrictStr] = Field(None,alias="name", description="The Name of this Action") 
     run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".") 
     action_details: Optional[ActionDetailsResponse] = Field(None, alias="actionDetails")
-    __properties = ["name", "runAsUserId", "actionDetails"]
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="Schema for the Action") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Schema for the Action") 
+    category:  Optional[StrictStr] = Field(None,alias="category", description="Schema for the Action") 
+    __properties = ["name", "runAsUserId", "actionDetails", "displayName", "description", "category"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +79,21 @@ class ActionDefinitionResponse(BaseModel):
         if self.run_as_user_id is None and "run_as_user_id" in self.__fields_set__:
             _dict['runAsUserId'] = None
 
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
+        # set to None if category (nullable) is None
+        # and __fields_set__ contains the field
+        if self.category is None and "category" in self.__fields_set__:
+            _dict['category'] = None
+
         return _dict
 
     @classmethod
@@ -90,6 +108,9 @@ class ActionDefinitionResponse(BaseModel):
         _obj = ActionDefinitionResponse.parse_obj({
             "name": obj.get("name"),
             "run_as_user_id": obj.get("runAsUserId"),
-            "action_details": ActionDetailsResponse.from_dict(obj.get("actionDetails")) if obj.get("actionDetails") is not None else None
+            "action_details": ActionDetailsResponse.from_dict(obj.get("actionDetails")) if obj.get("actionDetails") is not None else None,
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description"),
+            "category": obj.get("category")
         })
         return _obj

@@ -18,15 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import Any, Dict, Optional
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 
 class TaskStateDefinition(BaseModel):
     """
     A Task Definition/Task has a given set of States  # noqa: E501
     """
     name:  StrictStr = Field(...,alias="name", description="The Name of this State") 
-    __properties = ["name"]
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of this State") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of this State") 
+    category:  Optional[StrictStr] = Field(None,alias="category", description="The category of this State") 
+    __properties = ["name", "displayName", "description", "category"]
 
     class Config:
         """Pydantic configuration"""
@@ -60,6 +63,21 @@ class TaskStateDefinition(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
+        # set to None if category (nullable) is None
+        # and __fields_set__ contains the field
+        if self.category is None and "category" in self.__fields_set__:
+            _dict['category'] = None
+
         return _dict
 
     @classmethod
@@ -72,6 +90,9 @@ class TaskStateDefinition(BaseModel):
             return TaskStateDefinition.parse_obj(obj)
 
         _obj = TaskStateDefinition.parse_obj({
-            "name": obj.get("name")
+            "name": obj.get("name"),
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description"),
+            "category": obj.get("category")
         })
         return _obj

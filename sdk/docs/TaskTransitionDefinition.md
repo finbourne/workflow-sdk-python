@@ -10,6 +10,10 @@ Name | Type | Description | Notes
 **trigger** | **str** | The Trigger for this Transition | 
 **guard** | **str** | The Guard for this Transition, if any | [optional] 
 **action** | **str** | The Action to invoke on successful Transition | [optional] 
+**display_name** | **str** | Display name for transition | [optional] 
+**description** | **str** | Description for transition | [optional] 
+**guard_description** | **str** | Guard description for transition | [optional] 
+**guard_condition_not_met_message** | **str** | Message when guard has not been met | [optional] 
 
 ## Example
 

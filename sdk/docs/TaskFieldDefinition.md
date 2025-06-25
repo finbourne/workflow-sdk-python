@@ -9,6 +9,10 @@ Name | Type | Description | Notes
 **type** | **str** | The value type for the field. Available values are: \&quot;String\&quot;, \&quot;Decimal\&quot;, \&quot;DateTime\&quot;, \&quot;Boolean\&quot;) | 
 **read_only_states** | [**ReadOnlyStates**](ReadOnlyStates.md) |  | [optional] 
 **value_constraints** | [**ValueConstraints**](ValueConstraints.md) |  | [optional] 
+**display_name** | **str** | Display name for field definition | [optional] 
+**description** | **str** | Description for field definition | [optional] 
+**category** | **str** | Category for field definition | [optional] 
+**contains_url** | **bool** | Field contains url | [optional] 
 
 ## Example
 

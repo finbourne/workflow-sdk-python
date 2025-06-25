@@ -29,7 +29,9 @@ class ActionDefinition(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="The Name of this Action") 
     run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".") 
     action_details: ActionDetails = Field(..., alias="actionDetails")
-    __properties = ["name", "runAsUserId", "actionDetails"]
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of this Action") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of this Action") 
+    __properties = ["name", "runAsUserId", "actionDetails", "displayName", "description"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +73,16 @@ class ActionDefinition(BaseModel):
         if self.run_as_user_id is None and "run_as_user_id" in self.__fields_set__:
             _dict['runAsUserId'] = None
 
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod
@@ -85,6 +97,8 @@ class ActionDefinition(BaseModel):
         _obj = ActionDefinition.parse_obj({
             "name": obj.get("name"),
             "run_as_user_id": obj.get("runAsUserId"),
-            "action_details": ActionDetails.from_dict(obj.get("actionDetails")) if obj.get("actionDetails") is not None else None
+            "action_details": ActionDetails.from_dict(obj.get("actionDetails")) if obj.get("actionDetails") is not None else None,
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description")
         })
         return _obj

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
 from lusid_workflow.models.trigger_schema import TriggerSchema
 
@@ -28,7 +28,9 @@ class TransitionTriggerDefinition(BaseModel):
     """
     name:  StrictStr = Field(...,alias="name", description="The key/Name of this Trigger") 
     trigger: TriggerSchema = Field(...)
-    __properties = ["name", "trigger"]
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="Display name for trigger") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Description of trigger") 
+    __properties = ["name", "trigger", "displayName", "description"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +67,16 @@ class TransitionTriggerDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of trigger
         if self.trigger:
             _dict['trigger'] = self.trigger.to_dict()
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod
@@ -78,6 +90,8 @@ class TransitionTriggerDefinition(BaseModel):
 
         _obj = TransitionTriggerDefinition.parse_obj({
             "name": obj.get("name"),
-            "trigger": TriggerSchema.from_dict(obj.get("trigger")) if obj.get("trigger") is not None else None
+            "trigger": TriggerSchema.from_dict(obj.get("trigger")) if obj.get("trigger") is not None else None,
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description")
         })
         return _obj

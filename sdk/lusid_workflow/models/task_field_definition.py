@@ -19,7 +19,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
 from lusid_workflow.models.read_only_states import ReadOnlyStates
 from lusid_workflow.models.value_constraints import ValueConstraints
 
@@ -31,7 +31,11 @@ class TaskFieldDefinition(BaseModel):
     type:  StrictStr = Field(...,alias="type", description="The value type for the field. Available values are: \"String\", \"Decimal\", \"DateTime\", \"Boolean\")") 
     read_only_states: Optional[ReadOnlyStates] = Field(None, alias="readOnlyStates")
     value_constraints: Optional[ValueConstraints] = Field(None, alias="valueConstraints")
-    __properties = ["name", "type", "readOnlyStates", "valueConstraints"]
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="Display name for field definition") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Description for field definition") 
+    category:  Optional[StrictStr] = Field(None,alias="category", description="Category for field definition") 
+    contains_url: Optional[StrictBool] = Field(None, alias="containsUrl", description="Field contains url")
+    __properties = ["name", "type", "readOnlyStates", "valueConstraints", "displayName", "description", "category", "containsUrl"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +75,26 @@ class TaskFieldDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of value_constraints
         if self.value_constraints:
             _dict['valueConstraints'] = self.value_constraints.to_dict()
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
+        # set to None if category (nullable) is None
+        # and __fields_set__ contains the field
+        if self.category is None and "category" in self.__fields_set__:
+            _dict['category'] = None
+
+        # set to None if contains_url (nullable) is None
+        # and __fields_set__ contains the field
+        if self.contains_url is None and "contains_url" in self.__fields_set__:
+            _dict['containsUrl'] = None
+
         return _dict
 
     @classmethod
@@ -86,6 +110,10 @@ class TaskFieldDefinition(BaseModel):
             "name": obj.get("name"),
             "type": obj.get("type"),
             "read_only_states": ReadOnlyStates.from_dict(obj.get("readOnlyStates")) if obj.get("readOnlyStates") is not None else None,
-            "value_constraints": ValueConstraints.from_dict(obj.get("valueConstraints")) if obj.get("valueConstraints") is not None else None
+            "value_constraints": ValueConstraints.from_dict(obj.get("valueConstraints")) if obj.get("valueConstraints") is not None else None,
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description"),
+            "category": obj.get("category"),
+            "contains_url": obj.get("containsUrl")
         })
         return _obj

@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | The key/Name of this Trigger | 
 **trigger** | [**TriggerSchema**](TriggerSchema.md) |  | 
+**display_name** | **str** | Display name for trigger | [optional] 
+**description** | **str** | Description of trigger | [optional] 
 
 ## Example
 

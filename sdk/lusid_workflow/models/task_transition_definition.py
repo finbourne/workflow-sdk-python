@@ -30,7 +30,11 @@ class TaskTransitionDefinition(BaseModel):
     trigger:  StrictStr = Field(...,alias="trigger", description="The Trigger for this Transition") 
     guard:  Optional[StrictStr] = Field(None,alias="guard", description="The Guard for this Transition, if any") 
     action:  Optional[StrictStr] = Field(None,alias="action", description="The Action to invoke on successful Transition") 
-    __properties = ["fromState", "toState", "trigger", "guard", "action"]
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="Display name for transition") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="Description for transition") 
+    guard_description:  Optional[StrictStr] = Field(None,alias="guardDescription", description="Guard description for transition") 
+    guard_condition_not_met_message:  Optional[StrictStr] = Field(None,alias="guardConditionNotMetMessage", description="Message when guard has not been met") 
+    __properties = ["fromState", "toState", "trigger", "guard", "action", "displayName", "description", "guardDescription", "guardConditionNotMetMessage"]
 
     class Config:
         """Pydantic configuration"""
@@ -74,6 +78,26 @@ class TaskTransitionDefinition(BaseModel):
         if self.action is None and "action" in self.__fields_set__:
             _dict['action'] = None
 
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
+        # set to None if guard_description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.guard_description is None and "guard_description" in self.__fields_set__:
+            _dict['guardDescription'] = None
+
+        # set to None if guard_condition_not_met_message (nullable) is None
+        # and __fields_set__ contains the field
+        if self.guard_condition_not_met_message is None and "guard_condition_not_met_message" in self.__fields_set__:
+            _dict['guardConditionNotMetMessage'] = None
+
         return _dict
 
     @classmethod
@@ -90,6 +114,10 @@ class TaskTransitionDefinition(BaseModel):
             "to_state": obj.get("toState"),
             "trigger": obj.get("trigger"),
             "guard": obj.get("guard"),
-            "action": obj.get("action")
+            "action": obj.get("action"),
+            "display_name": obj.get("displayName"),
+            "description": obj.get("description"),
+            "guard_description": obj.get("guardDescription"),
+            "guard_condition_not_met_message": obj.get("guardConditionNotMetMessage")
         })
         return _obj
