@@ -1,7 +1,6 @@
 # ActionLog
 
 An Action Log contains the processing history of an Action
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **action_type** | **str** | The type of the Action | 
 **run_as_user_id** | **str** | The ID of the user that the Action was performed by.  If not specified, the actions were performed by the \&quot;current user\&quot;. | [optional] 
 **logged_items** | [**List[ActionLogItem]**](ActionLogItem.md) | The logged items for this Action | 
-
 ## Example
 
 ```python
 from lusid_workflow.models.action_log import ActionLog
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ActionLog from a JSON string
-action_log_instance = ActionLog.from_json(json)
-# print the JSON string representation of the object
-print ActionLog.to_json()
+id: StrictStr = "example_id"
+origin: ActionLogOrigin = # Replace with your value
+action_type: StrictStr = "example_action_type"
+run_as_user_id: Optional[StrictStr] = "example_run_as_user_id"
+logged_items: conlist(ActionLogItem) = # Replace with your value
+action_log_instance = ActionLog(id=id, origin=origin, action_type=action_type, run_as_user_id=run_as_user_id, logged_items=logged_items)
 
-# convert the object into a dict
-action_log_dict = action_log_instance.to_dict()
-# create an instance of ActionLog from a dict
-action_log_form_dict = action_log.from_dict(action_log_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,30 +1,23 @@
 # TaskInstanceField
 
 Defines a Field on a Task
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | The name of this Field | 
 **value** | **object** | The value of this Field | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.task_instance_field import TaskInstanceField
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TaskInstanceField from a JSON string
-task_instance_field_instance = TaskInstanceField.from_json(json)
-# print the JSON string representation of the object
-print TaskInstanceField.to_json()
+name: StrictStr = "example_name"
+value: Optional[Any] = # Replace with your value
+task_instance_field_instance = TaskInstanceField(name=name, value=value)
 
-# convert the object into a dict
-task_instance_field_dict = task_instance_field_instance.to_dict()
-# create an instance of TaskInstanceField from a dict
-task_instance_field_form_dict = task_instance_field.from_dict(task_instance_field_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # UpdateTaskDefinitionRequest
 
 Contains required info to update a Task Definition
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **triggers** | [**List[TransitionTriggerDefinition]**](TransitionTriggerDefinition.md) | Triggers | [optional] 
 **transitions** | [**List[TaskTransitionDefinition]**](TaskTransitionDefinition.md) | Transitions | [optional] 
 **actions** | [**List[ActionDefinition]**](ActionDefinition.md) | Actions | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.update_task_definition_request import UpdateTaskDefinitionRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpdateTaskDefinitionRequest from a JSON string
-update_task_definition_request_instance = UpdateTaskDefinitionRequest.from_json(json)
-# print the JSON string representation of the object
-print UpdateTaskDefinitionRequest.to_json()
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+states: conlist(TaskStateDefinition, min_items=1) = Field(..., description="The states this Task Definition operates over")
+field_schema: Optional[conlist(TaskFieldDefinition)] = # Replace with your value
+initial_state: InitialState = # Replace with your value
+triggers: Optional[conlist(TransitionTriggerDefinition)] = # Replace with your value
+transitions: Optional[conlist(TaskTransitionDefinition)] = # Replace with your value
+actions: Optional[conlist(ActionDefinition)] = # Replace with your value
+update_task_definition_request_instance = UpdateTaskDefinitionRequest(display_name=display_name, description=description, states=states, field_schema=field_schema, initial_state=initial_state, triggers=triggers, transitions=transitions, actions=actions)
 
-# convert the object into a dict
-update_task_definition_request_dict = update_task_definition_request_instance.to_dict()
-# create an instance of UpdateTaskDefinitionRequest from a dict
-update_task_definition_request_form_dict = update_task_definition_request.from_dict(update_task_definition_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,31 +1,27 @@
 # SpecifiedTime
 
 A specified time in the day
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **hours** | **int** | Hours | 
 **minutes** | **int** | Minutes | 
 **type** | **str** | The type of Time of Day | 
-
 ## Example
 
 ```python
 from lusid_workflow.models.specified_time import SpecifiedTime
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, conint, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SpecifiedTime from a JSON string
-specified_time_instance = SpecifiedTime.from_json(json)
-# print the JSON string representation of the object
-print SpecifiedTime.to_json()
+hours: conint(strict=True, le=23, ge=0) = Field(..., description="Hours")
+hours: StrictInt = 42
+minutes: conint(strict=True, le=59, ge=0) = Field(..., description="Minutes")
+minutes: StrictInt = 42
+type: StrictStr = "example_type"
+specified_time_instance = SpecifiedTime(hours=hours, minutes=minutes, type=type)
 
-# convert the object into a dict
-specified_time_dict = specified_time_instance.to_dict()
-# create an instance of SpecifiedTime from a dict
-specified_time_form_dict = specified_time.from_dict(specified_time_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

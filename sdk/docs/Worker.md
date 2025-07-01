@@ -1,7 +1,6 @@
 # Worker
 
 Information about the Worker
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -13,24 +12,24 @@ Name | Type | Description | Notes
 **parameters** | [**List[Parameter]**](Parameter.md) | The Parameters this Worker accepts or requires. | [optional] 
 **result_fields** | [**List[ResultField]**](ResultField.md) | The Fields that the Worker results will come back with. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.worker import Worker
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Worker from a JSON string
-worker_instance = Worker.from_json(json)
-# print the JSON string representation of the object
-print Worker.to_json()
+id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+worker_configuration: WorkerConfigurationResponse = # Replace with your value
+version: Optional[VersionInfo] = None
+parameters: Optional[conlist(Parameter)] = # Replace with your value
+result_fields: Optional[conlist(ResultField)] = # Replace with your value
+links: Optional[conlist(Link)] = None
+worker_instance = Worker(id=id, display_name=display_name, description=description, worker_configuration=worker_configuration, version=version, parameters=parameters, result_fields=result_fields, links=links)
 
-# convert the object into a dict
-worker_dict = worker_instance.to_dict()
-# create an instance of Worker from a dict
-worker_form_dict = worker.from_dict(worker_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

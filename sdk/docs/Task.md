@@ -1,7 +1,6 @@
 # Task
 
 Defines a Task created based on a Task Definition
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -23,24 +22,35 @@ Name | Type | Description | Notes
 **action_log_id_created** | **str** | The Id of the Action that created this Task | [optional] 
 **action_log_id_modified** | **str** | The Id of the Action that last modified this Task | [optional] 
 **action_log_id_submitted** | **str** | The Id of the last Action submitted by this Task | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.task import Task
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from datetime import datetime
+id: StrictStr = "example_id"
+task_definition_id: ResourceId = # Replace with your value
+task_definition_version: TaskDefinitionVersion = # Replace with your value
+task_definition_display_name: StrictStr = "example_task_definition_display_name"
+state: StrictStr = "example_state"
+ultimate_parent_task: TaskSummary = # Replace with your value
+parent_task: Optional[TaskSummary] = # Replace with your value
+child_tasks: Optional[conlist(TaskSummary)] = # Replace with your value
+correlation_ids: Optional[conlist(StrictStr)] = # Replace with your value
+version: Optional[VersionInfo] = None
+terminal_state: StrictBool = # Replace with your value
+terminal_state:StrictBool = True
+as_at_last_transition: Optional[datetime] = # Replace with your value
+fields: Optional[conlist(TaskInstanceField)] = # Replace with your value
+stacking_key: Optional[StrictStr] = "example_stacking_key"
+stack: Optional[Stack] = None
+action_log_id_created: Optional[StrictStr] = "example_action_log_id_created"
+action_log_id_modified: Optional[StrictStr] = "example_action_log_id_modified"
+action_log_id_submitted: Optional[StrictStr] = "example_action_log_id_submitted"
+task_instance = Task(id=id, task_definition_id=task_definition_id, task_definition_version=task_definition_version, task_definition_display_name=task_definition_display_name, state=state, ultimate_parent_task=ultimate_parent_task, parent_task=parent_task, child_tasks=child_tasks, correlation_ids=correlation_ids, version=version, terminal_state=terminal_state, as_at_last_transition=as_at_last_transition, fields=fields, stacking_key=stacking_key, stack=stack, action_log_id_created=action_log_id_created, action_log_id_modified=action_log_id_modified, action_log_id_submitted=action_log_id_submitted)
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Task from a JSON string
-task_instance = Task.from_json(json)
-# print the JSON string representation of the object
-print Task.to_json()
-
-# convert the object into a dict
-task_dict = task_instance.to_dict()
-# create an instance of Task from a dict
-task_form_dict = task.from_dict(task_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

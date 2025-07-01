@@ -1,6 +1,5 @@
 # PagedResourceListOfWorker
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,21 @@ Name | Type | Description | Notes
 **values** | [**List[Worker]**](Worker.md) |  | 
 **href** | **str** |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.paged_resource_list_of_worker import PagedResourceListOfWorker
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of PagedResourceListOfWorker from a JSON string
-paged_resource_list_of_worker_instance = PagedResourceListOfWorker.from_json(json)
-# print the JSON string representation of the object
-print PagedResourceListOfWorker.to_json()
+next_page: Optional[StrictStr] = "example_next_page"
+previous_page: Optional[StrictStr] = "example_previous_page"
+values: conlist(Worker) = # Replace with your value
+href: Optional[StrictStr] = "example_href"
+links: Optional[conlist(Link)] = None
+paged_resource_list_of_worker_instance = PagedResourceListOfWorker(next_page=next_page, previous_page=previous_page, values=values, href=href, links=links)
 
-# convert the object into a dict
-paged_resource_list_of_worker_dict = paged_resource_list_of_worker_instance.to_dict()
-# create an instance of PagedResourceListOfWorker from a dict
-paged_resource_list_of_worker_form_dict = paged_resource_list_of_worker.from_dict(paged_resource_list_of_worker_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,31 +1,25 @@
 # UpdateTaskRequest
 
 A request to update a Task
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **correlation_ids** | **List[str]** | A set of guid identifiers that allow correlation across the application tier | [optional] 
 **fields** | [**List[TaskInstanceField]**](TaskInstanceField.md) | Defines the fields associated with the update | [optional] 
 **stacking_key** | **str** | The key for the Stack that this Task should be added to | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.update_task_request import UpdateTaskRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpdateTaskRequest from a JSON string
-update_task_request_instance = UpdateTaskRequest.from_json(json)
-# print the JSON string representation of the object
-print UpdateTaskRequest.to_json()
+correlation_ids: Optional[conlist(StrictStr)] = # Replace with your value
+fields: Optional[conlist(TaskInstanceField)] = # Replace with your value
+stacking_key: Optional[StrictStr] = "example_stacking_key"
+update_task_request_instance = UpdateTaskRequest(correlation_ids=correlation_ids, fields=fields, stacking_key=stacking_key)
 
-# convert the object into a dict
-update_task_request_dict = update_task_request_instance.to_dict()
-# create an instance of UpdateTaskRequest from a dict
-update_task_request_form_dict = update_task_request.from_dict(update_task_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

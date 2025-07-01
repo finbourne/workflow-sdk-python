@@ -1,30 +1,24 @@
 # DayRegularity
 
 Day Regularity
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **frequency** | **int** | The frequency of the Day Regularity | 
 **type** | **str** | The type of Date Regularity | 
-
 ## Example
 
 ```python
 from lusid_workflow.models.day_regularity import DayRegularity
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, conint, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of DayRegularity from a JSON string
-day_regularity_instance = DayRegularity.from_json(json)
-# print the JSON string representation of the object
-print DayRegularity.to_json()
+frequency: conint(strict=True, le=1000, ge=1) = Field(..., description="The frequency of the Day Regularity")
+frequency: StrictInt = 42
+type: StrictStr = "example_type"
+day_regularity_instance = DayRegularity(frequency=frequency, type=type)
 
-# convert the object into a dict
-day_regularity_dict = day_regularity_instance.to_dict()
-# create an instance of DayRegularity from a dict
-day_regularity_form_dict = day_regularity.from_dict(day_regularity_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

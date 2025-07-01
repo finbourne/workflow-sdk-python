@@ -1,7 +1,6 @@
 # Parameter
 
 Defines a Worker Parameter
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,23 @@ Name | Type | Description | Notes
 **description** | **str** | Description | [optional] 
 **required** | **bool** | Required or not | 
 **default_value** | **str** | DefaultValue | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.parameter import Parameter
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of Parameter from a JSON string
-parameter_instance = Parameter.from_json(json)
-# print the JSON string representation of the object
-print Parameter.to_json()
+type: StrictStr = "example_type"
+name: StrictStr = "example_name"
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+required: StrictBool = # Replace with your value
+required:StrictBool = True
+default_value: Optional[StrictStr] = "example_default_value"
+parameter_instance = Parameter(type=type, name=name, display_name=display_name, description=description, required=required, default_value=default_value)
 
-# convert the object into a dict
-parameter_dict = parameter_instance.to_dict()
-# create an instance of Parameter from a dict
-parameter_form_dict = parameter.from_dict(parameter_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

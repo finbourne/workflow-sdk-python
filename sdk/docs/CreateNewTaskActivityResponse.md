@@ -1,7 +1,6 @@
 # CreateNewTaskActivityResponse
 
 Read only Create new task response
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,20 @@ Name | Type | Description | Notes
 **initial_trigger** | **str** | Trigger to supply to all tasks to be made | [optional] 
 **correlation_ids** | [**List[EventHandlerMapping]**](EventHandlerMapping.md) | The event to correlation ID mappings | [optional] 
 **task_fields** | [**Dict[str, FieldMapping]**](FieldMapping.md) | The event to task field mappings | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.create_new_task_activity_response import CreateNewTaskActivityResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateNewTaskActivityResponse from a JSON string
-create_new_task_activity_response_instance = CreateNewTaskActivityResponse.from_json(json)
-# print the JSON string representation of the object
-print CreateNewTaskActivityResponse.to_json()
+type: Optional[StrictStr] = "example_type"
+initial_trigger: Optional[StrictStr] = "example_initial_trigger"
+correlation_ids: Optional[conlist(EventHandlerMapping)] = # Replace with your value
+task_fields: Optional[Dict[str, FieldMapping]] = # Replace with your value
+create_new_task_activity_response_instance = CreateNewTaskActivityResponse(type=type, initial_trigger=initial_trigger, correlation_ids=correlation_ids, task_fields=task_fields)
 
-# convert the object into a dict
-create_new_task_activity_response_dict = create_new_task_activity_response_instance.to_dict()
-# create an instance of CreateNewTaskActivityResponse from a dict
-create_new_task_activity_response_form_dict = create_new_task_activity_response.from_dict(create_new_task_activity_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

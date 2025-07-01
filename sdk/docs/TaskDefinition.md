@@ -1,7 +1,6 @@
 # TaskDefinition
 
 Task Definition
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -15,24 +14,26 @@ Name | Type | Description | Notes
 **triggers** | [**List[TransitionTriggerDefinition]**](TransitionTriggerDefinition.md) | The Triggers for State transition | [optional] 
 **actions** | [**List[ActionDefinitionResponse]**](ActionDefinitionResponse.md) | The Actions of this Task - executed after a Transition completion | [optional] 
 **transitions** | [**List[TaskTransitionDefinition]**](TaskTransitionDefinition.md) | The Transitions between States | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.task_definition import TaskDefinition
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TaskDefinition from a JSON string
-task_definition_instance = TaskDefinition.from_json(json)
-# print the JSON string representation of the object
-print TaskDefinition.to_json()
+id: ResourceId = # Replace with your value
+version: Optional[VersionInfo] = None
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+states: conlist(TaskStateDefinition, min_items=1) = Field(..., description="The states this Task Definition operates over")
+field_schema: Optional[conlist(TaskFieldDefinition)] = # Replace with your value
+initial_state: InitialState = # Replace with your value
+triggers: Optional[conlist(TransitionTriggerDefinition)] = # Replace with your value
+actions: Optional[conlist(ActionDefinitionResponse)] = # Replace with your value
+transitions: Optional[conlist(TaskTransitionDefinition)] = # Replace with your value
+task_definition_instance = TaskDefinition(id=id, version=version, display_name=display_name, description=description, states=states, field_schema=field_schema, initial_state=initial_state, triggers=triggers, actions=actions, transitions=transitions)
 
-# convert the object into a dict
-task_definition_dict = task_definition_instance.to_dict()
-# create an instance of TaskDefinition from a dict
-task_definition_form_dict = task_definition.from_dict(task_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,32 +1,33 @@
 # WorkerConfiguration
 
 Information about how the worker should be executed
-
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**type** | **str** | The type of worker | 
-**url** | **str** | The URL to check, eg: https://www.google.com/ | 
-**name** | **str** | Name of the view in Luminesce | 
-**job_id** | [**ResourceId**](ResourceId.md) |  | 
-
 ## Example
 
 ```python
 from lusid_workflow.models.worker_configuration import WorkerConfiguration
+from typing import Any, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of WorkerConfiguration from a JSON string
-worker_configuration_instance = WorkerConfiguration.from_json(json)
-# print the JSON string representation of the object
-print WorkerConfiguration.to_json()
+# Example with WorkerConfiguration 
 
-# convert the object into a dict
-worker_configuration_dict = worker_configuration_instance.to_dict()
-# create an instance of WorkerConfiguration from a dict
-worker_configuration_form_dict = worker_configuration.from_dict(worker_configuration_dict)
+fail_instance = lusid_workflow.models.fail.Fail(
+                        type = 'Fail', )
+
+worker_configuration_instance = WorkerConfiguration(fail_instance)
+
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
+See all compatible oneOf types with WorkerConfiguration
 
+
+ * [GroupReconciliation](./GroupReconciliation.md)
+
+ * [HealthCheck](./HealthCheck.md)
+
+ * [LuminesceView](./LuminesceView.md)
+
+ * [SchedulerJob](./SchedulerJob.md)
+
+ * [Sleep](./Sleep.md)
+
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

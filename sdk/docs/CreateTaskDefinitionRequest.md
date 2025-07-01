@@ -1,7 +1,6 @@
 # CreateTaskDefinitionRequest
 
 Contains required info to create a new Task Definition
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,25 @@ Name | Type | Description | Notes
 **triggers** | [**List[TransitionTriggerDefinition]**](TransitionTriggerDefinition.md) | Triggers | [optional] 
 **transitions** | [**List[TaskTransitionDefinition]**](TaskTransitionDefinition.md) | Transitions | [optional] 
 **actions** | [**List[ActionDefinition]**](ActionDefinition.md) | Actions | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.create_task_definition_request import CreateTaskDefinitionRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of CreateTaskDefinitionRequest from a JSON string
-create_task_definition_request_instance = CreateTaskDefinitionRequest.from_json(json)
-# print the JSON string representation of the object
-print CreateTaskDefinitionRequest.to_json()
+id: ResourceId = # Replace with your value
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+states: conlist(TaskStateDefinition, min_items=1) = Field(..., description="The states this Task Definition operates over")
+field_schema: Optional[conlist(TaskFieldDefinition)] = # Replace with your value
+initial_state: InitialState = # Replace with your value
+triggers: Optional[conlist(TransitionTriggerDefinition)] = # Replace with your value
+transitions: Optional[conlist(TaskTransitionDefinition)] = # Replace with your value
+actions: Optional[conlist(ActionDefinition)] = # Replace with your value
+create_task_definition_request_instance = CreateTaskDefinitionRequest(id=id, display_name=display_name, description=description, states=states, field_schema=field_schema, initial_state=initial_state, triggers=triggers, transitions=transitions, actions=actions)
 
-# convert the object into a dict
-create_task_definition_request_dict = create_task_definition_request_instance.to_dict()
-# create an instance of CreateTaskDefinitionRequest from a dict
-create_task_definition_request_form_dict = create_task_definition_request.from_dict(create_task_definition_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

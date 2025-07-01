@@ -1,7 +1,6 @@
 # TaskTransitionDefinition
 
 Defines a State change
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -14,24 +13,25 @@ Name | Type | Description | Notes
 **description** | **str** | Description for transition | [optional] 
 **guard_description** | **str** | Guard description for transition | [optional] 
 **guard_condition_not_met_message** | **str** | Message when guard has not been met | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.task_transition_definition import TaskTransitionDefinition
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TaskTransitionDefinition from a JSON string
-task_transition_definition_instance = TaskTransitionDefinition.from_json(json)
-# print the JSON string representation of the object
-print TaskTransitionDefinition.to_json()
+from_state: StrictStr = "example_from_state"
+to_state: StrictStr = "example_to_state"
+trigger: StrictStr = "example_trigger"
+guard: Optional[StrictStr] = "example_guard"
+action: Optional[StrictStr] = "example_action"
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+guard_description: Optional[StrictStr] = "example_guard_description"
+guard_condition_not_met_message: Optional[StrictStr] = "example_guard_condition_not_met_message"
+task_transition_definition_instance = TaskTransitionDefinition(from_state=from_state, to_state=to_state, trigger=trigger, guard=guard, action=action, display_name=display_name, description=description, guard_description=guard_description, guard_condition_not_met_message=guard_condition_not_met_message)
 
-# convert the object into a dict
-task_transition_definition_dict = task_transition_definition_instance.to_dict()
-# create an instance of TaskTransitionDefinition from a dict
-task_transition_definition_form_dict = task_transition_definition.from_dict(task_transition_definition_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

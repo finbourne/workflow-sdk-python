@@ -1,7 +1,6 @@
 # ActionDefinitionResponse
 
 Defines the Actions for a Task in a read-only form
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -11,24 +10,22 @@ Name | Type | Description | Notes
 **display_name** | **str** | Schema for the Action | [optional] 
 **description** | **str** | Schema for the Action | [optional] 
 **category** | **str** | Schema for the Action | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.action_definition_response import ActionDefinitionResponse
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ActionDefinitionResponse from a JSON string
-action_definition_response_instance = ActionDefinitionResponse.from_json(json)
-# print the JSON string representation of the object
-print ActionDefinitionResponse.to_json()
+name: Optional[StrictStr] = "example_name"
+run_as_user_id: Optional[StrictStr] = "example_run_as_user_id"
+action_details: Optional[ActionDetailsResponse] = # Replace with your value
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+category: Optional[StrictStr] = "example_category"
+action_definition_response_instance = ActionDefinitionResponse(name=name, run_as_user_id=run_as_user_id, action_details=action_details, display_name=display_name, description=description, category=category)
 
-# convert the object into a dict
-action_definition_response_dict = action_definition_response_instance.to_dict()
-# create an instance of ActionDefinitionResponse from a dict
-action_definition_response_form_dict = action_definition_response.from_dict(action_definition_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

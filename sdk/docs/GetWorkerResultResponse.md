@@ -1,31 +1,25 @@
 # GetWorkerResultResponse
 
 The RunWorker response
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **worker_status** | **str** | The final status of the Worker | 
 **results** | **List[Dict[str, object]]** | Results | 
 **status_detail** | **str** | Detail on the final status | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.get_worker_result_response import GetWorkerResultResponse
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of GetWorkerResultResponse from a JSON string
-get_worker_result_response_instance = GetWorkerResultResponse.from_json(json)
-# print the JSON string representation of the object
-print GetWorkerResultResponse.to_json()
+worker_status: StrictStr = "example_worker_status"
+results: conlist(Dict[str, Any]) = # Replace with your value
+status_detail: Optional[StrictStr] = "example_status_detail"
+get_worker_result_response_instance = GetWorkerResultResponse(worker_status=worker_status, results=results, status_detail=status_detail)
 
-# convert the object into a dict
-get_worker_result_response_dict = get_worker_result_response_instance.to_dict()
-# create an instance of GetWorkerResultResponse from a dict
-get_worker_result_response_form_dict = get_worker_result_response.from_dict(get_worker_result_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # UpdateTaskWithIdAndTriggerRequest
 
 A request to update multiple Tasks  Includes a trigger which is supplied from route in single update request
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **fields** | [**List[TaskInstanceField]**](TaskInstanceField.md) | Defines the fields associated with the update | [optional] 
 **stacking_key** | **str** | The key for the Stack that this Task should be added to | [optional] 
 **trigger_name** | **str** | The trigger we want to update the task with | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.update_task_with_id_and_trigger_request import UpdateTaskWithIdAndTriggerRequest
+from typing import Any, Dict, List, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpdateTaskWithIdAndTriggerRequest from a JSON string
-update_task_with_id_and_trigger_request_instance = UpdateTaskWithIdAndTriggerRequest.from_json(json)
-# print the JSON string representation of the object
-print UpdateTaskWithIdAndTriggerRequest.to_json()
+task_instance_id: Optional[StrictStr] = "example_task_instance_id"
+correlation_ids: Optional[conlist(StrictStr)] = # Replace with your value
+fields: Optional[conlist(TaskInstanceField)] = # Replace with your value
+stacking_key: Optional[StrictStr] = "example_stacking_key"
+trigger_name: Optional[StrictStr] = "example_trigger_name"
+update_task_with_id_and_trigger_request_instance = UpdateTaskWithIdAndTriggerRequest(task_instance_id=task_instance_id, correlation_ids=correlation_ids, fields=fields, stacking_key=stacking_key, trigger_name=trigger_name)
 
-# convert the object into a dict
-update_task_with_id_and_trigger_request_dict = update_task_with_id_and_trigger_request_instance.to_dict()
-# create an instance of UpdateTaskWithIdAndTriggerRequest from a dict
-update_task_with_id_and_trigger_request_form_dict = update_task_with_id_and_trigger_request.from_dict(update_task_with_id_and_trigger_request_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

@@ -1,7 +1,6 @@
 # ResultField
 
 Defines a Worker Result Field
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,24 +8,20 @@ Name | Type | Description | Notes
 **type** | **str** | The type of this Parameter | 
 **display_name** | **str** | DisplayName | [optional] 
 **description** | **str** | Description | [optional] 
-
 ## Example
 
 ```python
 from lusid_workflow.models.result_field import ResultField
+from typing import Any, Dict, Optional
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of ResultField from a JSON string
-result_field_instance = ResultField.from_json(json)
-# print the JSON string representation of the object
-print ResultField.to_json()
+name: StrictStr = "example_name"
+type: StrictStr = "example_type"
+display_name: Optional[StrictStr] = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+result_field_instance = ResultField(name=name, type=type, display_name=display_name, description=description)
 
-# convert the object into a dict
-result_field_dict = result_field_instance.to_dict()
-# create an instance of ResultField from a dict
-result_field_form_dict = result_field.from_dict(result_field_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

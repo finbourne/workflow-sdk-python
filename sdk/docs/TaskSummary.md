@@ -1,7 +1,6 @@
 # TaskSummary
 
 Summary of a Task created based on a Task Definition
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,24 +9,21 @@ Name | Type | Description | Notes
 **task_definition_version** | [**TaskDefinitionVersion**](TaskDefinitionVersion.md) |  | 
 **task_definition_display_name** | **str** | The display name of the Task Definition used by this Task | 
 **state** | **str** | Current State | 
-
 ## Example
 
 ```python
 from lusid_workflow.models.task_summary import TaskSummary
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, StrictStr, constr
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of TaskSummary from a JSON string
-task_summary_instance = TaskSummary.from_json(json)
-# print the JSON string representation of the object
-print TaskSummary.to_json()
+id: StrictStr = "example_id"
+task_definition_id: ResourceId = # Replace with your value
+task_definition_version: TaskDefinitionVersion = # Replace with your value
+task_definition_display_name: StrictStr = "example_task_definition_display_name"
+state: StrictStr = "example_state"
+task_summary_instance = TaskSummary(id=id, task_definition_id=task_definition_id, task_definition_version=task_definition_version, task_definition_display_name=task_definition_display_name, state=state)
 
-# convert the object into a dict
-task_summary_dict = task_summary_instance.to_dict()
-# create an instance of TaskSummary from a dict
-task_summary_form_dict = task_summary.from_dict(task_summary_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

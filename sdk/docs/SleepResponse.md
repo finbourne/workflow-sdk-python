@@ -1,29 +1,21 @@
 # SleepResponse
 
 Configuration for a Worker that Sleeps for a user-defined amount of time
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | The type of worker | 
-
 ## Example
 
 ```python
 from lusid_workflow.models.sleep_response import SleepResponse
+from typing import Any, Dict
+from pydantic.v1 import BaseModel, Field, constr, validator
 
-# TODO update the JSON string below
-json = "{}"
-# create an instance of SleepResponse from a JSON string
-sleep_response_instance = SleepResponse.from_json(json)
-# print the JSON string representation of the object
-print SleepResponse.to_json()
+type: StrictStr = "example_type"
+sleep_response_instance = SleepResponse(type=type)
 
-# convert the object into a dict
-sleep_response_dict = sleep_response_instance.to_dict()
-# create an instance of SleepResponse from a dict
-sleep_response_form_dict = sleep_response.from_dict(sleep_response_dict)
 ```
-[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 
