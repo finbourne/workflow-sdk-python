@@ -22,6 +22,7 @@ from typing import Any, Dict, List, Optional
 from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
 from lusid_workflow.models.field_mapping import FieldMapping
+from lusid_workflow.models.scheduled_time_adjustment import ScheduledTimeAdjustment
 
 class CreateNewTaskActivity(BaseModel):
     """
@@ -31,7 +32,8 @@ class CreateNewTaskActivity(BaseModel):
     type:  StrictStr = Field(...,alias="type", description="The type of task activity") 
     correlation_ids: Optional[conlist(EventHandlerMapping)] = Field(None, alias="correlationIds", description="The event to correlation ID mappings")
     task_fields: Optional[Dict[str, FieldMapping]] = Field(None, alias="taskFields", description="The event to task field mappings")
-    __properties = ["initialTrigger", "type", "correlationIds", "taskFields"]
+    schedule_dependent_task_fields: Optional[Dict[str, ScheduledTimeAdjustment]] = Field(None, alias="scheduleDependentTaskFields", description="The Schedule dependent task field mappings. Only relevant if a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern is  specified")
+    __properties = ["initialTrigger", "type", "correlationIds", "taskFields", "scheduleDependentTaskFields"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -138,6 +140,13 @@ class CreateNewTaskActivity(BaseModel):
                 if self.task_fields[_key]:
                     _field_dict[_key] = self.task_fields[_key].to_dict()
             _dict['taskFields'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in schedule_dependent_task_fields (dict)
+        _field_dict = {}
+        if self.schedule_dependent_task_fields:
+            for _key in self.schedule_dependent_task_fields:
+                if self.schedule_dependent_task_fields[_key]:
+                    _field_dict[_key] = self.schedule_dependent_task_fields[_key].to_dict()
+            _dict['scheduleDependentTaskFields'] = _field_dict
         # set to None if initial_trigger (nullable) is None
         # and __fields_set__ contains the field
         if self.initial_trigger is None and "initial_trigger" in self.__fields_set__:
@@ -152,6 +161,11 @@ class CreateNewTaskActivity(BaseModel):
         # and __fields_set__ contains the field
         if self.task_fields is None and "task_fields" in self.__fields_set__:
             _dict['taskFields'] = None
+
+        # set to None if schedule_dependent_task_fields (nullable) is None
+        # and __fields_set__ contains the field
+        if self.schedule_dependent_task_fields is None and "schedule_dependent_task_fields" in self.__fields_set__:
+            _dict['scheduleDependentTaskFields'] = None
 
         return _dict
 
@@ -173,6 +187,12 @@ class CreateNewTaskActivity(BaseModel):
                 for _k, _v in obj.get("taskFields").items()
             )
             if obj.get("taskFields") is not None
+            else None,
+            "schedule_dependent_task_fields": dict(
+                (_k, ScheduledTimeAdjustment.from_dict(_v))
+                for _k, _v in obj.get("scheduleDependentTaskFields").items()
+            )
+            if obj.get("scheduleDependentTaskFields") is not None
             else None
         })
         return _obj

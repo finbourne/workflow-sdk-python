@@ -38,6 +38,7 @@ from lusid_workflow.models.create_task_definition_request import CreateTaskDefin
 from lusid_workflow.models.create_task_request import CreateTaskRequest
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
 from lusid_workflow.models.cut_label_reference import CutLabelReference
+from lusid_workflow.models.date_adjustment import DateAdjustment
 from lusid_workflow.models.date_regularity import DateRegularity
 from lusid_workflow.models.day_of_year import DayOfYear
 from lusid_workflow.models.day_regularity import DayRegularity
@@ -85,6 +86,7 @@ from lusid_workflow.models.run_worker_request import RunWorkerRequest
 from lusid_workflow.models.run_worker_response import RunWorkerResponse
 from lusid_workflow.models.schedule_matching_pattern import ScheduleMatchingPattern
 from lusid_workflow.models.schedule_matching_pattern_context import ScheduleMatchingPatternContext
+from lusid_workflow.models.scheduled_time_adjustment import ScheduledTimeAdjustment
 from lusid_workflow.models.scheduler_job import SchedulerJob
 from lusid_workflow.models.scheduler_job_response import SchedulerJobResponse
 from lusid_workflow.models.sleep import Sleep
@@ -102,6 +104,7 @@ from lusid_workflow.models.task_instance_field import TaskInstanceField
 from lusid_workflow.models.task_state_definition import TaskStateDefinition
 from lusid_workflow.models.task_summary import TaskSummary
 from lusid_workflow.models.task_transition_definition import TaskTransitionDefinition
+from lusid_workflow.models.time_adjustment import TimeAdjustment
 from lusid_workflow.models.time_constraints import TimeConstraints
 from lusid_workflow.models.time_of_day import TimeOfDay
 from lusid_workflow.models.transition_trigger_definition import TransitionTriggerDefinition
@@ -150,6 +153,7 @@ __all__ = [
     "CreateTaskRequest",
     "CreateWorkerRequest",
     "CutLabelReference",
+    "DateAdjustment",
     "DateRegularity",
     "DayOfYear",
     "DayRegularity",
@@ -197,6 +201,7 @@ __all__ = [
     "RunWorkerResponse",
     "ScheduleMatchingPattern",
     "ScheduleMatchingPatternContext",
+    "ScheduledTimeAdjustment",
     "SchedulerJob",
     "SchedulerJobResponse",
     "Sleep",
@@ -214,6 +219,7 @@ __all__ = [
     "TaskStateDefinition",
     "TaskSummary",
     "TaskTransitionDefinition",
+    "TimeAdjustment",
     "TimeConstraints",
     "TimeOfDay",
     "TransitionTriggerDefinition",

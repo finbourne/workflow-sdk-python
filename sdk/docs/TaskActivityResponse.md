@@ -22,6 +22,17 @@ create_new_task_activity_response_instance = lusid_workflow.models.create_new_ta
                             'key' : lusid_workflow.models.field_mapping.FieldMapping(
                                 map_from = '0', 
                                 set_to = null, )
+                            }, 
+                        schedule_dependent_task_fields = {
+                            'key' : lusid_workflow.models.scheduled_time_adjustment.ScheduledTimeAdjustment(
+                                date_adjustment = lusid_workflow.models.date_adjustment.DateAdjustment(
+                                    delta_days = -10000, 
+                                    business_day_adjustment = '0', ), 
+                                time_adjustment = lusid_workflow.models.time_adjustment.TimeAdjustment(
+                                    set_to = lusid_workflow.models.specified_time.SpecifiedTime(
+                                        hours = 0, 
+                                        minutes = 0, 
+                                        type = '0', ), ), )
                             }, )
 
 task_activity_response_instance = TaskActivityResponse(create_new_task_activity_response_instance)
