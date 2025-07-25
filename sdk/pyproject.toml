@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lusid-workflow-sdk"
-version = "2.1.171"
+version = "2.1.172"
 description = "FINBOURNE Workflow API"
 authors = ["FINBOURNE Technology <info@finbourne.com>"]
 license = "MIT"
