@@ -23,6 +23,8 @@ See all compatible oneOf types with WorkerConfigurationResponse
 
  * [HealthCheckResponse](./HealthCheckResponse.md)
 
+ * [LibraryResponse](./LibraryResponse.md)
+
  * [LuminesceViewResponse](./LuminesceViewResponse.md)
 
  * [SchedulerJobResponse](./SchedulerJobResponse.md)

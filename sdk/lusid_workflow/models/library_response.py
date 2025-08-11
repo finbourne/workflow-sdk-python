@@ -18,17 +18,15 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
-from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
+from typing import Any, Dict, Optional
+from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, validator 
 
-class CreateChildTasksAction(BaseModel):
+class LibraryResponse(BaseModel):
     """
-    Defines a Create Child Tasks Action  # noqa: E501
+    Readonly configuration for any Library Worker  # noqa: E501
     """
-    type:  StrictStr = Field(...,alias="type", description="Type name for this Action") 
-    child_task_configurations: conlist(CreateChildTaskConfiguration) = Field(..., alias="childTaskConfigurations", description="The Child Task Configurations")
-    __properties = ["type", "childTaskConfigurations"]
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of worker") 
+    __properties = ["type"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -41,7 +39,7 @@ class CreateChildTasksAction(BaseModel):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'CreateChildTasksAction' not in [ 
+        if 'LibraryResponse' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -87,8 +85,11 @@ class CreateChildTasksAction(BaseModel):
         if "type" != "type":
             return value
 
-        if not value == 'CreateChildTasks':
-            raise ValueError("must be one of enum values ('CreateChildTasks')")
+        if value is None:
+            return value
+
+        if value not in ('Library'):
+            raise ValueError("must be one of enum values ('Library')")
         return value
 
     class Config:
@@ -113,8 +114,8 @@ class CreateChildTasksAction(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CreateChildTasksAction:
-        """Create an instance of CreateChildTasksAction from a JSON string"""
+    def from_json(cls, json_str: str) -> LibraryResponse:
+        """Create an instance of LibraryResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -123,26 +124,23 @@ class CreateChildTasksAction(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in child_task_configurations (list)
-        _items = []
-        if self.child_task_configurations:
-            for _item in self.child_task_configurations:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['childTaskConfigurations'] = _items
+        # set to None if type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.type is None and "type" in self.__fields_set__:
+            _dict['type'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CreateChildTasksAction:
-        """Create an instance of CreateChildTasksAction from a dict"""
+    def from_dict(cls, obj: dict) -> LibraryResponse:
+        """Create an instance of LibraryResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CreateChildTasksAction.parse_obj(obj)
+            return LibraryResponse.parse_obj(obj)
 
-        _obj = CreateChildTasksAction.parse_obj({
-            "type": obj.get("type"),
-            "child_task_configurations": [CreateChildTaskConfiguration.from_dict(_item) for _item in obj.get("childTaskConfigurations")] if obj.get("childTaskConfigurations") is not None else None
+        _obj = LibraryResponse.parse_obj({
+            "type": obj.get("type")
         })
         return _obj

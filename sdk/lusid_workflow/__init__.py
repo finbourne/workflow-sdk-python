@@ -78,6 +78,7 @@ from lusid_workflow.models.health_check_response import HealthCheckResponse
 from lusid_workflow.models.id_selector_definition import IdSelectorDefinition
 from lusid_workflow.models.identifier_part_schema import IdentifierPartSchema
 from lusid_workflow.models.initial_state import InitialState
+from lusid_workflow.models.library_response import LibraryResponse
 from lusid_workflow.models.link import Link
 from lusid_workflow.models.luminesce_view import LuminesceView
 from lusid_workflow.models.luminesce_view_response import LuminesceViewResponse
@@ -211,6 +212,7 @@ __all__ = [
     "IdSelectorDefinition",
     "IdentifierPartSchema",
     "InitialState",
+    "LibraryResponse",
     "Link",
     "LuminesceView",
     "LuminesceViewResponse",
