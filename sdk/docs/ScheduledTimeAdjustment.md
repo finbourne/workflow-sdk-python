@@ -1,6 +1,6 @@
 # ScheduledTimeAdjustment
 
-Represents an adjustment to the scheduled time of an EventHandler. Only relevant for EventHandlers with a  Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern
+Represents an adjustment to the scheduled time of an EventHandler. Only relevant for EventHandlers with a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

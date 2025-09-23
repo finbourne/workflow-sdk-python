@@ -26,7 +26,7 @@ class ActionLogOrigin(BaseModel):
     The Action Log Origin contains information about how the Action was created  # noqa: E501
     """
     task_id:  Optional[StrictStr] = Field(None,alias="taskId", description="The Id of the Task that created this Action") 
-    request_id:  StrictStr = Field(...,alias="requestId", description="The request Id of the request that caused this Action to be triggered.  This could be the original request that caused a sequence of Actions that resulted in this Action") 
+    request_id:  StrictStr = Field(...,alias="requestId", description="The request Id of the request that caused this Action to be triggered. This could be the original request that caused a sequence of Actions that resulted in this Action") 
     __properties = ["taskId", "requestId"]
 
     class Config:

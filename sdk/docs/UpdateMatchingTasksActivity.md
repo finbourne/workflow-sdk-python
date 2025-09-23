@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **trigger** | **str** | Trigger to supply to all tasks that have been matched | 
 **correlation_ids** | [**List[EventHandlerMapping]**](EventHandlerMapping.md) | The event to correlation ID mappings | [optional] 
 **task_fields** | [**Dict[str, FieldMapping]**](FieldMapping.md) | The event to task field mappings | [optional] 
-**schedule_dependent_task_fields** | [**Dict[str, ScheduledTimeAdjustment]**](ScheduledTimeAdjustment.md) | The Schedule dependent task field mappings. Only relevant if a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern is  specified | [optional] 
+**schedule_dependent_task_fields** | [**Dict[str, ScheduledTimeAdjustment]**](ScheduledTimeAdjustment.md) | The Schedule dependent task field mappings. Only relevant if a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern is specified | [optional] 
 ## Example
 
 ```python

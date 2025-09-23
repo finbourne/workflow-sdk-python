@@ -32,7 +32,7 @@ class CreateNewTaskActivityResponse(BaseModel):
     initial_trigger:  Optional[StrictStr] = Field(None,alias="initialTrigger", description="Trigger to supply to all tasks to be made") 
     correlation_ids: Optional[conlist(EventHandlerMapping)] = Field(None, alias="correlationIds", description="The event to correlation ID mappings")
     task_fields: Optional[Dict[str, FieldMapping]] = Field(None, alias="taskFields", description="The event to task field mappings")
-    schedule_dependent_task_fields: Optional[Dict[str, ScheduledTimeAdjustment]] = Field(None, alias="scheduleDependentTaskFields", description="The Schedule dependent task field mappings. Only relevant if a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern is  specified")
+    schedule_dependent_task_fields: Optional[Dict[str, ScheduledTimeAdjustment]] = Field(None, alias="scheduleDependentTaskFields", description="The Schedule dependent task field mappings. Only relevant if a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern is specified")
     __properties = ["type", "initialTrigger", "correlationIds", "taskFields", "scheduleDependentTaskFields"]
 
     @validator('type')

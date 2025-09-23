@@ -24,7 +24,7 @@ from lusid_workflow.models.task_instance_field import TaskInstanceField
 
 class UpdateTaskWithIdAndTriggerRequest(BaseModel):
     """
-    A request to update multiple Tasks  Includes a trigger which is supplied from route in single update request  # noqa: E501
+    A request to update multiple Tasks Includes a trigger which is supplied from route in single update request  # noqa: E501
     """
     task_instance_id:  Optional[StrictStr] = Field(None,alias="taskInstanceId", description="The ID of the task instance") 
     correlation_ids: Optional[conlist(StrictStr)] = Field(None, alias="correlationIds", description="A set of guid identifiers that allow correlation across the application tier")

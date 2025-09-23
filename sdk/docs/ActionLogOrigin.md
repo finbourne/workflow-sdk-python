@@ -5,7 +5,7 @@ The Action Log Origin contains information about how the Action was created
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **task_id** | **str** | The Id of the Task that created this Action | [optional] 
-**request_id** | **str** | The request Id of the request that caused this Action to be triggered.  This could be the original request that caused a sequence of Actions that resulted in this Action | 
+**request_id** | **str** | The request Id of the request that caused this Action to be triggered. This could be the original request that caused a sequence of Actions that resulted in this Action | 
 ## Example
 
 ```python

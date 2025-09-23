@@ -25,7 +25,7 @@ from lusid_workflow.models.time_adjustment import TimeAdjustment
 
 class ScheduledTimeAdjustment(BaseModel):
     """
-    Represents an adjustment to the scheduled time of an EventHandler. Only relevant for EventHandlers with a  Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern  # noqa: E501
+    Represents an adjustment to the scheduled time of an EventHandler. Only relevant for EventHandlers with a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern  # noqa: E501
     """
     date_adjustment: DateAdjustment = Field(..., alias="dateAdjustment")
     time_adjustment: TimeAdjustment = Field(..., alias="timeAdjustment")

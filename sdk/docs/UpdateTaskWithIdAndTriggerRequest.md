@@ -1,6 +1,6 @@
 # UpdateTaskWithIdAndTriggerRequest
 
-A request to update multiple Tasks  Includes a trigger which is supplied from route in single update request
+A request to update multiple Tasks Includes a trigger which is supplied from route in single update request
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

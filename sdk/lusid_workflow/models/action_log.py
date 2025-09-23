@@ -30,7 +30,7 @@ class ActionLog(BaseModel):
     id:  StrictStr = Field(...,alias="id", description="Unique identifier of the Action") 
     origin: ActionLogOrigin = Field(...)
     action_type:  StrictStr = Field(...,alias="actionType", description="The type of the Action") 
-    run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that the Action was performed by.  If not specified, the actions were performed by the \"current user\".") 
+    run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that the Action was performed by. If not specified, the actions were performed by the \"current user\".") 
     logged_items: conlist(ActionLogItem) = Field(..., alias="loggedItems", description="The logged items for this Action")
     __properties = ["id", "origin", "actionType", "runAsUserId", "loggedItems"]
 
