@@ -16,7 +16,7 @@ from pydantic.v1 import BaseModel, Field, conlist, constr
 
 start_date: StrictStr = "example_start_date"
 end_date: Optional[StrictStr] = "example_end_date"
-times_of_day: conlist(TimeOfDay, max_items=5, min_items=1) = Field(..., alias="timesOfDay", description="Times of the day to run the Recurrence Pattern")
+times_of_day: conlist(TimeOfDay, max_items=100, min_items=1) = Field(..., alias="timesOfDay", description="Times of the day to run the Recurrence Pattern")
 time_constraints_instance = TimeConstraints(start_date=start_date, end_date=end_date, times_of_day=times_of_day)
 
 ```
