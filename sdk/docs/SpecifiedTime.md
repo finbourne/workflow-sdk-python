@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.specified_time import SpecifiedTime
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, conint, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-hours: conint(strict=True, le=23, ge=0) = Field(..., description="Hours")
+hours: StrictInt = # Replace with your value
 hours: StrictInt = 42
-minutes: conint(strict=True, le=59, ge=0) = Field(..., description="Minutes")
+minutes: StrictInt = # Replace with your value
 minutes: StrictInt = 42
 type: StrictStr = "example_type"
 specified_time_instance = SpecifiedTime(hours=hours, minutes=minutes, type=type)

@@ -10,10 +10,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.run_worker_request import RunWorkerRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictInt, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-parameters: conlist(ParameterValue) = # Replace with your value
+parameters: List[ParameterValue] = # Replace with your value
 worker_timeout: Optional[StrictInt] = # Replace with your value
 worker_timeout: Optional[StrictInt] = None
 run_worker_request_instance = RunWorkerRequest(parameters=parameters, worker_timeout=worker_timeout)

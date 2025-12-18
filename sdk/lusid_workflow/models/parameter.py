@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class Parameter(BaseModel):
     """
@@ -29,7 +31,7 @@ class Parameter(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="Name") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="DisplayName") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Description") 
-    required: StrictBool = Field(..., description="Required or not")
+    required: StrictBool = Field(description="Required or not")
     default_value:  Optional[StrictStr] = Field(None,alias="defaultValue", description="DefaultValue") 
     __properties = ["type", "name", "displayName", "description", "required", "defaultValue"]
 
@@ -100,3 +102,5 @@ class Parameter(BaseModel):
             "default_value": obj.get("defaultValue")
         })
         return _obj
+
+Parameter.update_forward_refs()

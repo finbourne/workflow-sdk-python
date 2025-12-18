@@ -18,15 +18,16 @@ import json
 import pprint
 import re  # noqa: F401
 
-from typing import Any, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.day_regularity import DayRegularity
 from lusid_workflow.models.relative_month_regularity import RelativeMonthRegularity
 from lusid_workflow.models.specific_month_regularity import SpecificMonthRegularity
 from lusid_workflow.models.week_regularity import WeekRegularity
 from lusid_workflow.models.year_regularity import YearRegularity
-from typing import Union, Any, List, TYPE_CHECKING
-from pydantic.v1 import StrictStr, Field
+
 
 DATEREGULARITY_ONE_OF_SCHEMAS = ["DayRegularity", "RelativeMonthRegularity", "SpecificMonthRegularity", "WeekRegularity", "YearRegularity"]
 

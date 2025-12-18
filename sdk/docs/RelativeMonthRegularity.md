@@ -12,12 +12,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.relative_month_regularity import RelativeMonthRegularity
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictStr, conint, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-frequency: conint(strict=True, le=100, ge=1) = Field(..., description="The frequency of the Relative Month Regularity")
+frequency: StrictInt = # Replace with your value
 frequency: StrictInt = 42
-days_of_week: conlist(StrictStr, max_items=7, min_items=1) = Field(..., alias="daysOfWeek", description="Days of the week")
+days_of_week: List[StrictStr] = # Replace with your value
 index: StrictStr = "example_index"
 type: StrictStr = "example_type"
 relative_month_regularity_instance = RelativeMonthRegularity(frequency=frequency, days_of_week=days_of_week, index=index, type=type)

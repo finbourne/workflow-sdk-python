@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
 from lusid_workflow.models.event_matching_pattern import EventMatchingPattern
 from lusid_workflow.models.resource_id import ResourceId
@@ -30,16 +32,16 @@ class CreateEventHandlerRequest(BaseModel):
     """
     Contains information for creating an Event Handler  # noqa: E501
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
     status:  StrictStr = Field(...,alias="status", description="The current status of the event handler") 
-    event_matching_pattern: Optional[EventMatchingPattern] = Field(None, alias="eventMatchingPattern")
-    schedule_matching_pattern: Optional[ScheduleMatchingPattern] = Field(None, alias="scheduleMatchingPattern")
-    run_as_user_id: EventHandlerMapping = Field(..., alias="runAsUserId")
-    task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
-    task_definition_as_at: Optional[datetime] = Field(None, alias="taskDefinitionAsAt", description="AsAt of the required task definition")
-    task_activity: TaskActivity = Field(..., alias="taskActivity")
+    event_matching_pattern: Optional[EventMatchingPattern] = Field(default=None, alias="eventMatchingPattern")
+    schedule_matching_pattern: Optional[ScheduleMatchingPattern] = Field(default=None, alias="scheduleMatchingPattern")
+    run_as_user_id: EventHandlerMapping = Field(alias="runAsUserId")
+    task_definition_id: ResourceId = Field(alias="taskDefinitionId")
+    task_definition_as_at: Optional[datetime] = Field(default=None, description="AsAt of the required task definition", alias="taskDefinitionAsAt")
+    task_activity: TaskActivity = Field(alias="taskActivity")
     __properties = ["id", "displayName", "description", "status", "eventMatchingPattern", "scheduleMatchingPattern", "runAsUserId", "taskDefinitionId", "taskDefinitionAsAt", "taskActivity"]
 
     class Config:
@@ -126,3 +128,5 @@ class CreateEventHandlerRequest(BaseModel):
             "task_activity": TaskActivity.from_dict(obj.get("taskActivity")) if obj.get("taskActivity") is not None else None
         })
         return _obj
+
+CreateEventHandlerRequest.update_forward_refs()

@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.parameter_value import ParameterValue
 
 class RunWorkerRequest(BaseModel):
     """
     Request to Create a new worker  # noqa: E501
     """
-    parameters: conlist(ParameterValue) = Field(..., description="The Parameter and their values.")
-    worker_timeout: Optional[StrictInt] = Field(None, alias="workerTimeout", description="The timeout in seconds for the worker")
+    parameters: List[ParameterValue] = Field(description="The Parameter and their values.")
+    worker_timeout: Optional[StrictInt] = Field(default=None, description="The timeout in seconds for the worker", alias="workerTimeout")
     __properties = ["parameters", "workerTimeout"]
 
     class Config:
@@ -90,3 +92,5 @@ class RunWorkerRequest(BaseModel):
             "worker_timeout": obj.get("workerTimeout")
         })
         return _obj
+
+RunWorkerRequest.update_forward_refs()

@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.read_only_states import ReadOnlyStates
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 state_type: StrictStr = "example_state_type"
-selected_states: Optional[conlist(StrictStr)] = # Replace with your value
+selected_states: Optional[List[StrictStr]] = # Replace with your value
 read_only_states_instance = ReadOnlyStates(state_type=state_type, selected_states=selected_states)
 
 ```

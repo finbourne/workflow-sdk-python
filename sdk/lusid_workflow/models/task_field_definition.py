@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.read_only_states import ReadOnlyStates
 from lusid_workflow.models.value_constraints import ValueConstraints
 
@@ -29,12 +31,12 @@ class TaskFieldDefinition(BaseModel):
     """
     name:  StrictStr = Field(...,alias="name", description="The name of this Field") 
     type:  StrictStr = Field(...,alias="type", description="The value type for the field. Available values are: \"String\", \"Decimal\", \"DateTime\", \"Boolean\")") 
-    read_only_states: Optional[ReadOnlyStates] = Field(None, alias="readOnlyStates")
-    value_constraints: Optional[ValueConstraints] = Field(None, alias="valueConstraints")
+    read_only_states: Optional[ReadOnlyStates] = Field(default=None, alias="readOnlyStates")
+    value_constraints: Optional[ValueConstraints] = Field(default=None, alias="valueConstraints")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="Display name for field definition") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Description for field definition") 
     category:  Optional[StrictStr] = Field(None,alias="category", description="Category for field definition") 
-    contains_url: Optional[StrictBool] = Field(None, alias="containsUrl", description="Field contains url")
+    contains_url: Optional[StrictBool] = Field(default=None, description="Field contains url", alias="containsUrl")
     __properties = ["name", "type", "readOnlyStates", "valueConstraints", "displayName", "description", "category", "containsUrl"]
 
     class Config:
@@ -117,3 +119,5 @@ class TaskFieldDefinition(BaseModel):
             "contains_url": obj.get("containsUrl")
         })
         return _obj
+
+TaskFieldDefinition.update_forward_refs()

@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class InitialState(BaseModel):
     """
     Defines the Initial State of the Task  # noqa: E501
     """
     name:  StrictStr = Field(...,alias="name", description="The Initial State of the Task") 
-    required_fields: Optional[conlist(StrictStr)] = Field(None, alias="requiredFields", description="Required input Fields for the Initial State")
+    required_fields: Optional[List[StrictStr]] = Field(default=None, description="Required input Fields for the Initial State", alias="requiredFields")
     __properties = ["name", "requiredFields"]
 
     class Config:
@@ -82,3 +84,5 @@ class InitialState(BaseModel):
             "required_fields": obj.get("requiredFields")
         })
         return _obj
+
+InitialState.update_forward_refs()

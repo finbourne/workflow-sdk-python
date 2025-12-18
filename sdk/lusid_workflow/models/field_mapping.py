@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class FieldMapping(BaseModel):
     """
     Defines a single Field map  # noqa: E501
     """
     map_from:  Optional[StrictStr] = Field(None,alias="mapFrom", description="The field to map from") 
-    set_to: Optional[Any] = Field(None, alias="setTo", description="The (constant) value to set")
+    set_to: Optional[Any] = Field(default=None, description="The (constant) value to set", alias="setTo")
     __properties = ["mapFrom", "setTo"]
 
     class Config:
@@ -87,3 +89,5 @@ class FieldMapping(BaseModel):
             "set_to": obj.get("setTo")
         })
         return _obj
+
+FieldMapping.update_forward_refs()

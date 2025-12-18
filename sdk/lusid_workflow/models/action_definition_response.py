@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.action_details_response import ActionDetailsResponse
 
 class ActionDefinitionResponse(BaseModel):
@@ -28,7 +30,7 @@ class ActionDefinitionResponse(BaseModel):
     """
     name:  Optional[StrictStr] = Field(None,alias="name", description="The Name of this Action") 
     run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".") 
-    action_details: Optional[ActionDetailsResponse] = Field(None, alias="actionDetails")
+    action_details: Optional[ActionDetailsResponse] = Field(default=None, alias="actionDetails")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="Schema for the Action") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Schema for the Action") 
     category:  Optional[StrictStr] = Field(None,alias="category", description="Schema for the Action") 
@@ -114,3 +116,5 @@ class ActionDefinitionResponse(BaseModel):
             "category": obj.get("category")
         })
         return _obj
+
+ActionDefinitionResponse.update_forward_refs()

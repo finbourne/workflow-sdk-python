@@ -11,11 +11,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.get_worker_result_response import GetWorkerResultResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 worker_status: StrictStr = "example_worker_status"
-results: conlist(Dict[str, Any]) = # Replace with your value
+results: List[Dict[str, Any]] = # Replace with your value
 status_detail: Optional[StrictStr] = "example_status_detail"
 get_worker_result_response_instance = GetWorkerResultResponse(worker_status=worker_status, results=results, status_detail=status_detail)
 

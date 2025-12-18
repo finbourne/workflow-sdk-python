@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.time_of_day import TimeOfDay
 
 class TimeConstraints(BaseModel):
@@ -28,7 +30,7 @@ class TimeConstraints(BaseModel):
     """
     start_date:  StrictStr = Field(...,alias="startDate", description="Start date of the Recurrence Pattern") 
     end_date:  Optional[StrictStr] = Field(None,alias="endDate", description="Optional end date of the Recurrence Pattern") 
-    times_of_day: conlist(TimeOfDay) = Field(..., alias="timesOfDay", description="Times of the day to run the Recurrence Pattern")
+    times_of_day: List[TimeOfDay] = Field(description="Times of the day to run the Recurrence Pattern", alias="timesOfDay")
     __properties = ["startDate", "endDate", "timesOfDay"]
 
     class Config:
@@ -92,3 +94,5 @@ class TimeConstraints(BaseModel):
             "times_of_day": [TimeOfDay.from_dict(_item) for _item in obj.get("timesOfDay")] if obj.get("timesOfDay") is not None else None
         })
         return _obj
+
+TimeConstraints.update_forward_refs()

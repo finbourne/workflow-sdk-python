@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class ValueConstraints(BaseModel):
     """
@@ -27,7 +29,7 @@ class ValueConstraints(BaseModel):
     """
     constraint_type:  StrictStr = Field(...,alias="constraintType", description="Whether the constraint is a suggestion or should be enforced via validation (e.g. Suggested, Validated)") 
     value_source_type:  StrictStr = Field(...,alias="valueSourceType", description="The source of the acceptable values (e.g. AcceptableValues)") 
-    acceptable_values: conlist(Any) = Field(..., alias="acceptableValues", description="The acceptable values for the field")
+    acceptable_values: List[Any] = Field(description="The acceptable values for the field", alias="acceptableValues")
     __properties = ["constraintType", "valueSourceType", "acceptableValues"]
 
     class Config:
@@ -79,3 +81,5 @@ class ValueConstraints(BaseModel):
             "acceptable_values": obj.get("acceptableValues")
         })
         return _obj
+
+ValueConstraints.update_forward_refs()

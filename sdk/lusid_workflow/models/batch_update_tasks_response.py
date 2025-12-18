@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.error_detail import ErrorDetail
 from lusid_workflow.models.link import Link
 from lusid_workflow.models.task import Task
@@ -28,9 +30,9 @@ class BatchUpdateTasksResponse(BaseModel):
     """
     Defines a representation of tasks that have been updated  # noqa: E501
     """
-    values: Optional[conlist(Task)] = Field(None, description="Successful tasks brought back from the BatchUpdate call")
-    failed: Optional[conlist(ErrorDetail)] = Field(None, description="Individual failures for each task returned from the BatchUpdate call")
-    links: Optional[conlist(Link)] = None
+    values: Optional[List[Task]] = Field(default=None, description="Successful tasks brought back from the BatchUpdate call")
+    failed: Optional[List[ErrorDetail]] = Field(default=None, description="Individual failures for each task returned from the BatchUpdate call")
+    links: Optional[List[Link]] = None
     __properties = ["values", "failed", "links"]
 
     class Config:
@@ -120,3 +122,5 @@ class BatchUpdateTasksResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+BatchUpdateTasksResponse.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.action_details import ActionDetails
 
 class ActionDefinition(BaseModel):
@@ -28,7 +30,7 @@ class ActionDefinition(BaseModel):
     """
     name:  StrictStr = Field(...,alias="name", description="The Name of this Action") 
     run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that this action will be performed by. If not specified, the actions will be performed by the \"current user\".") 
-    action_details: ActionDetails = Field(..., alias="actionDetails")
+    action_details: ActionDetails = Field(alias="actionDetails")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of this Action") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of this Action") 
     __properties = ["name", "runAsUserId", "actionDetails", "displayName", "description"]
@@ -102,3 +104,5 @@ class ActionDefinition(BaseModel):
             "description": obj.get("description")
         })
         return _obj
+
+ActionDefinition.update_forward_refs()

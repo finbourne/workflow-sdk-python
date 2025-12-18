@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
 from lusid_workflow.models.field_mapping import FieldMapping
 from lusid_workflow.models.scheduled_time_adjustment import ScheduledTimeAdjustment
@@ -30,9 +32,9 @@ class CreateNewTaskActivityResponse(BaseModel):
     """
     type:  Optional[StrictStr] = Field(None,alias="type", description="Type of task activity") 
     initial_trigger:  Optional[StrictStr] = Field(None,alias="initialTrigger", description="Trigger to supply to all tasks to be made") 
-    correlation_ids: Optional[conlist(EventHandlerMapping)] = Field(None, alias="correlationIds", description="The event to correlation ID mappings")
-    task_fields: Optional[Dict[str, FieldMapping]] = Field(None, alias="taskFields", description="The event to task field mappings")
-    schedule_dependent_task_fields: Optional[Dict[str, ScheduledTimeAdjustment]] = Field(None, alias="scheduleDependentTaskFields", description="The Schedule dependent task field mappings. Only relevant if a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern is specified")
+    correlation_ids: Optional[List[EventHandlerMapping]] = Field(default=None, description="The event to correlation ID mappings", alias="correlationIds")
+    task_fields: Optional[Dict[str, FieldMapping]] = Field(default=None, description="The event to task field mappings", alias="taskFields")
+    schedule_dependent_task_fields: Optional[Dict[str, ScheduledTimeAdjustment]] = Field(default=None, description="The Schedule dependent task field mappings. Only relevant if a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern is specified", alias="scheduleDependentTaskFields")
     __properties = ["type", "initialTrigger", "correlationIds", "taskFields", "scheduleDependentTaskFields"]
 
     @validator('type')
@@ -85,7 +87,12 @@ class CreateNewTaskActivityResponse(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -95,8 +102,8 @@ class CreateNewTaskActivityResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ('CreateNewTask', 'UpdateMatchingTasks'):
-            raise ValueError("must be one of enum values ('CreateNewTask', 'UpdateMatchingTasks')")
+        if value not in ['CreateNewTask']:
+            raise ValueError("must be one of enum values ('CreateNewTask')")
         return value
 
     class Config:
@@ -206,3 +213,5 @@ class CreateNewTaskActivityResponse(BaseModel):
             else None
         })
         return _obj
+
+CreateNewTaskActivityResponse.update_forward_refs()

@@ -18,17 +18,85 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, conint, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class SpecificMonthRegularity(BaseModel):
     """
     Specific Month Regularity  # noqa: E501
     """
-    frequency: conint(strict=True) = Field(..., description="The frequency of the Specific Month Regularity")
-    days_of_month: conlist(StrictInt) = Field(..., alias="daysOfMonth", description="Days of the month")
+    frequency: StrictInt = Field(description="The frequency of the Specific Month Regularity")
+    days_of_month: List[StrictInt] = Field(description="Days of the month", alias="daysOfMonth")
     type:  StrictStr = Field(...,alias="type", description="The type of Date Regularity") 
     __properties = ["frequency", "daysOfMonth", "type"]
+
+    @validator('type')
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'SpecificMonthRegularity' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "type" != "type":
+            return value
+
+        if value not in ['SpecificMonth']:
+            raise ValueError("must be one of enum values ('SpecificMonth')")
+        return value
 
     class Config:
         """Pydantic configuration"""
@@ -79,3 +147,5 @@ class SpecificMonthRegularity(BaseModel):
             "type": obj.get("type")
         })
         return _obj
+
+SpecificMonthRegularity.update_forward_refs()

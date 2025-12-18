@@ -12,11 +12,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.transition_trigger_definition import TransitionTriggerDefinition
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 name: StrictStr = "example_name"
-trigger: TriggerSchema = # Replace with your value
+trigger: TriggerSchema
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 transition_trigger_definition_instance = TransitionTriggerDefinition(name=name, trigger=trigger, display_name=display_name, description=description)

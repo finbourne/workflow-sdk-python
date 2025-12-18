@@ -18,19 +18,21 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.task_definition import TaskDefinition
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-id: ResourceId = # Replace with your value
+id: ResourceId
 version: Optional[VersionInfo] = None
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-states: conlist(TaskStateDefinition, min_items=1) = Field(..., description="The states this Task Definition operates over")
-field_schema: Optional[conlist(TaskFieldDefinition)] = # Replace with your value
+states: List[TaskStateDefinition] = # Replace with your value
+field_schema: Optional[List[TaskFieldDefinition]] = # Replace with your value
 initial_state: InitialState = # Replace with your value
-triggers: Optional[conlist(TransitionTriggerDefinition)] = # Replace with your value
-actions: Optional[conlist(ActionDefinitionResponse)] = # Replace with your value
-transitions: Optional[conlist(TaskTransitionDefinition)] = # Replace with your value
+triggers: Optional[List[TransitionTriggerDefinition]] = # Replace with your value
+actions: Optional[List[ActionDefinitionResponse]] = # Replace with your value
+transitions: Optional[List[TaskTransitionDefinition]] = # Replace with your value
 task_definition_instance = TaskDefinition(id=id, version=version, display_name=display_name, description=description, states=states, field_schema=field_schema, initial_state=initial_state, triggers=triggers, actions=actions, transitions=transitions)
 
 ```

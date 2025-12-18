@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TaskInstanceField(BaseModel):
     """
     Defines a Field on a Task  # noqa: E501
     """
     name:  StrictStr = Field(...,alias="name", description="The name of this Field") 
-    value: Optional[Any] = Field(None, description="The value of this Field")
+    value: Optional[Any] = Field(default=None, description="The value of this Field")
     __properties = ["name", "value"]
 
     class Config:
@@ -82,3 +84,5 @@ class TaskInstanceField(BaseModel):
             "value": obj.get("value")
         })
         return _obj
+
+TaskInstanceField.update_forward_refs()

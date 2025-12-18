@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.create_child_tasks_action_response import CreateChildTasksActionResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 type: Optional[StrictStr] = "example_type"
-child_task_configurations: Optional[conlist(CreateChildTaskConfiguration)] = # Replace with your value
+child_task_configurations: Optional[List[CreateChildTaskConfiguration]] = # Replace with your value
 create_child_tasks_action_response_instance = CreateChildTasksActionResponse(type=type, child_task_configurations=child_task_configurations)
 
 ```

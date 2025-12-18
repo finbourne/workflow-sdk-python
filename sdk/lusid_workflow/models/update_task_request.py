@@ -18,16 +18,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.task_instance_field import TaskInstanceField
 
 class UpdateTaskRequest(BaseModel):
     """
     A request to update a Task  # noqa: E501
     """
-    correlation_ids: Optional[conlist(StrictStr)] = Field(None, alias="correlationIds", description="A set of guid identifiers that allow correlation across the application tier")
-    fields: Optional[conlist(TaskInstanceField)] = Field(None, description="Defines the fields associated with the update")
+    correlation_ids: Optional[List[StrictStr]] = Field(default=None, description="A set of guid identifiers that allow correlation across the application tier", alias="correlationIds")
+    fields: Optional[List[TaskInstanceField]] = Field(default=None, description="Defines the fields associated with the update")
     stacking_key:  Optional[StrictStr] = Field(None,alias="stackingKey", description="The key for the Stack that this Task should be added to") 
     __properties = ["correlationIds", "fields", "stackingKey"]
 
@@ -102,3 +104,5 @@ class UpdateTaskRequest(BaseModel):
             "stacking_key": obj.get("stackingKey")
         })
         return _obj
+
+UpdateTaskRequest.update_forward_refs()

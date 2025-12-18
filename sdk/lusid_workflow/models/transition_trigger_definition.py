@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.trigger_schema import TriggerSchema
 
 class TransitionTriggerDefinition(BaseModel):
@@ -27,7 +29,7 @@ class TransitionTriggerDefinition(BaseModel):
     State changes happen in response to Triggers  # noqa: E501
     """
     name:  StrictStr = Field(...,alias="name", description="The key/Name of this Trigger") 
-    trigger: TriggerSchema = Field(...)
+    trigger: TriggerSchema
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="Display name for trigger") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Description of trigger") 
     __properties = ["name", "trigger", "displayName", "description"]
@@ -95,3 +97,5 @@ class TransitionTriggerDefinition(BaseModel):
             "description": obj.get("description")
         })
         return _obj
+
+TransitionTriggerDefinition.update_forward_refs()

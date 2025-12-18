@@ -26,9 +26,11 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.task import Task
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictBool, StrictStr, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+
 id: StrictStr = "example_id"
 task_definition_id: ResourceId = # Replace with your value
 task_definition_version: TaskDefinitionVersion = # Replace with your value
@@ -36,13 +38,13 @@ task_definition_display_name: StrictStr = "example_task_definition_display_name"
 state: StrictStr = "example_state"
 ultimate_parent_task: TaskSummary = # Replace with your value
 parent_task: Optional[TaskSummary] = # Replace with your value
-child_tasks: Optional[conlist(TaskSummary)] = # Replace with your value
-correlation_ids: Optional[conlist(StrictStr)] = # Replace with your value
+child_tasks: Optional[List[TaskSummary]] = # Replace with your value
+correlation_ids: Optional[List[StrictStr]] = # Replace with your value
 version: Optional[VersionInfo] = None
 terminal_state: StrictBool = # Replace with your value
 terminal_state:StrictBool = True
 as_at_last_transition: Optional[datetime] = # Replace with your value
-fields: Optional[conlist(TaskInstanceField)] = # Replace with your value
+fields: Optional[List[TaskInstanceField]] = # Replace with your value
 stacking_key: Optional[StrictStr] = "example_stacking_key"
 stack: Optional[Stack] = None
 action_log_id_created: Optional[StrictStr] = "example_action_log_id_created"

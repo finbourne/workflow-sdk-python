@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.action_definition_response import ActionDefinitionResponse
 from lusid_workflow.models.initial_state import InitialState
 from lusid_workflow.models.resource_id import ResourceId
@@ -33,16 +35,16 @@ class TaskDefinition(BaseModel):
     """
     Task Definition  # noqa: E501
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     version: Optional[VersionInfo] = None
     display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
-    states: conlist(TaskStateDefinition) = Field(..., description="The states this Task Definition operates over")
-    field_schema: Optional[conlist(TaskFieldDefinition)] = Field(None, alias="fieldSchema", description="The Fields that this Task Definition operates on")
-    initial_state: InitialState = Field(..., alias="initialState")
-    triggers: Optional[conlist(TransitionTriggerDefinition)] = Field(None, description="The Triggers for State transition")
-    actions: Optional[conlist(ActionDefinitionResponse)] = Field(None, description="The Actions of this Task - executed after a Transition completion")
-    transitions: Optional[conlist(TaskTransitionDefinition)] = Field(None, description="The Transitions between States")
+    states: List[TaskStateDefinition] = Field(description="The states this Task Definition operates over")
+    field_schema: Optional[List[TaskFieldDefinition]] = Field(default=None, description="The Fields that this Task Definition operates on", alias="fieldSchema")
+    initial_state: InitialState = Field(alias="initialState")
+    triggers: Optional[List[TransitionTriggerDefinition]] = Field(default=None, description="The Triggers for State transition")
+    actions: Optional[List[ActionDefinitionResponse]] = Field(default=None, description="The Actions of this Task - executed after a Transition completion")
+    transitions: Optional[List[TaskTransitionDefinition]] = Field(default=None, description="The Transitions between States")
     __properties = ["id", "version", "displayName", "description", "states", "fieldSchema", "initialState", "triggers", "actions", "transitions"]
 
     class Config:
@@ -170,3 +172,5 @@ class TaskDefinition(BaseModel):
             "transitions": [TaskTransitionDefinition.from_dict(_item) for _item in obj.get("transitions")] if obj.get("transitions") is not None else None
         })
         return _obj
+
+TaskDefinition.update_forward_refs()

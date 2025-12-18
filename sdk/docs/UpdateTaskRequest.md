@@ -11,11 +11,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.update_task_request import UpdateTaskRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-correlation_ids: Optional[conlist(StrictStr)] = # Replace with your value
-fields: Optional[conlist(TaskInstanceField)] = # Replace with your value
+correlation_ids: Optional[List[StrictStr]] = # Replace with your value
+fields: Optional[List[TaskInstanceField]] = # Replace with your value
 stacking_key: Optional[StrictStr] = "example_stacking_key"
 update_task_request_instance = UpdateTaskRequest(correlation_ids=correlation_ids, fields=fields, stacking_key=stacking_key)
 

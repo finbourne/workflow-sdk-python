@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class ReadOnlyStates(BaseModel):
     """
     Information about which states the field can be edited in  # noqa: E501
     """
     state_type:  StrictStr = Field(...,alias="stateType", description="The State Type (e.g. InitialState, AllStates, TerminalState, SelectedStates)") 
-    selected_states: Optional[conlist(StrictStr)] = Field(None, alias="selectedStates", description="Named states for which the field will be readonly - This field can only be populated if StateType = SelectedStates")
+    selected_states: Optional[List[StrictStr]] = Field(default=None, description="Named states for which the field will be readonly - This field can only be populated if StateType = SelectedStates", alias="selectedStates")
     __properties = ["stateType", "selectedStates"]
 
     class Config:
@@ -82,3 +84,5 @@ class ReadOnlyStates(BaseModel):
             "selected_states": obj.get("selectedStates")
         })
         return _obj
+
+ReadOnlyStates.update_forward_refs()

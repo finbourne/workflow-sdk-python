@@ -13,14 +13,16 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.action_log import ActionLog
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 id: StrictStr = "example_id"
-origin: ActionLogOrigin = # Replace with your value
+origin: ActionLogOrigin
 action_type: StrictStr = "example_action_type"
 run_as_user_id: Optional[StrictStr] = "example_run_as_user_id"
-logged_items: conlist(ActionLogItem) = # Replace with your value
+logged_items: List[ActionLogItem] = # Replace with your value
 action_log_instance = ActionLog(id=id, origin=origin, action_type=action_type, run_as_user_id=run_as_user_id, logged_items=logged_items)
 
 ```

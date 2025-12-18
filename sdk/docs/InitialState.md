@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.initial_state import InitialState
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 name: StrictStr = "example_name"
-required_fields: Optional[conlist(StrictStr)] = # Replace with your value
+required_fields: Optional[List[StrictStr]] = # Replace with your value
 initial_state_instance = InitialState(name=name, required_fields=required_fields)
 
 ```

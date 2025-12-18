@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictBool, StrictStr, conlist, constr 
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.stack import Stack
 from lusid_workflow.models.task_definition_version import TaskDefinitionVersion
@@ -32,18 +34,18 @@ class Task(BaseModel):
     Defines a Task created based on a Task Definition  # noqa: E501
     """
     id:  StrictStr = Field(...,alias="id", description="The unique id for this Task") 
-    task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
-    task_definition_version: TaskDefinitionVersion = Field(..., alias="taskDefinitionVersion")
+    task_definition_id: ResourceId = Field(alias="taskDefinitionId")
+    task_definition_version: TaskDefinitionVersion = Field(alias="taskDefinitionVersion")
     task_definition_display_name:  StrictStr = Field(...,alias="taskDefinitionDisplayName", description="The display name of the Task Definition used by this Task") 
     state:  StrictStr = Field(...,alias="state", description="Current State") 
-    ultimate_parent_task: TaskSummary = Field(..., alias="ultimateParentTask")
-    parent_task: Optional[TaskSummary] = Field(None, alias="parentTask")
-    child_tasks: Optional[conlist(TaskSummary)] = Field(None, alias="childTasks", description="This Task's child tasks")
-    correlation_ids: Optional[conlist(StrictStr)] = Field(None, alias="correlationIds", description="User-provided ID used to link entities and tasks")
+    ultimate_parent_task: TaskSummary = Field(alias="ultimateParentTask")
+    parent_task: Optional[TaskSummary] = Field(default=None, alias="parentTask")
+    child_tasks: Optional[List[TaskSummary]] = Field(default=None, description="This Task's child tasks", alias="childTasks")
+    correlation_ids: Optional[List[StrictStr]] = Field(default=None, description="User-provided ID used to link entities and tasks", alias="correlationIds")
     version: Optional[VersionInfo] = None
-    terminal_state: StrictBool = Field(..., alias="terminalState", description="True if no onward transitions are possible")
-    as_at_last_transition: Optional[datetime] = Field(None, alias="asAtLastTransition", description="Last Transition timestamp")
-    fields: Optional[conlist(TaskInstanceField)] = Field(None, description="Fields and their latest values - should correspond with the Task Definition field schema")
+    terminal_state: StrictBool = Field(description="True if no onward transitions are possible", alias="terminalState")
+    as_at_last_transition: Optional[datetime] = Field(default=None, description="Last Transition timestamp", alias="asAtLastTransition")
+    fields: Optional[List[TaskInstanceField]] = Field(default=None, description="Fields and their latest values - should correspond with the Task Definition field schema")
     stacking_key:  Optional[StrictStr] = Field(None,alias="stackingKey", description="The key used to determine which stack to add the Task to") 
     stack: Optional[Stack] = None
     action_log_id_created:  Optional[StrictStr] = Field(None,alias="actionLogIdCreated", description="The Id of the Action that created this Task") 
@@ -187,3 +189,5 @@ class Task(BaseModel):
             "action_log_id_submitted": obj.get("actionLogIdSubmitted")
         })
         return _obj
+
+Task.update_forward_refs()

@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.delete_tasks_request import DeleteTasksRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-task_ids: Optional[conlist(StrictStr)] = # Replace with your value
+task_ids: Optional[List[StrictStr]] = # Replace with your value
 delete_tasks_request_instance = DeleteTasksRequest(task_ids=task_ids)
 
 ```

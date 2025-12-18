@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.value_constraints import ValueConstraints
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 constraint_type: StrictStr = "example_constraint_type"
 value_source_type: StrictStr = "example_value_source_type"
-acceptable_values: conlist(Any) = # Replace with your value
+acceptable_values: List[Any] = # Replace with your value
 value_constraints_instance = ValueConstraints(constraint_type=constraint_type, value_source_type=value_source_type, acceptable_values=acceptable_values)
 
 ```

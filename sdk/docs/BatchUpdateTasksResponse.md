@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.batch_update_tasks_response import BatchUpdateTasksResponse
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-values: Optional[conlist(Task)] = # Replace with your value
-failed: Optional[conlist(ErrorDetail)] = # Replace with your value
-links: Optional[conlist(Link)] = None
+values: Optional[List[Task]] = # Replace with your value
+failed: Optional[List[ErrorDetail]] = # Replace with your value
+links: Optional[List[Link]] = None
 batch_update_tasks_response_instance = BatchUpdateTasksResponse(values=values, failed=failed, links=links)
 
 ```

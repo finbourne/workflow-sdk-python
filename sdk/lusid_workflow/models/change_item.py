@@ -17,22 +17,24 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, constr 
 
 class ChangeItem(BaseModel):
     """
     Defines a change that occured to a Task  # noqa: E501
     """
-    as_at_modified: datetime = Field(..., alias="asAtModified", description="The AsAt time of the change")
+    as_at_modified: datetime = Field(description="The AsAt time of the change", alias="asAtModified")
     user_id_modified:  StrictStr = Field(...,alias="userIdModified", description="The User ID that performed the change") 
     request_id_modified:  StrictStr = Field(...,alias="requestIdModified", description="The Request ID of the request that caused the change") 
-    as_at_version_number: StrictInt = Field(..., alias="asAtVersionNumber", description="The AsAt Version number")
+    as_at_version_number: StrictInt = Field(description="The AsAt Version number", alias="asAtVersionNumber")
     action:  StrictStr = Field(...,alias="action", description="The Action that resulted in the change") 
     attribute_name:  StrictStr = Field(...,alias="attributeName", description="The name of the attribute that has been change") 
-    previous_value: Optional[Any] = Field(None, alias="previousValue", description="The value of the attribute prior to the change")
-    new_value: Optional[Any] = Field(..., alias="newValue", description="The value of the attribute following the change")
+    previous_value: Optional[Any] = Field(default=None, description="The value of the attribute prior to the change", alias="previousValue")
+    new_value: Optional[Any] = Field(description="The value of the attribute following the change", alias="newValue")
     __properties = ["asAtModified", "userIdModified", "requestIdModified", "asAtVersionNumber", "action", "attributeName", "previousValue", "newValue"]
 
     class Config:
@@ -99,3 +101,5 @@ class ChangeItem(BaseModel):
             "new_value": obj.get("newValue")
         })
         return _obj
+
+ChangeItem.update_forward_refs()

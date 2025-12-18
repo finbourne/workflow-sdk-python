@@ -18,14 +18,16 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conint, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class DateAdjustment(BaseModel):
     """
     A date adjustment to apply to the scheduled time of an EventHandler with a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern  # noqa: E501
     """
-    delta_days: conint(strict=True, ge=-10000) = Field(..., alias="deltaDays", description="The delta to apply to the date part of the scheduled time, in days")
+    delta_days: StrictInt = Field(description="The delta to apply to the date part of the scheduled time, in days", alias="deltaDays")
     business_day_adjustment:  StrictStr = Field(...,alias="businessDayAdjustment", description="The Business Day Adjustment") 
     __properties = ["deltaDays", "businessDayAdjustment"]
 
@@ -77,3 +79,5 @@ class DateAdjustment(BaseModel):
             "business_day_adjustment": obj.get("businessDayAdjustment")
         })
         return _obj
+
+DateAdjustment.update_forward_refs()

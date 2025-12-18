@@ -17,15 +17,17 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
 
 class TaskDefinitionVersion(BaseModel):
     """
     The version of the Task Definition used by this Task  # noqa: E501
     """
-    as_at_modified: Optional[datetime] = Field(None, alias="asAtModified", description="The asAt datetime of the Task Definition used by this Task")
+    as_at_modified: Optional[datetime] = Field(default=None, description="The asAt datetime of the Task Definition used by this Task", alias="asAtModified")
     __properties = ["asAtModified"]
 
     class Config:
@@ -75,3 +77,5 @@ class TaskDefinitionVersion(BaseModel):
             "as_at_modified": obj.get("asAtModified")
         })
         return _obj
+
+TaskDefinitionVersion.update_forward_refs()

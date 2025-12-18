@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.task_instance_field import TaskInstanceField
 
 class UpdateTaskWithIdAndTriggerRequest(BaseModel):
@@ -27,8 +29,8 @@ class UpdateTaskWithIdAndTriggerRequest(BaseModel):
     A request to update multiple Tasks Includes a trigger which is supplied from route in single update request  # noqa: E501
     """
     task_instance_id:  Optional[StrictStr] = Field(None,alias="taskInstanceId", description="The ID of the task instance") 
-    correlation_ids: Optional[conlist(StrictStr)] = Field(None, alias="correlationIds", description="A set of guid identifiers that allow correlation across the application tier")
-    fields: Optional[conlist(TaskInstanceField)] = Field(None, description="Defines the fields associated with the update")
+    correlation_ids: Optional[List[StrictStr]] = Field(default=None, description="A set of guid identifiers that allow correlation across the application tier", alias="correlationIds")
+    fields: Optional[List[TaskInstanceField]] = Field(default=None, description="Defines the fields associated with the update")
     stacking_key:  Optional[StrictStr] = Field(None,alias="stackingKey", description="The key for the Stack that this Task should be added to") 
     trigger_name:  Optional[StrictStr] = Field(None,alias="triggerName", description="The trigger we want to update the task with") 
     __properties = ["taskInstanceId", "correlationIds", "fields", "stackingKey", "triggerName"]
@@ -116,3 +118,5 @@ class UpdateTaskWithIdAndTriggerRequest(BaseModel):
             "trigger_name": obj.get("triggerName")
         })
         return _obj
+
+UpdateTaskWithIdAndTriggerRequest.update_forward_refs()

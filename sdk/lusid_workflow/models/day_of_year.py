@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conint 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class DayOfYear(BaseModel):
     """
     A day in the year  # noqa: E501
     """
-    month: conint(strict=True) = Field(..., description="Month in the year")
-    day: conint(strict=True) = Field(..., description="Day in the month")
+    month: StrictInt = Field(description="Month in the year")
+    day: StrictInt = Field(description="Day in the month")
     __properties = ["month", "day"]
 
     class Config:
@@ -77,3 +79,5 @@ class DayOfYear(BaseModel):
             "day": obj.get("day")
         })
         return _obj
+
+DayOfYear.update_forward_refs()

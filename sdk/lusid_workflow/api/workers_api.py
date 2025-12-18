@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictInt, StrictStr, conlist, constr, validator
-
-from typing import Optional
-
+from pydantic.v1 import Field, StrictInt, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from lusid_workflow.models.get_worker_result_response import GetWorkerResultResponse
@@ -62,15 +59,15 @@ class WorkersApi:
 
 
     @overload
-    async def create_worker(self, create_worker_request : Annotated[CreateWorkerRequest, Field(..., description="Worker to be created")], **kwargs) -> Worker:  # noqa: E501
+    async def create_worker(self, create_worker_request : Annotated[CreateWorkerRequest, Field(description="Worker to be created")], **kwargs) -> Worker:  # noqa: E501
         ...
 
     @overload
-    def create_worker(self, create_worker_request : Annotated[CreateWorkerRequest, Field(..., description="Worker to be created")], async_req: Optional[bool]=True, **kwargs) -> Worker:  # noqa: E501
+    def create_worker(self, create_worker_request : Annotated[CreateWorkerRequest, Field(description="Worker to be created")], async_req: Optional[bool]=True, **kwargs) -> Worker:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_worker(self, create_worker_request : Annotated[CreateWorkerRequest, Field(..., description="Worker to be created")], async_req: Optional[bool]=None, **kwargs) -> Union[Worker, Awaitable[Worker]]:  # noqa: E501
+    def create_worker(self, create_worker_request : Annotated[CreateWorkerRequest, Field(description="Worker to be created")], async_req: Optional[bool]=None, **kwargs) -> Union[Worker, Awaitable[Worker]]:  # noqa: E501
         """CreateWorker: Create a new Worker  # noqa: E501
 
         If the Worker already exists a failure will be returned  # noqa: E501
@@ -101,7 +98,7 @@ class WorkersApi:
         return self.create_worker_with_http_info(create_worker_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_worker_with_http_info(self, create_worker_request : Annotated[CreateWorkerRequest, Field(..., description="Worker to be created")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_worker_with_http_info(self, create_worker_request : Annotated[CreateWorkerRequest, Field(description="Worker to be created")], **kwargs) -> ApiResponse:  # noqa: E501
         """CreateWorker: Create a new Worker  # noqa: E501
 
         If the Worker already exists a failure will be returned  # noqa: E501
@@ -703,15 +700,15 @@ class WorkersApi:
 
 
     @overload
-    async def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfWorker:  # noqa: E501
+    async def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfWorker:  # noqa: E501
         ...
 
     @overload
-    def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfWorker:  # noqa: E501
+    def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfWorker:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorker, Awaitable[PagedResourceListOfWorker]]:  # noqa: E501
+    def list_workers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorker, Awaitable[PagedResourceListOfWorker]]:  # noqa: E501
         """ListWorkers: List Workers  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -749,7 +746,7 @@ class WorkersApi:
         return self.list_workers_with_http_info(as_at, filter, sort_by, limit, page, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_workers_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_workers_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Workers. Defaults to return the latest version of each Worker if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workers from a previous call to list workers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListWorkers: List Workers  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1073,15 +1070,15 @@ class WorkersApi:
 
 
     @overload
-    async def update_worker(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be updated")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(..., description="State of the updated worker")], **kwargs) -> Worker:  # noqa: E501
+    async def update_worker(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be updated")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(description="State of the updated worker")], **kwargs) -> Worker:  # noqa: E501
         ...
 
     @overload
-    def update_worker(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be updated")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(..., description="State of the updated worker")], async_req: Optional[bool]=True, **kwargs) -> Worker:  # noqa: E501
+    def update_worker(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be updated")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(description="State of the updated worker")], async_req: Optional[bool]=True, **kwargs) -> Worker:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_worker(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be updated")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(..., description="State of the updated worker")], async_req: Optional[bool]=None, **kwargs) -> Union[Worker, Awaitable[Worker]]:  # noqa: E501
+    def update_worker(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be updated")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(description="State of the updated worker")], async_req: Optional[bool]=None, **kwargs) -> Union[Worker, Awaitable[Worker]]:  # noqa: E501
         """UpdateWorker: Update a Worker  # noqa: E501
 
         If the Worker does not exist a failure will be returned  # noqa: E501
@@ -1116,7 +1113,7 @@ class WorkersApi:
         return self.update_worker_with_http_info(scope, code, update_worker_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_worker_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be updated")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(..., description="State of the updated worker")], **kwargs) -> ApiResponse:  # noqa: E501
+    def update_worker_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the worker to be updated")], code : Annotated[StrictStr, Field(..., description="Code of the worker to be updated")], update_worker_request : Annotated[UpdateWorkerRequest, Field(description="State of the updated worker")], **kwargs) -> ApiResponse:  # noqa: E501
         """UpdateWorker: Update a Worker  # noqa: E501
 
         If the Worker does not exist a failure will be returned  # noqa: E501

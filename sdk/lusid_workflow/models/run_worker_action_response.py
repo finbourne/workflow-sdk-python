@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictInt, StrictStr, conlist, validator 
 from lusid_workflow.models.field_mapping import FieldMapping
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.resultant_child_task_configuration import ResultantChildTaskConfiguration
@@ -30,12 +32,12 @@ class RunWorkerActionResponse(BaseModel):
     Defines a read-only Run Worker Action  # noqa: E501
     """
     type:  Optional[StrictStr] = Field(None,alias="type", description="Type name for this Action") 
-    worker_id: Optional[ResourceId] = Field(None, alias="workerId")
-    worker_as_at: Optional[datetime] = Field(None, alias="workerAsAt", description="Worker AsAt")
-    worker_parameters: Optional[Dict[str, FieldMapping]] = Field(None, alias="workerParameters", description="Parameters for this Worker")
-    worker_status_triggers: Optional[WorkerStatusTriggers] = Field(None, alias="workerStatusTriggers")
-    child_task_configurations: Optional[conlist(ResultantChildTaskConfiguration)] = Field(None, alias="childTaskConfigurations", description="Tasks can be generated from run worker results; this is the configuration")
-    worker_timeout: Optional[StrictInt] = Field(None, alias="workerTimeout", description="Worker timeout in seconds")
+    worker_id: Optional[ResourceId] = Field(default=None, alias="workerId")
+    worker_as_at: Optional[datetime] = Field(default=None, description="Worker AsAt", alias="workerAsAt")
+    worker_parameters: Optional[Dict[str, FieldMapping]] = Field(default=None, description="Parameters for this Worker", alias="workerParameters")
+    worker_status_triggers: Optional[WorkerStatusTriggers] = Field(default=None, alias="workerStatusTriggers")
+    child_task_configurations: Optional[List[ResultantChildTaskConfiguration]] = Field(default=None, description="Tasks can be generated from run worker results; this is the configuration", alias="childTaskConfigurations")
+    worker_timeout: Optional[StrictInt] = Field(default=None, description="Worker timeout in seconds", alias="workerTimeout")
     __properties = ["type", "workerId", "workerAsAt", "workerParameters", "workerStatusTriggers", "childTaskConfigurations", "workerTimeout"]
 
     @validator('type')
@@ -88,7 +90,12 @@ class RunWorkerActionResponse(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
@@ -98,7 +105,7 @@ class RunWorkerActionResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ('RunWorker'):
+        if value not in ['RunWorker']:
             raise ValueError("must be one of enum values ('RunWorker')")
         return value
 
@@ -205,3 +212,5 @@ class RunWorkerActionResponse(BaseModel):
             "worker_timeout": obj.get("workerTimeout")
         })
         return _obj
+
+RunWorkerActionResponse.update_forward_refs()

@@ -12,12 +12,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.create_task_request import CreateTaskRequest
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 task_definition_id: ResourceId = # Replace with your value
-correlation_ids: Optional[conlist(StrictStr)] = # Replace with your value
-fields: Optional[conlist(TaskInstanceField)] = # Replace with your value
+correlation_ids: Optional[List[StrictStr]] = # Replace with your value
+fields: Optional[List[TaskInstanceField]] = # Replace with your value
 stacking_key: Optional[StrictStr] = "example_stacking_key"
 create_task_request_instance = CreateTaskRequest(task_definition_id=task_definition_id, correlation_ids=correlation_ids, fields=fields, stacking_key=stacking_key)
 

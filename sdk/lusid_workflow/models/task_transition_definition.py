@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class TaskTransitionDefinition(BaseModel):
     """
@@ -121,3 +123,5 @@ class TaskTransitionDefinition(BaseModel):
             "guard_condition_not_met_message": obj.get("guardConditionNotMetMessage")
         })
         return _obj
+
+TaskTransitionDefinition.update_forward_refs()

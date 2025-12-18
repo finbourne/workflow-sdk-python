@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class GetWorkerResultResponse(BaseModel):
     """
     The RunWorker response  # noqa: E501
     """
     worker_status:  StrictStr = Field(...,alias="workerStatus", description="The final status of the Worker") 
-    results: conlist(Dict[str, Any]) = Field(..., description="Results")
+    results: List[Dict[str, Any]] = Field(description="Results")
     status_detail:  Optional[StrictStr] = Field(None,alias="statusDetail", description="Detail on the final status") 
     __properties = ["workerStatus", "results", "statusDetail"]
 
@@ -84,3 +86,5 @@ class GetWorkerResultResponse(BaseModel):
             "status_detail": obj.get("statusDetail")
         })
         return _obj
+
+GetWorkerResultResponse.update_forward_refs()

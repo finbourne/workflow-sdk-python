@@ -10,10 +10,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.day_regularity import DayRegularity
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, conint, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-frequency: conint(strict=True, le=1000, ge=1) = Field(..., description="The frequency of the Day Regularity")
+frequency: StrictInt = # Replace with your value
 frequency: StrictInt = 42
 type: StrictStr = "example_type"
 day_regularity_instance = DayRegularity(frequency=frequency, type=type)

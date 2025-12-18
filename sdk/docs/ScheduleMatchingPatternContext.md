@@ -10,11 +10,13 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.schedule_matching_pattern_context import ScheduleMatchingPatternContext
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 time_zone: StrictStr = "example_time_zone"
-holiday_calendars: Optional[conlist(CalendarReference, max_items=5, min_items=0)] = Field(None, alias="holidayCalendars", description="References to any Holiday Calendars to use")
+holiday_calendars: Optional[List[CalendarReference]] = # Replace with your value
 schedule_matching_pattern_context_instance = ScheduleMatchingPatternContext(time_zone=time_zone, holiday_calendars=holiday_calendars)
 
 ```

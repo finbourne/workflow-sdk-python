@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictInt, StrictStr, conlist, constr, validator
-
-from typing import Optional
-
+from pydantic.v1 import Field, StrictInt, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from lusid_workflow.models.batch_update_tasks_request import BatchUpdateTasksRequest
 from lusid_workflow.models.batch_update_tasks_response import BatchUpdateTasksResponse
 from lusid_workflow.models.create_task_request import CreateTaskRequest
@@ -220,15 +217,15 @@ class TasksApi:
 
 
     @overload
-    async def create_task(self, create_task_request : Annotated[CreateTaskRequest, Field(..., description="Request to create Task")], trigger : Annotated[Optional[StrictStr], Field( description="The name of the Trigger to invoke")] = None, **kwargs) -> Task:  # noqa: E501
+    async def create_task(self, create_task_request : Annotated[CreateTaskRequest, Field(description="Request to create Task")], trigger : Annotated[Optional[StrictStr], Field( description="The name of the Trigger to invoke")] = None, **kwargs) -> Task:  # noqa: E501
         ...
 
     @overload
-    def create_task(self, create_task_request : Annotated[CreateTaskRequest, Field(..., description="Request to create Task")], trigger : Annotated[Optional[StrictStr], Field( description="The name of the Trigger to invoke")] = None, async_req: Optional[bool]=True, **kwargs) -> Task:  # noqa: E501
+    def create_task(self, create_task_request : Annotated[CreateTaskRequest, Field(description="Request to create Task")], trigger : Annotated[Optional[StrictStr], Field( description="The name of the Trigger to invoke")] = None, async_req: Optional[bool]=True, **kwargs) -> Task:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_task(self, create_task_request : Annotated[CreateTaskRequest, Field(..., description="Request to create Task")], trigger : Annotated[Optional[StrictStr], Field( description="The name of the Trigger to invoke")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Task, Awaitable[Task]]:  # noqa: E501
+    def create_task(self, create_task_request : Annotated[CreateTaskRequest, Field(description="Request to create Task")], trigger : Annotated[Optional[StrictStr], Field( description="The name of the Trigger to invoke")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Task, Awaitable[Task]]:  # noqa: E501
         """CreateTask: Create a new Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -260,7 +257,7 @@ class TasksApi:
         return self.create_task_with_http_info(create_task_request, trigger, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_task_with_http_info(self, create_task_request : Annotated[CreateTaskRequest, Field(..., description="Request to create Task")], trigger : Annotated[Optional[StrictStr], Field( description="The name of the Trigger to invoke")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def create_task_with_http_info(self, create_task_request : Annotated[CreateTaskRequest, Field(description="Request to create Task")], trigger : Annotated[Optional[StrictStr], Field( description="The name of the Trigger to invoke")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """CreateTask: Create a new Task  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1018,15 +1015,15 @@ class TasksApi:
 
 
     @overload
-    async def list_tasks(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfTask:  # noqa: E501
+    async def list_tasks(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfTask:  # noqa: E501
         ...
 
     @overload
-    def list_tasks(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTask:  # noqa: E501
+    def list_tasks(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTask:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_tasks(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTask, Awaitable[PagedResourceListOfTask]]:  # noqa: E501
+    def list_tasks(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTask, Awaitable[PagedResourceListOfTask]]:  # noqa: E501
         """ListTasks: List Tasks  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -1064,7 +1061,7 @@ class TasksApi:
         return self.list_tasks_with_http_info(as_at, filter, sort_by, limit, page, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_tasks_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_tasks_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListTasks: List Tasks  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an

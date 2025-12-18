@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist 
 from lusid_workflow.models.link import Link
 
 class DeletedEntityResponse(BaseModel):
@@ -27,9 +29,9 @@ class DeletedEntityResponse(BaseModel):
     DeletedEntityResponse
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The Uri related to this Entity") 
-    effective_from: Optional[datetime] = Field(None, alias="effectiveFrom", description="The EffectiveFrom for this response")
-    as_at: datetime = Field(..., alias="asAt", description="The AsAt for this response")
-    links: Optional[conlist(Link)] = None
+    effective_from: Optional[datetime] = Field(default=None, description="The EffectiveFrom for this response", alias="effectiveFrom")
+    as_at: datetime = Field(description="The AsAt for this response", alias="asAt")
+    links: Optional[List[Link]] = None
     __properties = ["href", "effectiveFrom", "asAt", "links"]
 
     class Config:
@@ -104,3 +106,5 @@ class DeletedEntityResponse(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+DeletedEntityResponse.update_forward_refs()

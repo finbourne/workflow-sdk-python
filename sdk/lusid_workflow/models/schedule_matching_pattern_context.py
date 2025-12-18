@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.calendar_reference import CalendarReference
 
 class ScheduleMatchingPatternContext(BaseModel):
@@ -27,7 +29,7 @@ class ScheduleMatchingPatternContext(BaseModel):
     Context for a Schedule Matching Pattern  # noqa: E501
     """
     time_zone:  StrictStr = Field(...,alias="timeZone", description="The time zone to use") 
-    holiday_calendars: Optional[conlist(CalendarReference)] = Field(None, alias="holidayCalendars", description="References to any Holiday Calendars to use")
+    holiday_calendars: Optional[List[CalendarReference]] = Field(default=None, description="References to any Holiday Calendars to use", alias="holidayCalendars")
     __properties = ["timeZone", "holidayCalendars"]
 
     class Config:
@@ -90,3 +92,5 @@ class ScheduleMatchingPatternContext(BaseModel):
             "holiday_calendars": [CalendarReference.from_dict(_item) for _item in obj.get("holidayCalendars")] if obj.get("holidayCalendars") is not None else None
         })
         return _obj
+
+ScheduleMatchingPatternContext.update_forward_refs()

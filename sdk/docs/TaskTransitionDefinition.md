@@ -17,8 +17,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.task_transition_definition import TaskTransitionDefinition
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 from_state: StrictStr = "example_from_state"
 to_state: StrictStr = "example_to_state"

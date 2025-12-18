@@ -5,8 +5,10 @@ Information about what tasks to create/update when receiving events
 
 ```python
 from lusid_workflow.models.task_activity import TaskActivity
-from typing import Any, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 # Example with TaskActivity 
 
@@ -20,19 +22,19 @@ create_new_task_activity_instance = lusid_workflow.models.create_new_task_activi
                             ], 
                         task_fields = {
                             'key' : lusid_workflow.models.field_mapping.FieldMapping(
-                                map_from = '0', 
+                                map_from = '', 
                                 set_to = null, )
                             }, 
                         schedule_dependent_task_fields = {
                             'key' : lusid_workflow.models.scheduled_time_adjustment.ScheduledTimeAdjustment(
                                 date_adjustment = lusid_workflow.models.date_adjustment.DateAdjustment(
-                                    delta_days = -10000, 
-                                    business_day_adjustment = '0', ), 
+                                    delta_days = 56, 
+                                    business_day_adjustment = '', ), 
                                 time_adjustment = lusid_workflow.models.time_adjustment.TimeAdjustment(
                                     set_to = lusid_workflow.models.specified_time.SpecifiedTime(
-                                        hours = 0, 
-                                        minutes = 0, 
-                                        type = '0', ), ), )
+                                        hours = 56, 
+                                        minutes = 56, 
+                                        type = 'Specified', ), ), )
                             }, )
 
 task_activity_instance = TaskActivity(create_new_task_activity_instance)

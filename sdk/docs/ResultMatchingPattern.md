@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.result_matching_pattern import ResultMatchingPattern
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 filter: StrictStr = "example_filter"
 result_matching_pattern_instance = ResultMatchingPattern(filter=filter)

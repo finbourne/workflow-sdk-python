@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 class UpdateWorkerRequest(BaseModel):
     """
@@ -27,7 +29,7 @@ class UpdateWorkerRequest(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
-    worker_configuration: Optional[Any] = Field(..., alias="workerConfiguration", description="Information about how the worker should be executed")
+    worker_configuration: Optional[Any] = Field(description="Information about how the worker should be executed", alias="workerConfiguration")
     __properties = ["displayName", "description", "workerConfiguration"]
 
     class Config:
@@ -89,3 +91,5 @@ class UpdateWorkerRequest(BaseModel):
             "worker_configuration": obj.get("workerConfiguration")
         })
         return _obj
+
+UpdateWorkerRequest.update_forward_refs()

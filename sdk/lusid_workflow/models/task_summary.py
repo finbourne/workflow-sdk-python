@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.task_definition_version import TaskDefinitionVersion
 
@@ -28,8 +30,8 @@ class TaskSummary(BaseModel):
     Summary of a Task created based on a Task Definition  # noqa: E501
     """
     id:  StrictStr = Field(...,alias="id", description="The unique id for this Task") 
-    task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
-    task_definition_version: TaskDefinitionVersion = Field(..., alias="taskDefinitionVersion")
+    task_definition_id: ResourceId = Field(alias="taskDefinitionId")
+    task_definition_version: TaskDefinitionVersion = Field(alias="taskDefinitionVersion")
     task_definition_display_name:  StrictStr = Field(...,alias="taskDefinitionDisplayName", description="The display name of the Task Definition used by this Task") 
     state:  StrictStr = Field(...,alias="state", description="Current State") 
     __properties = ["id", "taskDefinitionId", "taskDefinitionVersion", "taskDefinitionDisplayName", "state"]
@@ -91,3 +93,5 @@ class TaskSummary(BaseModel):
             "state": obj.get("state")
         })
         return _obj
+
+TaskSummary.update_forward_refs()

@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictInt, constr, validator
-
+from pydantic.v1 import Field, StrictInt
 from typing import Optional
-
+from typing_extensions import Annotated
 from lusid_workflow.models.create_event_handler_request import CreateEventHandlerRequest
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from lusid_workflow.models.event_handler import EventHandler
@@ -59,15 +56,15 @@ class EventHandlersApi:
 
 
     @overload
-    async def create_event_handler(self, create_event_handler_request : Annotated[CreateEventHandlerRequest, Field(..., description="The data to create an Event Handler")], **kwargs) -> EventHandler:  # noqa: E501
+    async def create_event_handler(self, create_event_handler_request : Annotated[CreateEventHandlerRequest, Field(description="The data to create an Event Handler")], **kwargs) -> EventHandler:  # noqa: E501
         ...
 
     @overload
-    def create_event_handler(self, create_event_handler_request : Annotated[CreateEventHandlerRequest, Field(..., description="The data to create an Event Handler")], async_req: Optional[bool]=True, **kwargs) -> EventHandler:  # noqa: E501
+    def create_event_handler(self, create_event_handler_request : Annotated[CreateEventHandlerRequest, Field(description="The data to create an Event Handler")], async_req: Optional[bool]=True, **kwargs) -> EventHandler:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_event_handler(self, create_event_handler_request : Annotated[CreateEventHandlerRequest, Field(..., description="The data to create an Event Handler")], async_req: Optional[bool]=None, **kwargs) -> Union[EventHandler, Awaitable[EventHandler]]:  # noqa: E501
+    def create_event_handler(self, create_event_handler_request : Annotated[CreateEventHandlerRequest, Field(description="The data to create an Event Handler")], async_req: Optional[bool]=None, **kwargs) -> Union[EventHandler, Awaitable[EventHandler]]:  # noqa: E501
         """[EXPERIMENTAL] CreateEventHandler: Create a new Event Handler  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -97,7 +94,7 @@ class EventHandlersApi:
         return self.create_event_handler_with_http_info(create_event_handler_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_event_handler_with_http_info(self, create_event_handler_request : Annotated[CreateEventHandlerRequest, Field(..., description="The data to create an Event Handler")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_event_handler_with_http_info(self, create_event_handler_request : Annotated[CreateEventHandlerRequest, Field(description="The data to create an Event Handler")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateEventHandler: Create a new Event Handler  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -725,15 +722,15 @@ class EventHandlersApi:
 
 
     @overload
-    async def update_event_handler(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies an Event Handler")], code : Annotated[StrictStr, Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update an Event Handler")], **kwargs) -> EventHandler:  # noqa: E501
+    async def update_event_handler(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies an Event Handler")], code : Annotated[StrictStr, Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(description="The data to update an Event Handler")], **kwargs) -> EventHandler:  # noqa: E501
         ...
 
     @overload
-    def update_event_handler(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies an Event Handler")], code : Annotated[StrictStr, Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update an Event Handler")], async_req: Optional[bool]=True, **kwargs) -> EventHandler:  # noqa: E501
+    def update_event_handler(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies an Event Handler")], code : Annotated[StrictStr, Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(description="The data to update an Event Handler")], async_req: Optional[bool]=True, **kwargs) -> EventHandler:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_event_handler(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies an Event Handler")], code : Annotated[StrictStr, Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update an Event Handler")], async_req: Optional[bool]=None, **kwargs) -> Union[EventHandler, Awaitable[EventHandler]]:  # noqa: E501
+    def update_event_handler(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies an Event Handler")], code : Annotated[StrictStr, Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(description="The data to update an Event Handler")], async_req: Optional[bool]=None, **kwargs) -> Union[EventHandler, Awaitable[EventHandler]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateEventHandler: Update an existing Event handler  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -767,7 +764,7 @@ class EventHandlersApi:
         return self.update_event_handler_with_http_info(scope, code, update_event_handler_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_event_handler_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies an Event Handler")], code : Annotated[StrictStr, Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(..., description="The data to update an Event Handler")], **kwargs) -> ApiResponse:  # noqa: E501
+    def update_event_handler_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies an Event Handler")], code : Annotated[StrictStr, Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(description="The data to update an Event Handler")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateEventHandler: Update an existing Event handler  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an

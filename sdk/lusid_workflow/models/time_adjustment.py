@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.specified_time import SpecifiedTime
 
 class TimeAdjustment(BaseModel):
     """
     A time adjustment to apply to the scheduled time of an EventHandler with a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern  # noqa: E501
     """
-    set_to: SpecifiedTime = Field(..., alias="setTo")
+    set_to: SpecifiedTime = Field(alias="setTo")
     __properties = ["setTo"]
 
     class Config:
@@ -79,3 +81,5 @@ class TimeAdjustment(BaseModel):
             "set_to": SpecifiedTime.from_dict(obj.get("setTo")) if obj.get("setTo") is not None else None
         })
         return _obj
+
+TimeAdjustment.update_forward_refs()

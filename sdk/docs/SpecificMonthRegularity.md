@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.specific_month_regularity import SpecificMonthRegularity
-from typing import Any, Dict, List
-from pydantic.v1 import BaseModel, Field, StrictInt, conint, conlist, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-frequency: conint(strict=True, le=100, ge=1) = Field(..., description="The frequency of the Specific Month Regularity")
+frequency: StrictInt = # Replace with your value
 frequency: StrictInt = 42
-days_of_month: conlist(StrictInt, max_items=31, min_items=1) = Field(..., alias="daysOfMonth", description="Days of the month")
+days_of_month: List[StrictInt] = # Replace with your value
 type: StrictStr = "example_type"
 specific_month_regularity_instance = SpecificMonthRegularity(frequency=frequency, days_of_month=days_of_month, type=type)
 

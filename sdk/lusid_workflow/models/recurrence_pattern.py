@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.date_regularity import DateRegularity
 from lusid_workflow.models.time_constraints import TimeConstraints
 
@@ -27,8 +29,8 @@ class RecurrencePattern(BaseModel):
     """
     The Recurrence Pattern  # noqa: E501
     """
-    time_constraints: TimeConstraints = Field(..., alias="timeConstraints")
-    date_regularity: DateRegularity = Field(..., alias="dateRegularity")
+    time_constraints: TimeConstraints = Field(alias="timeConstraints")
+    date_regularity: DateRegularity = Field(alias="dateRegularity")
     business_day_adjustment:  StrictStr = Field(...,alias="businessDayAdjustment", description="The Business Day Adjustment") 
     __properties = ["timeConstraints", "dateRegularity", "businessDayAdjustment"]
 
@@ -87,3 +89,5 @@ class RecurrencePattern(BaseModel):
             "business_day_adjustment": obj.get("businessDayAdjustment")
         })
         return _obj
+
+RecurrencePattern.update_forward_refs()

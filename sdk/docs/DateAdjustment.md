@@ -10,10 +10,12 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.date_adjustment import DateAdjustment
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, conint, constr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-delta_days: conint(strict=True, le=10000, ge=-10000) = Field(..., alias="deltaDays", description="The delta to apply to the date part of the scheduled time, in days")
+delta_days: StrictInt = # Replace with your value
 delta_days: StrictInt = 42
 business_day_adjustment: StrictStr = "example_business_day_adjustment"
 date_adjustment_instance = DateAdjustment(delta_days=delta_days, business_day_adjustment=business_day_adjustment)

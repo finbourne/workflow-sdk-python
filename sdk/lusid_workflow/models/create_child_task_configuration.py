@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid_workflow.models.field_mapping import FieldMapping
 from lusid_workflow.models.resource_id import ResourceId
 
@@ -27,10 +29,10 @@ class CreateChildTaskConfiguration(BaseModel):
     """
     Create Child Task Configuration  # noqa: E501
     """
-    task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
-    task_definition_as_at: Optional[datetime] = Field(None, alias="taskDefinitionAsAt", description="TaskDefinition AsAt timestamp")
+    task_definition_id: ResourceId = Field(alias="taskDefinitionId")
+    task_definition_as_at: Optional[datetime] = Field(default=None, description="TaskDefinition AsAt timestamp", alias="taskDefinitionAsAt")
     initial_trigger:  Optional[StrictStr] = Field(None,alias="initialTrigger", description="The Initial Trigger for automatic start") 
-    child_task_fields: Optional[Dict[str, FieldMapping]] = Field(None, alias="childTaskFields", description="Field Mappings")
+    child_task_fields: Optional[Dict[str, FieldMapping]] = Field(default=None, description="Field Mappings", alias="childTaskFields")
     map_stacking_key_from:  Optional[StrictStr] = Field(None,alias="mapStackingKeyFrom", description="If present, the value of this field on the parent task will be the Stacking Key on any created child tasks") 
     __properties = ["taskDefinitionId", "taskDefinitionAsAt", "initialTrigger", "childTaskFields", "mapStackingKeyFrom"]
 
@@ -120,3 +122,5 @@ class CreateChildTaskConfiguration(BaseModel):
             "map_stacking_key_from": obj.get("mapStackingKeyFrom")
         })
         return _obj
+
+CreateChildTaskConfiguration.update_forward_refs()

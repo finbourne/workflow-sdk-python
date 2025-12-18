@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, conlist, constr 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.link import Link
 from lusid_workflow.models.parameter import Parameter
 from lusid_workflow.models.resource_id import ResourceId
@@ -31,14 +33,14 @@ class Worker(BaseModel):
     """
     Information about the Worker  # noqa: E501
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
-    worker_configuration: WorkerConfigurationResponse = Field(..., alias="workerConfiguration")
+    worker_configuration: WorkerConfigurationResponse = Field(alias="workerConfiguration")
     version: Optional[VersionInfo] = None
-    parameters: Optional[conlist(Parameter)] = Field(None, description="The Parameters this Worker accepts or requires.")
-    result_fields: Optional[conlist(ResultField)] = Field(None, alias="resultFields", description="The Fields that the Worker results will come back with.")
-    links: Optional[conlist(Link)] = None
+    parameters: Optional[List[Parameter]] = Field(default=None, description="The Parameters this Worker accepts or requires.")
+    result_fields: Optional[List[ResultField]] = Field(default=None, description="The Fields that the Worker results will come back with.", alias="resultFields")
+    links: Optional[List[Link]] = None
     __properties = ["id", "displayName", "description", "workerConfiguration", "version", "parameters", "resultFields", "links"]
 
     class Config:
@@ -145,3 +147,5 @@ class Worker(BaseModel):
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
+
+Worker.update_forward_refs()

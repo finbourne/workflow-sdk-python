@@ -18,12 +18,13 @@ import json
 import pprint
 import re  # noqa: F401
 
-from typing import Any, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.create_new_task_activity_response import CreateNewTaskActivityResponse
 from lusid_workflow.models.update_matching_tasks_activity_response import UpdateMatchingTasksActivityResponse
-from typing import Union, Any, List, TYPE_CHECKING
-from pydantic.v1 import StrictStr, Field
+
 
 TASKACTIVITYRESPONSE_ONE_OF_SCHEMAS = ["CreateNewTaskActivityResponse", "UpdateMatchingTasksActivityResponse"]
 

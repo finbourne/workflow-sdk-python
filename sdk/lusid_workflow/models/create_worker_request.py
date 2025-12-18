@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.worker_configuration import WorkerConfiguration
 
@@ -27,10 +29,10 @@ class CreateWorkerRequest(BaseModel):
     """
     Request to Create a new worker  # noqa: E501
     """
-    id: ResourceId = Field(...)
+    id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="Human readable name") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Human readable description") 
-    worker_configuration: WorkerConfiguration = Field(..., alias="workerConfiguration")
+    worker_configuration: WorkerConfiguration = Field(alias="workerConfiguration")
     __properties = ["id", "displayName", "description", "workerConfiguration"]
 
     class Config:
@@ -94,3 +96,5 @@ class CreateWorkerRequest(BaseModel):
             "worker_configuration": WorkerConfiguration.from_dict(obj.get("workerConfiguration")) if obj.get("workerConfiguration") is not None else None
         })
         return _obj
+
+CreateWorkerRequest.update_forward_refs()

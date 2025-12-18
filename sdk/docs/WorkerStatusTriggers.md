@@ -13,8 +13,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.worker_status_triggers import WorkerStatusTriggers
-from typing import Any, Dict, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 started: Optional[StrictStr] = "example_started"
 completed_with_results: Optional[StrictStr] = "example_completed_with_results"

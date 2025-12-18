@@ -14,13 +14,15 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.update_matching_tasks_activity import UpdateMatchingTasksActivity
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 type: StrictStr = "example_type"
 filter: Optional[StrictStr] = "example_filter"
 trigger: StrictStr = "example_trigger"
-correlation_ids: Optional[conlist(EventHandlerMapping)] = # Replace with your value
+correlation_ids: Optional[List[EventHandlerMapping]] = # Replace with your value
 task_fields: Optional[Dict[str, FieldMapping]] = # Replace with your value
 schedule_dependent_task_fields: Optional[Dict[str, ScheduledTimeAdjustment]] = # Replace with your value
 update_matching_tasks_activity_instance = UpdateMatchingTasksActivity(type=type, filter=filter, trigger=trigger, correlation_ids=correlation_ids, task_fields=task_fields, schedule_dependent_task_fields=schedule_dependent_task_fields)

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 
 class CreateChildTasksAction(BaseModel):
@@ -27,7 +29,7 @@ class CreateChildTasksAction(BaseModel):
     Defines a Create Child Tasks Action  # noqa: E501
     """
     type:  StrictStr = Field(...,alias="type", description="Type name for this Action") 
-    child_task_configurations: conlist(CreateChildTaskConfiguration) = Field(..., alias="childTaskConfigurations", description="The Child Task Configurations")
+    child_task_configurations: List[CreateChildTaskConfiguration] = Field(description="The Child Task Configurations", alias="childTaskConfigurations")
     __properties = ["type", "childTaskConfigurations"]
 
     @validator('type')
@@ -80,14 +82,19 @@ class CreateChildTasksAction(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "type" != "type":
             return value
 
-        if not value == 'CreateChildTasks':
+        if value not in ['CreateChildTasks']:
             raise ValueError("must be one of enum values ('CreateChildTasks')")
         return value
 
@@ -146,3 +153,5 @@ class CreateChildTasksAction(BaseModel):
             "child_task_configurations": [CreateChildTaskConfiguration.from_dict(_item) for _item in obj.get("childTaskConfigurations")] if obj.get("childTaskConfigurations") is not None else None
         })
         return _obj
+
+CreateChildTasksAction.update_forward_refs()

@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.scheduled_time_adjustment import ScheduledTimeAdjustment
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 date_adjustment: DateAdjustment = # Replace with your value
 time_adjustment: TimeAdjustment = # Replace with your value

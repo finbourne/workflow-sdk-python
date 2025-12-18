@@ -18,15 +18,17 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.update_task_with_id_and_trigger_request import UpdateTaskWithIdAndTriggerRequest
 
 class BatchUpdateTasksRequest(BaseModel):
     """
     A request to update multiple Tasks  # noqa: E501
     """
-    update_tasks: Optional[conlist(UpdateTaskWithIdAndTriggerRequest)] = Field(None, alias="updateTasks", description="A Dictionary of task IDs to UpdateTaskRequest")
+    update_tasks: Optional[List[UpdateTaskWithIdAndTriggerRequest]] = Field(default=None, description="A Dictionary of task IDs to UpdateTaskRequest", alias="updateTasks")
     __properties = ["updateTasks"]
 
     class Config:
@@ -88,3 +90,5 @@ class BatchUpdateTasksRequest(BaseModel):
             "update_tasks": [UpdateTaskWithIdAndTriggerRequest.from_dict(_item) for _item in obj.get("updateTasks")] if obj.get("updateTasks") is not None else None
         })
         return _obj
+
+BatchUpdateTasksRequest.update_forward_refs()

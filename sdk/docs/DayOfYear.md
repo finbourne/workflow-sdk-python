@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.day_of_year import DayOfYear
-from typing import Any, Dict
-from pydantic.v1 import BaseModel, Field, conint
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
-month: conint(strict=True, le=12, ge=1) = Field(..., description="Month in the year")
+month: StrictInt = # Replace with your value
 month: StrictInt = 42
-day: conint(strict=True, le=31, ge=1) = Field(..., description="Day in the month")
+day: StrictInt = # Replace with your value
 day: StrictInt = 42
 day_of_year_instance = DayOfYear(month=month, day=day)
 

@@ -17,9 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr, validator 
 from lusid_workflow.models.field_mapping import FieldMapping
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.result_matching_pattern import ResultMatchingPattern
@@ -28,11 +30,11 @@ class ResultantChildTaskConfiguration(BaseModel):
     """
     Child Task Configuration  # noqa: E501
     """
-    result_matching_pattern: Optional[ResultMatchingPattern] = Field(None, alias="resultMatchingPattern")
-    task_definition_id: ResourceId = Field(..., alias="taskDefinitionId")
-    task_definition_as_at: Optional[datetime] = Field(None, alias="taskDefinitionAsAt", description="TaskDefinition AsAt timestamp")
+    result_matching_pattern: Optional[ResultMatchingPattern] = Field(default=None, alias="resultMatchingPattern")
+    task_definition_id: ResourceId = Field(alias="taskDefinitionId")
+    task_definition_as_at: Optional[datetime] = Field(default=None, description="TaskDefinition AsAt timestamp", alias="taskDefinitionAsAt")
     initial_trigger:  Optional[StrictStr] = Field(None,alias="initialTrigger", description="The Initial Trigger for automatic start") 
-    child_task_fields: Dict[str, FieldMapping] = Field(..., alias="childTaskFields", description="Field Mappings")
+    child_task_fields: Dict[str, FieldMapping] = Field(description="Field Mappings", alias="childTaskFields")
     map_stacking_key_from:  Optional[StrictStr] = Field(None,alias="mapStackingKeyFrom", description="The field to be mapped as the ChildTasks Stacking Key") 
     __properties = ["resultMatchingPattern", "taskDefinitionId", "taskDefinitionAsAt", "initialTrigger", "childTaskFields", "mapStackingKeyFrom"]
 
@@ -121,3 +123,5 @@ class ResultantChildTaskConfiguration(BaseModel):
             "map_stacking_key_from": obj.get("mapStackingKeyFrom")
         })
         return _obj
+
+ResultantChildTaskConfiguration.update_forward_refs()

@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.recurrence_pattern import RecurrencePattern
 from lusid_workflow.models.schedule_matching_pattern_context import ScheduleMatchingPatternContext
 
@@ -27,8 +29,8 @@ class ScheduleMatchingPattern(BaseModel):
     """
     The Schedule Matching Pattern to trigger on  # noqa: E501
     """
-    context: ScheduleMatchingPatternContext = Field(...)
-    recurrence_pattern: RecurrencePattern = Field(..., alias="recurrencePattern")
+    context: ScheduleMatchingPatternContext
+    recurrence_pattern: RecurrencePattern = Field(alias="recurrencePattern")
     __properties = ["context", "recurrencePattern"]
 
     class Config:
@@ -85,3 +87,5 @@ class ScheduleMatchingPattern(BaseModel):
             "recurrence_pattern": RecurrencePattern.from_dict(obj.get("recurrencePattern")) if obj.get("recurrencePattern") is not None else None
         })
         return _obj
+
+ScheduleMatchingPattern.update_forward_refs()

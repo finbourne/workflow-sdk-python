@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.resource_id import ResourceId
 
 class SchedulerJob(BaseModel):
@@ -27,7 +29,7 @@ class SchedulerJob(BaseModel):
     Configuration for a Worker that calls a Scheduler Job  # noqa: E501
     """
     type:  StrictStr = Field(...,alias="type", description="The type of worker") 
-    job_id: ResourceId = Field(..., alias="jobId")
+    job_id: ResourceId = Field(alias="jobId")
     __properties = ["type", "jobId"]
 
     @validator('type')
@@ -80,14 +82,19 @@ class SchedulerJob(BaseModel):
                                     'SchedulerJobResponse', 
                                     'SleepResponse',
                                     'Library',
-                                    'LibraryResponse']:
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity']:
            return value
         
         # Only validate the 'type' property of the class
         if "type" != "type":
             return value
 
-        if value not in ('SchedulerJob'):
+        if value not in ['SchedulerJob']:
             raise ValueError("must be one of enum values ('SchedulerJob')")
         return value
 
@@ -142,3 +149,5 @@ class SchedulerJob(BaseModel):
             "job_id": ResourceId.from_dict(obj.get("jobId")) if obj.get("jobId") is not None else None
         })
         return _obj
+
+SchedulerJob.update_forward_refs()

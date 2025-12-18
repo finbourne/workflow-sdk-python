@@ -13,12 +13,14 @@ Name | Type | Description | Notes
 
 ```python
 from lusid_workflow.models.create_new_task_activity import CreateNewTaskActivity
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, conlist, constr, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 initial_trigger: Optional[StrictStr] = "example_initial_trigger"
 type: StrictStr = "example_type"
-correlation_ids: Optional[conlist(EventHandlerMapping)] = # Replace with your value
+correlation_ids: Optional[List[EventHandlerMapping]] = # Replace with your value
 task_fields: Optional[Dict[str, FieldMapping]] = # Replace with your value
 schedule_dependent_task_fields: Optional[Dict[str, ScheduledTimeAdjustment]] = # Replace with your value
 create_new_task_activity_instance = CreateNewTaskActivity(initial_trigger=initial_trigger, type=type, correlation_ids=correlation_ids, task_fields=task_fields, schedule_dependent_task_fields=schedule_dependent_task_fields)

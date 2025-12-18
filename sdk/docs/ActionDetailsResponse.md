@@ -5,8 +5,10 @@ Abstracts the kinds of Actions available in a read-only form
 
 ```python
 from lusid_workflow.models.action_details_response import ActionDetailsResponse
-from typing import Any, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 # Example with ActionDetailsResponse 
 
@@ -21,7 +23,7 @@ create_child_tasks_action_response_instance = lusid_workflow.models.create_child
                                 initial_trigger = 'z', 
                                 child_task_fields = {
                                     'key' : lusid_workflow.models.field_mapping.FieldMapping(
-                                        map_from = '0', 
+                                        map_from = '', 
                                         set_to = null, )
                                     }, 
                                 map_stacking_key_from = '', )

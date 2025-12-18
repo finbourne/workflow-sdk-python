@@ -19,9 +19,8 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
+from pydantic.v1 import Field
 from typing_extensions import Annotated
-from pydantic.v1 import Field, constr, validator
-
 from lusid_workflow.models.action_log import ActionLog
 
 from lusid_workflow.api_client import ApiClient

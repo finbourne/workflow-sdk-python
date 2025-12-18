@@ -5,14 +5,16 @@ A Date Regularity
 
 ```python
 from lusid_workflow.models.date_regularity import DateRegularity
-from typing import Any, List, Optional
-from pydantic.v1 import BaseModel, Field, StrictStr, ValidationError, validator
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 
 # Example with DateRegularity 
 
 day_regularity_instance = lusid_workflow.models.day_regularity.DayRegularity(
-                        frequency = 1, 
-                        type = '0', )
+                        frequency = 56, 
+                        type = 'Day', )
 
 date_regularity_instance = DateRegularity(day_regularity_instance)
 

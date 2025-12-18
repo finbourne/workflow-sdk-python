@@ -19,13 +19,10 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from typing_extensions import Annotated
 from datetime import datetime
-
-from pydantic.v1 import Field, StrictInt, StrictStr, conlist, constr, validator
-
-from typing import Optional
-
+from pydantic.v1 import Field, StrictInt, StrictStr
+from typing import List, Optional
+from typing_extensions import Annotated
 from lusid_workflow.models.create_task_definition_request import CreateTaskDefinitionRequest
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from lusid_workflow.models.paged_resource_list_of_task_definition import PagedResourceListOfTaskDefinition
@@ -60,15 +57,15 @@ class TaskDefinitionsApi:
 
 
     @overload
-    async def create_task_definition(self, create_task_definition_request : Annotated[CreateTaskDefinitionRequest, Field(..., description="The data to create a Task Definition")], **kwargs) -> TaskDefinition:  # noqa: E501
+    async def create_task_definition(self, create_task_definition_request : Annotated[CreateTaskDefinitionRequest, Field(description="The data to create a Task Definition")], **kwargs) -> TaskDefinition:  # noqa: E501
         ...
 
     @overload
-    def create_task_definition(self, create_task_definition_request : Annotated[CreateTaskDefinitionRequest, Field(..., description="The data to create a Task Definition")], async_req: Optional[bool]=True, **kwargs) -> TaskDefinition:  # noqa: E501
+    def create_task_definition(self, create_task_definition_request : Annotated[CreateTaskDefinitionRequest, Field(description="The data to create a Task Definition")], async_req: Optional[bool]=True, **kwargs) -> TaskDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_task_definition(self, create_task_definition_request : Annotated[CreateTaskDefinitionRequest, Field(..., description="The data to create a Task Definition")], async_req: Optional[bool]=None, **kwargs) -> Union[TaskDefinition, Awaitable[TaskDefinition]]:  # noqa: E501
+    def create_task_definition(self, create_task_definition_request : Annotated[CreateTaskDefinitionRequest, Field(description="The data to create a Task Definition")], async_req: Optional[bool]=None, **kwargs) -> Union[TaskDefinition, Awaitable[TaskDefinition]]:  # noqa: E501
         """CreateTaskDefinition: Create a new Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -98,7 +95,7 @@ class TaskDefinitionsApi:
         return self.create_task_definition_with_http_info(create_task_definition_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_task_definition_with_http_info(self, create_task_definition_request : Annotated[CreateTaskDefinitionRequest, Field(..., description="The data to create a Task Definition")], **kwargs) -> ApiResponse:  # noqa: E501
+    def create_task_definition_with_http_info(self, create_task_definition_request : Annotated[CreateTaskDefinitionRequest, Field(description="The data to create a Task Definition")], **kwargs) -> ApiResponse:  # noqa: E501
         """CreateTaskDefinition: Create a new Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -546,15 +543,15 @@ class TaskDefinitionsApi:
 
 
     @overload
-    async def list_task_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfTaskDefinition:  # noqa: E501
+    async def list_task_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> PagedResourceListOfTaskDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_task_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTaskDefinition:  # noqa: E501
+    def list_task_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfTaskDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_task_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTaskDefinition, Awaitable[PagedResourceListOfTaskDefinition]]:  # noqa: E501
+    def list_task_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfTaskDefinition, Awaitable[PagedResourceListOfTaskDefinition]]:  # noqa: E501
         """ListTaskDefinitions: List Task Definitions  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -592,7 +589,7 @@ class TaskDefinitionsApi:
         return self.list_task_definitions_with_http_info(as_at, filter, sort_by, limit, page, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_task_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[conlist(StrictStr)], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_task_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Task Definitions. Defaults to return the latest version of each Task Definition if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing task definitions from a previous call to list task definitions. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListTaskDefinitions: List Task Definitions  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -903,15 +900,15 @@ class TaskDefinitionsApi:
 
 
     @overload
-    async def update_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], update_task_definition_request : Annotated[UpdateTaskDefinitionRequest, Field(..., description="The data to update a Task Definition")], **kwargs) -> TaskDefinition:  # noqa: E501
+    async def update_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], update_task_definition_request : Annotated[UpdateTaskDefinitionRequest, Field(description="The data to update a Task Definition")], **kwargs) -> TaskDefinition:  # noqa: E501
         ...
 
     @overload
-    def update_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], update_task_definition_request : Annotated[UpdateTaskDefinitionRequest, Field(..., description="The data to update a Task Definition")], async_req: Optional[bool]=True, **kwargs) -> TaskDefinition:  # noqa: E501
+    def update_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], update_task_definition_request : Annotated[UpdateTaskDefinitionRequest, Field(description="The data to update a Task Definition")], async_req: Optional[bool]=True, **kwargs) -> TaskDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], update_task_definition_request : Annotated[UpdateTaskDefinitionRequest, Field(..., description="The data to update a Task Definition")], async_req: Optional[bool]=None, **kwargs) -> Union[TaskDefinition, Awaitable[TaskDefinition]]:  # noqa: E501
+    def update_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], update_task_definition_request : Annotated[UpdateTaskDefinitionRequest, Field(description="The data to update a Task Definition")], async_req: Optional[bool]=None, **kwargs) -> Union[TaskDefinition, Awaitable[TaskDefinition]]:  # noqa: E501
         """UpdateTaskDefinition: Update an existing Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -945,7 +942,7 @@ class TaskDefinitionsApi:
         return self.update_task_definition_with_http_info(scope, code, update_task_definition_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_task_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], update_task_definition_request : Annotated[UpdateTaskDefinitionRequest, Field(..., description="The data to update a Task Definition")], **kwargs) -> ApiResponse:  # noqa: E501
+    def update_task_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], update_task_definition_request : Annotated[UpdateTaskDefinitionRequest, Field(description="The data to update a Task Definition")], **kwargs) -> ApiResponse:  # noqa: E501
         """UpdateTaskDefinition: Update an existing Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an

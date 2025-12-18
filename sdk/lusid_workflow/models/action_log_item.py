@@ -17,15 +17,17 @@ import pprint
 import re  # noqa: F401
 import json
 
+
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from typing import Any, Dict, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, StrictStr, constr 
 
 class ActionLogItem(BaseModel):
     """
     A log item for a given Action Log  # noqa: E501
     """
-    timestamp: datetime = Field(..., description="The timestamp of the log item")
+    timestamp: datetime = Field(description="The timestamp of the log item")
     log_type:  StrictStr = Field(...,alias="logType", description="The type of log item") 
     details:  Optional[StrictStr] = Field(None,alias="details", description="The details of the log item") 
     __properties = ["timestamp", "logType", "details"]
@@ -84,3 +86,5 @@ class ActionLogItem(BaseModel):
             "details": obj.get("details")
         })
         return _obj
+
+ActionLogItem.update_forward_refs()

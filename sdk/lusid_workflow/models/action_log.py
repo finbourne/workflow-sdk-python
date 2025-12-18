@@ -18,8 +18,10 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic.v1 import StrictStr, Field, BaseModel, Field, conlist, constr, validator 
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
 from lusid_workflow.models.action_log_item import ActionLogItem
 from lusid_workflow.models.action_log_origin import ActionLogOrigin
 
@@ -28,10 +30,10 @@ class ActionLog(BaseModel):
     An Action Log contains the processing history of an Action  # noqa: E501
     """
     id:  StrictStr = Field(...,alias="id", description="Unique identifier of the Action") 
-    origin: ActionLogOrigin = Field(...)
+    origin: ActionLogOrigin
     action_type:  StrictStr = Field(...,alias="actionType", description="The type of the Action") 
     run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that the Action was performed by. If not specified, the actions were performed by the \"current user\".") 
-    logged_items: conlist(ActionLogItem) = Field(..., alias="loggedItems", description="The logged items for this Action")
+    logged_items: List[ActionLogItem] = Field(description="The logged items for this Action", alias="loggedItems")
     __properties = ["id", "origin", "actionType", "runAsUserId", "loggedItems"]
 
     class Config:
@@ -100,3 +102,5 @@ class ActionLog(BaseModel):
             "logged_items": [ActionLogItem.from_dict(_item) for _item in obj.get("loggedItems")] if obj.get("loggedItems") is not None else None
         })
         return _obj
+
+ActionLog.update_forward_refs()
