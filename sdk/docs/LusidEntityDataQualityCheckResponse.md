@@ -1,23 +1,21 @@
-# CutLabelReference
+# LusidEntityDataQualityCheckResponse
 
-A reference to a Cut Label in LUSID. The time zone of the Cut Label will be used
+Readonly configuration for the Lusid Entity Data Quality Check Worker
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **str** | Code of the Cut Label | 
-**type** | **str** | The type of Time of Day | 
+**type** | **str** | The type of worker | [optional] 
 ## Example
 
 ```python
-from lusid_workflow.models.cut_label_reference import CutLabelReference
+from lusid_workflow.models.lusid_entity_data_quality_check_response import LusidEntityDataQualityCheckResponse
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-code: StrictStr = "example_code"
-type: StrictStr = "example_type"
-cut_label_reference_instance = CutLabelReference(code=code, type=type)
+type: Optional[StrictStr] = "example_type"
+lusid_entity_data_quality_check_response_instance = LusidEntityDataQualityCheckResponse(type=type)
 
 ```
 

@@ -4,7 +4,7 @@ Day Regularity
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**frequency** | **int** | The frequency of the Day Regularity | 
+**frequency** | **int** | The frequency of the Day Regularity. For example, a value of 2 indicates every 2 days | 
 **type** | **str** | The type of Date Regularity | 
 ## Example
 

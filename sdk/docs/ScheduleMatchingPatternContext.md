@@ -4,7 +4,7 @@ Context for a Schedule Matching Pattern
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**time_zone** | **str** | The time zone to use | 
+**time_zone** | **str** | The time zone to use. A TZ Identifier e.g. \&quot;Europe/London\&quot; | 
 **holiday_calendars** | [**List[CalendarReference]**](CalendarReference.md) | References to any Holiday Calendars to use | [optional] 
 ## Example
 

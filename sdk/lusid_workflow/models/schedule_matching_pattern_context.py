@@ -28,7 +28,7 @@ class ScheduleMatchingPatternContext(BaseModel):
     """
     Context for a Schedule Matching Pattern  # noqa: E501
     """
-    time_zone:  StrictStr = Field(...,alias="timeZone", description="The time zone to use") 
+    time_zone:  StrictStr = Field(...,alias="timeZone", description="The time zone to use. A TZ Identifier e.g. \"Europe/London\"") 
     holiday_calendars: Optional[List[CalendarReference]] = Field(default=None, description="References to any Holiday Calendars to use", alias="holidayCalendars")
     __properties = ["timeZone", "holidayCalendars"]
 

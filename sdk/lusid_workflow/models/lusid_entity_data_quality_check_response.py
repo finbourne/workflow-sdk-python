@@ -23,13 +23,12 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class LuminesceView(BaseModel):
+class LusidEntityDataQualityCheckResponse(BaseModel):
     """
-    Configuration for a Worker that calls a Luminesce view  # noqa: E501
+    Readonly configuration for the Lusid Entity Data Quality Check Worker  # noqa: E501
     """
-    type:  StrictStr = Field(...,alias="type", description="The type of worker") 
-    name:  StrictStr = Field(...,alias="name", description="Name of the view in Luminesce") 
-    __properties = ["type", "name"]
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of worker") 
+    __properties = ["type"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -42,7 +41,7 @@ class LuminesceView(BaseModel):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'LuminesceView' not in [ 
+        if 'LusidEntityDataQualityCheckResponse' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -95,8 +94,11 @@ class LuminesceView(BaseModel):
         if "type" != "type":
             return value
 
-        if value not in ['LuminesceView']:
-            raise ValueError("must be one of enum values ('LuminesceView')")
+        if value is None:
+            return value
+
+        if value not in ['LusidEntityDataQualityCheck']:
+            raise ValueError("must be one of enum values ('LusidEntityDataQualityCheck')")
         return value
 
     class Config:
@@ -121,8 +123,8 @@ class LuminesceView(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> LuminesceView:
-        """Create an instance of LuminesceView from a JSON string"""
+    def from_json(cls, json_str: str) -> LusidEntityDataQualityCheckResponse:
+        """Create an instance of LusidEntityDataQualityCheckResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -131,21 +133,25 @@ class LuminesceView(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.type is None and "type" in self.__fields_set__:
+            _dict['type'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> LuminesceView:
-        """Create an instance of LuminesceView from a dict"""
+    def from_dict(cls, obj: dict) -> LusidEntityDataQualityCheckResponse:
+        """Create an instance of LusidEntityDataQualityCheckResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return LuminesceView.parse_obj(obj)
+            return LusidEntityDataQualityCheckResponse.parse_obj(obj)
 
-        _obj = LuminesceView.parse_obj({
-            "type": obj.get("type"),
-            "name": obj.get("name")
+        _obj = LusidEntityDataQualityCheckResponse.parse_obj({
+            "type": obj.get("type")
         })
         return _obj
 
-LuminesceView.update_forward_refs()
+LusidEntityDataQualityCheckResponse.update_forward_refs()

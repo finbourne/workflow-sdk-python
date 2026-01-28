@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **time_constraints** | [**TimeConstraints**](TimeConstraints.md) |  | 
 **date_regularity** | [**DateRegularity**](DateRegularity.md) |  | 
-**business_day_adjustment** | **str** | The Business Day Adjustment | 
+**business_day_adjustment** | **str** | The Business Day Adjustment. One of None, Previous, Following, ModifiedPrevious, ModifiedFollowing, HalfMonthModifiedFollowing, Nearest | 
 ## Example
 
 ```python

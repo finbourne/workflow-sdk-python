@@ -63,6 +63,8 @@ from lusid_workflow.models.library_response import LibraryResponse
 from lusid_workflow.models.link import Link
 from lusid_workflow.models.luminesce_view import LuminesceView
 from lusid_workflow.models.luminesce_view_response import LuminesceViewResponse
+from lusid_workflow.models.lusid_entity_data_quality_check import LusidEntityDataQualityCheck
+from lusid_workflow.models.lusid_entity_data_quality_check_response import LusidEntityDataQualityCheckResponse
 from lusid_workflow.models.lusid_problem_details import LusidProblemDetails
 from lusid_workflow.models.lusid_validation_problem_details import LusidValidationProblemDetails
 from lusid_workflow.models.paged_resource_list_of_event_handler import PagedResourceListOfEventHandler
@@ -179,6 +181,8 @@ __all__ = [
     "Link",
     "LuminesceView",
     "LuminesceViewResponse",
+    "LusidEntityDataQualityCheck",
+    "LusidEntityDataQualityCheckResponse",
     "LusidProblemDetails",
     "LusidValidationProblemDetails",
     "PagedResourceListOfEventHandler",

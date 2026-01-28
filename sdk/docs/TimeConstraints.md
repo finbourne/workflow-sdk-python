@@ -4,8 +4,8 @@ Time constraints for a Recurrence Pattern
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**start_date** | **str** | Start date of the Recurrence Pattern | 
-**end_date** | **str** | Optional end date of the Recurrence Pattern | [optional] 
+**start_date** | **str** | Start date of the Recurrence Pattern e.g. 2025-12-25 | 
+**end_date** | **str** | Optional end date of the Recurrence Pattern e.g. 2025-12-31 | [optional] 
 **times_of_day** | [**List[TimeOfDay]**](TimeOfDay.md) | Times of the day to run the Recurrence Pattern | 
 ## Example
 

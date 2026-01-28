@@ -4,8 +4,8 @@ Specific Month Regularity
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**frequency** | **int** | The frequency of the Specific Month Regularity | 
-**days_of_month** | **List[int]** | Days of the month | 
+**frequency** | **int** | The frequency of the Specific Month Regularity. For example, a value of 2 indicates every 2 months | 
+**days_of_month** | **List[int]** | Days of the month. For example, to specify the 1st and 15th of every month, set DaysOfMonth to [1, 15] | 
 **type** | **str** | The type of Date Regularity | 
 ## Example
 

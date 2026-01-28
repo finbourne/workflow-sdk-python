@@ -4,8 +4,8 @@ Week Regularity
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**frequency** | **int** | The frequency of the Week Regularity | 
-**days_of_week** | **List[str]** | Days of the week | 
+**frequency** | **int** | The frequency of the Week Regularity. For example, a value of 2 indicates every 2 weeks | 
+**days_of_week** | **List[str]** | Days of the week. One or more of - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday | 
 **type** | **str** | The type of Date Regularity | 
 ## Example
 

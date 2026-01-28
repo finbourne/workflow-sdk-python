@@ -27,7 +27,7 @@ class DayRegularity(BaseModel):
     """
     Day Regularity  # noqa: E501
     """
-    frequency: StrictInt = Field(description="The frequency of the Day Regularity")
+    frequency: StrictInt = Field(description="The frequency of the Day Regularity. For example, a value of 2 indicates every 2 days")
     type:  StrictStr = Field(...,alias="type", description="The type of Date Regularity") 
     __properties = ["frequency", "type"]
 
@@ -86,7 +86,9 @@ class DayRegularity(BaseModel):
                                     'RelativeMonthRegularity',
                                     'SpecificMonthRegularity',
                                     'WeekRegularity',
-                                    'YearRegularity']:
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse']:
            return value
         
         # Only validate the 'type' property of the class

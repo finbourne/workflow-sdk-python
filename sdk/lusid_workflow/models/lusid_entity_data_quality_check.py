@@ -23,13 +23,12 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class LuminesceView(BaseModel):
+class LusidEntityDataQualityCheck(BaseModel):
     """
-    Configuration for a Worker that calls a Luminesce view  # noqa: E501
+    Configuration for a Worker that calls runs a Lusid entity Data quality check in LUSID  # noqa: E501
     """
     type:  StrictStr = Field(...,alias="type", description="The type of worker") 
-    name:  StrictStr = Field(...,alias="name", description="Name of the view in Luminesce") 
-    __properties = ["type", "name"]
+    __properties = ["type"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -42,7 +41,7 @@ class LuminesceView(BaseModel):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'LuminesceView' not in [ 
+        if 'LusidEntityDataQualityCheck' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -95,8 +94,8 @@ class LuminesceView(BaseModel):
         if "type" != "type":
             return value
 
-        if value not in ['LuminesceView']:
-            raise ValueError("must be one of enum values ('LuminesceView')")
+        if value not in ['LusidEntityDataQualityCheck']:
+            raise ValueError("must be one of enum values ('LusidEntityDataQualityCheck')")
         return value
 
     class Config:
@@ -121,8 +120,8 @@ class LuminesceView(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> LuminesceView:
-        """Create an instance of LuminesceView from a JSON string"""
+    def from_json(cls, json_str: str) -> LusidEntityDataQualityCheck:
+        """Create an instance of LusidEntityDataQualityCheck from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -134,18 +133,17 @@ class LuminesceView(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> LuminesceView:
-        """Create an instance of LuminesceView from a dict"""
+    def from_dict(cls, obj: dict) -> LusidEntityDataQualityCheck:
+        """Create an instance of LusidEntityDataQualityCheck from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return LuminesceView.parse_obj(obj)
+            return LusidEntityDataQualityCheck.parse_obj(obj)
 
-        _obj = LuminesceView.parse_obj({
-            "type": obj.get("type"),
-            "name": obj.get("name")
+        _obj = LusidEntityDataQualityCheck.parse_obj({
+            "type": obj.get("type")
         })
         return _obj
 
-LuminesceView.update_forward_refs()
+LusidEntityDataQualityCheck.update_forward_refs()

@@ -28,8 +28,8 @@ class TimeConstraints(BaseModel):
     """
     Time constraints for a Recurrence Pattern  # noqa: E501
     """
-    start_date:  StrictStr = Field(...,alias="startDate", description="Start date of the Recurrence Pattern") 
-    end_date:  Optional[StrictStr] = Field(None,alias="endDate", description="Optional end date of the Recurrence Pattern") 
+    start_date:  StrictStr = Field(...,alias="startDate", description="Start date of the Recurrence Pattern e.g. 2025-12-25") 
+    end_date:  Optional[StrictStr] = Field(None,alias="endDate", description="Optional end date of the Recurrence Pattern e.g. 2025-12-31") 
     times_of_day: List[TimeOfDay] = Field(description="Times of the day to run the Recurrence Pattern", alias="timesOfDay")
     __properties = ["startDate", "endDate", "timesOfDay"]
 

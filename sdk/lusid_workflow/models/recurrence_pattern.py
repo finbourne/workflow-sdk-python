@@ -31,7 +31,7 @@ class RecurrencePattern(BaseModel):
     """
     time_constraints: TimeConstraints = Field(alias="timeConstraints")
     date_regularity: DateRegularity = Field(alias="dateRegularity")
-    business_day_adjustment:  StrictStr = Field(...,alias="businessDayAdjustment", description="The Business Day Adjustment") 
+    business_day_adjustment:  StrictStr = Field(...,alias="businessDayAdjustment", description="The Business Day Adjustment. One of None, Previous, Following, ModifiedPrevious, ModifiedFollowing, HalfMonthModifiedFollowing, Nearest") 
     __properties = ["timeConstraints", "dateRegularity", "businessDayAdjustment"]
 
     class Config:

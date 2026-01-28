@@ -27,8 +27,8 @@ class SpecificMonthRegularity(BaseModel):
     """
     Specific Month Regularity  # noqa: E501
     """
-    frequency: StrictInt = Field(description="The frequency of the Specific Month Regularity")
-    days_of_month: List[StrictInt] = Field(description="Days of the month", alias="daysOfMonth")
+    frequency: StrictInt = Field(description="The frequency of the Specific Month Regularity. For example, a value of 2 indicates every 2 months")
+    days_of_month: List[StrictInt] = Field(description="Days of the month. For example, to specify the 1st and 15th of every month, set DaysOfMonth to [1, 15]", alias="daysOfMonth")
     type:  StrictStr = Field(...,alias="type", description="The type of Date Regularity") 
     __properties = ["frequency", "daysOfMonth", "type"]
 
@@ -87,7 +87,9 @@ class SpecificMonthRegularity(BaseModel):
                                     'RelativeMonthRegularity',
                                     'SpecificMonthRegularity',
                                     'WeekRegularity',
-                                    'YearRegularity']:
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse']:
            return value
         
         # Only validate the 'type' property of the class

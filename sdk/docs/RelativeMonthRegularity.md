@@ -4,9 +4,9 @@ Relative Month Regularity
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**frequency** | **int** | The frequency of the Relative Month Regularity | 
-**days_of_week** | **List[str]** | Days of the week | 
-**index** | **str** | Relative index in the month | 
+**frequency** | **int** | The frequency of the Relative Month Regularity. For example, a value of 2 indicates every 2 months | 
+**days_of_week** | **List[str]** | Days of the week. One or more of - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday | 
+**index** | **str** | Relative index in the month. One of - First, Second, Third, Fourth, Last. For example, to specify the second Tuesday of every month, set DaysOfWeek to [\&quot;Tuesday\&quot;] and Index to \&quot;Second\&quot; | 
 **type** | **str** | The type of Date Regularity | 
 ## Example
 

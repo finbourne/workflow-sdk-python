@@ -27,9 +27,9 @@ class RelativeMonthRegularity(BaseModel):
     """
     Relative Month Regularity  # noqa: E501
     """
-    frequency: StrictInt = Field(description="The frequency of the Relative Month Regularity")
-    days_of_week: List[StrictStr] = Field(description="Days of the week", alias="daysOfWeek")
-    index:  StrictStr = Field(...,alias="index", description="Relative index in the month") 
+    frequency: StrictInt = Field(description="The frequency of the Relative Month Regularity. For example, a value of 2 indicates every 2 months")
+    days_of_week: List[StrictStr] = Field(description="Days of the week. One or more of - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday", alias="daysOfWeek")
+    index:  StrictStr = Field(...,alias="index", description="Relative index in the month. One of - First, Second, Third, Fourth, Last. For example, to specify the second Tuesday of every month, set DaysOfWeek to [\"Tuesday\"] and Index to \"Second\"") 
     type:  StrictStr = Field(...,alias="type", description="The type of Date Regularity") 
     __properties = ["frequency", "daysOfWeek", "index", "type"]
 
@@ -88,7 +88,9 @@ class RelativeMonthRegularity(BaseModel):
                                     'RelativeMonthRegularity',
                                     'SpecificMonthRegularity',
                                     'WeekRegularity',
-                                    'YearRegularity']:
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse']:
            return value
         
         # Only validate the 'type' property of the class

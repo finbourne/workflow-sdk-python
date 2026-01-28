@@ -25,7 +25,7 @@ from datetime import datetime
 
 class CutLabelReference(BaseModel):
     """
-    A reference to a Cut Label in LUSID  # noqa: E501
+    A reference to a Cut Label in LUSID. The time zone of the Cut Label will be used  # noqa: E501
     """
     code:  StrictStr = Field(...,alias="code", description="Code of the Cut Label") 
     type:  StrictStr = Field(...,alias="type", description="The type of Time of Day") 
@@ -86,7 +86,9 @@ class CutLabelReference(BaseModel):
                                     'RelativeMonthRegularity',
                                     'SpecificMonthRegularity',
                                     'WeekRegularity',
-                                    'YearRegularity']:
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse']:
            return value
         
         # Only validate the 'type' property of the class

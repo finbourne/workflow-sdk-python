@@ -27,6 +27,8 @@ See all compatible oneOf types with WorkerConfiguration
 
  * [LuminesceView](./LuminesceView.md)
 
+ * [LusidEntityDataQualityCheck](./LusidEntityDataQualityCheck.md)
+
  * [SchedulerJob](./SchedulerJob.md)
 
  * [Sleep](./Sleep.md)
