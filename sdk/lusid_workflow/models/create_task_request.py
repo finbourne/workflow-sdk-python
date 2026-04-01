@@ -29,11 +29,12 @@ class CreateTaskRequest(BaseModel):
     """
     Contains required info to create a new Task  # noqa: E501
     """
-    task_definition_id: ResourceId = Field(alias="taskDefinitionId")
+    task_definition_id: Optional[ResourceId] = Field(default=None, alias="taskDefinitionId")
+    workflow_id: Optional[ResourceId] = Field(default=None, alias="workflowId")
     correlation_ids: Optional[List[StrictStr]] = Field(default=None, description="A set of guid identifiers that allow correlation across the application tier", alias="correlationIds")
     fields: Optional[List[TaskInstanceField]] = Field(default=None, description="Fields and their initial values - should correspond with the Task Definition field schema")
     stacking_key:  Optional[StrictStr] = Field(None,alias="stackingKey", description="The key for the Stack that this Task should be added to") 
-    __properties = ["taskDefinitionId", "correlationIds", "fields", "stackingKey"]
+    __properties = ["taskDefinitionId", "workflowId", "correlationIds", "fields", "stackingKey"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +71,9 @@ class CreateTaskRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of task_definition_id
         if self.task_definition_id:
             _dict['taskDefinitionId'] = self.task_definition_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of workflow_id
+        if self.workflow_id:
+            _dict['workflowId'] = self.workflow_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in fields (list)
         _items = []
         if self.fields:
@@ -105,6 +109,7 @@ class CreateTaskRequest(BaseModel):
 
         _obj = CreateTaskRequest.parse_obj({
             "task_definition_id": ResourceId.from_dict(obj.get("taskDefinitionId")) if obj.get("taskDefinitionId") is not None else None,
+            "workflow_id": ResourceId.from_dict(obj.get("workflowId")) if obj.get("workflowId") is not None else None,
             "correlation_ids": obj.get("correlationIds"),
             "fields": [TaskInstanceField.from_dict(_item) for _item in obj.get("fields")] if obj.get("fields") is not None else None,
             "stacking_key": obj.get("stackingKey")

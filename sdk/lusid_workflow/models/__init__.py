@@ -28,6 +28,7 @@ from lusid_workflow.models.batch_update_tasks_request import BatchUpdateTasksReq
 from lusid_workflow.models.batch_update_tasks_response import BatchUpdateTasksResponse
 from lusid_workflow.models.calendar_reference import CalendarReference
 from lusid_workflow.models.change_item import ChangeItem
+from lusid_workflow.models.child_task_definition_edge import ChildTaskDefinitionEdge
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 from lusid_workflow.models.create_child_tasks_action import CreateChildTasksAction
 from lusid_workflow.models.create_child_tasks_action_response import CreateChildTasksActionResponse
@@ -37,6 +38,7 @@ from lusid_workflow.models.create_new_task_activity_response import CreateNewTas
 from lusid_workflow.models.create_task_definition_request import CreateTaskDefinitionRequest
 from lusid_workflow.models.create_task_request import CreateTaskRequest
 from lusid_workflow.models.create_worker_request import CreateWorkerRequest
+from lusid_workflow.models.create_workflow_request import CreateWorkflowRequest
 from lusid_workflow.models.cut_label_reference import CutLabelReference
 from lusid_workflow.models.date_adjustment import DateAdjustment
 from lusid_workflow.models.date_regularity import DateRegularity
@@ -71,6 +73,7 @@ from lusid_workflow.models.paged_resource_list_of_event_handler import PagedReso
 from lusid_workflow.models.paged_resource_list_of_task import PagedResourceListOfTask
 from lusid_workflow.models.paged_resource_list_of_task_definition import PagedResourceListOfTaskDefinition
 from lusid_workflow.models.paged_resource_list_of_worker import PagedResourceListOfWorker
+from lusid_workflow.models.paged_resource_list_of_workflow_response import PagedResourceListOfWorkflowResponse
 from lusid_workflow.models.parameter import Parameter
 from lusid_workflow.models.parameter_value import ParameterValue
 from lusid_workflow.models.read_only_states import ReadOnlyStates
@@ -123,11 +126,16 @@ from lusid_workflow.models.update_task_with_id_and_trigger_request import Update
 from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
 from lusid_workflow.models.value_constraints import ValueConstraints
 from lusid_workflow.models.version_info import VersionInfo
+from lusid_workflow.models.versioned_task_definition_id import VersionedTaskDefinitionId
 from lusid_workflow.models.week_regularity import WeekRegularity
 from lusid_workflow.models.worker import Worker
 from lusid_workflow.models.worker_configuration import WorkerConfiguration
 from lusid_workflow.models.worker_configuration_response import WorkerConfigurationResponse
 from lusid_workflow.models.worker_status_triggers import WorkerStatusTriggers
+from lusid_workflow.models.workflow_response import WorkflowResponse
+from lusid_workflow.models.workflow_structure import WorkflowStructure
+from lusid_workflow.models.workflow_structure_edges import WorkflowStructureEdges
+from lusid_workflow.models.workflow_structure_nodes import WorkflowStructureNodes
 from lusid_workflow.models.year_regularity import YearRegularity
 
 
@@ -146,6 +154,7 @@ __all__ = [
     "BatchUpdateTasksResponse",
     "CalendarReference",
     "ChangeItem",
+    "ChildTaskDefinitionEdge",
     "CreateChildTaskConfiguration",
     "CreateChildTasksAction",
     "CreateChildTasksActionResponse",
@@ -155,6 +164,7 @@ __all__ = [
     "CreateTaskDefinitionRequest",
     "CreateTaskRequest",
     "CreateWorkerRequest",
+    "CreateWorkflowRequest",
     "CutLabelReference",
     "DateAdjustment",
     "DateRegularity",
@@ -189,6 +199,7 @@ __all__ = [
     "PagedResourceListOfTask",
     "PagedResourceListOfTaskDefinition",
     "PagedResourceListOfWorker",
+    "PagedResourceListOfWorkflowResponse",
     "Parameter",
     "ParameterValue",
     "ReadOnlyStates",
@@ -241,10 +252,15 @@ __all__ = [
     "UpdateWorkerRequest",
     "ValueConstraints",
     "VersionInfo",
+    "VersionedTaskDefinitionId",
     "WeekRegularity",
     "Worker",
     "WorkerConfiguration",
     "WorkerConfigurationResponse",
     "WorkerStatusTriggers",
+    "WorkflowResponse",
+    "WorkflowStructure",
+    "WorkflowStructureEdges",
+    "WorkflowStructureNodes",
     "YearRegularity"
 ]

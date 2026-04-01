@@ -69,7 +69,7 @@ class TasksApi:
 
     @validate_arguments
     def batch_update_tasks(self, batch_update_tasks_request : Annotated[Optional[BatchUpdateTasksRequest], Field(description="The details of the request")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpdateTasksResponse, Awaitable[BatchUpdateTasksResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] BatchUpdateTasks: Batch update tasks  # noqa: E501
+        """BatchUpdateTasks: Batch update tasks  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -99,7 +99,7 @@ class TasksApi:
 
     @validate_arguments
     def batch_update_tasks_with_http_info(self, batch_update_tasks_request : Annotated[Optional[BatchUpdateTasksRequest], Field(description="The details of the request")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] BatchUpdateTasks: Batch update tasks  # noqa: E501
+        """BatchUpdateTasks: Batch update tasks  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True

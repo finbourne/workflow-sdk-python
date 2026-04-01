@@ -7,6 +7,7 @@ from lusid_workflow.api.event_handlers_api import EventHandlersApi
 from lusid_workflow.api.task_definitions_api import TaskDefinitionsApi
 from lusid_workflow.api.tasks_api import TasksApi
 from lusid_workflow.api.workers_api import WorkersApi
+from lusid_workflow.api.workflows_api import WorkflowsApi
 
 
 __all__ = [
@@ -15,5 +16,6 @@ __all__ = [
     "EventHandlersApi",
     "TaskDefinitionsApi",
     "TasksApi",
-    "WorkersApi"
+    "WorkersApi",
+    "WorkflowsApi"
 ]

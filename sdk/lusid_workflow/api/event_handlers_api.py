@@ -65,7 +65,7 @@ class EventHandlersApi:
 
     @validate_arguments
     def create_event_handler(self, create_event_handler_request : Annotated[CreateEventHandlerRequest, Field(description="The data to create an Event Handler")], async_req: Optional[bool]=None, **kwargs) -> Union[EventHandler, Awaitable[EventHandler]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateEventHandler: Create a new Event Handler  # noqa: E501
+        """CreateEventHandler: Create a new Event Handler  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -95,7 +95,7 @@ class EventHandlersApi:
 
     @validate_arguments
     def create_event_handler_with_http_info(self, create_event_handler_request : Annotated[CreateEventHandlerRequest, Field(description="The data to create an Event Handler")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateEventHandler: Create a new Event Handler  # noqa: E501
+        """CreateEventHandler: Create a new Event Handler  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -222,7 +222,7 @@ class EventHandlersApi:
 
     @validate_arguments
     def delete_event_handler(self, scope : Annotated[StrictStr, Field(..., description="Scope of the event handler to be deleted")], code : Annotated[StrictStr, Field(..., description="Code of the event handler to be deleted")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteEventHandler: Delete an Event Handler  # noqa: E501
+        """DeleteEventHandler: Delete an Event Handler  # noqa: E501
 
         If the Event Handler does not exist a failure will be returned  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -255,7 +255,7 @@ class EventHandlersApi:
 
     @validate_arguments
     def delete_event_handler_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the event handler to be deleted")], code : Annotated[StrictStr, Field(..., description="Code of the event handler to be deleted")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteEventHandler: Delete an Event Handler  # noqa: E501
+        """DeleteEventHandler: Delete an Event Handler  # noqa: E501
 
         If the Event Handler does not exist a failure will be returned  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -383,7 +383,7 @@ class EventHandlersApi:
 
     @validate_arguments
     def get_event_handler(self, scope : Annotated[StrictStr, Field(..., description="Scope of the event handler")], code : Annotated[StrictStr, Field(..., description="Code of the event handler")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the event handler. Defaults to returning the latest version of the event handler if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[EventHandler, Awaitable[EventHandler]]:  # noqa: E501
-        """[EXPERIMENTAL] GetEventHandler: Get an Event Handler  # noqa: E501
+        """GetEventHandler: Get an Event Handler  # noqa: E501
 
         Will return a NotFound failure if the event handler does not exist  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -418,7 +418,7 @@ class EventHandlersApi:
 
     @validate_arguments
     def get_event_handler_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Scope of the event handler")], code : Annotated[StrictStr, Field(..., description="Code of the event handler")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the event handler. Defaults to returning the latest version of the event handler if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetEventHandler: Get an Event Handler  # noqa: E501
+        """GetEventHandler: Get an Event Handler  # noqa: E501
 
         Will return a NotFound failure if the event handler does not exist  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -554,7 +554,7 @@ class EventHandlersApi:
 
     @validate_arguments
     def list_event_handlers(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Event Handlers. Defaults to return the latest version of each Event Handler if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing event handlers from a previous call to list event handlers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfEventHandler, Awaitable[PagedResourceListOfEventHandler]]:  # noqa: E501
-        """[EXPERIMENTAL] ListEventHandlers: List Event Handlers  # noqa: E501
+        """ListEventHandlers: List Event Handlers  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -590,7 +590,7 @@ class EventHandlersApi:
 
     @validate_arguments
     def list_event_handlers_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Event Handlers. Defaults to return the latest version of each Event Handler if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing event handlers from a previous call to list event handlers. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListEventHandlers: List Event Handlers  # noqa: E501
+        """ListEventHandlers: List Event Handlers  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -731,7 +731,7 @@ class EventHandlersApi:
 
     @validate_arguments
     def update_event_handler(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies an Event Handler")], code : Annotated[StrictStr, Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(description="The data to update an Event Handler")], async_req: Optional[bool]=None, **kwargs) -> Union[EventHandler, Awaitable[EventHandler]]:  # noqa: E501
-        """[EXPERIMENTAL] UpdateEventHandler: Update an existing Event handler  # noqa: E501
+        """UpdateEventHandler: Update an existing Event handler  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -765,7 +765,7 @@ class EventHandlersApi:
 
     @validate_arguments
     def update_event_handler_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies an Event Handler")], code : Annotated[StrictStr, Field(..., description="The code that identifies an Event Handler")], update_event_handler_request : Annotated[UpdateEventHandlerRequest, Field(description="The data to update an Event Handler")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpdateEventHandler: Update an existing Event handler  # noqa: E501
+        """UpdateEventHandler: Update an existing Event handler  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True

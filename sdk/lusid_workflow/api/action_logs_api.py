@@ -59,7 +59,7 @@ class ActionLogsApi:
 
     @validate_arguments
     def get_action_logs(self, id : Annotated[StrictStr, Field(..., description="The Action Id")], async_req: Optional[bool]=None, **kwargs) -> Union[ActionLog, Awaitable[ActionLog]]:  # noqa: E501
-        """[EXPERIMENTAL] GetActionLogs: Get the Action Logs for an Action Id  # noqa: E501
+        """GetActionLogs: Get the Action Logs for an Action Id  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -89,7 +89,7 @@ class ActionLogsApi:
 
     @validate_arguments
     def get_action_logs_with_http_info(self, id : Annotated[StrictStr, Field(..., description="The Action Id")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetActionLogs: Get the Action Logs for an Action Id  # noqa: E501
+        """GetActionLogs: Get the Action Logs for an Action Id  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True

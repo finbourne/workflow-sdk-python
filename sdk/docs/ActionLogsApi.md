@@ -4,13 +4,13 @@ All URIs are relative to *https://fbn-prd.lusid.com/workflow*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_action_logs**](ActionLogsApi.md#get_action_logs) | **GET** /api/actionlogs/{id} | [EXPERIMENTAL] GetActionLogs: Get the Action Logs for an Action Id
+[**get_action_logs**](ActionLogsApi.md#get_action_logs) | **GET** /api/actionlogs/{id} | GetActionLogs: Get the Action Logs for an Action Id
 
 
 # **get_action_logs**
 > ActionLog get_action_logs(id)
 
-[EXPERIMENTAL] GetActionLogs: Get the Action Logs for an Action Id
+GetActionLogs: Get the Action Logs for an Action Id
 
 ### Example
 
@@ -63,7 +63,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_action_logs(id, opts=opts)
 
-        # [EXPERIMENTAL] GetActionLogs: Get the Action Logs for an Action Id
+        # GetActionLogs: Get the Action Logs for an Action Id
         api_response = api_instance.get_action_logs(id)
         pprint(api_response)
 

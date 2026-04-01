@@ -37,6 +37,8 @@ class Task(BaseModel):
     task_definition_id: ResourceId = Field(alias="taskDefinitionId")
     task_definition_version: TaskDefinitionVersion = Field(alias="taskDefinitionVersion")
     task_definition_display_name:  StrictStr = Field(...,alias="taskDefinitionDisplayName", description="The display name of the Task Definition used by this Task") 
+    workflow_id: Optional[ResourceId] = Field(default=None, alias="workflowId")
+    workflow_display_name:  Optional[StrictStr] = Field(None,alias="workflowDisplayName", description="The display name of the Workflow that this Task is a member of, if any") 
     state:  StrictStr = Field(...,alias="state", description="Current State") 
     ultimate_parent_task: TaskSummary = Field(alias="ultimateParentTask")
     parent_task: Optional[TaskSummary] = Field(default=None, alias="parentTask")
@@ -51,7 +53,12 @@ class Task(BaseModel):
     action_log_id_created:  Optional[StrictStr] = Field(None,alias="actionLogIdCreated", description="The Id of the Action that created this Task") 
     action_log_id_modified:  Optional[StrictStr] = Field(None,alias="actionLogIdModified", description="The Id of the Action that last modified this Task") 
     action_log_id_submitted:  Optional[StrictStr] = Field(None,alias="actionLogIdSubmitted", description="The Id of the last Action submitted by this Task") 
-    __properties = ["id", "taskDefinitionId", "taskDefinitionVersion", "taskDefinitionDisplayName", "state", "ultimateParentTask", "parentTask", "childTasks", "correlationIds", "version", "terminalState", "asAtLastTransition", "fields", "stackingKey", "stack", "actionLogIdCreated", "actionLogIdModified", "actionLogIdSubmitted"]
+    hierarchical_position:  Optional[StrictStr] = Field(None,alias="hierarchicalPosition", description="The hierarchical position of this Task: UltimateParent, IntermediateParent, Child, or Standalone") 
+    completion_status:  Optional[StrictStr] = Field(None,alias="completionStatus", description="The completion status of this Task: NotStarted, InProgress, or Completed") 
+    open_duration: Optional[StrictInt] = Field(default=None, description="Duration in seconds since the Task was created. If the Task is Completed, this is the duration from creation to the last transition.", alias="openDuration")
+    open_duration_since_last_update: Optional[StrictInt] = Field(default=None, description="Duration in seconds since the Task was last updated. 0 if the Task is Completed.", alias="openDurationSinceLastUpdate")
+    open_duration_since_last_transition: Optional[StrictInt] = Field(default=None, description="Duration in seconds since the Task last transitioned. 0 if the Task is Completed.", alias="openDurationSinceLastTransition")
+    __properties = ["id", "taskDefinitionId", "taskDefinitionVersion", "taskDefinitionDisplayName", "workflowId", "workflowDisplayName", "state", "ultimateParentTask", "parentTask", "childTasks", "correlationIds", "version", "terminalState", "asAtLastTransition", "fields", "stackingKey", "stack", "actionLogIdCreated", "actionLogIdModified", "actionLogIdSubmitted", "hierarchicalPosition", "completionStatus", "openDuration", "openDurationSinceLastUpdate", "openDurationSinceLastTransition"]
 
     class Config:
         """Pydantic configuration"""
@@ -91,6 +98,9 @@ class Task(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of task_definition_version
         if self.task_definition_version:
             _dict['taskDefinitionVersion'] = self.task_definition_version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of workflow_id
+        if self.workflow_id:
+            _dict['workflowId'] = self.workflow_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of ultimate_parent_task
         if self.ultimate_parent_task:
             _dict['ultimateParentTask'] = self.ultimate_parent_task.to_dict()
@@ -117,6 +127,11 @@ class Task(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of stack
         if self.stack:
             _dict['stack'] = self.stack.to_dict()
+        # set to None if workflow_display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.workflow_display_name is None and "workflow_display_name" in self.__fields_set__:
+            _dict['workflowDisplayName'] = None
+
         # set to None if child_tasks (nullable) is None
         # and __fields_set__ contains the field
         if self.child_tasks is None and "child_tasks" in self.__fields_set__:
@@ -157,6 +172,31 @@ class Task(BaseModel):
         if self.action_log_id_submitted is None and "action_log_id_submitted" in self.__fields_set__:
             _dict['actionLogIdSubmitted'] = None
 
+        # set to None if hierarchical_position (nullable) is None
+        # and __fields_set__ contains the field
+        if self.hierarchical_position is None and "hierarchical_position" in self.__fields_set__:
+            _dict['hierarchicalPosition'] = None
+
+        # set to None if completion_status (nullable) is None
+        # and __fields_set__ contains the field
+        if self.completion_status is None and "completion_status" in self.__fields_set__:
+            _dict['completionStatus'] = None
+
+        # set to None if open_duration (nullable) is None
+        # and __fields_set__ contains the field
+        if self.open_duration is None and "open_duration" in self.__fields_set__:
+            _dict['openDuration'] = None
+
+        # set to None if open_duration_since_last_update (nullable) is None
+        # and __fields_set__ contains the field
+        if self.open_duration_since_last_update is None and "open_duration_since_last_update" in self.__fields_set__:
+            _dict['openDurationSinceLastUpdate'] = None
+
+        # set to None if open_duration_since_last_transition (nullable) is None
+        # and __fields_set__ contains the field
+        if self.open_duration_since_last_transition is None and "open_duration_since_last_transition" in self.__fields_set__:
+            _dict['openDurationSinceLastTransition'] = None
+
         return _dict
 
     @classmethod
@@ -173,6 +213,8 @@ class Task(BaseModel):
             "task_definition_id": ResourceId.from_dict(obj.get("taskDefinitionId")) if obj.get("taskDefinitionId") is not None else None,
             "task_definition_version": TaskDefinitionVersion.from_dict(obj.get("taskDefinitionVersion")) if obj.get("taskDefinitionVersion") is not None else None,
             "task_definition_display_name": obj.get("taskDefinitionDisplayName"),
+            "workflow_id": ResourceId.from_dict(obj.get("workflowId")) if obj.get("workflowId") is not None else None,
+            "workflow_display_name": obj.get("workflowDisplayName"),
             "state": obj.get("state"),
             "ultimate_parent_task": TaskSummary.from_dict(obj.get("ultimateParentTask")) if obj.get("ultimateParentTask") is not None else None,
             "parent_task": TaskSummary.from_dict(obj.get("parentTask")) if obj.get("parentTask") is not None else None,
@@ -186,7 +228,12 @@ class Task(BaseModel):
             "stack": Stack.from_dict(obj.get("stack")) if obj.get("stack") is not None else None,
             "action_log_id_created": obj.get("actionLogIdCreated"),
             "action_log_id_modified": obj.get("actionLogIdModified"),
-            "action_log_id_submitted": obj.get("actionLogIdSubmitted")
+            "action_log_id_submitted": obj.get("actionLogIdSubmitted"),
+            "hierarchical_position": obj.get("hierarchicalPosition"),
+            "completion_status": obj.get("completionStatus"),
+            "open_duration": obj.get("openDuration"),
+            "open_duration_since_last_update": obj.get("openDurationSinceLastUpdate"),
+            "open_duration_since_last_transition": obj.get("openDurationSinceLastTransition")
         })
         return _obj
 

@@ -4,7 +4,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/workflow*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**batch_update_tasks**](TasksApi.md#batch_update_tasks) | **PATCH** /api/tasks/$update | [EXPERIMENTAL] BatchUpdateTasks: Batch update tasks
+[**batch_update_tasks**](TasksApi.md#batch_update_tasks) | **PATCH** /api/tasks/$update | BatchUpdateTasks: Batch update tasks
 [**create_task**](TasksApi.md#create_task) | **POST** /api/tasks | CreateTask: Create a new Task
 [**delete_task**](TasksApi.md#delete_task) | **DELETE** /api/tasks/{id} | DeleteTask: Delete a Task
 [**delete_tasks**](TasksApi.md#delete_tasks) | **POST** /api/tasks/$delete | DeleteTasks: Batch Delete Tasks
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 # **batch_update_tasks**
 > BatchUpdateTasksResponse batch_update_tasks(batch_update_tasks_request=batch_update_tasks_request)
 
-[EXPERIMENTAL] BatchUpdateTasks: Batch update tasks
+BatchUpdateTasks: Batch update tasks
 
 ### Example
 
@@ -75,7 +75,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.batch_update_tasks(batch_update_tasks_request=batch_update_tasks_request, opts=opts)
 
-        # [EXPERIMENTAL] BatchUpdateTasks: Batch update tasks
+        # BatchUpdateTasks: Batch update tasks
         api_response = api_instance.batch_update_tasks(batch_update_tasks_request=batch_update_tasks_request)
         pprint(api_response)
 

@@ -4,17 +4,17 @@ All URIs are relative to *https://fbn-prd.lusid.com/workflow*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_event_handler**](EventHandlersApi.md#create_event_handler) | **POST** /api/eventhandlers | [EXPERIMENTAL] CreateEventHandler: Create a new Event Handler
-[**delete_event_handler**](EventHandlersApi.md#delete_event_handler) | **DELETE** /api/eventhandlers/{scope}/{code} | [EXPERIMENTAL] DeleteEventHandler: Delete an Event Handler
-[**get_event_handler**](EventHandlersApi.md#get_event_handler) | **GET** /api/eventhandlers/{scope}/{code} | [EXPERIMENTAL] GetEventHandler: Get an Event Handler
-[**list_event_handlers**](EventHandlersApi.md#list_event_handlers) | **GET** /api/eventhandlers | [EXPERIMENTAL] ListEventHandlers: List Event Handlers
-[**update_event_handler**](EventHandlersApi.md#update_event_handler) | **PUT** /api/eventhandlers/{scope}/{code} | [EXPERIMENTAL] UpdateEventHandler: Update an existing Event handler
+[**create_event_handler**](EventHandlersApi.md#create_event_handler) | **POST** /api/eventhandlers | CreateEventHandler: Create a new Event Handler
+[**delete_event_handler**](EventHandlersApi.md#delete_event_handler) | **DELETE** /api/eventhandlers/{scope}/{code} | DeleteEventHandler: Delete an Event Handler
+[**get_event_handler**](EventHandlersApi.md#get_event_handler) | **GET** /api/eventhandlers/{scope}/{code} | GetEventHandler: Get an Event Handler
+[**list_event_handlers**](EventHandlersApi.md#list_event_handlers) | **GET** /api/eventhandlers | ListEventHandlers: List Event Handlers
+[**update_event_handler**](EventHandlersApi.md#update_event_handler) | **PUT** /api/eventhandlers/{scope}/{code} | UpdateEventHandler: Update an existing Event handler
 
 
 # **create_event_handler**
 > EventHandler create_event_handler(create_event_handler_request)
 
-[EXPERIMENTAL] CreateEventHandler: Create a new Event Handler
+CreateEventHandler: Create a new Event Handler
 
 ### Example
 
@@ -72,7 +72,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_event_handler(create_event_handler_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateEventHandler: Create a new Event Handler
+        # CreateEventHandler: Create a new Event Handler
         api_response = api_instance.create_event_handler(create_event_handler_request)
         pprint(api_response)
 
@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 # **delete_event_handler**
 > DeletedEntityResponse delete_event_handler(scope, code)
 
-[EXPERIMENTAL] DeleteEventHandler: Delete an Event Handler
+DeleteEventHandler: Delete an Event Handler
 
 If the Event Handler does not exist a failure will be returned
 
@@ -165,7 +165,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_event_handler(scope, code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteEventHandler: Delete an Event Handler
+        # DeleteEventHandler: Delete an Event Handler
         api_response = api_instance.delete_event_handler(scope, code)
         pprint(api_response)
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 # **get_event_handler**
 > EventHandler get_event_handler(scope, code, as_at=as_at)
 
-[EXPERIMENTAL] GetEventHandler: Get an Event Handler
+GetEventHandler: Get an Event Handler
 
 Will return a NotFound failure if the event handler does not exist
 
@@ -261,7 +261,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_event_handler(scope, code, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetEventHandler: Get an Event Handler
+        # GetEventHandler: Get an Event Handler
         api_response = api_instance.get_event_handler(scope, code, as_at=as_at)
         pprint(api_response)
 
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 # **list_event_handlers**
 > PagedResourceListOfEventHandler list_event_handlers(as_at=as_at, filter=filter, limit=limit, page=page)
 
-[EXPERIMENTAL] ListEventHandlers: List Event Handlers
+ListEventHandlers: List Event Handlers
 
 ### Example
 
@@ -356,7 +356,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_event_handlers(as_at=as_at, filter=filter, limit=limit, page=page, opts=opts)
 
-        # [EXPERIMENTAL] ListEventHandlers: List Event Handlers
+        # ListEventHandlers: List Event Handlers
         api_response = api_instance.list_event_handlers(as_at=as_at, filter=filter, limit=limit, page=page)
         pprint(api_response)
 
@@ -396,7 +396,7 @@ Name | Type | Description  | Notes
 # **update_event_handler**
 > EventHandler update_event_handler(scope, code, update_event_handler_request)
 
-[EXPERIMENTAL] UpdateEventHandler: Update an existing Event handler
+UpdateEventHandler: Update an existing Event handler
 
 ### Example
 
@@ -456,7 +456,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_event_handler(scope, code, update_event_handler_request, opts=opts)
 
-        # [EXPERIMENTAL] UpdateEventHandler: Update an existing Event handler
+        # UpdateEventHandler: Update an existing Event handler
         api_response = api_instance.update_event_handler(scope, code, update_event_handler_request)
         pprint(api_response)
 
