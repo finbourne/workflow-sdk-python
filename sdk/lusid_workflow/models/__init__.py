@@ -114,6 +114,8 @@ from lusid_workflow.models.time_adjustment import TimeAdjustment
 from lusid_workflow.models.time_constraints import TimeConstraints
 from lusid_workflow.models.time_of_day import TimeOfDay
 from lusid_workflow.models.transition_trigger_definition import TransitionTriggerDefinition
+from lusid_workflow.models.trigger_child_tasks_action import TriggerChildTasksAction
+from lusid_workflow.models.trigger_child_tasks_action_response import TriggerChildTasksActionResponse
 from lusid_workflow.models.trigger_parent_task_action import TriggerParentTaskAction
 from lusid_workflow.models.trigger_parent_task_action_response import TriggerParentTaskActionResponse
 from lusid_workflow.models.trigger_schema import TriggerSchema
@@ -240,6 +242,8 @@ __all__ = [
     "TimeConstraints",
     "TimeOfDay",
     "TransitionTriggerDefinition",
+    "TriggerChildTasksAction",
+    "TriggerChildTasksActionResponse",
     "TriggerParentTaskAction",
     "TriggerParentTaskActionResponse",
     "TriggerSchema",
