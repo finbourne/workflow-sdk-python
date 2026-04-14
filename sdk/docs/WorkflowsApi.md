@@ -5,6 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/workflow*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_workflow**](WorkflowsApi.md#create_workflow) | **POST** /api/workflows | CreateWorkflow: Create a new Workflow
+[**delete_workflow**](WorkflowsApi.md#delete_workflow) | **DELETE** /api/workflows/{scope}/{code} | [EXPERIMENTAL] DeleteWorkflow: Delete a Workflow
 [**get_workflow**](WorkflowsApi.md#get_workflow) | **GET** /api/workflows/{scope}/{code} | GetWorkflow: Get a Workflow
 [**list_workflows**](WorkflowsApi.md#list_workflows) | **GET** /api/workflows | ListWorkflows: List Workflows
 
@@ -101,6 +102,99 @@ Name | Type | Description  | Notes
 **201** | Created |  -  |
 **400** | The details of the input related failure |  -  |
 **409** | Workflow already exists. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **delete_workflow**
+> DeletedEntityResponse delete_workflow(scope, code)
+
+[EXPERIMENTAL] DeleteWorkflow: Delete a Workflow
+
+### Example
+
+```python
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
+from lusid_workflow.models import *
+from pprint import pprint
+from lusid_workflow import (
+    SyncApiClientFactory,
+    WorkflowsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkflowsApi)
+    scope = 'scope_example' # str | The scope that identifies a Workflow
+    code = 'code_example' # str | The code that identifies a Workflow
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_workflow(scope, code, opts=opts)
+
+        # [EXPERIMENTAL] DeleteWorkflow: Delete a Workflow
+        api_response = api_instance.delete_workflow(scope, code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling WorkflowsApi->delete_workflow: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope that identifies a Workflow | 
+ **code** | **str**| The code that identifies a Workflow | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | Workflow not found. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

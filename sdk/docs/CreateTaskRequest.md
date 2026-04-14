@@ -5,10 +5,10 @@ Contains required info to create a new Task
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **task_definition_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**workflow_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **correlation_ids** | **List[str]** | A set of guid identifiers that allow correlation across the application tier | [optional] 
 **fields** | [**List[TaskInstanceField]**](TaskInstanceField.md) | Fields and their initial values - should correspond with the Task Definition field schema | [optional] 
 **stacking_key** | **str** | The key for the Stack that this Task should be added to | [optional] 
+**workflow_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -19,11 +19,11 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 task_definition_id: Optional[ResourceId] = # Replace with your value
-workflow_id: Optional[ResourceId] = # Replace with your value
 correlation_ids: Optional[List[StrictStr]] = # Replace with your value
 fields: Optional[List[TaskInstanceField]] = # Replace with your value
 stacking_key: Optional[StrictStr] = "example_stacking_key"
-create_task_request_instance = CreateTaskRequest(task_definition_id=task_definition_id, workflow_id=workflow_id, correlation_ids=correlation_ids, fields=fields, stacking_key=stacking_key)
+workflow_id: Optional[ResourceId] = # Replace with your value
+create_task_request_instance = CreateTaskRequest(task_definition_id=task_definition_id, correlation_ids=correlation_ids, fields=fields, stacking_key=stacking_key, workflow_id=workflow_id)
 
 ```
 
