@@ -126,6 +126,7 @@ from lusid_workflow.models.update_task_definition_request import UpdateTaskDefin
 from lusid_workflow.models.update_task_request import UpdateTaskRequest
 from lusid_workflow.models.update_task_with_id_and_trigger_request import UpdateTaskWithIdAndTriggerRequest
 from lusid_workflow.models.update_worker_request import UpdateWorkerRequest
+from lusid_workflow.models.update_workflow_request import UpdateWorkflowRequest
 from lusid_workflow.models.value_constraints import ValueConstraints
 from lusid_workflow.models.version_info import VersionInfo
 from lusid_workflow.models.versioned_task_definition_id import VersionedTaskDefinitionId
@@ -254,6 +255,7 @@ __all__ = [
     "UpdateTaskRequest",
     "UpdateTaskWithIdAndTriggerRequest",
     "UpdateWorkerRequest",
+    "UpdateWorkflowRequest",
     "ValueConstraints",
     "VersionInfo",
     "VersionedTaskDefinitionId",

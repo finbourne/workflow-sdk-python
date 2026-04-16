@@ -26,6 +26,7 @@ from typing_extensions import Annotated
 from lusid_workflow.models.create_workflow_request import CreateWorkflowRequest
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from lusid_workflow.models.paged_resource_list_of_workflow_response import PagedResourceListOfWorkflowResponse
+from lusid_workflow.models.update_workflow_request import UpdateWorkflowRequest
 from lusid_workflow.models.workflow_response import WorkflowResponse
 
 from lusid_workflow.api_client import ApiClient
@@ -711,6 +712,180 @@ class WorkflowsApi:
 
         return self.api_client.call_api(
             '/api/workflows', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def update_workflow(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], update_workflow_request : Annotated[UpdateWorkflowRequest, Field(description="The data to update a Workflow")], **kwargs) -> WorkflowResponse:  # noqa: E501
+        ...
+
+    @overload
+    def update_workflow(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], update_workflow_request : Annotated[UpdateWorkflowRequest, Field(description="The data to update a Workflow")], async_req: Optional[bool]=True, **kwargs) -> WorkflowResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def update_workflow(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], update_workflow_request : Annotated[UpdateWorkflowRequest, Field(description="The data to update a Workflow")], async_req: Optional[bool]=None, **kwargs) -> Union[WorkflowResponse, Awaitable[WorkflowResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] UpdateWorkflow: Update an existing Workflow  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_workflow(scope, code, update_workflow_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope that identifies a Workflow (required)
+        :type scope: str
+        :param code: The code that identifies a Workflow (required)
+        :type code: str
+        :param update_workflow_request: The data to update a Workflow (required)
+        :type update_workflow_request: UpdateWorkflowRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: WorkflowResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the update_workflow_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.update_workflow_with_http_info(scope, code, update_workflow_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def update_workflow_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], update_workflow_request : Annotated[UpdateWorkflowRequest, Field(description="The data to update a Workflow")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpdateWorkflow: Update an existing Workflow  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_workflow_with_http_info(scope, code, update_workflow_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope that identifies a Workflow (required)
+        :type scope: str
+        :param code: The code that identifies a Workflow (required)
+        :type code: str
+        :param update_workflow_request: The data to update a Workflow (required)
+        :type update_workflow_request: UpdateWorkflowRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(WorkflowResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'update_workflow_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_workflow" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_workflow_request'] is not None:
+            _body_params = _params['update_workflow_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "WorkflowResponse",
+            '400': "LusidValidationProblemDetails",
+            '404': "str",
+        }
+
+        return self.api_client.call_api(
+            '/api/workflows/{scope}/{code}', 'PUT',
             _path_params,
             _query_params,
             _header_params,
