@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | Type name for this Action | 
 **trigger** | **str** | Trigger on child tasks to be invoked | 
+**filter** | **str** | Optional LUSID filter expression to limit the action to a subset of the child tasks | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,8 @@ from datetime import datetime
 
 type: StrictStr = "example_type"
 trigger: StrictStr = "example_trigger"
-trigger_child_tasks_action_instance = TriggerChildTasksAction(type=type, trigger=trigger)
+filter: Optional[StrictStr] = "example_filter"
+trigger_child_tasks_action_instance = TriggerChildTasksAction(type=type, trigger=trigger, filter=filter)
 
 ```
 

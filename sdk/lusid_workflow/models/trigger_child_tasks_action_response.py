@@ -29,7 +29,8 @@ class TriggerChildTasksActionResponse(BaseModel):
     """
     type:  Optional[StrictStr] = Field(None,alias="type", description="Type name for this Action") 
     trigger:  Optional[StrictStr] = Field(None,alias="trigger", description="Trigger on child tasks to be invoked") 
-    __properties = ["type", "trigger"]
+    filter:  Optional[StrictStr] = Field(None,alias="filter", description="Optional LUSID filter expression to limit the action to a subset of the child tasks") 
+    __properties = ["type", "trigger", "filter"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -63,6 +64,8 @@ class TriggerChildTasksActionResponse(BaseModel):
                                     'TriggerParentTaskAction',
                                     'CreateChildTasksActionResponse', 
                                     'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
                                     'TriggerParentTaskActionResponse',
                                     'CreateNewTaskActivity',
                                     'UpdateMatchingTasksActivity',
@@ -145,6 +148,11 @@ class TriggerChildTasksActionResponse(BaseModel):
         if self.trigger is None and "trigger" in self.__fields_set__:
             _dict['trigger'] = None
 
+        # set to None if filter (nullable) is None
+        # and __fields_set__ contains the field
+        if self.filter is None and "filter" in self.__fields_set__:
+            _dict['filter'] = None
+
         return _dict
 
     @classmethod
@@ -158,7 +166,8 @@ class TriggerChildTasksActionResponse(BaseModel):
 
         _obj = TriggerChildTasksActionResponse.parse_obj({
             "type": obj.get("type"),
-            "trigger": obj.get("trigger")
+            "trigger": obj.get("trigger"),
+            "filter": obj.get("filter")
         })
         return _obj
 
