@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**get_workflow**](WorkflowsApi.md#get_workflow) | **GET** /api/workflows/{scope}/{code} | GetWorkflow: Get a Workflow
 [**list_workflows**](WorkflowsApi.md#list_workflows) | **GET** /api/workflows | ListWorkflows: List Workflows
 [**update_workflow**](WorkflowsApi.md#update_workflow) | **PUT** /api/workflows/{scope}/{code} | [EXPERIMENTAL] UpdateWorkflow: Update an existing Workflow
+[**upsert_workflow_properties**](WorkflowsApi.md#upsert_workflow_properties) | **POST** /api/workflows/{scope}/{code}/properties | [EXPERIMENTAL] UpsertWorkflowProperties: Add, update and remove properties on an existing Workflow in bulk.
 
 
 # **create_workflow**
@@ -478,6 +479,103 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WorkflowResponse**](WorkflowResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | Workflow not found. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **upsert_workflow_properties**
+> BatchUpsertWorkflowPropertiesResponse upsert_workflow_properties(scope, code, request_body, success_mode=success_mode)
+
+[EXPERIMENTAL] UpsertWorkflowProperties: Add, update and remove properties on an existing Workflow in bulk.
+
+### Example
+
+```python
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
+from lusid_workflow.models import *
+from pprint import pprint
+from lusid_workflow import (
+    SyncApiClientFactory,
+    WorkflowsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WorkflowsApi)
+    scope = 'scope_example' # str | The scope that identifies a Workflow
+    code = 'code_example' # str | The code that identifies a Workflow
+    request_body = {"Workflow/myScope/reviewer":{"key":"Workflow/myScope/reviewer","value":{"labelValue":"Jane Doe"}},"Workflow/myScope/priority":{"key":"Workflow/myScope/priority","value":{"metricValue":{"value":1}}},"Workflow/myScope/obsoleteProperty":{"key":"Workflow/myScope/obsoleteProperty"}} # Dict[str, PerpetualProperty] | The properties to upsert, keyed by property key. A null value deletes the property.
+    success_mode = 'Partial' # str | Whether the batch should fail Atomically or Partially. Defaults to Partial. (optional) (default to 'Partial')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_workflow_properties(scope, code, request_body, success_mode=success_mode, opts=opts)
+
+        # [EXPERIMENTAL] UpsertWorkflowProperties: Add, update and remove properties on an existing Workflow in bulk.
+        api_response = api_instance.upsert_workflow_properties(scope, code, request_body, success_mode=success_mode)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling WorkflowsApi->upsert_workflow_properties: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope that identifies a Workflow | 
+ **code** | **str**| The code that identifies a Workflow | 
+ **request_body** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md)| The properties to upsert, keyed by property key. A null value deletes the property. | 
+ **success_mode** | **str**| Whether the batch should fail Atomically or Partially. Defaults to Partial. | [optional] [default to &#39;Partial&#39;]
+
+### Return type
+
+[**BatchUpsertWorkflowPropertiesResponse**](BatchUpsertWorkflowPropertiesResponse.md)
 
 ### HTTP request headers
 

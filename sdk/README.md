@@ -38,6 +38,7 @@ Class | Method | HTTP request | Description
 *WorkflowsApi* | [**get_workflow**](docs/WorkflowsApi.md#get_workflow) | **GET** /api/workflows/{scope}/{code} | GetWorkflow: Get a Workflow
 *WorkflowsApi* | [**list_workflows**](docs/WorkflowsApi.md#list_workflows) | **GET** /api/workflows | ListWorkflows: List Workflows
 *WorkflowsApi* | [**update_workflow**](docs/WorkflowsApi.md#update_workflow) | **PUT** /api/workflows/{scope}/{code} | [EXPERIMENTAL] UpdateWorkflow: Update an existing Workflow
+*WorkflowsApi* | [**upsert_workflow_properties**](docs/WorkflowsApi.md#upsert_workflow_properties) | **POST** /api/workflows/{scope}/{code}/properties | [EXPERIMENTAL] UpsertWorkflowProperties: Add, update and remove properties on an existing Workflow in bulk.
 
 
 <a id="documentation-for-models"></a>
@@ -55,6 +56,7 @@ Class | Method | HTTP request | Description
  - [ActionLogOrigin](docs/ActionLogOrigin.md)
  - [BatchUpdateTasksRequest](docs/BatchUpdateTasksRequest.md)
  - [BatchUpdateTasksResponse](docs/BatchUpdateTasksResponse.md)
+ - [BatchUpsertWorkflowPropertiesResponse](docs/BatchUpsertWorkflowPropertiesResponse.md)
  - [CalendarReference](docs/CalendarReference.md)
  - [ChangeItem](docs/ChangeItem.md)
  - [ChildTaskDefinitionEdge](docs/ChildTaskDefinitionEdge.md)
@@ -90,6 +92,7 @@ Class | Method | HTTP request | Description
  - [IdSelectorDefinition](docs/IdSelectorDefinition.md)
  - [IdentifierPartSchema](docs/IdentifierPartSchema.md)
  - [InitialState](docs/InitialState.md)
+ - [LabelValueSet](docs/LabelValueSet.md)
  - [LibraryResponse](docs/LibraryResponse.md)
  - [Link](docs/Link.md)
  - [LuminesceView](docs/LuminesceView.md)
@@ -98,6 +101,7 @@ Class | Method | HTTP request | Description
  - [LusidEntityDataQualityCheckResponse](docs/LusidEntityDataQualityCheckResponse.md)
  - [LusidProblemDetails](docs/LusidProblemDetails.md)
  - [LusidValidationProblemDetails](docs/LusidValidationProblemDetails.md)
+ - [MetricValue](docs/MetricValue.md)
  - [PagedResourceListOfEventHandler](docs/PagedResourceListOfEventHandler.md)
  - [PagedResourceListOfTask](docs/PagedResourceListOfTask.md)
  - [PagedResourceListOfTaskDefinition](docs/PagedResourceListOfTaskDefinition.md)
@@ -105,6 +109,8 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfWorkflowResponse](docs/PagedResourceListOfWorkflowResponse.md)
  - [Parameter](docs/Parameter.md)
  - [ParameterValue](docs/ParameterValue.md)
+ - [PerpetualProperty](docs/PerpetualProperty.md)
+ - [PropertyValue](docs/PropertyValue.md)
  - [ReadOnlyStates](docs/ReadOnlyStates.md)
  - [RecurrencePattern](docs/RecurrencePattern.md)
  - [RelativeMonthRegularity](docs/RelativeMonthRegularity.md)

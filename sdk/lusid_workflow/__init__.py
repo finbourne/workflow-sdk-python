@@ -46,6 +46,7 @@ from lusid_workflow.models.action_log_item import ActionLogItem
 from lusid_workflow.models.action_log_origin import ActionLogOrigin
 from lusid_workflow.models.batch_update_tasks_request import BatchUpdateTasksRequest
 from lusid_workflow.models.batch_update_tasks_response import BatchUpdateTasksResponse
+from lusid_workflow.models.batch_upsert_workflow_properties_response import BatchUpsertWorkflowPropertiesResponse
 from lusid_workflow.models.calendar_reference import CalendarReference
 from lusid_workflow.models.change_item import ChangeItem
 from lusid_workflow.models.child_task_definition_edge import ChildTaskDefinitionEdge
@@ -81,6 +82,7 @@ from lusid_workflow.models.health_check_response import HealthCheckResponse
 from lusid_workflow.models.id_selector_definition import IdSelectorDefinition
 from lusid_workflow.models.identifier_part_schema import IdentifierPartSchema
 from lusid_workflow.models.initial_state import InitialState
+from lusid_workflow.models.label_value_set import LabelValueSet
 from lusid_workflow.models.library_response import LibraryResponse
 from lusid_workflow.models.link import Link
 from lusid_workflow.models.luminesce_view import LuminesceView
@@ -89,6 +91,7 @@ from lusid_workflow.models.lusid_entity_data_quality_check import LusidEntityDat
 from lusid_workflow.models.lusid_entity_data_quality_check_response import LusidEntityDataQualityCheckResponse
 from lusid_workflow.models.lusid_problem_details import LusidProblemDetails
 from lusid_workflow.models.lusid_validation_problem_details import LusidValidationProblemDetails
+from lusid_workflow.models.metric_value import MetricValue
 from lusid_workflow.models.paged_resource_list_of_event_handler import PagedResourceListOfEventHandler
 from lusid_workflow.models.paged_resource_list_of_task import PagedResourceListOfTask
 from lusid_workflow.models.paged_resource_list_of_task_definition import PagedResourceListOfTaskDefinition
@@ -96,6 +99,8 @@ from lusid_workflow.models.paged_resource_list_of_worker import PagedResourceLis
 from lusid_workflow.models.paged_resource_list_of_workflow_response import PagedResourceListOfWorkflowResponse
 from lusid_workflow.models.parameter import Parameter
 from lusid_workflow.models.parameter_value import ParameterValue
+from lusid_workflow.models.perpetual_property import PerpetualProperty
+from lusid_workflow.models.property_value import PropertyValue
 from lusid_workflow.models.read_only_states import ReadOnlyStates
 from lusid_workflow.models.recurrence_pattern import RecurrencePattern
 from lusid_workflow.models.relative_month_regularity import RelativeMonthRegularity
@@ -194,6 +199,7 @@ __all__ = [
     "ActionLogOrigin",
     "BatchUpdateTasksRequest",
     "BatchUpdateTasksResponse",
+    "BatchUpsertWorkflowPropertiesResponse",
     "CalendarReference",
     "ChangeItem",
     "ChildTaskDefinitionEdge",
@@ -229,6 +235,7 @@ __all__ = [
     "IdSelectorDefinition",
     "IdentifierPartSchema",
     "InitialState",
+    "LabelValueSet",
     "LibraryResponse",
     "Link",
     "LuminesceView",
@@ -237,6 +244,7 @@ __all__ = [
     "LusidEntityDataQualityCheckResponse",
     "LusidProblemDetails",
     "LusidValidationProblemDetails",
+    "MetricValue",
     "PagedResourceListOfEventHandler",
     "PagedResourceListOfTask",
     "PagedResourceListOfTaskDefinition",
@@ -244,6 +252,8 @@ __all__ = [
     "PagedResourceListOfWorkflowResponse",
     "Parameter",
     "ParameterValue",
+    "PerpetualProperty",
+    "PropertyValue",
     "ReadOnlyStates",
     "RecurrencePattern",
     "RelativeMonthRegularity",
