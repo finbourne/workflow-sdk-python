@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_workflow**
-> WorkflowResponse get_workflow(scope, code, as_at=as_at)
+> WorkflowResponse get_workflow(scope, code, as_at=as_at, property_keys=property_keys)
 
 GetWorkflow: Get a Workflow
 
@@ -254,13 +254,14 @@ def main():
     scope = 'scope_example' # str | The scope that identifies a Workflow
     code = 'code_example' # str | The code that identifies a Workflow
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_workflow(scope, code, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_workflow(scope, code, as_at=as_at, property_keys=property_keys, opts=opts)
 
         # GetWorkflow: Get a Workflow
-        api_response = api_instance.get_workflow(scope, code, as_at=as_at)
+        api_response = api_instance.get_workflow(scope, code, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -276,6 +277,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope that identifies a Workflow | 
  **code** | **str**| The code that identifies a Workflow | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow. | [optional] 
 
 ### Return type
 

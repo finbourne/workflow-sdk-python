@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | Human readable name | 
 **description** | **str** | Human readable description | [optional] 
 **root_task_definition_id** | [**ResourceId**](ResourceId.md) |  | 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The properties to set on the Workflow, keyed by property key. Optional. | [optional] 
 ## Example
 
 ```python
@@ -21,7 +22,8 @@ id: ResourceId
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 root_task_definition_id: ResourceId = # Replace with your value
-create_workflow_request_instance = CreateWorkflowRequest(id=id, display_name=display_name, description=description, root_task_definition_id=root_task_definition_id)
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+create_workflow_request_instance = CreateWorkflowRequest(id=id, display_name=display_name, description=description, root_task_definition_id=root_task_definition_id, properties=properties)
 
 ```
 

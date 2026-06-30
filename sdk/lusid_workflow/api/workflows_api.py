@@ -375,21 +375,21 @@ class WorkflowsApi:
 
 
     @overload
-    async def get_workflow(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> WorkflowResponse:  # noqa: E501
+    async def get_workflow(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow.")] = None, **kwargs) -> WorkflowResponse:  # noqa: E501
         ...
 
     @overload
-    def get_workflow(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> WorkflowResponse:  # noqa: E501
+    def get_workflow(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow.")] = None, async_req: Optional[bool]=True, **kwargs) -> WorkflowResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_workflow(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkflowResponse, Awaitable[WorkflowResponse]]:  # noqa: E501
+    def get_workflow(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WorkflowResponse, Awaitable[WorkflowResponse]]:  # noqa: E501
         """GetWorkflow: Get a Workflow  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_workflow(scope, code, as_at, async_req=True)
+        >>> thread = api.get_workflow(scope, code, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope that identifies a Workflow (required)
@@ -398,6 +398,8 @@ class WorkflowsApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified.
         :type as_at: datetime
+        :param property_keys: The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -414,16 +416,16 @@ class WorkflowsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_workflow_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+        return self.get_workflow_with_http_info(scope, code, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_workflow_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_workflow_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Workflow")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Workflow")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetWorkflow: Get a Workflow  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_workflow_with_http_info(scope, code, as_at, async_req=True)
+        >>> thread = api.get_workflow_with_http_info(scope, code, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope that identifies a Workflow (required)
@@ -432,6 +434,8 @@ class WorkflowsApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Workflow. Defaults to returning the latest version if not specified.
         :type as_at: datetime
+        :param property_keys: The property keys (in the Workflow or TaskDefinition domain) whose values to return on the Workflow.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -461,7 +465,8 @@ class WorkflowsApi:
         _all_params = [
             'scope',
             'code',
-            'as_at'
+            'as_at',
+            'property_keys'
         ]
         _all_params.extend(
             [
@@ -504,6 +509,10 @@ class WorkflowsApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

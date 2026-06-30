@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | Human readable name | 
 **description** | **str** | Human readable description | [optional] 
 **root_task_definition_id** | [**ResourceId**](ResourceId.md) |  | 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The properties to set on the Workflow, keyed by property key. Optional. A null property value deletes the property. | [optional] 
 ## Example
 
 ```python
@@ -19,7 +20,8 @@ from datetime import datetime
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 root_task_definition_id: ResourceId = # Replace with your value
-update_workflow_request_instance = UpdateWorkflowRequest(display_name=display_name, description=description, root_task_definition_id=root_task_definition_id)
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+update_workflow_request_instance = UpdateWorkflowRequest(display_name=display_name, description=description, root_task_definition_id=root_task_definition_id, properties=properties)
 
 ```
 

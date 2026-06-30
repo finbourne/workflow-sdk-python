@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **description** | **str** | Human readable description | [optional] 
 **root_task_definition_id** | [**ResourceId**](ResourceId.md) |  | 
 **workflow_structure** | [**WorkflowStructure**](WorkflowStructure.md) |  | [optional] 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The properties of the Workflow, keyed by property key. | [optional] 
 ## Example
 
 ```python
@@ -25,7 +26,8 @@ display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 root_task_definition_id: ResourceId = # Replace with your value
 workflow_structure: Optional[WorkflowStructure] = # Replace with your value
-workflow_response_instance = WorkflowResponse(id=id, version=version, display_name=display_name, description=description, root_task_definition_id=root_task_definition_id, workflow_structure=workflow_structure)
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+workflow_response_instance = WorkflowResponse(id=id, version=version, display_name=display_name, description=description, root_task_definition_id=root_task_definition_id, workflow_structure=workflow_structure, properties=properties)
 
 ```
 
