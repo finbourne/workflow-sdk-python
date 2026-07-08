@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid_workflow.models.action_definition import ActionDefinition
 from lusid_workflow.models.initial_state import InitialState
+from lusid_workflow.models.perpetual_property import PerpetualProperty
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.task_field_definition import TaskFieldDefinition
 from lusid_workflow.models.task_state_definition import TaskStateDefinition
@@ -43,7 +44,8 @@ class CreateTaskDefinitionRequest(BaseModel):
     triggers: Optional[List[TransitionTriggerDefinition]] = Field(default=None, description="Triggers")
     transitions: Optional[List[TaskTransitionDefinition]] = Field(default=None, description="Transitions")
     actions: Optional[List[ActionDefinition]] = Field(default=None, description="Actions")
-    __properties = ["id", "displayName", "description", "states", "fieldSchema", "initialState", "triggers", "transitions", "actions"]
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The properties to set on the Task Definition, keyed by property key. Optional.")
+    __properties = ["id", "displayName", "description", "states", "fieldSchema", "initialState", "triggers", "transitions", "actions", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -118,6 +120,13 @@ class CreateTaskDefinitionRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['actions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -143,6 +152,11 @@ class CreateTaskDefinitionRequest(BaseModel):
         if self.actions is None and "actions" in self.__fields_set__:
             _dict['actions'] = None
 
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
+
         return _dict
 
     @classmethod
@@ -163,7 +177,13 @@ class CreateTaskDefinitionRequest(BaseModel):
             "initial_state": InitialState.from_dict(obj.get("initialState")) if obj.get("initialState") is not None else None,
             "triggers": [TransitionTriggerDefinition.from_dict(_item) for _item in obj.get("triggers")] if obj.get("triggers") is not None else None,
             "transitions": [TaskTransitionDefinition.from_dict(_item) for _item in obj.get("transitions")] if obj.get("transitions") is not None else None,
-            "actions": [ActionDefinition.from_dict(_item) for _item in obj.get("actions")] if obj.get("actions") is not None else None
+            "actions": [ActionDefinition.from_dict(_item) for _item in obj.get("actions")] if obj.get("actions") is not None else None,
+            "properties": dict(
+                (_k, PerpetualProperty.from_dict(_v))
+                for _k, _v in obj.get("properties").items()
+            )
+            if obj.get("properties") is not None
+            else None
         })
         return _obj
 

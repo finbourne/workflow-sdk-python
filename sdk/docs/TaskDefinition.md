@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **triggers** | [**List[TransitionTriggerDefinition]**](TransitionTriggerDefinition.md) | The Triggers for State transition | [optional] 
 **actions** | [**List[ActionDefinitionResponse]**](ActionDefinitionResponse.md) | The Actions of this Task - executed after a Transition completion | [optional] 
 **transitions** | [**List[TaskTransitionDefinition]**](TaskTransitionDefinition.md) | The Transitions between States | [optional] 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The properties of the Task Definition, keyed by property key. Only populated when set on the request (Create/Update) or when property keys are requested (Get/List). | [optional] 
 ## Example
 
 ```python
@@ -33,7 +34,8 @@ initial_state: InitialState = # Replace with your value
 triggers: Optional[List[TransitionTriggerDefinition]] = # Replace with your value
 actions: Optional[List[ActionDefinitionResponse]] = # Replace with your value
 transitions: Optional[List[TaskTransitionDefinition]] = # Replace with your value
-task_definition_instance = TaskDefinition(id=id, version=version, display_name=display_name, description=description, states=states, field_schema=field_schema, initial_state=initial_state, triggers=triggers, actions=actions, transitions=transitions)
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+task_definition_instance = TaskDefinition(id=id, version=version, display_name=display_name, description=description, states=states, field_schema=field_schema, initial_state=initial_state, triggers=triggers, actions=actions, transitions=transitions, properties=properties)
 
 ```
 
