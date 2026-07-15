@@ -26,6 +26,7 @@ from lusid_workflow.models.action_log_item import ActionLogItem
 from lusid_workflow.models.action_log_origin import ActionLogOrigin
 from lusid_workflow.models.batch_update_tasks_request import BatchUpdateTasksRequest
 from lusid_workflow.models.batch_update_tasks_response import BatchUpdateTasksResponse
+from lusid_workflow.models.batch_upsert_task_definition_properties_response import BatchUpsertTaskDefinitionPropertiesResponse
 from lusid_workflow.models.batch_upsert_workflow_properties_response import BatchUpsertWorkflowPropertiesResponse
 from lusid_workflow.models.calendar_reference import CalendarReference
 from lusid_workflow.models.change_item import ChangeItem
@@ -160,6 +161,7 @@ __all__ = [
     "ActionLogOrigin",
     "BatchUpdateTasksRequest",
     "BatchUpdateTasksResponse",
+    "BatchUpsertTaskDefinitionPropertiesResponse",
     "BatchUpsertWorkflowPropertiesResponse",
     "CalendarReference",
     "ChangeItem",

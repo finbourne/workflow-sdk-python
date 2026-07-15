@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **task_definition_version** | [**TaskDefinitionVersion**](TaskDefinitionVersion.md) |  | 
 **task_definition_display_name** | **str** | The display name of the Task Definition used by this Task | 
 **state** | **str** | Current State | 
+**state_display_name** | **str** | The display name of the current State, from the Task Definition, if one is provided | [optional] 
+**correlation_ids** | **List[str]** | User-provided ID used to link entities and tasks | [optional] 
 ## Example
 
 ```python
@@ -23,7 +25,9 @@ task_definition_id: ResourceId = # Replace with your value
 task_definition_version: TaskDefinitionVersion = # Replace with your value
 task_definition_display_name: StrictStr = "example_task_definition_display_name"
 state: StrictStr = "example_state"
-task_summary_instance = TaskSummary(id=id, task_definition_id=task_definition_id, task_definition_version=task_definition_version, task_definition_display_name=task_definition_display_name, state=state)
+state_display_name: Optional[StrictStr] = "example_state_display_name"
+correlation_ids: Optional[List[StrictStr]] = # Replace with your value
+task_summary_instance = TaskSummary(id=id, task_definition_id=task_definition_id, task_definition_version=task_definition_version, task_definition_display_name=task_definition_display_name, state=state, state_display_name=state_display_name, correlation_ids=correlation_ids)
 
 ```
 

@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**list_task_definitions**](TaskDefinitionsApi.md#list_task_definitions) | **GET** /api/taskdefinitions | ListTaskDefinitions: List Task Definitions
 [**list_tasks_for_task_definition**](TaskDefinitionsApi.md#list_tasks_for_task_definition) | **GET** /api/taskdefinitions/{scope}/{code}/tasks | ListTasksForTaskDefinition: List Tasks for a Task Definition
 [**update_task_definition**](TaskDefinitionsApi.md#update_task_definition) | **PUT** /api/taskdefinitions/{scope}/{code} | UpdateTaskDefinition: Update an existing Task Definition
+[**upsert_task_definition_properties**](TaskDefinitionsApi.md#upsert_task_definition_properties) | **POST** /api/taskdefinitions/{scope}/{code}/properties | [EXPERIMENTAL] UpsertTaskDefinitionProperties: Add, update and remove properties on an existing Task Definition in bulk.
 
 
 # **create_task_definition**
@@ -201,7 +202,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_task_definition**
-> TaskDefinition get_task_definition(scope, code, as_at=as_at)
+> TaskDefinition get_task_definition(scope, code, as_at=as_at, property_keys=property_keys)
 
 GetTaskDefinition: Get a Task Definition
 
@@ -253,13 +254,14 @@ def main():
     scope = 'scope_example' # str | The scope that identifies a Task Definition
     code = 'code_example' # str | The code that identifies a Task Definition
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys whose values to return on the Task Definition. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_task_definition(scope, code, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_task_definition(scope, code, as_at=as_at, property_keys=property_keys, opts=opts)
 
         # GetTaskDefinition: Get a Task Definition
-        api_response = api_instance.get_task_definition(scope, code, as_at=as_at)
+        api_response = api_instance.get_task_definition(scope, code, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -275,6 +277,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope that identifies a Task Definition | 
  **code** | **str**| The code that identifies a Task Definition | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys whose values to return on the Task Definition. | [optional] 
 
 ### Return type
 
@@ -395,7 +398,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_tasks_for_task_definition**
-> ResourceListOfTask list_tasks_for_task_definition(scope, code, as_at=as_at)
+> ResourceListOfTask list_tasks_for_task_definition(scope, code, as_at=as_at, property_keys=property_keys)
 
 ListTasksForTaskDefinition: List Tasks for a Task Definition
 
@@ -447,13 +450,14 @@ def main():
     scope = 'scope_example' # str | The scope that identifies a Task Definition
     code = 'code_example' # str | The code that identifies a Task Definition
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_tasks_for_task_definition(scope, code, as_at=as_at, opts=opts)
+        # api_response =  api_instance.list_tasks_for_task_definition(scope, code, as_at=as_at, property_keys=property_keys, opts=opts)
 
         # ListTasksForTaskDefinition: List Tasks for a Task Definition
-        api_response = api_instance.list_tasks_for_task_definition(scope, code, as_at=as_at)
+        api_response = api_instance.list_tasks_for_task_definition(scope, code, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -469,6 +473,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope that identifies a Task Definition | 
  **code** | **str**| The code that identifies a Task Definition | 
  **as_at** | **datetime**| The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. | [optional] 
 
 ### Return type
 
@@ -573,6 +578,103 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TaskDefinition**](TaskDefinition.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | Task Definition not found. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **upsert_task_definition_properties**
+> BatchUpsertTaskDefinitionPropertiesResponse upsert_task_definition_properties(scope, code, request_body, success_mode=success_mode)
+
+[EXPERIMENTAL] UpsertTaskDefinitionProperties: Add, update and remove properties on an existing Task Definition in bulk.
+
+### Example
+
+```python
+from lusid_workflow.exceptions import ApiException
+from lusid_workflow.extensions.configuration_options import ConfigurationOptions
+from lusid_workflow.models import *
+from pprint import pprint
+from lusid_workflow import (
+    SyncApiClientFactory,
+    TaskDefinitionsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "workflowUrl":"https://<your-domain>.lusid.com/workflow",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid_workflow SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TaskDefinitionsApi)
+    scope = 'scope_example' # str | The scope that identifies a Task Definition
+    code = 'code_example' # str | The code that identifies a Task Definition
+    request_body = {"TaskDefinition/myScope/category":{"key":"TaskDefinition/myScope/category","value":{"labelValue":"exception-management"}},"TaskDefinition/myScope/priority":{"key":"TaskDefinition/myScope/priority","value":{"metricValue":{"value":1}}},"TaskDefinition/myScope/obsoleteProperty":{"key":"TaskDefinition/myScope/obsoleteProperty"}} # Dict[str, PerpetualProperty] | The properties to upsert, keyed by property key. A null value deletes the property.
+    success_mode = 'Partial' # str | Whether the batch should fail Atomically or Partially. Defaults to Partial. (optional) (default to 'Partial')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_task_definition_properties(scope, code, request_body, success_mode=success_mode, opts=opts)
+
+        # [EXPERIMENTAL] UpsertTaskDefinitionProperties: Add, update and remove properties on an existing Task Definition in bulk.
+        api_response = api_instance.upsert_task_definition_properties(scope, code, request_body, success_mode=success_mode)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TaskDefinitionsApi->upsert_task_definition_properties: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope that identifies a Task Definition | 
+ **code** | **str**| The code that identifies a Task Definition | 
+ **request_body** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md)| The properties to upsert, keyed by property key. A null value deletes the property. | 
+ **success_mode** | **str**| Whether the batch should fail Atomically or Partially. Defaults to Partial. | [optional] [default to &#39;Partial&#39;]
+
+### Return type
+
+[**BatchUpsertTaskDefinitionPropertiesResponse**](BatchUpsertTaskDefinitionPropertiesResponse.md)
 
 ### HTTP request headers
 

@@ -21,11 +21,13 @@ from typing import overload, Optional, Union, Awaitable
 
 from datetime import datetime
 from pydantic.v1 import Field, StrictInt, StrictStr
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Annotated
+from lusid_workflow.models.batch_upsert_task_definition_properties_response import BatchUpsertTaskDefinitionPropertiesResponse
 from lusid_workflow.models.create_task_definition_request import CreateTaskDefinitionRequest
 from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from lusid_workflow.models.paged_resource_list_of_task_definition import PagedResourceListOfTaskDefinition
+from lusid_workflow.models.perpetual_property import PerpetualProperty
 from lusid_workflow.models.resource_list_of_task import ResourceListOfTask
 from lusid_workflow.models.task_definition import TaskDefinition
 from lusid_workflow.models.update_task_definition_request import UpdateTaskDefinitionRequest
@@ -373,21 +375,21 @@ class TaskDefinitionsApi:
 
 
     @overload
-    async def get_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.")] = None, **kwargs) -> TaskDefinition:  # noqa: E501
+    async def get_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys whose values to return on the Task Definition.")] = None, **kwargs) -> TaskDefinition:  # noqa: E501
         ...
 
     @overload
-    def get_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaskDefinition:  # noqa: E501
+    def get_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys whose values to return on the Task Definition.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaskDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaskDefinition, Awaitable[TaskDefinition]]:  # noqa: E501
+    def get_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys whose values to return on the Task Definition.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaskDefinition, Awaitable[TaskDefinition]]:  # noqa: E501
         """GetTaskDefinition: Get a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_task_definition(scope, code, as_at, async_req=True)
+        >>> thread = api.get_task_definition(scope, code, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope that identifies a Task Definition (required)
@@ -396,6 +398,8 @@ class TaskDefinitionsApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.
         :type as_at: datetime
+        :param property_keys: The property keys whose values to return on the Task Definition.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -412,16 +416,16 @@ class TaskDefinitionsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_task_definition_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+        return self.get_task_definition_with_http_info(scope, code, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_task_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_task_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys whose values to return on the Task Definition.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetTaskDefinition: Get a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_task_definition_with_http_info(scope, code, as_at, async_req=True)
+        >>> thread = api.get_task_definition_with_http_info(scope, code, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope that identifies a Task Definition (required)
@@ -430,6 +434,8 @@ class TaskDefinitionsApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Task Definition. Defaults to returning the latest version of the Task Definition if not specified.
         :type as_at: datetime
+        :param property_keys: The property keys whose values to return on the Task Definition.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -459,7 +465,8 @@ class TaskDefinitionsApi:
         _all_params = [
             'scope',
             'code',
-            'as_at'
+            'as_at',
+            'property_keys'
         ]
         _all_params.extend(
             [
@@ -502,6 +509,10 @@ class TaskDefinitionsApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -730,21 +741,21 @@ class TaskDefinitionsApi:
 
 
     @overload
-    async def list_tasks_for_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, **kwargs) -> ResourceListOfTask:  # noqa: E501
+    async def list_tasks_for_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task.")] = None, **kwargs) -> ResourceListOfTask:  # noqa: E501
         ...
 
     @overload
-    def list_tasks_for_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfTask:  # noqa: E501
+    def list_tasks_for_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfTask:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_tasks_for_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTask, Awaitable[ResourceListOfTask]]:  # noqa: E501
+    def list_tasks_for_task_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTask, Awaitable[ResourceListOfTask]]:  # noqa: E501
         """ListTasksForTaskDefinition: List Tasks for a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_tasks_for_task_definition(scope, code, as_at, async_req=True)
+        >>> thread = api.list_tasks_for_task_definition(scope, code, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope that identifies a Task Definition (required)
@@ -753,6 +764,8 @@ class TaskDefinitionsApi:
         :type code: str
         :param as_at: The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.
         :type as_at: datetime
+        :param property_keys: The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -769,16 +782,16 @@ class TaskDefinitionsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_tasks_for_task_definition_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+        return self.list_tasks_for_task_definition_with_http_info(scope, code, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_tasks_for_task_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_tasks_for_task_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListTasksForTaskDefinition: List Tasks for a Task Definition  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_tasks_for_task_definition_with_http_info(scope, code, as_at, async_req=True)
+        >>> thread = api.list_tasks_for_task_definition_with_http_info(scope, code, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope that identifies a Task Definition (required)
@@ -787,6 +800,8 @@ class TaskDefinitionsApi:
         :type code: str
         :param as_at: The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified.
         :type as_at: datetime
+        :param property_keys: The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -816,7 +831,8 @@ class TaskDefinitionsApi:
         _all_params = [
             'scope',
             'code',
-            'as_at'
+            'as_at',
+            'property_keys'
         ]
         _all_params.extend(
             [
@@ -859,6 +875,10 @@ class TaskDefinitionsApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -1056,6 +1076,188 @@ class TaskDefinitionsApi:
 
         return self.api_client.call_api(
             '/api/taskdefinitions/{scope}/{code}', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def upsert_task_definition_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], request_body : Annotated[Dict[str, PerpetualProperty], Field(description="The properties to upsert, keyed by property key. A null value deletes the property.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch should fail Atomically or Partially. Defaults to Partial.")] = None, **kwargs) -> BatchUpsertTaskDefinitionPropertiesResponse:  # noqa: E501
+        ...
+
+    @overload
+    def upsert_task_definition_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], request_body : Annotated[Dict[str, PerpetualProperty], Field(description="The properties to upsert, keyed by property key. A null value deletes the property.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch should fail Atomically or Partially. Defaults to Partial.")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertTaskDefinitionPropertiesResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def upsert_task_definition_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], request_body : Annotated[Dict[str, PerpetualProperty], Field(description="The properties to upsert, keyed by property key. A null value deletes the property.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch should fail Atomically or Partially. Defaults to Partial.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertTaskDefinitionPropertiesResponse, Awaitable[BatchUpsertTaskDefinitionPropertiesResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] UpsertTaskDefinitionProperties: Add, update and remove properties on an existing Task Definition in bulk.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_task_definition_properties(scope, code, request_body, success_mode, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope that identifies a Task Definition (required)
+        :type scope: str
+        :param code: The code that identifies a Task Definition (required)
+        :type code: str
+        :param request_body: The properties to upsert, keyed by property key. A null value deletes the property. (required)
+        :type request_body: Dict[str, PerpetualProperty]
+        :param success_mode: Whether the batch should fail Atomically or Partially. Defaults to Partial.
+        :type success_mode: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: BatchUpsertTaskDefinitionPropertiesResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the upsert_task_definition_properties_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.upsert_task_definition_properties_with_http_info(scope, code, request_body, success_mode, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def upsert_task_definition_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope that identifies a Task Definition")], code : Annotated[StrictStr, Field(..., description="The code that identifies a Task Definition")], request_body : Annotated[Dict[str, PerpetualProperty], Field(description="The properties to upsert, keyed by property key. A null value deletes the property.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch should fail Atomically or Partially. Defaults to Partial.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpsertTaskDefinitionProperties: Add, update and remove properties on an existing Task Definition in bulk.  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_task_definition_properties_with_http_info(scope, code, request_body, success_mode, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope that identifies a Task Definition (required)
+        :type scope: str
+        :param code: The code that identifies a Task Definition (required)
+        :type code: str
+        :param request_body: The properties to upsert, keyed by property key. A null value deletes the property. (required)
+        :type request_body: Dict[str, PerpetualProperty]
+        :param success_mode: Whether the batch should fail Atomically or Partially. Defaults to Partial.
+        :type success_mode: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(BatchUpsertTaskDefinitionPropertiesResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'request_body',
+            'success_mode'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method upsert_task_definition_properties" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('success_mode') is not None:  # noqa: E501
+            _query_params.append(('successMode', _params['success_mode']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "BatchUpsertTaskDefinitionPropertiesResponse",
+            '400': "LusidValidationProblemDetails",
+            '404': "str",
+        }
+
+        return self.api_client.call_api(
+            '/api/taskdefinitions/{scope}/{code}/properties', 'POST',
             _path_params,
             _query_params,
             _header_params,
