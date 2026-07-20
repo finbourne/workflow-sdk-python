@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **triggers** | [**List[TransitionTriggerDefinition]**](TransitionTriggerDefinition.md) | Triggers | [optional] 
 **transitions** | [**List[TaskTransitionDefinition]**](TaskTransitionDefinition.md) | Transitions | [optional] 
 **actions** | [**List[ActionDefinition]**](ActionDefinition.md) | Actions | [optional] 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The properties to set on the Task Definition, keyed by property key. Optional. A null property value deletes the property. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ initial_state: InitialState = # Replace with your value
 triggers: Optional[List[TransitionTriggerDefinition]] = # Replace with your value
 transitions: Optional[List[TaskTransitionDefinition]] = # Replace with your value
 actions: Optional[List[ActionDefinition]] = # Replace with your value
-update_task_definition_request_instance = UpdateTaskDefinitionRequest(display_name=display_name, description=description, states=states, field_schema=field_schema, initial_state=initial_state, triggers=triggers, transitions=transitions, actions=actions)
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+update_task_definition_request_instance = UpdateTaskDefinitionRequest(display_name=display_name, description=description, states=states, field_schema=field_schema, initial_state=initial_state, triggers=triggers, transitions=transitions, actions=actions, properties=properties)
 
 ```
 
