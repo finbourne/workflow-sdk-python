@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_workflows**
-> PagedResourceListOfWorkflowResponse list_workflows(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
+> PagedResourceListOfWorkflowResponse list_workflows(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, property_keys=property_keys)
 
 ListWorkflows: List Workflows
 
@@ -353,13 +353,14 @@ def main():
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
     limit = 10 # int | When paginating, limit the number of returned results to this many. (optional) (default to 10)
     page = 'page_example' # str | The pagination token to use to continue listing workflows from a previous call to list workflows. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_workflows(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, opts=opts)
+        # api_response =  api_instance.list_workflows(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, property_keys=property_keys, opts=opts)
 
         # ListWorkflows: List Workflows
-        api_response = api_instance.list_workflows(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page)
+        api_response = api_instance.list_workflows(as_at=as_at, filter=filter, sort_by=sort_by, limit=limit, page=page, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -377,6 +378,7 @@ Name | Type | Description  | Notes
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] [default to 10]
  **page** | **str**| The pagination token to use to continue listing workflows from a previous call to list workflows. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys (in the Workflow or TaskDefinition domain) whose values to return on each Workflow. | [optional] 
 
 ### Return type
 

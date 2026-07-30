@@ -445,7 +445,7 @@ def main():
     api_instance = api_client_factory.build(TasksApi)
     id = 'id_example' # str | Id of the Task to retrieve
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. These values are a snapshot copied from the TaskDefinition and Workflow when the Task was created, so they reflect the state at creation time and are not affected by subsequent changes to the TaskDefinition or Workflow. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -467,7 +467,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**| Id of the Task to retrieve | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Task. Defaults to returning the latest version of the Task if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on the Task. These values are a snapshot copied from the TaskDefinition and Workflow when the Task was created, so they reflect the state at creation time and are not affected by subsequent changes to the TaskDefinition or Workflow. | [optional] 
 
 ### Return type
 
@@ -634,7 +634,7 @@ def main():
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each optionally suffixed by \" ASC\" or \" DESC\" (optional)
-    property_keys = ['property_keys_example'] # List[str] | The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. These values are a snapshot copied from the TaskDefinition and Workflow when each Task was created, so they reflect the state at creation time and are not affected by subsequent changes to the TaskDefinition or Workflow. (optional)
     limit = 10 # int | When paginating, limit the number of returned results to this many. (optional) (default to 10)
     page = 'page_example' # str | The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. (optional)
 
@@ -659,7 +659,7 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to list the Tasks. Defaults to return the latest version of each Task if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here: https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each optionally suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
- **property_keys** | [**List[str]**](str.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys (in the TaskDefinition or Workflow domain) whose values to return on each Task. These values are a snapshot copied from the TaskDefinition and Workflow when each Task was created, so they reflect the state at creation time and are not affected by subsequent changes to the TaskDefinition or Workflow. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] [default to 10]
  **page** | **str**| The pagination token to use to continue listing tasks from a previous call to list tasks. This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields must not have changed since the original request. | [optional] 
 
