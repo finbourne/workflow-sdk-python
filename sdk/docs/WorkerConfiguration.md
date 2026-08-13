@@ -25,6 +25,8 @@ See all compatible oneOf types with WorkerConfiguration
 
  * [HealthCheck](./HealthCheck.md)
 
+ * [HorizonIntegration](./HorizonIntegration.md)
+
  * [LuminesceView](./LuminesceView.md)
 
  * [LusidEntityDataQualityCheck](./LusidEntityDataQualityCheck.md)

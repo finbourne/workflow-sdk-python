@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid_workflow.models.fail_response import FailResponse
 from lusid_workflow.models.group_reconciliation_response import GroupReconciliationResponse
 from lusid_workflow.models.health_check_response import HealthCheckResponse
+from lusid_workflow.models.horizon_integration_response import HorizonIntegrationResponse
 from lusid_workflow.models.library_response import LibraryResponse
 from lusid_workflow.models.luminesce_view_response import LuminesceViewResponse
 from lusid_workflow.models.lusid_entity_data_quality_check_response import LusidEntityDataQualityCheckResponse
@@ -32,7 +33,7 @@ from lusid_workflow.models.scheduler_job_response import SchedulerJobResponse
 from lusid_workflow.models.sleep_response import SleepResponse
 
 
-WORKERCONFIGURATIONRESPONSE_ONE_OF_SCHEMAS = ["FailResponse", "GroupReconciliationResponse", "HealthCheckResponse", "LibraryResponse", "LuminesceViewResponse", "LusidEntityDataQualityCheckResponse", "SchedulerJobResponse", "SleepResponse"]
+WORKERCONFIGURATIONRESPONSE_ONE_OF_SCHEMAS = ["FailResponse", "GroupReconciliationResponse", "HealthCheckResponse", "HorizonIntegrationResponse", "LibraryResponse", "LuminesceViewResponse", "LusidEntityDataQualityCheckResponse", "SchedulerJobResponse", "SleepResponse"]
 
 class WorkerConfigurationResponse(BaseModel):
     """
@@ -44,18 +45,20 @@ class WorkerConfigurationResponse(BaseModel):
     oneof_schema_2_validator: Optional[GroupReconciliationResponse] = None
     # data type: HealthCheckResponse
     oneof_schema_3_validator: Optional[HealthCheckResponse] = None
+    # data type: HorizonIntegrationResponse
+    oneof_schema_4_validator: Optional[HorizonIntegrationResponse] = None
     # data type: LibraryResponse
-    oneof_schema_4_validator: Optional[LibraryResponse] = None
+    oneof_schema_5_validator: Optional[LibraryResponse] = None
     # data type: LuminesceViewResponse
-    oneof_schema_5_validator: Optional[LuminesceViewResponse] = None
+    oneof_schema_6_validator: Optional[LuminesceViewResponse] = None
     # data type: LusidEntityDataQualityCheckResponse
-    oneof_schema_6_validator: Optional[LusidEntityDataQualityCheckResponse] = None
+    oneof_schema_7_validator: Optional[LusidEntityDataQualityCheckResponse] = None
     # data type: SchedulerJobResponse
-    oneof_schema_7_validator: Optional[SchedulerJobResponse] = None
+    oneof_schema_8_validator: Optional[SchedulerJobResponse] = None
     # data type: SleepResponse
-    oneof_schema_8_validator: Optional[SleepResponse] = None
+    oneof_schema_9_validator: Optional[SleepResponse] = None
     if TYPE_CHECKING:
-        actual_instance: Union[FailResponse, GroupReconciliationResponse, HealthCheckResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse]
+        actual_instance: Union[FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(WORKERCONFIGURATIONRESPONSE_ONE_OF_SCHEMAS, const=True)
@@ -97,6 +100,12 @@ class WorkerConfigurationResponse(BaseModel):
         else:
             match += 1
             matchclass = matchclass + " HealthCheckResponse"
+        # validate data type: HorizonIntegrationResponse
+        if not isinstance(v, HorizonIntegrationResponse):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `HorizonIntegrationResponse`")
+        else:
+            match += 1
+            matchclass = matchclass + " HorizonIntegrationResponse"
         # validate data type: LibraryResponse
         if not isinstance(v, LibraryResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `LibraryResponse`")
@@ -129,10 +138,10 @@ class WorkerConfigurationResponse(BaseModel):
             matchclass = matchclass + " SleepResponse"
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse. Details: Matched classes " + matchclass)
+            raise ValueError("Multiple matches found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse. Details: Matched classes " + matchclass)
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -168,6 +177,13 @@ class WorkerConfigurationResponse(BaseModel):
             instance.actual_instance = HealthCheckResponse.from_json(json_str)
             match += 1
             matchclass =matchclass + " HealthCheckResponse"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into HorizonIntegrationResponse
+        try:
+            instance.actual_instance = HorizonIntegrationResponse.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " HorizonIntegrationResponse"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into LibraryResponse
@@ -208,10 +224,10 @@ class WorkerConfigurationResponse(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+            raise ValueError("Multiple matches found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into WorkerConfigurationResponse with oneOf schemas: FailResponse, GroupReconciliationResponse, HealthCheckResponse, HorizonIntegrationResponse, LibraryResponse, LuminesceViewResponse, LusidEntityDataQualityCheckResponse, SchedulerJobResponse, SleepResponse. Details: " + ", ".join(error_messages))
         else:
             return instance
 

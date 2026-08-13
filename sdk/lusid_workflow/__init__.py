@@ -80,6 +80,8 @@ from lusid_workflow.models.group_reconciliation import GroupReconciliation
 from lusid_workflow.models.group_reconciliation_response import GroupReconciliationResponse
 from lusid_workflow.models.health_check import HealthCheck
 from lusid_workflow.models.health_check_response import HealthCheckResponse
+from lusid_workflow.models.horizon_integration import HorizonIntegration
+from lusid_workflow.models.horizon_integration_response import HorizonIntegrationResponse
 from lusid_workflow.models.id_selector_definition import IdSelectorDefinition
 from lusid_workflow.models.identifier_part_schema import IdentifierPartSchema
 from lusid_workflow.models.initial_state import InitialState
@@ -234,6 +236,8 @@ __all__ = [
     "GroupReconciliationResponse",
     "HealthCheck",
     "HealthCheckResponse",
+    "HorizonIntegration",
+    "HorizonIntegrationResponse",
     "IdSelectorDefinition",
     "IdentifierPartSchema",
     "InitialState",

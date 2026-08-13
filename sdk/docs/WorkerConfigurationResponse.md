@@ -25,6 +25,8 @@ See all compatible oneOf types with WorkerConfigurationResponse
 
  * [HealthCheckResponse](./HealthCheckResponse.md)
 
+ * [HorizonIntegrationResponse](./HorizonIntegrationResponse.md)
+
  * [LibraryResponse](./LibraryResponse.md)
 
  * [LuminesceViewResponse](./LuminesceViewResponse.md)

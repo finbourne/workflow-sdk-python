@@ -22,21 +22,13 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
-from lusid_workflow.models.field_mapping import FieldMapping
-from lusid_workflow.models.scheduled_time_adjustment import ScheduledTimeAdjustment
 
-class UpdateMatchingTasksActivityResponse(BaseModel):
+class HorizonIntegrationResponse(BaseModel):
     """
-    Readonly TaskActivity response  # noqa: E501
+    Readonly configuration for the Horizon Integration Worker  # noqa: E501
     """
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of task activity") 
-    filter:  Optional[StrictStr] = Field(None,alias="filter", description="The filter that matches on existing tasks") 
-    trigger:  Optional[StrictStr] = Field(None,alias="trigger", description="Trigger to supply to all tasks that have been matched") 
-    correlation_ids: Optional[List[EventHandlerMapping]] = Field(default=None, description="The event to correlation ID mappings", alias="correlationIds")
-    task_fields: Optional[Dict[str, FieldMapping]] = Field(default=None, description="The event to task field mappings", alias="taskFields")
-    schedule_dependent_task_fields: Optional[Dict[str, ScheduledTimeAdjustment]] = Field(default=None, description="The Schedule dependent task field mappings. Only relevant if a Finbourne.Workflow.WebApi.Common.Dto.Json.EventHandlers.ScheduleMatchingPattern is specified", alias="scheduleDependentTaskFields")
-    __properties = ["type", "filter", "trigger", "correlationIds", "taskFields", "scheduleDependentTaskFields"]
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of worker") 
+    __properties = ["type"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -49,7 +41,7 @@ class UpdateMatchingTasksActivityResponse(BaseModel):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'UpdateMatchingTasksActivityResponse' not in [ 
+        if 'HorizonIntegrationResponse' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -110,8 +102,8 @@ class UpdateMatchingTasksActivityResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in ['UpdateMatchingTasks']:
-            raise ValueError("must be one of enum values ('UpdateMatchingTasks')")
+        if value not in ['HorizonIntegration']:
+            raise ValueError("must be one of enum values ('HorizonIntegration')")
         return value
 
     class Config:
@@ -136,8 +128,8 @@ class UpdateMatchingTasksActivityResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpdateMatchingTasksActivityResponse:
-        """Create an instance of UpdateMatchingTasksActivityResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> HorizonIntegrationResponse:
+        """Create an instance of HorizonIntegrationResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -146,86 +138,25 @@ class UpdateMatchingTasksActivityResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in correlation_ids (list)
-        _items = []
-        if self.correlation_ids:
-            for _item in self.correlation_ids:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['correlationIds'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each value in task_fields (dict)
-        _field_dict = {}
-        if self.task_fields:
-            for _key in self.task_fields:
-                if self.task_fields[_key]:
-                    _field_dict[_key] = self.task_fields[_key].to_dict()
-            _dict['taskFields'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of each value in schedule_dependent_task_fields (dict)
-        _field_dict = {}
-        if self.schedule_dependent_task_fields:
-            for _key in self.schedule_dependent_task_fields:
-                if self.schedule_dependent_task_fields[_key]:
-                    _field_dict[_key] = self.schedule_dependent_task_fields[_key].to_dict()
-            _dict['scheduleDependentTaskFields'] = _field_dict
         # set to None if type (nullable) is None
         # and __fields_set__ contains the field
         if self.type is None and "type" in self.__fields_set__:
             _dict['type'] = None
 
-        # set to None if filter (nullable) is None
-        # and __fields_set__ contains the field
-        if self.filter is None and "filter" in self.__fields_set__:
-            _dict['filter'] = None
-
-        # set to None if trigger (nullable) is None
-        # and __fields_set__ contains the field
-        if self.trigger is None and "trigger" in self.__fields_set__:
-            _dict['trigger'] = None
-
-        # set to None if correlation_ids (nullable) is None
-        # and __fields_set__ contains the field
-        if self.correlation_ids is None and "correlation_ids" in self.__fields_set__:
-            _dict['correlationIds'] = None
-
-        # set to None if task_fields (nullable) is None
-        # and __fields_set__ contains the field
-        if self.task_fields is None and "task_fields" in self.__fields_set__:
-            _dict['taskFields'] = None
-
-        # set to None if schedule_dependent_task_fields (nullable) is None
-        # and __fields_set__ contains the field
-        if self.schedule_dependent_task_fields is None and "schedule_dependent_task_fields" in self.__fields_set__:
-            _dict['scheduleDependentTaskFields'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpdateMatchingTasksActivityResponse:
-        """Create an instance of UpdateMatchingTasksActivityResponse from a dict"""
+    def from_dict(cls, obj: dict) -> HorizonIntegrationResponse:
+        """Create an instance of HorizonIntegrationResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpdateMatchingTasksActivityResponse.parse_obj(obj)
+            return HorizonIntegrationResponse.parse_obj(obj)
 
-        _obj = UpdateMatchingTasksActivityResponse.parse_obj({
-            "type": obj.get("type"),
-            "filter": obj.get("filter"),
-            "trigger": obj.get("trigger"),
-            "correlation_ids": [EventHandlerMapping.from_dict(_item) for _item in obj.get("correlationIds")] if obj.get("correlationIds") is not None else None,
-            "task_fields": dict(
-                (_k, FieldMapping.from_dict(_v))
-                for _k, _v in obj.get("taskFields").items()
-            )
-            if obj.get("taskFields") is not None
-            else None,
-            "schedule_dependent_task_fields": dict(
-                (_k, ScheduledTimeAdjustment.from_dict(_v))
-                for _k, _v in obj.get("scheduleDependentTaskFields").items()
-            )
-            if obj.get("scheduleDependentTaskFields") is not None
-            else None
+        _obj = HorizonIntegrationResponse.parse_obj({
+            "type": obj.get("type")
         })
         return _obj
 
-UpdateMatchingTasksActivityResponse.update_forward_refs()
+HorizonIntegrationResponse.update_forward_refs()
