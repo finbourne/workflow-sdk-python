@@ -5,6 +5,7 @@ Readonly configuration for the Horizon Integration Worker
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | The type of worker | [optional] 
+**integration_instance_id** | **str** | The id of the Horizon integration instance the worker executes. Null on the library worker. | [optional] 
 ## Example
 
 ```python
@@ -15,7 +16,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 type: Optional[StrictStr] = "example_type"
-horizon_integration_response_instance = HorizonIntegrationResponse(type=type)
+integration_instance_id: Optional[StrictStr] = "example_integration_instance_id"
+horizon_integration_response_instance = HorizonIntegrationResponse(type=type, integration_instance_id=integration_instance_id)
 
 ```
 

@@ -5,6 +5,7 @@ Configuration for a Worker that executes a Horizon integration instance
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | The type of worker | 
+**integration_instance_id** | **str** | The id of the Horizon integration instance the worker executes. | 
 ## Example
 
 ```python
@@ -15,7 +16,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 type: StrictStr = "example_type"
-horizon_integration_instance = HorizonIntegration(type=type)
+integration_instance_id: StrictStr = "example_integration_instance_id"
+horizon_integration_instance = HorizonIntegration(type=type, integration_instance_id=integration_instance_id)
 
 ```
 
