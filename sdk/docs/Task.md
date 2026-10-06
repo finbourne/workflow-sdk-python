@@ -16,6 +16,9 @@ Name | Type | Description | Notes
 **ultimate_parent_task** | [**TaskSummary**](TaskSummary.md) |  | 
 **parent_task** | [**TaskSummary**](TaskSummary.md) |  | [optional] 
 **child_tasks** | [**List[TaskSummary]**](TaskSummary.md) | This Task&#39;s child tasks | [optional] 
+**previous_task** | [**TaskSummary**](TaskSummary.md) |  | [optional] 
+**next_task** | [**TaskSummary**](TaskSummary.md) |  | [optional] 
+**next_task_initial_trigger** | **str** | The trigger this Task&#39;s next Task should receive when this Task completes, if any | [optional] 
 **correlation_ids** | **List[str]** | User-provided ID used to link entities and tasks | [optional] 
 **version** | [**VersionInfo**](VersionInfo.md) |  | [optional] 
 **terminal_state** | **bool** | True if no onward transitions are possible | 
@@ -53,6 +56,9 @@ state_display_name: Optional[StrictStr] = "example_state_display_name"
 ultimate_parent_task: TaskSummary = # Replace with your value
 parent_task: Optional[TaskSummary] = # Replace with your value
 child_tasks: Optional[List[TaskSummary]] = # Replace with your value
+previous_task: Optional[TaskSummary] = # Replace with your value
+next_task: Optional[TaskSummary] = # Replace with your value
+next_task_initial_trigger: Optional[StrictStr] = "example_next_task_initial_trigger"
 correlation_ids: Optional[List[StrictStr]] = # Replace with your value
 version: Optional[VersionInfo] = None
 terminal_state: StrictBool = # Replace with your value
@@ -70,7 +76,7 @@ open_duration: Optional[StrictInt] = # Replace with your value
 open_duration_since_last_update: Optional[StrictInt] = # Replace with your value
 open_duration_since_last_transition: Optional[StrictInt] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-task_instance = Task(id=id, task_definition_id=task_definition_id, task_definition_version=task_definition_version, task_definition_display_name=task_definition_display_name, workflow_id=workflow_id, workflow_display_name=workflow_display_name, workflow_run=workflow_run, state=state, state_display_name=state_display_name, ultimate_parent_task=ultimate_parent_task, parent_task=parent_task, child_tasks=child_tasks, correlation_ids=correlation_ids, version=version, terminal_state=terminal_state, as_at_last_transition=as_at_last_transition, fields=fields, stacking_key=stacking_key, stack=stack, action_log_id_created=action_log_id_created, action_log_id_modified=action_log_id_modified, action_log_id_submitted=action_log_id_submitted, hierarchical_position=hierarchical_position, completion_status=completion_status, open_duration=open_duration, open_duration_since_last_update=open_duration_since_last_update, open_duration_since_last_transition=open_duration_since_last_transition, properties=properties)
+task_instance = Task(id=id, task_definition_id=task_definition_id, task_definition_version=task_definition_version, task_definition_display_name=task_definition_display_name, workflow_id=workflow_id, workflow_display_name=workflow_display_name, workflow_run=workflow_run, state=state, state_display_name=state_display_name, ultimate_parent_task=ultimate_parent_task, parent_task=parent_task, child_tasks=child_tasks, previous_task=previous_task, next_task=next_task, next_task_initial_trigger=next_task_initial_trigger, correlation_ids=correlation_ids, version=version, terminal_state=terminal_state, as_at_last_transition=as_at_last_transition, fields=fields, stacking_key=stacking_key, stack=stack, action_log_id_created=action_log_id_created, action_log_id_modified=action_log_id_modified, action_log_id_submitted=action_log_id_submitted, hierarchical_position=hierarchical_position, completion_status=completion_status, open_duration=open_duration, open_duration_since_last_update=open_duration_since_last_update, open_duration_since_last_transition=open_duration_since_last_transition, properties=properties)
 
 ```
 

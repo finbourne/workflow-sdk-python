@@ -45,6 +45,7 @@ from lusid_workflow.models.action_id import ActionId
 from lusid_workflow.models.action_log import ActionLog
 from lusid_workflow.models.action_log_item import ActionLogItem
 from lusid_workflow.models.action_log_origin import ActionLogOrigin
+from lusid_workflow.models.api_endpoint import ApiEndpoint
 from lusid_workflow.models.batch_update_tasks_request import BatchUpdateTasksRequest
 from lusid_workflow.models.batch_update_tasks_response import BatchUpdateTasksResponse
 from lusid_workflow.models.batch_upsert_task_definition_properties_response import BatchUpsertTaskDefinitionPropertiesResponse
@@ -153,6 +154,7 @@ from lusid_workflow.models.schedule_task_field_mapping import ScheduleTaskFieldM
 from lusid_workflow.models.scheduled_time_adjustment import ScheduledTimeAdjustment
 from lusid_workflow.models.scheduler_job import SchedulerJob
 from lusid_workflow.models.scheduler_job_response import SchedulerJobResponse
+from lusid_workflow.models.service_api_endpoints import ServiceApiEndpoints
 from lusid_workflow.models.sleep import Sleep
 from lusid_workflow.models.sleep_response import SleepResponse
 from lusid_workflow.models.specific_month_regularity import SpecificMonthRegularity
@@ -233,6 +235,7 @@ __all__ = [
     "ActionLog",
     "ActionLogItem",
     "ActionLogOrigin",
+    "ApiEndpoint",
     "BatchUpdateTasksRequest",
     "BatchUpdateTasksResponse",
     "BatchUpsertTaskDefinitionPropertiesResponse",
@@ -341,6 +344,7 @@ __all__ = [
     "ScheduledTimeAdjustment",
     "SchedulerJob",
     "SchedulerJobResponse",
+    "ServiceApiEndpoints",
     "Sleep",
     "SleepResponse",
     "SpecificMonthRegularity",

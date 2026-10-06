@@ -7,6 +7,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ActionLogsApi* | [**get_action_logs**](docs/ActionLogsApi.md#get_action_logs) | **GET** /api/actionlogs/{id} | GetActionLogs: Get the Action Logs for an Action Id
 *ApplicationMetadataApi* | [**list_access_controlled_resources**](docs/ApplicationMetadataApi.md#list_access_controlled_resources) | **GET** /api/metadata/access/resources | ListAccessControlledResources: Get resources available for access control
+*ApplicationMetadataApi* | [**list_api_endpoints**](docs/ApplicationMetadataApi.md#list_api_endpoints) | **GET** /api/metadata/endpoints | ListApiEndpoints: Get the API endpoints available
 *EventHandlersApi* | [**create_event_handler**](docs/EventHandlersApi.md#create_event_handler) | **POST** /api/eventhandlers | CreateEventHandler: Create a new Event Handler
 *EventHandlersApi* | [**delete_event_handler**](docs/EventHandlersApi.md#delete_event_handler) | **DELETE** /api/eventhandlers/{scope}/{code} | DeleteEventHandler: Delete an Event Handler
 *EventHandlersApi* | [**get_event_handler**](docs/EventHandlersApi.md#get_event_handler) | **GET** /api/eventhandlers/{scope}/{code} | GetEventHandler: Get an Event Handler
@@ -60,6 +61,7 @@ Class | Method | HTTP request | Description
  - [ActionLog](docs/ActionLog.md)
  - [ActionLogItem](docs/ActionLogItem.md)
  - [ActionLogOrigin](docs/ActionLogOrigin.md)
+ - [ApiEndpoint](docs/ApiEndpoint.md)
  - [BatchUpdateTasksRequest](docs/BatchUpdateTasksRequest.md)
  - [BatchUpdateTasksResponse](docs/BatchUpdateTasksResponse.md)
  - [BatchUpsertTaskDefinitionPropertiesResponse](docs/BatchUpsertTaskDefinitionPropertiesResponse.md)
@@ -168,6 +170,7 @@ Class | Method | HTTP request | Description
  - [ScheduledTimeAdjustment](docs/ScheduledTimeAdjustment.md)
  - [SchedulerJob](docs/SchedulerJob.md)
  - [SchedulerJobResponse](docs/SchedulerJobResponse.md)
+ - [ServiceApiEndpoints](docs/ServiceApiEndpoints.md)
  - [Sleep](docs/Sleep.md)
  - [SleepResponse](docs/SleepResponse.md)
  - [SpecificMonthRegularity](docs/SpecificMonthRegularity.md)

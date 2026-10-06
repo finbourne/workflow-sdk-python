@@ -47,6 +47,9 @@ class Task(BaseModel):
     ultimate_parent_task: TaskSummary = Field(alias="ultimateParentTask")
     parent_task: Optional[TaskSummary] = Field(default=None, alias="parentTask")
     child_tasks: Optional[List[TaskSummary]] = Field(default=None, description="This Task's child tasks", alias="childTasks")
+    previous_task: Optional[TaskSummary] = Field(default=None, alias="previousTask")
+    next_task: Optional[TaskSummary] = Field(default=None, alias="nextTask")
+    next_task_initial_trigger:  Optional[StrictStr] = Field(None,alias="nextTaskInitialTrigger", description="The trigger this Task's next Task should receive when this Task completes, if any") 
     correlation_ids: Optional[List[StrictStr]] = Field(default=None, description="User-provided ID used to link entities and tasks", alias="correlationIds")
     version: Optional[VersionInfo] = None
     terminal_state: StrictBool = Field(description="True if no onward transitions are possible", alias="terminalState")
@@ -63,7 +66,7 @@ class Task(BaseModel):
     open_duration_since_last_update: Optional[StrictInt] = Field(default=None, description="Duration in seconds since the Task was last updated. 0 if the Task is Completed.", alias="openDurationSinceLastUpdate")
     open_duration_since_last_transition: Optional[StrictInt] = Field(default=None, description="Duration in seconds since the Task last transitioned. 0 if the Task is Completed.", alias="openDurationSinceLastTransition")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The requested TaskDefinition and Workflow properties decorated onto this Task, keyed by property key. Only populated when property keys were requested.")
-    __properties = ["id", "taskDefinitionId", "taskDefinitionVersion", "taskDefinitionDisplayName", "workflowId", "workflowDisplayName", "workflowRun", "state", "stateDisplayName", "ultimateParentTask", "parentTask", "childTasks", "correlationIds", "version", "terminalState", "asAtLastTransition", "fields", "stackingKey", "stack", "actionLogIdCreated", "actionLogIdModified", "actionLogIdSubmitted", "hierarchicalPosition", "completionStatus", "openDuration", "openDurationSinceLastUpdate", "openDurationSinceLastTransition", "properties"]
+    __properties = ["id", "taskDefinitionId", "taskDefinitionVersion", "taskDefinitionDisplayName", "workflowId", "workflowDisplayName", "workflowRun", "state", "stateDisplayName", "ultimateParentTask", "parentTask", "childTasks", "previousTask", "nextTask", "nextTaskInitialTrigger", "correlationIds", "version", "terminalState", "asAtLastTransition", "fields", "stackingKey", "stack", "actionLogIdCreated", "actionLogIdModified", "actionLogIdSubmitted", "hierarchicalPosition", "completionStatus", "openDuration", "openDurationSinceLastUpdate", "openDurationSinceLastTransition", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -122,6 +125,12 @@ class Task(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['childTasks'] = _items
+        # override the default output from pydantic by calling `to_dict()` of previous_task
+        if self.previous_task:
+            _dict['previousTask'] = self.previous_task.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of next_task
+        if self.next_task:
+            _dict['nextTask'] = self.next_task.to_dict()
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -156,6 +165,11 @@ class Task(BaseModel):
         # and __fields_set__ contains the field
         if self.child_tasks is None and "child_tasks" in self.__fields_set__:
             _dict['childTasks'] = None
+
+        # set to None if next_task_initial_trigger (nullable) is None
+        # and __fields_set__ contains the field
+        if self.next_task_initial_trigger is None and "next_task_initial_trigger" in self.__fields_set__:
+            _dict['nextTaskInitialTrigger'] = None
 
         # set to None if correlation_ids (nullable) is None
         # and __fields_set__ contains the field
@@ -246,6 +260,9 @@ class Task(BaseModel):
             "ultimate_parent_task": TaskSummary.from_dict(obj.get("ultimateParentTask")) if obj.get("ultimateParentTask") is not None else None,
             "parent_task": TaskSummary.from_dict(obj.get("parentTask")) if obj.get("parentTask") is not None else None,
             "child_tasks": [TaskSummary.from_dict(_item) for _item in obj.get("childTasks")] if obj.get("childTasks") is not None else None,
+            "previous_task": TaskSummary.from_dict(obj.get("previousTask")) if obj.get("previousTask") is not None else None,
+            "next_task": TaskSummary.from_dict(obj.get("nextTask")) if obj.get("nextTask") is not None else None,
+            "next_task_initial_trigger": obj.get("nextTaskInitialTrigger"),
             "correlation_ids": obj.get("correlationIds"),
             "version": VersionInfo.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "terminal_state": obj.get("terminalState"),

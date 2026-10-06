@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **child_task_configurations** | [**List[ResultantChildTaskConfiguration]**](ResultantChildTaskConfiguration.md) | Tasks can be generated from run worker results; this is the configuration | [optional] 
 **re_run_configurations** | [**List[ReRunConfiguration]**](ReRunConfiguration.md) | Configuration governing how re-run results are reconciled against existing child tasks from a previous run of this action against the same parent Task instance | [optional] 
 **worker_timeout** | **int** | Worker timeout in seconds | [optional] 
+**ordering** | **str** | How the created child tasks are ordered for execution: Parallel (default), Series, or ParallelSeries | [optional] 
 ## Example
 
 ```python
@@ -30,7 +31,8 @@ child_task_configurations: Optional[List[ResultantChildTaskConfiguration]] = # R
 re_run_configurations: Optional[List[ReRunConfiguration]] = # Replace with your value
 worker_timeout: Optional[StrictInt] = # Replace with your value
 worker_timeout: Optional[StrictInt] = None
-run_worker_action_response_instance = RunWorkerActionResponse(type=type, worker_id=worker_id, worker_as_at=worker_as_at, worker_parameters=worker_parameters, worker_status_triggers=worker_status_triggers, child_task_configurations=child_task_configurations, re_run_configurations=re_run_configurations, worker_timeout=worker_timeout)
+ordering: Optional[StrictStr] = "example_ordering"
+run_worker_action_response_instance = RunWorkerActionResponse(type=type, worker_id=worker_id, worker_as_at=worker_as_at, worker_parameters=worker_parameters, worker_status_triggers=worker_status_triggers, child_task_configurations=child_task_configurations, re_run_configurations=re_run_configurations, worker_timeout=worker_timeout, ordering=ordering)
 
 ```
 
