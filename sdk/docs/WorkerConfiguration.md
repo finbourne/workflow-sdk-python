@@ -31,6 +31,10 @@ See all compatible oneOf types with WorkerConfiguration
 
  * [LusidEntityDataQualityCheck](./LusidEntityDataQualityCheck.md)
 
+ * [PortfolioHoldingDataQualityCheck](./PortfolioHoldingDataQualityCheck.md)
+
+ * [PortfolioTransactionDataQualityCheck](./PortfolioTransactionDataQualityCheck.md)
+
  * [SchedulerJob](./SchedulerJob.md)
 
  * [Sleep](./Sleep.md)

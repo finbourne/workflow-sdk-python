@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **origin** | [**ActionLogOrigin**](ActionLogOrigin.md) |  | 
 **action_type** | **str** | The type of the Action | 
 **run_as_user_id** | **str** | The ID of the user that the Action was performed by. If not specified, the actions were performed by the \&quot;current user\&quot;. | [optional] 
-**logged_items** | [**List[ActionLogItem]**](ActionLogItem.md) | The logged items for this Action | 
+**logged_items** | [**List[ActionLogItem]**](ActionLogItem.md) | The logged items for this Action, ordered by timestamp with the earliest item first | 
 ## Example
 
 ```python

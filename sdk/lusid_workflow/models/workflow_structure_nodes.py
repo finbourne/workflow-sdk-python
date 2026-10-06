@@ -22,14 +22,16 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid_workflow.models.launcher_response import LauncherResponse
 from lusid_workflow.models.task_definition import TaskDefinition
 
 class WorkflowStructureNodes(BaseModel):
     """
-    The nodes of a Workflow structure graph — the Task Definitions involved  # noqa: E501
+    The nodes of a Workflow structure graph — the Task Definitions and the Launchers involved  # noqa: E501
     """
     task_definitions: Optional[List[TaskDefinition]] = Field(default=None, description="The Task Definitions that make up the nodes of this Workflow", alias="taskDefinitions")
-    __properties = ["taskDefinitions"]
+    launchers: Optional[List[LauncherResponse]] = Field(default=None, description="The Launchers of this Workflow, as full Launcher objects. At most the first 10 by launcher id are returned, in the same order as ListLaunchers gives by default. Inactive Launchers are included. When the Workflow has more, launchersTruncated is true and ListLaunchers returns the full set")
+    __properties = ["taskDefinitions", "launchers"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,10 +72,22 @@ class WorkflowStructureNodes(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['taskDefinitions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in launchers (list)
+        _items = []
+        if self.launchers:
+            for _item in self.launchers:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['launchers'] = _items
         # set to None if task_definitions (nullable) is None
         # and __fields_set__ contains the field
         if self.task_definitions is None and "task_definitions" in self.__fields_set__:
             _dict['taskDefinitions'] = None
+
+        # set to None if launchers (nullable) is None
+        # and __fields_set__ contains the field
+        if self.launchers is None and "launchers" in self.__fields_set__:
+            _dict['launchers'] = None
 
         return _dict
 
@@ -87,7 +101,8 @@ class WorkflowStructureNodes(BaseModel):
             return WorkflowStructureNodes.parse_obj(obj)
 
         _obj = WorkflowStructureNodes.parse_obj({
-            "task_definitions": [TaskDefinition.from_dict(_item) for _item in obj.get("taskDefinitions")] if obj.get("taskDefinitions") is not None else None
+            "task_definitions": [TaskDefinition.from_dict(_item) for _item in obj.get("taskDefinitions")] if obj.get("taskDefinitions") is not None else None,
+            "launchers": [LauncherResponse.from_dict(_item) for _item in obj.get("launchers")] if obj.get("launchers") is not None else None
         })
         return _obj
 

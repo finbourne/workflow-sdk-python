@@ -33,7 +33,7 @@ class ActionLog(BaseModel):
     origin: ActionLogOrigin
     action_type:  StrictStr = Field(...,alias="actionType", description="The type of the Action") 
     run_as_user_id:  Optional[StrictStr] = Field(None,alias="runAsUserId", description="The ID of the user that the Action was performed by. If not specified, the actions were performed by the \"current user\".") 
-    logged_items: List[ActionLogItem] = Field(description="The logged items for this Action", alias="loggedItems")
+    logged_items: List[ActionLogItem] = Field(description="The logged items for this Action, ordered by timestamp with the earliest item first", alias="loggedItems")
     __properties = ["id", "origin", "actionType", "runAsUserId", "loggedItems"]
 
     class Config:

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **task_definition_display_name** | **str** | The display name of the Task Definition used by this Task | 
 **workflow_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **workflow_display_name** | **str** | The display name of the Workflow that this Task is a member of, if any | [optional] 
+**workflow_run** | [**WorkflowRun**](WorkflowRun.md) |  | [optional] 
 **state** | **str** | Current State | 
 **state_display_name** | **str** | The display name of the current State, from the Task Definition, if one is provided | [optional] 
 **ultimate_parent_task** | [**TaskSummary**](TaskSummary.md) |  | 
@@ -46,6 +47,7 @@ task_definition_version: TaskDefinitionVersion = # Replace with your value
 task_definition_display_name: StrictStr = "example_task_definition_display_name"
 workflow_id: Optional[ResourceId] = # Replace with your value
 workflow_display_name: Optional[StrictStr] = "example_workflow_display_name"
+workflow_run: Optional[WorkflowRun] = # Replace with your value
 state: StrictStr = "example_state"
 state_display_name: Optional[StrictStr] = "example_state_display_name"
 ultimate_parent_task: TaskSummary = # Replace with your value
@@ -68,7 +70,7 @@ open_duration: Optional[StrictInt] = # Replace with your value
 open_duration_since_last_update: Optional[StrictInt] = # Replace with your value
 open_duration_since_last_transition: Optional[StrictInt] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-task_instance = Task(id=id, task_definition_id=task_definition_id, task_definition_version=task_definition_version, task_definition_display_name=task_definition_display_name, workflow_id=workflow_id, workflow_display_name=workflow_display_name, state=state, state_display_name=state_display_name, ultimate_parent_task=ultimate_parent_task, parent_task=parent_task, child_tasks=child_tasks, correlation_ids=correlation_ids, version=version, terminal_state=terminal_state, as_at_last_transition=as_at_last_transition, fields=fields, stacking_key=stacking_key, stack=stack, action_log_id_created=action_log_id_created, action_log_id_modified=action_log_id_modified, action_log_id_submitted=action_log_id_submitted, hierarchical_position=hierarchical_position, completion_status=completion_status, open_duration=open_duration, open_duration_since_last_update=open_duration_since_last_update, open_duration_since_last_transition=open_duration_since_last_transition, properties=properties)
+task_instance = Task(id=id, task_definition_id=task_definition_id, task_definition_version=task_definition_version, task_definition_display_name=task_definition_display_name, workflow_id=workflow_id, workflow_display_name=workflow_display_name, workflow_run=workflow_run, state=state, state_display_name=state_display_name, ultimate_parent_task=ultimate_parent_task, parent_task=parent_task, child_tasks=child_tasks, correlation_ids=correlation_ids, version=version, terminal_state=terminal_state, as_at_last_transition=as_at_last_transition, fields=fields, stacking_key=stacking_key, stack=stack, action_log_id_created=action_log_id_created, action_log_id_modified=action_log_id_modified, action_log_id_submitted=action_log_id_submitted, hierarchical_position=hierarchical_position, completion_status=completion_status, open_duration=open_duration, open_duration_since_last_update=open_duration_since_last_update, open_duration_since_last_transition=open_duration_since_last_transition, properties=properties)
 
 ```
 

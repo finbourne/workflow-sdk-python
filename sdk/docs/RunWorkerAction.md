@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **worker_parameters** | [**Dict[str, FieldMapping]**](FieldMapping.md) | Parameters for this Worker | [optional] 
 **worker_status_triggers** | [**WorkerStatusTriggers**](WorkerStatusTriggers.md) |  | [optional] 
 **child_task_configurations** | [**List[ResultantChildTaskConfiguration]**](ResultantChildTaskConfiguration.md) | Tasks can be generated from run worker results; this is the configuration | [optional] 
+**re_run_configurations** | [**List[ReRunConfiguration]**](ReRunConfiguration.md) | Configuration governing how re-run results are reconciled against existing child tasks from a previous run of this action against the same parent Task instance | [optional] 
 **worker_timeout** | **int** | Worker WorkerTimeout in seconds | [optional] 
 ## Example
 
@@ -26,9 +27,10 @@ worker_as_at: Optional[datetime] = # Replace with your value
 worker_parameters: Optional[Dict[str, FieldMapping]] = # Replace with your value
 worker_status_triggers: Optional[WorkerStatusTriggers] = # Replace with your value
 child_task_configurations: Optional[List[ResultantChildTaskConfiguration]] = # Replace with your value
+re_run_configurations: Optional[List[ReRunConfiguration]] = # Replace with your value
 worker_timeout: Optional[StrictInt] = # Replace with your value
 worker_timeout: Optional[StrictInt] = None
-run_worker_action_instance = RunWorkerAction(type=type, worker_id=worker_id, worker_as_at=worker_as_at, worker_parameters=worker_parameters, worker_status_triggers=worker_status_triggers, child_task_configurations=child_task_configurations, worker_timeout=worker_timeout)
+run_worker_action_instance = RunWorkerAction(type=type, worker_id=worker_id, worker_as_at=worker_as_at, worker_parameters=worker_parameters, worker_status_triggers=worker_status_triggers, child_task_configurations=child_task_configurations, re_run_configurations=re_run_configurations, worker_timeout=worker_timeout)
 
 ```
 

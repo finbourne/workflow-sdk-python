@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid_workflow.models.field_mapping import FieldMapping
+from lusid_workflow.models.re_run_configuration import ReRunConfiguration
 from lusid_workflow.models.resource_id import ResourceId
 from lusid_workflow.models.resultant_child_task_configuration import ResultantChildTaskConfiguration
 from lusid_workflow.models.worker_status_triggers import WorkerStatusTriggers
@@ -37,83 +38,29 @@ class RunWorkerActionResponse(BaseModel):
     worker_parameters: Optional[Dict[str, FieldMapping]] = Field(default=None, description="Parameters for this Worker", alias="workerParameters")
     worker_status_triggers: Optional[WorkerStatusTriggers] = Field(default=None, alias="workerStatusTriggers")
     child_task_configurations: Optional[List[ResultantChildTaskConfiguration]] = Field(default=None, description="Tasks can be generated from run worker results; this is the configuration", alias="childTaskConfigurations")
+    re_run_configurations: Optional[List[ReRunConfiguration]] = Field(default=None, description="Configuration governing how re-run results are reconciled against existing child tasks from a previous run of this action against the same parent Task instance", alias="reRunConfigurations")
     worker_timeout: Optional[StrictInt] = Field(default=None, description="Worker timeout in seconds", alias="workerTimeout")
-    __properties = ["type", "workerId", "workerAsAt", "workerParameters", "workerStatusTriggers", "childTaskConfigurations", "workerTimeout"]
+    __properties = ["type", "workerId", "workerAsAt", "workerParameters", "workerStatusTriggers", "childTaskConfigurations", "reRunConfigurations", "workerTimeout"]
 
     @validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
 
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
-
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'RunWorkerActionResponse' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerChildTasksAction',
-                                    'TriggerChildTasksActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse',
-                                    'Library',
-                                    'LibraryResponse',
-                                    'DayRegularity',
-                                    'RelativeMonthRegularity',
-                                    'SpecificMonthRegularity',
-                                    'WeekRegularity',
-                                    'YearRegularity',
-                                    'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse',
-                                    'HorizonIntegration',
-                                    'HorizonIntegrationResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "type" != "type":
-            return value
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
 
         if value is None:
             return value
 
-        if value not in ['RunWorker']:
-            raise ValueError("must be one of enum values ('RunWorker')")
+        _allowed = ['RunWorker']
+        if len(_allowed) != 1:
+            return value
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
         return value
 
     class Config:
@@ -168,6 +115,13 @@ class RunWorkerActionResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['childTaskConfigurations'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in re_run_configurations (list)
+        _items = []
+        if self.re_run_configurations:
+            for _item in self.re_run_configurations:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['reRunConfigurations'] = _items
         # set to None if type (nullable) is None
         # and __fields_set__ contains the field
         if self.type is None and "type" in self.__fields_set__:
@@ -187,6 +141,11 @@ class RunWorkerActionResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.child_task_configurations is None and "child_task_configurations" in self.__fields_set__:
             _dict['childTaskConfigurations'] = None
+
+        # set to None if re_run_configurations (nullable) is None
+        # and __fields_set__ contains the field
+        if self.re_run_configurations is None and "re_run_configurations" in self.__fields_set__:
+            _dict['reRunConfigurations'] = None
 
         # set to None if worker_timeout (nullable) is None
         # and __fields_set__ contains the field
@@ -216,6 +175,7 @@ class RunWorkerActionResponse(BaseModel):
             else None,
             "worker_status_triggers": WorkerStatusTriggers.from_dict(obj.get("workerStatusTriggers")) if obj.get("workerStatusTriggers") is not None else None,
             "child_task_configurations": [ResultantChildTaskConfiguration.from_dict(_item) for _item in obj.get("childTaskConfigurations")] if obj.get("childTaskConfigurations") is not None else None,
+            "re_run_configurations": [ReRunConfiguration.from_dict(_item) for _item in obj.get("reRunConfigurations")] if obj.get("reRunConfigurations") is not None else None,
             "worker_timeout": obj.get("workerTimeout")
         })
         return _obj

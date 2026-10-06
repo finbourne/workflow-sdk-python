@@ -23,13 +23,15 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid_workflow.models.child_task_definition_edge import ChildTaskDefinitionEdge
+from lusid_workflow.models.launcher_edge import LauncherEdge
 
 class WorkflowStructureEdges(BaseModel):
     """
-    The edges of a Workflow structure graph — the parent-child relationships between Task Definitions  # noqa: E501
+    The edges of a Workflow structure graph — the parent-child relationships between Task Definitions and the relationships between Launchers and the Task Definitions they start  # noqa: E501
     """
     child_task_definitions: Optional[List[ChildTaskDefinitionEdge]] = Field(default=None, description="The child Task Definition relationships", alias="childTaskDefinitions")
-    __properties = ["childTaskDefinitions"]
+    launchers: Optional[List[LauncherEdge]] = Field(default=None, description="The Launcher relationships. There is one entry per Launcher in nodes.launchers, in the same order")
+    __properties = ["childTaskDefinitions", "launchers"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,10 +72,22 @@ class WorkflowStructureEdges(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['childTaskDefinitions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in launchers (list)
+        _items = []
+        if self.launchers:
+            for _item in self.launchers:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['launchers'] = _items
         # set to None if child_task_definitions (nullable) is None
         # and __fields_set__ contains the field
         if self.child_task_definitions is None and "child_task_definitions" in self.__fields_set__:
             _dict['childTaskDefinitions'] = None
+
+        # set to None if launchers (nullable) is None
+        # and __fields_set__ contains the field
+        if self.launchers is None and "launchers" in self.__fields_set__:
+            _dict['launchers'] = None
 
         return _dict
 
@@ -87,7 +101,8 @@ class WorkflowStructureEdges(BaseModel):
             return WorkflowStructureEdges.parse_obj(obj)
 
         _obj = WorkflowStructureEdges.parse_obj({
-            "child_task_definitions": [ChildTaskDefinitionEdge.from_dict(_item) for _item in obj.get("childTaskDefinitions")] if obj.get("childTaskDefinitions") is not None else None
+            "child_task_definitions": [ChildTaskDefinitionEdge.from_dict(_item) for _item in obj.get("childTaskDefinitions")] if obj.get("childTaskDefinitions") is not None else None,
+            "launchers": [LauncherEdge.from_dict(_item) for _item in obj.get("launchers")] if obj.get("launchers") is not None else None
         })
         return _obj
 

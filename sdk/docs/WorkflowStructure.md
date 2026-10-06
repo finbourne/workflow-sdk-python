@@ -1,11 +1,12 @@
 # WorkflowStructure
 
-Describes the structure of a Workflow as a graph of Task Definitions
+Describes the structure of a Workflow as a graph of its Task Definitions and its Launchers
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **nodes** | [**WorkflowStructureNodes**](WorkflowStructureNodes.md) |  | [optional] 
 **edges** | [**WorkflowStructureEdges**](WorkflowStructureEdges.md) |  | [optional] 
+**launchers_truncated** | **bool** | True when the Workflow has more Launchers than were returned inline in nodes.launchers. Call ListLaunchers for the full set | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,9 @@ from datetime import datetime
 
 nodes: Optional[WorkflowStructureNodes] = None
 edges: Optional[WorkflowStructureEdges] = None
-workflow_structure_instance = WorkflowStructure(nodes=nodes, edges=edges)
+launchers_truncated: Optional[StrictBool] = # Replace with your value
+launchers_truncated:Optional[StrictBool] = None
+workflow_structure_instance = WorkflowStructure(nodes=nodes, edges=edges, launchers_truncated=launchers_truncated)
 
 ```
 

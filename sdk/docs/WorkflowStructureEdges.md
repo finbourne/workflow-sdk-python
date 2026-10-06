@@ -1,10 +1,11 @@
 # WorkflowStructureEdges
 
-The edges of a Workflow structure graph — the parent-child relationships between Task Definitions
+The edges of a Workflow structure graph — the parent-child relationships between Task Definitions and the relationships between Launchers and the Task Definitions they start
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **child_task_definitions** | [**List[ChildTaskDefinitionEdge]**](ChildTaskDefinitionEdge.md) | The child Task Definition relationships | [optional] 
+**launchers** | [**List[LauncherEdge]**](LauncherEdge.md) | The Launcher relationships. There is one entry per Launcher in nodes.launchers, in the same order | [optional] 
 ## Example
 
 ```python
@@ -15,7 +16,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 child_task_definitions: Optional[List[ChildTaskDefinitionEdge]] = # Replace with your value
-workflow_structure_edges_instance = WorkflowStructureEdges(child_task_definitions=child_task_definitions)
+launchers: Optional[List[LauncherEdge]] = # Replace with your value
+workflow_structure_edges_instance = WorkflowStructureEdges(child_task_definitions=child_task_definitions, launchers=launchers)
 
 ```
 

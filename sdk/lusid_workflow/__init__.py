@@ -20,6 +20,7 @@ from __future__ import absolute_import
 from lusid_workflow.api.action_logs_api import ActionLogsApi
 from lusid_workflow.api.application_metadata_api import ApplicationMetadataApi
 from lusid_workflow.api.event_handlers_api import EventHandlersApi
+from lusid_workflow.api.launchers_api import LaunchersApi
 from lusid_workflow.api.task_definitions_api import TaskDefinitionsApi
 from lusid_workflow.api.tasks_api import TasksApi
 from lusid_workflow.api.workers_api import WorkersApi
@@ -48,13 +49,16 @@ from lusid_workflow.models.batch_update_tasks_request import BatchUpdateTasksReq
 from lusid_workflow.models.batch_update_tasks_response import BatchUpdateTasksResponse
 from lusid_workflow.models.batch_upsert_task_definition_properties_response import BatchUpsertTaskDefinitionPropertiesResponse
 from lusid_workflow.models.batch_upsert_workflow_properties_response import BatchUpsertWorkflowPropertiesResponse
+from lusid_workflow.models.calendar_context import CalendarContext
 from lusid_workflow.models.calendar_reference import CalendarReference
 from lusid_workflow.models.change_item import ChangeItem
 from lusid_workflow.models.child_task_definition_edge import ChildTaskDefinitionEdge
+from lusid_workflow.models.correlation_id_mapping import CorrelationIdMapping
 from lusid_workflow.models.create_child_task_configuration import CreateChildTaskConfiguration
 from lusid_workflow.models.create_child_tasks_action import CreateChildTasksAction
 from lusid_workflow.models.create_child_tasks_action_response import CreateChildTasksActionResponse
 from lusid_workflow.models.create_event_handler_request import CreateEventHandlerRequest
+from lusid_workflow.models.create_launcher_request import CreateLauncherRequest
 from lusid_workflow.models.create_new_task_activity import CreateNewTaskActivity
 from lusid_workflow.models.create_new_task_activity_response import CreateNewTaskActivityResponse
 from lusid_workflow.models.create_task_definition_request import CreateTaskDefinitionRequest
@@ -64,6 +68,7 @@ from lusid_workflow.models.create_workflow_request import CreateWorkflowRequest
 from lusid_workflow.models.cut_label_reference import CutLabelReference
 from lusid_workflow.models.date_adjustment import DateAdjustment
 from lusid_workflow.models.date_regularity import DateRegularity
+from lusid_workflow.models.date_time_adjustment import DateTimeAdjustment
 from lusid_workflow.models.day_of_year import DayOfYear
 from lusid_workflow.models.day_regularity import DayRegularity
 from lusid_workflow.models.delete_tasks_request import DeleteTasksRequest
@@ -71,7 +76,12 @@ from lusid_workflow.models.deleted_entity_response import DeletedEntityResponse
 from lusid_workflow.models.error_detail import ErrorDetail
 from lusid_workflow.models.event_handler import EventHandler
 from lusid_workflow.models.event_handler_mapping import EventHandlerMapping
+from lusid_workflow.models.event_launcher_details import EventLauncherDetails
+from lusid_workflow.models.event_launcher_details_response import EventLauncherDetailsResponse
 from lusid_workflow.models.event_matching_pattern import EventMatchingPattern
+from lusid_workflow.models.event_task_field_mapping import EventTaskFieldMapping
+from lusid_workflow.models.existing_tasks_not_recurring_configuration import ExistingTasksNotRecurringConfiguration
+from lusid_workflow.models.existing_tasks_recurring_configuration import ExistingTasksRecurringConfiguration
 from lusid_workflow.models.fail import Fail
 from lusid_workflow.models.fail_response import FailResponse
 from lusid_workflow.models.field_mapping import FieldMapping
@@ -86,6 +96,14 @@ from lusid_workflow.models.id_selector_definition import IdSelectorDefinition
 from lusid_workflow.models.identifier_part_schema import IdentifierPartSchema
 from lusid_workflow.models.initial_state import InitialState
 from lusid_workflow.models.label_value_set import LabelValueSet
+from lusid_workflow.models.launcher_details import LauncherDetails
+from lusid_workflow.models.launcher_details_response import LauncherDetailsResponse
+from lusid_workflow.models.launcher_edge import LauncherEdge
+from lusid_workflow.models.launcher_event_matching_pattern import LauncherEventMatchingPattern
+from lusid_workflow.models.launcher_mapping import LauncherMapping
+from lusid_workflow.models.launcher_response import LauncherResponse
+from lusid_workflow.models.launcher_schedule import LauncherSchedule
+from lusid_workflow.models.launcher_summaries import LauncherSummaries
 from lusid_workflow.models.library_response import LibraryResponse
 from lusid_workflow.models.link import Link
 from lusid_workflow.models.luminesce_view import LuminesceView
@@ -95,7 +113,9 @@ from lusid_workflow.models.lusid_entity_data_quality_check_response import Lusid
 from lusid_workflow.models.lusid_problem_details import LusidProblemDetails
 from lusid_workflow.models.lusid_validation_problem_details import LusidValidationProblemDetails
 from lusid_workflow.models.metric_value import MetricValue
+from lusid_workflow.models.new_tasks_recurring_configuration import NewTasksRecurringConfiguration
 from lusid_workflow.models.paged_resource_list_of_event_handler import PagedResourceListOfEventHandler
+from lusid_workflow.models.paged_resource_list_of_launcher_response import PagedResourceListOfLauncherResponse
 from lusid_workflow.models.paged_resource_list_of_task import PagedResourceListOfTask
 from lusid_workflow.models.paged_resource_list_of_task_definition import PagedResourceListOfTaskDefinition
 from lusid_workflow.models.paged_resource_list_of_worker import PagedResourceListOfWorker
@@ -103,7 +123,12 @@ from lusid_workflow.models.paged_resource_list_of_workflow_response import Paged
 from lusid_workflow.models.parameter import Parameter
 from lusid_workflow.models.parameter_value import ParameterValue
 from lusid_workflow.models.perpetual_property import PerpetualProperty
+from lusid_workflow.models.portfolio_holding_data_quality_check import PortfolioHoldingDataQualityCheck
+from lusid_workflow.models.portfolio_holding_data_quality_check_response import PortfolioHoldingDataQualityCheckResponse
+from lusid_workflow.models.portfolio_transaction_data_quality_check import PortfolioTransactionDataQualityCheck
+from lusid_workflow.models.portfolio_transaction_data_quality_check_response import PortfolioTransactionDataQualityCheckResponse
 from lusid_workflow.models.property_value import PropertyValue
+from lusid_workflow.models.re_run_configuration import ReRunConfiguration
 from lusid_workflow.models.read_only_states import ReadOnlyStates
 from lusid_workflow.models.recurrence_pattern import RecurrencePattern
 from lusid_workflow.models.relative_month_regularity import RelativeMonthRegularity
@@ -114,12 +139,17 @@ from lusid_workflow.models.resource_list_of_task import ResourceListOfTask
 from lusid_workflow.models.result_field import ResultField
 from lusid_workflow.models.result_matching_pattern import ResultMatchingPattern
 from lusid_workflow.models.resultant_child_task_configuration import ResultantChildTaskConfiguration
+from lusid_workflow.models.results_not_recurring_configuration import ResultsNotRecurringConfiguration
+from lusid_workflow.models.results_recurring_configuration import ResultsRecurringConfiguration
 from lusid_workflow.models.run_worker_action import RunWorkerAction
 from lusid_workflow.models.run_worker_action_response import RunWorkerActionResponse
 from lusid_workflow.models.run_worker_request import RunWorkerRequest
 from lusid_workflow.models.run_worker_response import RunWorkerResponse
+from lusid_workflow.models.schedule_launcher_details import ScheduleLauncherDetails
+from lusid_workflow.models.schedule_launcher_details_response import ScheduleLauncherDetailsResponse
 from lusid_workflow.models.schedule_matching_pattern import ScheduleMatchingPattern
 from lusid_workflow.models.schedule_matching_pattern_context import ScheduleMatchingPatternContext
+from lusid_workflow.models.schedule_task_field_mapping import ScheduleTaskFieldMapping
 from lusid_workflow.models.scheduled_time_adjustment import ScheduledTimeAdjustment
 from lusid_workflow.models.scheduler_job import SchedulerJob
 from lusid_workflow.models.scheduler_job_response import SchedulerJobResponse
@@ -148,6 +178,7 @@ from lusid_workflow.models.trigger_parent_task_action import TriggerParentTaskAc
 from lusid_workflow.models.trigger_parent_task_action_response import TriggerParentTaskActionResponse
 from lusid_workflow.models.trigger_schema import TriggerSchema
 from lusid_workflow.models.update_event_handler_request import UpdateEventHandlerRequest
+from lusid_workflow.models.update_launcher_request import UpdateLauncherRequest
 from lusid_workflow.models.update_matching_tasks_activity import UpdateMatchingTasksActivity
 from lusid_workflow.models.update_matching_tasks_activity_response import UpdateMatchingTasksActivityResponse
 from lusid_workflow.models.update_task_definition_request import UpdateTaskDefinitionRequest
@@ -164,6 +195,7 @@ from lusid_workflow.models.worker_configuration import WorkerConfiguration
 from lusid_workflow.models.worker_configuration_response import WorkerConfigurationResponse
 from lusid_workflow.models.worker_status_triggers import WorkerStatusTriggers
 from lusid_workflow.models.workflow_response import WorkflowResponse
+from lusid_workflow.models.workflow_run import WorkflowRun
 from lusid_workflow.models.workflow_structure import WorkflowStructure
 from lusid_workflow.models.workflow_structure_edges import WorkflowStructureEdges
 from lusid_workflow.models.workflow_structure_nodes import WorkflowStructureNodes
@@ -186,6 +218,7 @@ __all__ = [
     "ActionLogsApi",
     "ApplicationMetadataApi",
     "EventHandlersApi",
+    "LaunchersApi",
     "TaskDefinitionsApi",
     "TasksApi",
     "WorkersApi",
@@ -204,13 +237,16 @@ __all__ = [
     "BatchUpdateTasksResponse",
     "BatchUpsertTaskDefinitionPropertiesResponse",
     "BatchUpsertWorkflowPropertiesResponse",
+    "CalendarContext",
     "CalendarReference",
     "ChangeItem",
     "ChildTaskDefinitionEdge",
+    "CorrelationIdMapping",
     "CreateChildTaskConfiguration",
     "CreateChildTasksAction",
     "CreateChildTasksActionResponse",
     "CreateEventHandlerRequest",
+    "CreateLauncherRequest",
     "CreateNewTaskActivity",
     "CreateNewTaskActivityResponse",
     "CreateTaskDefinitionRequest",
@@ -220,6 +256,7 @@ __all__ = [
     "CutLabelReference",
     "DateAdjustment",
     "DateRegularity",
+    "DateTimeAdjustment",
     "DayOfYear",
     "DayRegularity",
     "DeleteTasksRequest",
@@ -227,7 +264,12 @@ __all__ = [
     "ErrorDetail",
     "EventHandler",
     "EventHandlerMapping",
+    "EventLauncherDetails",
+    "EventLauncherDetailsResponse",
     "EventMatchingPattern",
+    "EventTaskFieldMapping",
+    "ExistingTasksNotRecurringConfiguration",
+    "ExistingTasksRecurringConfiguration",
     "Fail",
     "FailResponse",
     "FieldMapping",
@@ -242,6 +284,14 @@ __all__ = [
     "IdentifierPartSchema",
     "InitialState",
     "LabelValueSet",
+    "LauncherDetails",
+    "LauncherDetailsResponse",
+    "LauncherEdge",
+    "LauncherEventMatchingPattern",
+    "LauncherMapping",
+    "LauncherResponse",
+    "LauncherSchedule",
+    "LauncherSummaries",
     "LibraryResponse",
     "Link",
     "LuminesceView",
@@ -251,7 +301,9 @@ __all__ = [
     "LusidProblemDetails",
     "LusidValidationProblemDetails",
     "MetricValue",
+    "NewTasksRecurringConfiguration",
     "PagedResourceListOfEventHandler",
+    "PagedResourceListOfLauncherResponse",
     "PagedResourceListOfTask",
     "PagedResourceListOfTaskDefinition",
     "PagedResourceListOfWorker",
@@ -259,7 +311,12 @@ __all__ = [
     "Parameter",
     "ParameterValue",
     "PerpetualProperty",
+    "PortfolioHoldingDataQualityCheck",
+    "PortfolioHoldingDataQualityCheckResponse",
+    "PortfolioTransactionDataQualityCheck",
+    "PortfolioTransactionDataQualityCheckResponse",
     "PropertyValue",
+    "ReRunConfiguration",
     "ReadOnlyStates",
     "RecurrencePattern",
     "RelativeMonthRegularity",
@@ -270,12 +327,17 @@ __all__ = [
     "ResultField",
     "ResultMatchingPattern",
     "ResultantChildTaskConfiguration",
+    "ResultsNotRecurringConfiguration",
+    "ResultsRecurringConfiguration",
     "RunWorkerAction",
     "RunWorkerActionResponse",
     "RunWorkerRequest",
     "RunWorkerResponse",
+    "ScheduleLauncherDetails",
+    "ScheduleLauncherDetailsResponse",
     "ScheduleMatchingPattern",
     "ScheduleMatchingPatternContext",
+    "ScheduleTaskFieldMapping",
     "ScheduledTimeAdjustment",
     "SchedulerJob",
     "SchedulerJobResponse",
@@ -304,6 +366,7 @@ __all__ = [
     "TriggerParentTaskActionResponse",
     "TriggerSchema",
     "UpdateEventHandlerRequest",
+    "UpdateLauncherRequest",
     "UpdateMatchingTasksActivity",
     "UpdateMatchingTasksActivityResponse",
     "UpdateTaskDefinitionRequest",
@@ -320,6 +383,7 @@ __all__ = [
     "WorkerConfigurationResponse",
     "WorkerStatusTriggers",
     "WorkflowResponse",
+    "WorkflowRun",
     "WorkflowStructure",
     "WorkflowStructureEdges",
     "WorkflowStructureNodes",

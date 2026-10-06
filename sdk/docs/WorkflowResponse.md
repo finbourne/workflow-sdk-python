@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **display_name** | **str** | Human readable name | 
 **description** | **str** | Human readable description | [optional] 
 **root_task_definition_id** | [**ResourceId**](ResourceId.md) |  | 
-**workflow_structure** | [**WorkflowStructure**](WorkflowStructure.md) |  | [optional] 
+**workflow_structure** | [**WorkflowStructure**](WorkflowStructure.md) |  | 
+**run_count** | **int** | The number of times this Workflow has been run. Starts at 0 and increments by 1 each time a new run is instantiated. | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The properties of the Workflow, keyed by property key. | [optional] 
 ## Example
 
@@ -25,9 +26,11 @@ version: Optional[VersionInfo] = None
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 root_task_definition_id: ResourceId = # Replace with your value
-workflow_structure: Optional[WorkflowStructure] = # Replace with your value
+workflow_structure: WorkflowStructure = # Replace with your value
+run_count: StrictInt = # Replace with your value
+run_count: StrictInt = 42
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-workflow_response_instance = WorkflowResponse(id=id, version=version, display_name=display_name, description=description, root_task_definition_id=root_task_definition_id, workflow_structure=workflow_structure, properties=properties)
+workflow_response_instance = WorkflowResponse(id=id, version=version, display_name=display_name, description=description, root_task_definition_id=root_task_definition_id, workflow_structure=workflow_structure, run_count=run_count, properties=properties)
 
 ```
 
