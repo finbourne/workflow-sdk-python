@@ -27,6 +27,8 @@ See all compatible oneOf types with WorkerConfiguration
 
  * [HorizonIntegration](./HorizonIntegration.md)
 
+ * [InstantiateRec](./InstantiateRec.md)
+
  * [LuminesceView](./LuminesceView.md)
 
  * [LusidEntityDataQualityCheck](./LusidEntityDataQualityCheck.md)

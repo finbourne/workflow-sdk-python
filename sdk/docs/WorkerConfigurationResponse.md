@@ -27,6 +27,8 @@ See all compatible oneOf types with WorkerConfigurationResponse
 
  * [HorizonIntegrationResponse](./HorizonIntegrationResponse.md)
 
+ * [InstantiateRecResponse](./InstantiateRecResponse.md)
+
  * [LibraryResponse](./LibraryResponse.md)
 
  * [LuminesceViewResponse](./LuminesceViewResponse.md)

@@ -75,6 +75,8 @@ from lusid_workflow.models.horizon_integration_response import HorizonIntegratio
 from lusid_workflow.models.id_selector_definition import IdSelectorDefinition
 from lusid_workflow.models.identifier_part_schema import IdentifierPartSchema
 from lusid_workflow.models.initial_state import InitialState
+from lusid_workflow.models.instantiate_rec import InstantiateRec
+from lusid_workflow.models.instantiate_rec_response import InstantiateRecResponse
 from lusid_workflow.models.label_value_set import LabelValueSet
 from lusid_workflow.models.launcher_details import LauncherDetails
 from lusid_workflow.models.launcher_details_response import LauncherDetailsResponse
@@ -245,6 +247,8 @@ __all__ = [
     "IdSelectorDefinition",
     "IdentifierPartSchema",
     "InitialState",
+    "InstantiateRec",
+    "InstantiateRecResponse",
     "LabelValueSet",
     "LauncherDetails",
     "LauncherDetailsResponse",
