@@ -99,6 +99,7 @@ from lusid_workflow.models.initial_state import InitialState
 from lusid_workflow.models.instantiate_rec import InstantiateRec
 from lusid_workflow.models.instantiate_rec_response import InstantiateRecResponse
 from lusid_workflow.models.label_value_set import LabelValueSet
+from lusid_workflow.models.launched_by import LaunchedBy
 from lusid_workflow.models.launcher_details import LauncherDetails
 from lusid_workflow.models.launcher_details_response import LauncherDetailsResponse
 from lusid_workflow.models.launcher_edge import LauncherEdge
@@ -162,6 +163,8 @@ from lusid_workflow.models.sleep_response import SleepResponse
 from lusid_workflow.models.specific_month_regularity import SpecificMonthRegularity
 from lusid_workflow.models.specified_time import SpecifiedTime
 from lusid_workflow.models.stack import Stack
+from lusid_workflow.models.structured_result_data_quality_check import StructuredResultDataQualityCheck
+from lusid_workflow.models.structured_result_data_quality_check_response import StructuredResultDataQualityCheckResponse
 from lusid_workflow.models.task import Task
 from lusid_workflow.models.task_activity import TaskActivity
 from lusid_workflow.models.task_activity_response import TaskActivityResponse
@@ -291,6 +294,7 @@ __all__ = [
     "InstantiateRec",
     "InstantiateRecResponse",
     "LabelValueSet",
+    "LaunchedBy",
     "LauncherDetails",
     "LauncherDetailsResponse",
     "LauncherEdge",
@@ -354,6 +358,8 @@ __all__ = [
     "SpecificMonthRegularity",
     "SpecifiedTime",
     "Stack",
+    "StructuredResultDataQualityCheck",
+    "StructuredResultDataQualityCheckResponse",
     "Task",
     "TaskActivity",
     "TaskActivityResponse",

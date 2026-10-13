@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **id** | **int** | The id of this run of the Workflow. Assigned once, when the run is instantiated. | 
 **as_at_created** | **datetime** | The version.asAtCreated of the root/ultimate parent Task of this run. | 
 **completion_status** | **str** | The completion status of the root/ultimate parent Task of this run: NotStarted, InProgress, or Completed. | 
+**launched_by** | [**LaunchedBy**](LaunchedBy.md) |  | [optional] 
 ## Example
 
 ```python
@@ -20,7 +21,8 @@ id: StrictInt = # Replace with your value
 id: StrictInt = 42
 as_at_created: datetime = # Replace with your value
 completion_status: StrictStr = "example_completion_status"
-workflow_run_instance = WorkflowRun(id=id, as_at_created=as_at_created, completion_status=completion_status)
+launched_by: Optional[LaunchedBy] = # Replace with your value
+workflow_run_instance = WorkflowRun(id=id, as_at_created=as_at_created, completion_status=completion_status, launched_by=launched_by)
 
 ```
 

@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid_workflow.models.launched_by import LaunchedBy
 
 class WorkflowRun(BaseModel):
     """
@@ -30,7 +31,8 @@ class WorkflowRun(BaseModel):
     id: StrictInt = Field(description="The id of this run of the Workflow. Assigned once, when the run is instantiated.")
     as_at_created: datetime = Field(description="The version.asAtCreated of the root/ultimate parent Task of this run.", alias="asAtCreated")
     completion_status:  StrictStr = Field(...,alias="completionStatus", description="The completion status of the root/ultimate parent Task of this run: NotStarted, InProgress, or Completed.") 
-    __properties = ["id", "asAtCreated", "completionStatus"]
+    launched_by: Optional[LaunchedBy] = Field(default=None, alias="launchedBy")
+    __properties = ["id", "asAtCreated", "completionStatus", "launchedBy"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +66,9 @@ class WorkflowRun(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of launched_by
+        if self.launched_by:
+            _dict['launchedBy'] = self.launched_by.to_dict()
         return _dict
 
     @classmethod
@@ -78,7 +83,8 @@ class WorkflowRun(BaseModel):
         _obj = WorkflowRun.parse_obj({
             "id": obj.get("id"),
             "as_at_created": obj.get("asAtCreated"),
-            "completion_status": obj.get("completionStatus")
+            "completion_status": obj.get("completionStatus"),
+            "launched_by": LaunchedBy.from_dict(obj.get("launchedBy")) if obj.get("launchedBy") is not None else None
         })
         return _obj
 
