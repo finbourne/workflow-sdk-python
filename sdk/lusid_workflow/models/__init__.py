@@ -160,6 +160,10 @@ from lusid_workflow.models.time_of_day import TimeOfDay
 from lusid_workflow.models.transition_trigger_definition import TransitionTriggerDefinition
 from lusid_workflow.models.trigger_child_tasks_action import TriggerChildTasksAction
 from lusid_workflow.models.trigger_child_tasks_action_response import TriggerChildTasksActionResponse
+from lusid_workflow.models.trigger_next_task_action import TriggerNextTaskAction
+from lusid_workflow.models.trigger_next_task_action_response import TriggerNextTaskActionResponse
+from lusid_workflow.models.trigger_next_task_fallback_actions import TriggerNextTaskFallbackActions
+from lusid_workflow.models.trigger_next_task_fallback_actions_response import TriggerNextTaskFallbackActionsResponse
 from lusid_workflow.models.trigger_parent_task_action import TriggerParentTaskAction
 from lusid_workflow.models.trigger_parent_task_action_response import TriggerParentTaskActionResponse
 from lusid_workflow.models.trigger_schema import TriggerSchema
@@ -335,6 +339,10 @@ __all__ = [
     "TransitionTriggerDefinition",
     "TriggerChildTasksAction",
     "TriggerChildTasksActionResponse",
+    "TriggerNextTaskAction",
+    "TriggerNextTaskActionResponse",
+    "TriggerNextTaskFallbackActions",
+    "TriggerNextTaskFallbackActionsResponse",
     "TriggerParentTaskAction",
     "TriggerParentTaskActionResponse",
     "TriggerSchema",

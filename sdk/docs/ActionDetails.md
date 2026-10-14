@@ -26,7 +26,8 @@ create_child_tasks_action_instance = lusid_workflow.models.create_child_tasks_ac
                                         map_from = '', 
                                         set_to = null, )
                                     }, 
-                                map_stacking_key_from = '', )
+                                map_stacking_key_from = '', 
+                                display_name = ' Aa6w77ikCX*cKCmv|`K/V', )
                             ], )
 
 action_details_instance = ActionDetails(create_child_tasks_action_instance)
@@ -38,6 +39,8 @@ See all compatible oneOf types with ActionDetails
  * [RunWorkerAction](./RunWorkerAction.md)
 
  * [TriggerChildTasksAction](./TriggerChildTasksAction.md)
+
+ * [TriggerNextTaskAction](./TriggerNextTaskAction.md)
 
  * [TriggerParentTaskAction](./TriggerParentTaskAction.md)
 
