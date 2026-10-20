@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **launcher_type** | **str** |  | 
 **event_matching_pattern** | [**LauncherEventMatchingPattern**](LauncherEventMatchingPattern.md) |  | 
+**calendar_contexts** | [**List[CalendarContext]**](CalendarContext.md) | The named time zones and holiday calendars the date time adjustments of this Launcher work in.              Required when any mapped field has a dateTimeAdjustment | [optional] 
 **map_task_fields** | [**Dict[str, EventTaskFieldMapping]**](EventTaskFieldMapping.md) | Fields of the root task filled from the event, keyed by the field name on the root task definition | [optional] 
 **map_correlation_ids** | [**List[CorrelationIdMapping]**](CorrelationIdMapping.md) | Correlation IDs of the root task filled from the event | [optional] 
 **run_as_user_id** | [**LauncherMapping**](LauncherMapping.md) |  | 
@@ -23,13 +24,14 @@ from datetime import datetime
 
 launcher_type: StrictStr = "example_launcher_type"
 event_matching_pattern: LauncherEventMatchingPattern = # Replace with your value
+calendar_contexts: Optional[List[CalendarContext]] = # Replace with your value
 map_task_fields: Optional[Dict[str, EventTaskFieldMapping]] = # Replace with your value
 map_correlation_ids: Optional[List[CorrelationIdMapping]] = # Replace with your value
 run_as_user_id: LauncherMapping = # Replace with your value
 set_task_fields: Optional[Dict[str, Any]] = # Replace with your value
 set_correlation_ids: Optional[List[StrictStr]] = # Replace with your value
 initial_trigger: Optional[StrictStr] = "example_initial_trigger"
-event_launcher_details_instance = EventLauncherDetails(launcher_type=launcher_type, event_matching_pattern=event_matching_pattern, map_task_fields=map_task_fields, map_correlation_ids=map_correlation_ids, run_as_user_id=run_as_user_id, set_task_fields=set_task_fields, set_correlation_ids=set_correlation_ids, initial_trigger=initial_trigger)
+event_launcher_details_instance = EventLauncherDetails(launcher_type=launcher_type, event_matching_pattern=event_matching_pattern, calendar_contexts=calendar_contexts, map_task_fields=map_task_fields, map_correlation_ids=map_correlation_ids, run_as_user_id=run_as_user_id, set_task_fields=set_task_fields, set_correlation_ids=set_correlation_ids, initial_trigger=initial_trigger)
 
 ```
 

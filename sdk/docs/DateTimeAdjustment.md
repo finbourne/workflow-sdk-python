@@ -4,7 +4,7 @@ A change applied to the date and the time of a source value, in a named calendar
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**calendar_context** | **str** | The name of the calendar context this change happens in, which must be one the Launcher declares. When it is left out a Schedule Launcher uses the context of its schedule | [optional] 
+**calendar_context** | **str** | The name of the calendar context this change happens in, which must be one the Launcher declares. It is required on an Event Launcher. When it is left out a Schedule Launcher uses the context of its schedule | [optional] 
 **date_adjustment** | [**DateAdjustment**](DateAdjustment.md) |  | [optional] 
 **time_adjustment** | [**TimeAdjustment**](TimeAdjustment.md) |  | [optional] 
 ## Example

@@ -33,7 +33,7 @@ class ScheduleLauncherDetailsResponse(BaseModel):
     """
     launcher_type:  Optional[StrictStr] = Field(None,alias="launcherType") 
     schedule: Optional[LauncherSchedule] = None
-    calendar_contexts: Optional[List[CalendarContext]] = Field(default=None, description="The named time zones and holiday calendars this Launcher works in.              Only a Schedule Launcher works in a calendar context", alias="calendarContexts")
+    calendar_contexts: Optional[List[CalendarContext]] = Field(default=None, description="The named time zones and holiday calendars this Launcher works in", alias="calendarContexts")
     map_task_fields: Optional[Dict[str, ScheduleTaskFieldMapping]] = Field(default=None, description="Fields of the root task filled from the instant the schedule fired, keyed by the field name on the root task definition", alias="mapTaskFields")
     run_as_user_id: Optional[LauncherMapping] = Field(default=None, alias="runAsUserId")
     set_task_fields: Optional[Dict[str, Any]] = Field(default=None, description="Fields of the root task set to a fixed value, keyed by the field name on the root task definition", alias="setTaskFields")

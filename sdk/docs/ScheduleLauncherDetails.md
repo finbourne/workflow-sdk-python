@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **launcher_type** | **str** |  | 
 **schedule** | [**LauncherSchedule**](LauncherSchedule.md) |  | 
-**calendar_contexts** | [**List[CalendarContext]**](CalendarContext.md) | The named time zones and holiday calendars this Launcher works in.              Only a Schedule Launcher works in a calendar context | [optional] 
+**calendar_contexts** | [**List[CalendarContext]**](CalendarContext.md) | The named time zones and holiday calendars this Launcher works in | [optional] 
 **map_task_fields** | [**Dict[str, ScheduleTaskFieldMapping]**](ScheduleTaskFieldMapping.md) | Fields of the root task filled from the instant the schedule fired, keyed by the field name on the root task definition | [optional] 
 **run_as_user_id** | [**LauncherMapping**](LauncherMapping.md) |  | 
 **set_task_fields** | **Dict[str, Optional[object]]** | Fields of the root task set to a fixed value, keyed by the field name on the root task definition | [optional] 

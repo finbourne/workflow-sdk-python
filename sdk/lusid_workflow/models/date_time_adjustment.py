@@ -29,7 +29,7 @@ class DateTimeAdjustment(BaseModel):
     """
     A change applied to the date and the time of a source value, in a named calendar context.              At least one of Finbourne.Workflow.WebApi.Common.Dto.Json.Launchers.DateTimeAdjustment.DateAdjustment or Finbourne.Workflow.WebApi.Common.Dto.Json.Launchers.DateTimeAdjustment.TimeAdjustment must be given  # noqa: E501
     """
-    calendar_context:  Optional[StrictStr] = Field(None,alias="calendarContext", description="The name of the calendar context this change happens in, which must be one the Launcher declares. When it is left out a Schedule Launcher uses the context of its schedule") 
+    calendar_context:  Optional[StrictStr] = Field(None,alias="calendarContext", description="The name of the calendar context this change happens in, which must be one the Launcher declares. It is required on an Event Launcher. When it is left out a Schedule Launcher uses the context of its schedule") 
     date_adjustment: Optional[DateAdjustment] = Field(default=None, alias="dateAdjustment")
     time_adjustment: Optional[TimeAdjustment] = Field(default=None, alias="timeAdjustment")
     __properties = ["calendarContext", "dateAdjustment", "timeAdjustment"]

@@ -17,6 +17,16 @@ event_launcher_details_response_instance = lusid_workflow.models.event_launcher_
                         event_matching_pattern = lusid_workflow.models.launcher_event_matching_pattern.LauncherEventMatchingPattern(
                             event_type = 'EiOTgswWMEJTcMoSLlNYUL', 
                             filter = '', ), 
+                        calendar_contexts = [
+                            lusid_workflow.models.calendar_context.CalendarContext(
+                                name = 'z', 
+                                time_zone = '', 
+                                holiday_calendars = [
+                                    lusid_workflow.models.calendar_reference.CalendarReference(
+                                        scope = 'z', 
+                                        code = 'z', )
+                                    ], )
+                            ], 
                         map_task_fields = {
                             'key' : lusid_workflow.models.event_task_field_mapping.EventTaskFieldMapping(
                                 map_from = '', 
