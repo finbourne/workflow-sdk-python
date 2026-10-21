@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **child_task_configurations** | [**List[ResultantChildTaskConfiguration]**](ResultantChildTaskConfiguration.md) | Tasks can be generated from run worker results; this is the configuration | [optional] 
 **re_run_configurations** | [**List[ReRunConfiguration]**](ReRunConfiguration.md) | Configuration governing how re-run results are reconciled against existing child tasks from a previous run of this action against the same parent Task instance | [optional] 
 **worker_timeout** | **int** | Worker WorkerTimeout in seconds | [optional] 
-**ordering** | **str** | How the created child tasks are ordered for execution: Parallel (default), Series, or ParallelSeries | [optional] 
+**ordering** | **str** | How the created child tasks are ordered for execution: Parallel (default), Series, or ParallelSeries. In Series and ParallelSeries only the first child task of each chain is started; each later one is started by its predecessor&#39;s TriggerNextTask action, or by another trigger such as a TriggerChildTasks filter on previousTask. Without one, the chain stops after its first child. | [optional] 
 ## Example
 
 ```python

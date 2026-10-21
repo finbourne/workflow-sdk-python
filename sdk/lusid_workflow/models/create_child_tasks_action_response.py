@@ -30,7 +30,8 @@ class CreateChildTasksActionResponse(BaseModel):
     """
     type:  Optional[StrictStr] = Field(None,alias="type", description="Type name for this Action") 
     child_task_configurations: Optional[List[CreateChildTaskConfiguration]] = Field(default=None, description="The Child Task Configurations", alias="childTaskConfigurations")
-    __properties = ["type", "childTaskConfigurations"]
+    ordering:  Optional[StrictStr] = Field(None,alias="ordering", description="How the created child tasks are ordered for execution: Parallel (default) or Series. In Series the child tasks form a chain and only the first is started; each later one is started by its predecessor's TriggerNextTask action, or by another trigger such as a TriggerChildTasks filter on previousTask. Without one, the chain stops after the first child.") 
+    __properties = ["type", "childTaskConfigurations", "ordering"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -102,6 +103,11 @@ class CreateChildTasksActionResponse(BaseModel):
         if self.child_task_configurations is None and "child_task_configurations" in self.__fields_set__:
             _dict['childTaskConfigurations'] = None
 
+        # set to None if ordering (nullable) is None
+        # and __fields_set__ contains the field
+        if self.ordering is None and "ordering" in self.__fields_set__:
+            _dict['ordering'] = None
+
         return _dict
 
     @classmethod
@@ -115,7 +121,8 @@ class CreateChildTasksActionResponse(BaseModel):
 
         _obj = CreateChildTasksActionResponse.parse_obj({
             "type": obj.get("type"),
-            "child_task_configurations": [CreateChildTaskConfiguration.from_dict(_item) for _item in obj.get("childTaskConfigurations")] if obj.get("childTaskConfigurations") is not None else None
+            "child_task_configurations": [CreateChildTaskConfiguration.from_dict(_item) for _item in obj.get("childTaskConfigurations")] if obj.get("childTaskConfigurations") is not None else None,
+            "ordering": obj.get("ordering")
         })
         return _obj
 

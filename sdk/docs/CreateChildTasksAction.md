@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | Type name for this Action | 
 **child_task_configurations** | [**List[CreateChildTaskConfiguration]**](CreateChildTaskConfiguration.md) | The Child Task Configurations | 
+**ordering** | **str** | How the created child tasks are ordered for execution: Parallel (default) or Series. In Series the child tasks form a chain and only the first is started; each later one is started by its predecessor&#39;s TriggerNextTask action, or by another trigger such as a TriggerChildTasks filter on previousTask. Without one, the chain stops after the first child. | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,8 @@ from datetime import datetime
 
 type: StrictStr = "example_type"
 child_task_configurations: List[CreateChildTaskConfiguration] = # Replace with your value
-create_child_tasks_action_instance = CreateChildTasksAction(type=type, child_task_configurations=child_task_configurations)
+ordering: Optional[StrictStr] = "example_ordering"
+create_child_tasks_action_instance = CreateChildTasksAction(type=type, child_task_configurations=child_task_configurations, ordering=ordering)
 
 ```
 

@@ -40,7 +40,7 @@ class RunWorkerAction(BaseModel):
     child_task_configurations: Optional[List[ResultantChildTaskConfiguration]] = Field(default=None, description="Tasks can be generated from run worker results; this is the configuration", alias="childTaskConfigurations")
     re_run_configurations: Optional[List[ReRunConfiguration]] = Field(default=None, description="Configuration governing how re-run results are reconciled against existing child tasks from a previous run of this action against the same parent Task instance", alias="reRunConfigurations")
     worker_timeout: Optional[StrictInt] = Field(default=None, description="Worker WorkerTimeout in seconds", alias="workerTimeout")
-    ordering:  Optional[StrictStr] = Field(None,alias="ordering", description="How the created child tasks are ordered for execution: Parallel (default), Series, or ParallelSeries") 
+    ordering:  Optional[StrictStr] = Field(None,alias="ordering", description="How the created child tasks are ordered for execution: Parallel (default), Series, or ParallelSeries. In Series and ParallelSeries only the first child task of each chain is started; each later one is started by its predecessor's TriggerNextTask action, or by another trigger such as a TriggerChildTasks filter on previousTask. Without one, the chain stops after its first child.") 
     __properties = ["type", "workerId", "workerAsAt", "workerParameters", "workerStatusTriggers", "childTaskConfigurations", "reRunConfigurations", "workerTimeout", "ordering"]
 
     @validator('type')

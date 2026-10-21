@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **child_task_fields** | [**Dict[str, FieldMapping]**](FieldMapping.md) | Field Mappings | [optional] 
 **map_stacking_key_from** | **str** | If present, the value of this field on the parent task will be the Stacking Key on any created child tasks | [optional] 
 **display_name** | **str** | An optional display name, to tell apart child task configurations that use the same Task Definition | [optional] 
+**condition** | **str** | A filter expression over the parent Task, in the same form as a transition Guard. If present, the child Task is only created when it evaluates to true, after the field changes of the update that made the transition | [optional] 
 ## Example
 
 ```python
@@ -25,7 +26,8 @@ initial_trigger: Optional[StrictStr] = "example_initial_trigger"
 child_task_fields: Optional[Dict[str, FieldMapping]] = # Replace with your value
 map_stacking_key_from: Optional[StrictStr] = "example_map_stacking_key_from"
 display_name: Optional[StrictStr] = "example_display_name"
-create_child_task_configuration_instance = CreateChildTaskConfiguration(task_definition_id=task_definition_id, task_definition_as_at=task_definition_as_at, initial_trigger=initial_trigger, child_task_fields=child_task_fields, map_stacking_key_from=map_stacking_key_from, display_name=display_name)
+condition: Optional[StrictStr] = "example_condition"
+create_child_task_configuration_instance = CreateChildTaskConfiguration(task_definition_id=task_definition_id, task_definition_as_at=task_definition_as_at, initial_trigger=initial_trigger, child_task_fields=child_task_fields, map_stacking_key_from=map_stacking_key_from, display_name=display_name, condition=condition)
 
 ```
 

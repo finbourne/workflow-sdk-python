@@ -27,8 +27,10 @@ create_child_tasks_action_response_instance = lusid_workflow.models.create_child
                                         set_to = null, )
                                     }, 
                                 map_stacking_key_from = '', 
-                                display_name = ' Aa6w77ikCX*cKCmv|`K/V', )
-                            ], )
+                                display_name = ' Aa6w77ikCX*cKCmv|`K/V', 
+                                condition = ' Aa6w77ikCX*cKCmv|`K/V', )
+                            ], 
+                        ordering = '', )
 
 action_details_response_instance = ActionDetailsResponse(create_child_tasks_action_response_instance)
 
