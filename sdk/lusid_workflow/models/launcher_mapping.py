@@ -28,7 +28,7 @@ class LauncherMapping(BaseModel):
     A value a Launcher either gives as it is or takes from somewhere.              Exactly one of Finbourne.Workflow.WebApi.Common.Dto.Json.Launchers.LauncherMapping.SetTo or Finbourne.Workflow.WebApi.Common.Dto.Json.Launchers.LauncherMapping.MapFrom must be given. Only an Event Launcher has an event to take a value from, so a Schedule Launcher can only use Finbourne.Workflow.WebApi.Common.Dto.Json.Launchers.LauncherMapping.SetTo  # noqa: E501
     """
     set_to:  Optional[StrictStr] = Field(None,alias="setTo", description="The value to use, given as it is") 
-    map_from:  Optional[StrictStr] = Field(None,alias="mapFrom", description="The path the value is taken from, for example header.userId") 
+    map_from:  Optional[StrictStr] = Field(None,alias="mapFrom", description="The path the value is taken from. A runAsUserId can only be taken from header.userId, and not for an event type whose header has no user ID") 
     __properties = ["setTo", "mapFrom"]
 
     class Config:

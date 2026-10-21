@@ -27,7 +27,7 @@ class CorrelationIdMapping(BaseModel):
     """
     How an Event Launcher fills one correlation ID of the root task from the event that arrived.              A mapped correlation ID joins the fixed correlation IDs of the Launcher  # noqa: E501
     """
-    map_from:  StrictStr = Field(...,alias="mapFrom", description="The path into the event the correlation ID is taken from, for example body.fileId") 
+    map_from:  StrictStr = Field(...,alias="mapFrom", description="The path into the event the correlation ID is taken from, for example body.fileId. The path must be in the schema of the event type, and a value of any type is written as a string") 
     __properties = ["mapFrom"]
 
     class Config:
