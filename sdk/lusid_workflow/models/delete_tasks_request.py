@@ -27,7 +27,7 @@ class DeleteTasksRequest(BaseModel):
     """
     Contains required info to delete Tasks  # noqa: E501
     """
-    task_ids: Optional[List[StrictStr]] = Field(default=None, description="The Ids of the Tasks to delete", alias="taskIds")
+    task_ids: List[StrictStr] = Field(description="The Ids of the Tasks to delete", alias="taskIds")
     __properties = ["taskIds"]
 
     class Config:
@@ -62,11 +62,6 @@ class DeleteTasksRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if task_ids (nullable) is None
-        # and __fields_set__ contains the field
-        if self.task_ids is None and "task_ids" in self.__fields_set__:
-            _dict['taskIds'] = None
-
         return _dict
 
     @classmethod

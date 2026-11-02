@@ -4,7 +4,7 @@ Contains required info to delete Tasks
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**task_ids** | **List[str]** | The Ids of the Tasks to delete | [optional] 
+**task_ids** | **List[str]** | The Ids of the Tasks to delete | 
 ## Example
 
 ```python
@@ -14,7 +14,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-task_ids: Optional[List[StrictStr]] = # Replace with your value
+task_ids: List[StrictStr] = # Replace with your value
 delete_tasks_request_instance = DeleteTasksRequest(task_ids=task_ids)
 
 ```
