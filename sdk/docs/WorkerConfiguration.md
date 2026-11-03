@@ -29,6 +29,8 @@ See all compatible oneOf types with WorkerConfiguration
 
  * [InstantiateRec](./InstantiateRec.md)
 
+ * [LuminesceMultiQuery](./LuminesceMultiQuery.md)
+
  * [LuminesceView](./LuminesceView.md)
 
  * [LusidEntityDataQualityCheck](./LusidEntityDataQualityCheck.md)

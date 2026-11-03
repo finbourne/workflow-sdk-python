@@ -110,6 +110,8 @@ from lusid_workflow.models.launcher_schedule import LauncherSchedule
 from lusid_workflow.models.launcher_summaries import LauncherSummaries
 from lusid_workflow.models.library_response import LibraryResponse
 from lusid_workflow.models.link import Link
+from lusid_workflow.models.luminesce_multi_query import LuminesceMultiQuery
+from lusid_workflow.models.luminesce_multi_query_response import LuminesceMultiQueryResponse
 from lusid_workflow.models.luminesce_view import LuminesceView
 from lusid_workflow.models.luminesce_view_response import LuminesceViewResponse
 from lusid_workflow.models.lusid_entity_data_quality_check import LusidEntityDataQualityCheck
@@ -309,6 +311,8 @@ __all__ = [
     "LauncherSummaries",
     "LibraryResponse",
     "Link",
+    "LuminesceMultiQuery",
+    "LuminesceMultiQueryResponse",
     "LuminesceView",
     "LuminesceViewResponse",
     "LusidEntityDataQualityCheck",

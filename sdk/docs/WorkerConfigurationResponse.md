@@ -31,6 +31,8 @@ See all compatible oneOf types with WorkerConfigurationResponse
 
  * [LibraryResponse](./LibraryResponse.md)
 
+ * [LuminesceMultiQueryResponse](./LuminesceMultiQueryResponse.md)
+
  * [LuminesceViewResponse](./LuminesceViewResponse.md)
 
  * [LusidEntityDataQualityCheckResponse](./LusidEntityDataQualityCheckResponse.md)
